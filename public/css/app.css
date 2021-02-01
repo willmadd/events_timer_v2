@@ -10015,9 +10015,20 @@ section .wrapper {
   padding: 32px;
 }
 
+.hidden {
+  position: absolute;
+  left: -100000px;
+}
+
+@font-face {
+  font-family: "c059bold";
+  src: url("/fonts/c059-bold-webfont.woff2") format("woff2"), url("/fonts/c059-bold-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
 header {
   width: 100%;
-  background-color: red;
+  background-color: #F0F0F0;
   height: 40px;
 }
 
@@ -10029,15 +10040,101 @@ header {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
-.video .image__wrapper {
+
+.form__wrapper {
+  padding: 24px;
+  background-color: #F0F0F0;
+  border: 1px solid #333333;
+}
+.form__buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.form__preview {
   width: 640px;
   height: 480px;
-  background-color: white;
-  border: 1px solid black;
+  background-color: #fff;
+  border: 1px solid #333333;
   margin-bottom: 24px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+.form__preview span {
+  font-family: "c059bold";
+  position: absolute;
+  bottom: 12px;
+  font-size: 48px;
+}
+.form__countdown {
+  display: flex;
+  align-items: center;
+}
+.form__download {
+  width: 100%;
+  margin-top: 24px;
 }
 
 .howto .wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
+}
+
+.bar {
+  padding: 12px;
+  position: relative;
+  height: 20px;
+  width: 200px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  -ms-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03), inset 0 1px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03), inset 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* 
+This is the actual bar with stripes
+*/
+.bar span {
+  position: absolute;
+  top: 5px;
+  left: 6px;
+  display: inline-block;
+  height: 15px;
+  width: calc(100% - 12px);
+  border: 1px solid #ff9a1a;
+  border-bottom-color: #ff6201;
+  background-color: #d3d3d3;
+  border-radius: 20px;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  background-image: linear-gradient(-45deg, #ff9a1a 25%, transparent 25%, transparent 50%, #ff9a1a 50%, #ff9a1a 75%, transparent 75%, transparent);
+  -ms-background-size: 50px 50px;
+  background-size: 50px 50px;
+  -webkit-animation: move 2s linear infinite;
+  animation: move 2s linear infinite;
+  border-radius: 20px;
+  overflow: hidden;
+  -ms-box-shadow: inset 0 10px 0 rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 10px 0 rgba(255, 255, 255, 0.2);
+}
+
+/*
+Animate the stripes
+*/
+@-webkit-keyframes move {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 50px 50px;
+  }
+}
+@keyframes move {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 50px 50px;
+  }
 }

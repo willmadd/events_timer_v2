@@ -1,16 +1,51 @@
-.video{
-    background: rgb(20,163,212);
-    background: radial-gradient(circle, rgba(20,163,212,1) 27%, rgba(0,85,214,1) 100%);
-    .wrapper{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+.video {
+    background: rgb(20, 163, 212);
+    background: radial-gradient(
+        circle,
+        rgba(20, 163, 212, 1) 27%,
+        rgba(0, 85, 214, 1) 100%
+    );
+    .wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+}
 
-}
-.image__wrapper{
-    width: 640px;
-    height: 480px;
-    background-color: white;
-    border: 1px solid black;
-    margin-bottom: 24px;
-}
+.form {
+    &__wrapper{
+        padding: 24px;
+        background-color: $grey;
+        border: 1px solid $black;
+
+    }
+    &__buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    &__preview {
+        width: 640px;
+        height: 480px;
+        background-color: $white;
+        border: 1px solid $black;
+        margin-bottom: 24px;
+        position: relative;
+        display:flex;
+        justify-content: center;
+        overflow: hidden;
+        span{
+            font-family: $counterFont;
+            position: absolute;
+            bottom:12px;
+            font-size: 48px;
+
+        }
+    }
+    &__countdown{
+        display:flex;
+        align-items: center;
+    }
+    &__download{
+        width:100%;
+        margin-top:24px;
+    }
 }
