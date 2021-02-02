@@ -19,7 +19,7 @@ class VideoController extends Controller
         $upperFont=100;
         $lowerFont=100;
         $color=$request->textColor;
-        $name="generated/countdown_timer_$id.mp4";
+        $name="countdown_timer_$id.mp4";
         // $image=asset('/images/backgrounds/').'/'.$request->backgroundImage.'.jpg';
         $image=env("APP_BACKGROUND_URL", "/").'/public/images/backgrounds/'.$request->backgroundImage.'.jpg';
         // env("APP_BACKGROUND_URL", "/").
