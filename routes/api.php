@@ -20,3 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/video', [VideoController::class, 'makeVideo']);
+
+Route::get('/test', [VideoController::class, 'test']);
