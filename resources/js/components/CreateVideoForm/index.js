@@ -6,7 +6,7 @@ import { SketchPicker } from "react-color";
 import BackgroundSelector from "./BackgroundSelector";
 
 const CreateVideoForm = () => {
-    const [time, setTime] = useState(10);
+    const [time, setTime] = useState(2);
     const [textColor, setTextColor] = useState("#333333");
 
     const [loadingState, setLoadingState] = useState("ready");

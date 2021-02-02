@@ -211,7 +211,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var CreateVideoForm = function CreateVideoForm() {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(10),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(2),
       _useState2 = _slicedToArray(_useState, 2),
       time = _useState2[0],
       setTime = _useState2[1];
