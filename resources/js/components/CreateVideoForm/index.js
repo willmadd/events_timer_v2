@@ -16,6 +16,8 @@ const CreateVideoForm = () => {
 
     const [backgroundImage, setBackgroundImage] = useState("color");
 
+    const [backgroundColor, setBackgroundColor] = useState({hex:"#ff4500"});
+
     const setColor = (e) => {
         setTextColor(e.hex);
     };
@@ -44,12 +46,12 @@ const CreateVideoForm = () => {
             }
         });
     };
-
+console.log(backgroundImage)
     return (
         <div className="form">
             <div className="form__wrapper">
-                <div className="form__preview">
-                    {backgroundImage && (
+                <div className="form__preview" style={{backgroundColor:backgroundImage==='color'?backgroundColor.hex:'inherit'}}>
+                    {backgroundImage && backgroundImage !== 'color' &&(
                         <img
                             src={`/images/backgrounds/${backgroundImage}.jpg`}
                         />
@@ -60,6 +62,9 @@ const CreateVideoForm = () => {
                 <BackgroundSelector
                     currentlySelected={backgroundImage}
                     onChange={setBackgroundImage}
+                    backgroundColor={backgroundColor}
+                    setBackgroundColor={setBackgroundColor}
+                    
                 />
                 <CreateCountdown
                     time={time}

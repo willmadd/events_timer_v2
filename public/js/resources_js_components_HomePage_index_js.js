@@ -3108,23 +3108,17 @@ __webpack_require__.r(__webpack_exports__);
 
 var BackgroundSelector = function BackgroundSelector(_ref) {
   var _onChange = _ref.onChange,
-      currentlySelected = _ref.currentlySelected;
-  console.log(currentlySelected);
+      currentlySelected = _ref.currentlySelected,
+      backgroundColor = _ref.backgroundColor,
+      setBackgroundColor = _ref.setBackgroundColor;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", {
       children: "Step 1: Choose a background"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
       className: "background__wrapper",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("label", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-          style: {
-            backgroundColor: "red"
-          }
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_input_color__WEBPACK_IMPORTED_MODULE_3__.default, {
-          initialValue: "#e8e8e8" // onChange={(e) => setColor(e)}
-          ,
-          placement: "right"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+        className: "colour",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", {
           // class="hidden"
           type: "radio",
           name: "background",
@@ -3132,13 +3126,27 @@ var BackgroundSelector = function BackgroundSelector(_ref) {
           checked: currentlySelected === "color",
           onChange: function onChange(e) {
             return _onChange(e.target.value);
+          },
+          id: "color"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", {
+          htmlFor: "color",
+          className: "colour__label",
+          style: {
+            backgroundColor: backgroundColor.hex
           }
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+          className: "colour__picker",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_input_color__WEBPACK_IMPORTED_MODULE_3__.default, {
+            initialValue: backgroundColor.hex,
+            onChange: function onChange(e) {
+              return setBackgroundColor(e);
+            },
+            placement: "right"
+          })
         })]
-      }), _backgrounds__WEBPACK_IMPORTED_MODULE_2__.default.map(function (background) {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("label", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", {
-            src: "/images/backgrounds/".concat(background.thumb)
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", {
+      }), _backgrounds__WEBPACK_IMPORTED_MODULE_2__.default.map(function (background, index) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", {
             // class="hidden"
             type: "radio",
             name: "background",
@@ -3146,7 +3154,13 @@ var BackgroundSelector = function BackgroundSelector(_ref) {
             checked: background.id == currentlySelected,
             onChange: function onChange(e) {
               return _onChange(e.target.value);
-            }
+            },
+            id: "radio__".concat(index)
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", {
+            htmlFor: "radio__".concat(index),
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", {
+              src: "/images/backgrounds/".concat(background.thumb)
+            })
           })]
         }, background.thumb);
       })]
@@ -3331,6 +3345,13 @@ var CreateVideoForm = function CreateVideoForm() {
       backgroundImage = _useState8[0],
       setBackgroundImage = _useState8[1];
 
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
+    hex: "#ff4500"
+  }),
+      _useState10 = _slicedToArray(_useState9, 2),
+      backgroundColor = _useState10[0],
+      setBackgroundColor = _useState10[1];
+
   var setColor = function setColor(e) {
     setTextColor(e.hex);
   };
@@ -3362,13 +3383,17 @@ var CreateVideoForm = function CreateVideoForm() {
     });
   };
 
+  console.log(backgroundImage);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
     className: "form",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
       className: "form__wrapper",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: "form__preview",
-        children: [backgroundImage && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", {
+        style: {
+          backgroundColor: backgroundImage === 'color' ? backgroundColor.hex : 'inherit'
+        },
+        children: [backgroundImage && backgroundImage !== 'color' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", {
           src: "/images/backgrounds/".concat(backgroundImage, ".jpg")
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
           style: {
@@ -3378,7 +3403,9 @@ var CreateVideoForm = function CreateVideoForm() {
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_BackgroundSelector__WEBPACK_IMPORTED_MODULE_5__.default, {
         currentlySelected: backgroundImage,
-        onChange: setBackgroundImage
+        onChange: setBackgroundImage,
+        backgroundColor: backgroundColor,
+        setBackgroundColor: setBackgroundColor
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_CreateCountdown__WEBPACK_IMPORTED_MODULE_6__.default, {
         time: time,
         setTime: setTime,

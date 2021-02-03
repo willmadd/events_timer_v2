@@ -10080,9 +10080,16 @@ header {
 .background__wrapper {
   display: flex;
 }
+.background__wrapper input[type=radio] {
+  position: absolute;
+  left: -99999px;
+}
+.background__wrapper input[type=radio]:checked + label {
+  border: 3px solid black;
+}
 .background__wrapper label {
-  height: 100px;
-  width: 100px;
+  height: 75px;
+  width: 75px;
   display: flex;
   margin-left: 12px;
 }
@@ -10091,6 +10098,21 @@ header {
   border: 1px solid #333333;
   -o-object-fit: none;
      object-fit: none;
+}
+.background__wrapper .colour {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.background__wrapper .colour__label {
+  height: 75px;
+  width: 75px;
+  border: 1px solid #333333;
+  margin-left: 0;
+}
+.background__wrapper .colour__picker {
+  position: absolute;
+  bottom: 10px;
 }
 
 .howto .wrapper {
