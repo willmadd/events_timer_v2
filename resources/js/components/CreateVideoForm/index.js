@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { randomString } from "../../helpers/randomstring";
 import Loading from "../Loader";
-import { SketchPicker } from "react-color";
+
 import BackgroundSelector from "./BackgroundSelector";
+import CreateCountdown from "./CreateCountdown";
+import ImageUpload from "./ImageUpload";
+import AudioSelector from "./AudioSelector";
 
 const CreateVideoForm = () => {
     const [time, setTime] = useState(2);
@@ -11,7 +14,7 @@ const CreateVideoForm = () => {
 
     const [loadingState, setLoadingState] = useState("ready");
 
-    const [backgroundImage, setBackgroundImage] = useState(1);
+    const [backgroundImage, setBackgroundImage] = useState("color");
 
     const setColor = (e) => {
         setTextColor(e.hex);
@@ -46,25 +49,26 @@ const CreateVideoForm = () => {
         <div className="form">
             <div className="form__wrapper">
                 <div className="form__preview">
-                    {backgroundImage && <img src={`/images/backgrounds/${backgroundImage}.jpg`}/>}
+                    {backgroundImage && (
+                        <img
+                            src={`/images/backgrounds/${backgroundImage}.jpg`}
+                        />
+                    )}
                     <span style={{ color: textColor }}>{`${time}:00`}</span>
                 </div>
-                <div className="form__buttons">
-                    <button type="button">Upload Image</button>
-                    <div className="form__countdown">
-                        <h3>Countdown</h3>
-                        <input
-                            value={time}
-                            onChange={(e) => setTime(e.target.value)}
-                        />
-                        <p>seconds</p>
-                    </div>
-                    <SketchPicker
-                        color={textColor}
-                        onChangeComplete={(e) => setColor(e)}
-                    />
-                    <BackgroundSelector currentlySelected={backgroundImage} onChange={setBackgroundImage}/>
-                </div>
+
+                <BackgroundSelector
+                    currentlySelected={backgroundImage}
+                    onChange={setBackgroundImage}
+                />
+                <CreateCountdown
+                    time={time}
+                    setTime={setTime}
+                    textColor={textColor}
+                    setColor={setColor}
+                />
+                <ImageUpload />
+                <AudioSelector />
             </div>
             {loadingState === "ready" ? (
                 <button
