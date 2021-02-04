@@ -1,22 +1,17 @@
 import { useDropzone } from "react-dropzone";
 import React, {useCallback} from 'react'
 
-const ImageUpload = () => {
-    const onDrop = useCallback((acceptedFiles) => {
+const ImageUpload = ({setFeatureImage, setFeatureImgPos, featureImgPos}) => {
 
-        const cb = (file) =>{
-console.log(file)
-        }
-        // Do something with the files
-        console.log(acceptedFiles)
-        getBase64(acceptedFiles, cb)
+    const onDrop = useCallback((acceptedFiles) => {
+        getBase64(acceptedFiles)
     }, []);
 
-    const getBase64 = (file, cb) => {
+    const getBase64 = (file) => {
         let reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = function () {
-            cb(reader.result)
+        reader.readAsDataURL(file[0]);
+        reader.onloadend = function () {
+            setFeatureImage(reader.result)
         };
         reader.onerror = function (error) {
             console.log('Error: ', error);
@@ -43,18 +38,18 @@ console.log(file)
                     )}
                 </div>
             </div>
-                <h4>Position of feartured Image</h4>
+                <h4>Position of featured image</h4>
             <div className="featuredimage__position">
                 <div >
-                <input type="radio" name="position" id="left"/>
+                <input type="radio" name="position" id="left" onChange={()=>setFeatureImgPos('left')} checked={featureImgPos==="left"}/>
                 <label htmlFor="left">Left</label>
                 </div>
                 <div>
-                <input type="radio" name="position" id="centre"/>
-                <label htmlFor="centre">Centre</label>
+                <input type="radio" name="position" id="center" onChange={()=>setFeatureImgPos('center')} checked={featureImgPos==="center"}/>
+                <label htmlFor="center">Center</label>
                 </div>
                 <div>
-                <input type="radio" name="position" id="Right"/>
+                <input type="radio" name="position" id="Right" onChange={()=>setFeatureImgPos('right')} checked={featureImgPos==="right"}/>
                 <label htmlFor="Right">Right</label>
                 </div>
             </div>

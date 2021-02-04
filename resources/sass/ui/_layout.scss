@@ -13,3 +13,12 @@ section{
     position: absolute;
     left: -100000px;
 }
+
+.left{
+    left:0;
+    right:unset;
+}
+.right{
+    right:0;
+    left:unset;
+}

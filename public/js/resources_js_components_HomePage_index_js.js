@@ -3351,23 +3351,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var ImageUpload = function ImageUpload() {
+var ImageUpload = function ImageUpload(_ref) {
+  var setFeatureImage = _ref.setFeatureImage,
+      setFeatureImgPos = _ref.setFeatureImgPos,
+      featureImgPos = _ref.featureImgPos;
   var onDrop = (0,react__WEBPACK_IMPORTED_MODULE_2__.useCallback)(function (acceptedFiles) {
-    var cb = function cb(file) {
-      console.log(file);
-    }; // Do something with the files
-
-
-    console.log(acceptedFiles);
-    getBase64(acceptedFiles, cb);
+    getBase64(acceptedFiles);
   }, []);
 
-  var getBase64 = function getBase64(file, cb) {
+  var getBase64 = function getBase64(file) {
     var reader = new FileReader();
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(file[0]);
 
-    reader.onload = function () {
-      cb(reader.result);
+    reader.onloadend = function () {
+      setFeatureImage(reader.result);
     };
 
     reader.onerror = function (error) {
@@ -3396,14 +3393,18 @@ var ImageUpload = function ImageUpload() {
         })]
       }))
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h4", {
-      children: "Position of feartured Image"
+      children: "Position of featured image"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
       className: "featuredimage__position",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", {
           type: "radio",
           name: "position",
-          id: "left"
+          id: "left",
+          onChange: function onChange() {
+            return setFeatureImgPos('left');
+          },
+          checked: featureImgPos === "left"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", {
           htmlFor: "left",
           children: "Left"
@@ -3412,16 +3413,24 @@ var ImageUpload = function ImageUpload() {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", {
           type: "radio",
           name: "position",
-          id: "centre"
+          id: "center",
+          onChange: function onChange() {
+            return setFeatureImgPos('center');
+          },
+          checked: featureImgPos === "center"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", {
-          htmlFor: "centre",
-          children: "Centre"
+          htmlFor: "center",
+          children: "Center"
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", {
           type: "radio",
           name: "position",
-          id: "Right"
+          id: "Right",
+          onChange: function onChange() {
+            return setFeatureImgPos('right');
+          },
+          checked: featureImgPos === "right"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", {
           htmlFor: "Right",
           children: "Right"
@@ -3523,10 +3532,25 @@ var CreateVideoForm = function CreateVideoForm() {
       backgroundImage = _useState8[0],
       setBackgroundImage = _useState8[1];
 
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(localStorage.getItem("eventsTimer:video:bgCol", backgroundColor) || "#ff4500"),
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
       _useState10 = _slicedToArray(_useState9, 2),
-      backgroundColor = _useState10[0],
-      setBackgroundColor = _useState10[1];
+      featureImage = _useState10[0],
+      setFeatureImage = _useState10[1];
+
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState12 = _slicedToArray(_useState11, 2),
+      hideTimer = _useState12[0],
+      setHideTimer = _useState12[1];
+
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('center'),
+      _useState14 = _slicedToArray(_useState13, 2),
+      featureImgPos = _useState14[0],
+      setFeatureImgPos = _useState14[1];
+
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(localStorage.getItem("eventsTimer:video:bgCol", backgroundColor) || "#ff4500"),
+      _useState16 = _slicedToArray(_useState15, 2),
+      backgroundColor = _useState16[0],
+      setBackgroundColor = _useState16[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     localStorage.setItem("eventsTimer:video:bgCol", backgroundColor);
@@ -3571,9 +3595,12 @@ var CreateVideoForm = function CreateVideoForm() {
         style: {
           backgroundColor: backgroundImage === "color" ? backgroundColor : "inherit"
         },
-        children: [backgroundImage && backgroundImage !== "color" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", {
+        children: [featureImage && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", {
+          className: "feature__image ".concat(featureImgPos === 'left' ? 'left' : featureImgPos === 'right' ? "right" : undefined),
+          src: featureImage
+        }), backgroundImage && backgroundImage !== "color" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", {
           src: "/images/backgrounds/".concat(backgroundImage, ".jpg")
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+        }), !hideTimer && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
           style: {
             color: textColor
           },
@@ -3589,7 +3616,11 @@ var CreateVideoForm = function CreateVideoForm() {
         setTime: setTime,
         textColor: textColor,
         setColor: setTextColor
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_ImageUpload__WEBPACK_IMPORTED_MODULE_7__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_AudioSelector__WEBPACK_IMPORTED_MODULE_8__.default, {})]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_ImageUpload__WEBPACK_IMPORTED_MODULE_7__.default, {
+        setFeatureImage: setFeatureImage,
+        setFeatureImgPos: setFeatureImgPos,
+        featureImgPos: featureImgPos
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_AudioSelector__WEBPACK_IMPORTED_MODULE_8__.default, {})]
     }), loadingState === "ready" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
       className: "form__download",
       type: "button",

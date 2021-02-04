@@ -17,6 +17,12 @@ const CreateVideoForm = () => {
 
     const [backgroundImage, setBackgroundImage] = useState("color");
 
+    const [featureImage, setFeatureImage] = useState("");
+
+    const [hideTimer, setHideTimer] = useState(false);
+
+    const [featureImgPos, setFeatureImgPos] = useState('center');
+
     const [backgroundColor, setBackgroundColor] = useState(
         localStorage.getItem("eventsTimer:video:bgCol", backgroundColor) ||
             "#ff4500"
@@ -68,12 +74,13 @@ const CreateVideoForm = () => {
                                 : "inherit",
                     }}
                 >
+                    {featureImage&&<img className={`feature__image ${featureImgPos==='left'?'left':featureImgPos==='right'?"right":undefined}`} src={featureImage}/>}
                     {backgroundImage && backgroundImage !== "color" && (
                         <img
                             src={`/images/backgrounds/${backgroundImage}.jpg`}
                         />
                     )}
-                    <span style={{ color: textColor }}>{`${time/1000}:00`}</span>
+                   { !hideTimer && <span style={{ color: textColor }}>{`${time/1000}:00`}</span>}
                 </div>
 
                 <BackgroundSelector
@@ -88,7 +95,7 @@ const CreateVideoForm = () => {
                     textColor={textColor}
                     setColor={setTextColor}
                 />
-                <ImageUpload />
+                <ImageUpload setFeatureImage={setFeatureImage} setFeatureImgPos={setFeatureImgPos} featureImgPos={featureImgPos}/>
                 <AudioSelector />
             </div>
             {loadingState === "ready" ? (

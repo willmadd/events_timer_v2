@@ -10020,6 +10020,16 @@ section .wrapper {
   left: -100000px;
 }
 
+.left {
+  left: 0;
+  right: unset;
+}
+
+.right {
+  right: 0;
+  left: unset;
+}
+
 @font-face {
   font-family: "c059bold";
   src: url("/fonts/c059-bold-webfont.woff2") format("woff2"), url("/fonts/c059-bold-webfont.woff") format("woff");
@@ -10142,6 +10152,12 @@ header {
 .featuredimage__position {
   display: flex;
   justify-content: space-between;
+}
+
+.feature__image {
+  height: 65%;
+  margin-top: 5%;
+  position: absolute;
 }
 
 .howto .wrapper {
