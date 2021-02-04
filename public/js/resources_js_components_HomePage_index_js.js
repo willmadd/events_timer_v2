@@ -3222,8 +3222,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_color__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-color */ "./node_modules/react-color/es/index.js");
-/* harmony import */ var react_input_color__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-input-color */ "./node_modules/react-input-color/dist/index.esm.js");
+/* harmony import */ var react_input_color__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-input-color */ "./node_modules/react-input-color/dist/index.esm.js");
 /* harmony import */ var react_time_duration_input__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-time-duration-input */ "./node_modules/react-time-duration-input/dist/index.js");
+/* harmony import */ var react_maskedinput__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-maskedinput */ "./node_modules/react-maskedinput/es/index.js");
+
 
 
 
@@ -3236,6 +3238,19 @@ var CreateCountdown = function CreateCountdown(_ref) {
       setTime = _ref.setTime,
       textColor = _ref.textColor,
       setColor = _ref.setColor;
+
+  var stringToSeconds = function stringToSeconds(e) {
+    var value = e.target.value;
+    var things = value.split(":");
+    var hours = Number(things[0]) * 3600;
+    var minutes = Number(things[1]) * 60;
+    var total = hours + minutes * 1000;
+
+    if (total !== NaN) {
+      setTime(total);
+    }
+  };
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
     className: "form__countdown",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", {
@@ -3259,15 +3274,30 @@ var CreateCountdown = function CreateCountdown(_ref) {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", {
           htmlFor: "",
           children: "Countdown Length"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_time_duration_input__WEBPACK_IMPORTED_MODULE_3__.TimeDurationInput, {
-          value: time,
-          onChange: setTime
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_maskedinput__WEBPACK_IMPORTED_MODULE_4__.default, {
+          value: "0:10",
+          onChange: function onChange(e) {
+            return stringToSeconds(e);
+          },
+          mask: "W:11",
+          placeholder: "h:mm",
+          size: "11",
+          formatCharacters: {
+            W: {
+              validate: function validate(_char) {
+                return /\d+/.test(_char);
+              },
+              transform: function transform(_char2) {
+                return _char2;
+              }
+            }
+          }
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: "form__countdown__option",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
           children: "Countdown Color"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_input_color__WEBPACK_IMPORTED_MODULE_4__.default, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_input_color__WEBPACK_IMPORTED_MODULE_5__.default, {
           initialValue: textColor,
           onChange: function onChange(e) {
             return setColor(e.hex);
@@ -4021,6 +4051,534 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _file_selector__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./file-selector */ "./node_modules/file-selector/dist/es5/file-selector.js");
 
 //# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ "./node_modules/inputmask-core/lib/index.js":
+/*!**************************************************!*\
+  !*** ./node_modules/inputmask-core/lib/index.js ***!
+  \**************************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+function extend(dest, src) {
+  if (src) {
+    var props = Object.keys(src)
+    for (var i = 0, l = props.length; i < l ; i++) {
+      dest[props[i]] = src[props[i]]
+    }
+  }
+  return dest
+}
+
+function copy(obj) {
+  return extend({}, obj)
+}
+
+/**
+ * Merge an object defining format characters into the defaults.
+ * Passing null/undefined for en existing format character removes it.
+ * Passing a definition for an existing format character overrides it.
+ * @param {?Object} formatCharacters.
+ */
+function mergeFormatCharacters(formatCharacters) {
+  var merged = copy(DEFAULT_FORMAT_CHARACTERS)
+  if (formatCharacters) {
+    var chars = Object.keys(formatCharacters)
+    for (var i = 0, l = chars.length; i < l ; i++) {
+      var char = chars[i]
+      if (formatCharacters[char] == null) {
+        delete merged[char]
+      }
+      else {
+        merged[char] = formatCharacters[char]
+      }
+    }
+  }
+  return merged
+}
+
+var ESCAPE_CHAR = '\\'
+
+var DIGIT_RE = /^\d$/
+var LETTER_RE = /^[A-Za-z]$/
+var ALPHANNUMERIC_RE = /^[\dA-Za-z]$/
+
+var DEFAULT_PLACEHOLDER_CHAR = '_'
+var DEFAULT_FORMAT_CHARACTERS = {
+  '*': {
+    validate: function(char) { return ALPHANNUMERIC_RE.test(char) }
+  },
+  '1': {
+    validate: function(char) { return DIGIT_RE.test(char) }
+  },
+  'a': {
+    validate: function(char) { return LETTER_RE.test(char) }
+  },
+  'A': {
+    validate: function(char) { return LETTER_RE.test(char) },
+    transform: function(char) { return char.toUpperCase() }
+  },
+  '#': {
+    validate: function(char) { return ALPHANNUMERIC_RE.test(char) },
+    transform: function(char) { return char.toUpperCase() }
+  }
+}
+
+/**
+ * @param {string} source
+ * @patam {?Object} formatCharacters
+ */
+function Pattern(source, formatCharacters, placeholderChar, isRevealingMask) {
+  if (!(this instanceof Pattern)) {
+    return new Pattern(source, formatCharacters, placeholderChar)
+  }
+
+  /** Placeholder character */
+  this.placeholderChar = placeholderChar || DEFAULT_PLACEHOLDER_CHAR
+  /** Format character definitions. */
+  this.formatCharacters = formatCharacters || DEFAULT_FORMAT_CHARACTERS
+  /** Pattern definition string with escape characters. */
+  this.source = source
+  /** Pattern characters after escape characters have been processed. */
+  this.pattern = []
+  /** Length of the pattern after escape characters have been processed. */
+  this.length = 0
+  /** Index of the first editable character. */
+  this.firstEditableIndex = null
+  /** Index of the last editable character. */
+  this.lastEditableIndex = null
+  /** Lookup for indices of editable characters in the pattern. */
+  this._editableIndices = {}
+  /** If true, only the pattern before the last valid value character shows. */
+  this.isRevealingMask = isRevealingMask || false
+
+  this._parse()
+}
+
+Pattern.prototype._parse = function parse() {
+  var sourceChars = this.source.split('')
+  var patternIndex = 0
+  var pattern = []
+
+  for (var i = 0, l = sourceChars.length; i < l; i++) {
+    var char = sourceChars[i]
+    if (char === ESCAPE_CHAR) {
+      if (i === l - 1) {
+        throw new Error('InputMask: pattern ends with a raw ' + ESCAPE_CHAR)
+      }
+      char = sourceChars[++i]
+    }
+    else if (char in this.formatCharacters) {
+      if (this.firstEditableIndex === null) {
+        this.firstEditableIndex = patternIndex
+      }
+      this.lastEditableIndex = patternIndex
+      this._editableIndices[patternIndex] = true
+    }
+
+    pattern.push(char)
+    patternIndex++
+  }
+
+  if (this.firstEditableIndex === null) {
+    throw new Error(
+      'InputMask: pattern "' + this.source + '" does not contain any editable characters.'
+    )
+  }
+
+  this.pattern = pattern
+  this.length = pattern.length
+}
+
+/**
+ * @param {Array<string>} value
+ * @return {Array<string>}
+ */
+Pattern.prototype.formatValue = function format(value) {
+  var valueBuffer = new Array(this.length)
+  var valueIndex = 0
+
+  for (var i = 0, l = this.length; i < l ; i++) {
+    if (this.isEditableIndex(i)) {
+      if (this.isRevealingMask &&
+          value.length <= valueIndex &&
+          !this.isValidAtIndex(value[valueIndex], i)) {
+        break
+      }
+      valueBuffer[i] = (value.length > valueIndex && this.isValidAtIndex(value[valueIndex], i)
+                        ? this.transform(value[valueIndex], i)
+                        : this.placeholderChar)
+      valueIndex++
+    }
+    else {
+      valueBuffer[i] = this.pattern[i]
+      // Also allow the value to contain static values from the pattern by
+      // advancing its index.
+      if (value.length > valueIndex && value[valueIndex] === this.pattern[i]) {
+        valueIndex++
+      }
+    }
+  }
+
+  return valueBuffer
+}
+
+/**
+ * @param {number} index
+ * @return {boolean}
+ */
+Pattern.prototype.isEditableIndex = function isEditableIndex(index) {
+  return !!this._editableIndices[index]
+}
+
+/**
+ * @param {string} char
+ * @param {number} index
+ * @return {boolean}
+ */
+Pattern.prototype.isValidAtIndex = function isValidAtIndex(char, index) {
+  return this.formatCharacters[this.pattern[index]].validate(char)
+}
+
+Pattern.prototype.transform = function transform(char, index) {
+  var format = this.formatCharacters[this.pattern[index]]
+  return typeof format.transform == 'function' ? format.transform(char) : char
+}
+
+function InputMask(options) {
+  if (!(this instanceof InputMask)) { return new InputMask(options) }
+  options = extend({
+    formatCharacters: null,
+    pattern: null,
+    isRevealingMask: false,
+    placeholderChar: DEFAULT_PLACEHOLDER_CHAR,
+    selection: {start: 0, end: 0},
+    value: ''
+  }, options)
+
+  if (options.pattern == null) {
+    throw new Error('InputMask: you must provide a pattern.')
+  }
+
+  if (typeof options.placeholderChar !== 'string' || options.placeholderChar.length > 1) {
+    throw new Error('InputMask: placeholderChar should be a single character or an empty string.')
+  }
+
+  this.placeholderChar = options.placeholderChar
+  this.formatCharacters = mergeFormatCharacters(options.formatCharacters)
+  this.setPattern(options.pattern, {
+    value: options.value,
+    selection: options.selection,
+    isRevealingMask: options.isRevealingMask
+  })
+}
+
+// Editing
+
+/**
+ * Applies a single character of input based on the current selection.
+ * @param {string} char
+ * @return {boolean} true if a change has been made to value or selection as a
+ *   result of the input, false otherwise.
+ */
+InputMask.prototype.input = function input(char) {
+  // Ignore additional input if the cursor's at the end of the pattern
+  if (this.selection.start === this.selection.end &&
+      this.selection.start === this.pattern.length) {
+    return false
+  }
+
+  var selectionBefore = copy(this.selection)
+  var valueBefore = this.getValue()
+
+  var inputIndex = this.selection.start
+
+  // If the cursor or selection is prior to the first editable character, make
+  // sure any input given is applied to it.
+  if (inputIndex < this.pattern.firstEditableIndex) {
+    inputIndex = this.pattern.firstEditableIndex
+  }
+
+  // Bail out or add the character to input
+  if (this.pattern.isEditableIndex(inputIndex)) {
+    if (!this.pattern.isValidAtIndex(char, inputIndex)) {
+      return false
+    }
+    this.value[inputIndex] = this.pattern.transform(char, inputIndex)
+  }
+
+  // If multiple characters were selected, blank the remainder out based on the
+  // pattern.
+  var end = this.selection.end - 1
+  while (end > inputIndex) {
+    if (this.pattern.isEditableIndex(end)) {
+      this.value[end] = this.placeholderChar
+    }
+    end--
+  }
+
+  // Advance the cursor to the next character
+  this.selection.start = this.selection.end = inputIndex + 1
+
+  // Skip over any subsequent static characters
+  while (this.pattern.length > this.selection.start &&
+         !this.pattern.isEditableIndex(this.selection.start)) {
+    this.selection.start++
+    this.selection.end++
+  }
+
+  // History
+  if (this._historyIndex != null) {
+    // Took more input after undoing, so blow any subsequent history away
+    this._history.splice(this._historyIndex, this._history.length - this._historyIndex)
+    this._historyIndex = null
+  }
+  if (this._lastOp !== 'input' ||
+      selectionBefore.start !== selectionBefore.end ||
+      this._lastSelection !== null && selectionBefore.start !== this._lastSelection.start) {
+    this._history.push({value: valueBefore, selection: selectionBefore, lastOp: this._lastOp})
+  }
+  this._lastOp = 'input'
+  this._lastSelection = copy(this.selection)
+
+  return true
+}
+
+/**
+ * Attempts to delete from the value based on the current cursor position or
+ * selection.
+ * @return {boolean} true if the value or selection changed as the result of
+ *   backspacing, false otherwise.
+ */
+InputMask.prototype.backspace = function backspace() {
+  // If the cursor is at the start there's nothing to do
+  if (this.selection.start === 0 && this.selection.end === 0) {
+    return false
+  }
+
+  var selectionBefore = copy(this.selection)
+  var valueBefore = this.getValue()
+
+  // No range selected - work on the character preceding the cursor
+  if (this.selection.start === this.selection.end) {
+    if (this.pattern.isEditableIndex(this.selection.start - 1)) {
+      this.value[this.selection.start - 1] = this.placeholderChar
+    }
+    this.selection.start--
+    this.selection.end--
+  }
+  // Range selected - delete characters and leave the cursor at the start of the selection
+  else {
+    var end = this.selection.end - 1
+    while (end >= this.selection.start) {
+      if (this.pattern.isEditableIndex(end)) {
+        this.value[end] = this.placeholderChar
+      }
+      end--
+    }
+    this.selection.end = this.selection.start
+  }
+
+  // History
+  if (this._historyIndex != null) {
+    // Took more input after undoing, so blow any subsequent history away
+    this._history.splice(this._historyIndex, this._history.length - this._historyIndex)
+  }
+  if (this._lastOp !== 'backspace' ||
+      selectionBefore.start !== selectionBefore.end ||
+      this._lastSelection !== null && selectionBefore.start !== this._lastSelection.start) {
+    this._history.push({value: valueBefore, selection: selectionBefore, lastOp: this._lastOp})
+  }
+  this._lastOp = 'backspace'
+  this._lastSelection = copy(this.selection)
+
+  return true
+}
+
+/**
+ * Attempts to paste a string of input at the current cursor position or over
+ * the top of the current selection.
+ * Invalid content at any position will cause the paste to be rejected, and it
+ * may contain static parts of the mask's pattern.
+ * @param {string} input
+ * @return {boolean} true if the paste was successful, false otherwise.
+ */
+InputMask.prototype.paste = function paste(input) {
+  // This is necessary because we're just calling input() with each character
+  // and rolling back if any were invalid, rather than checking up-front.
+  var initialState = {
+    value: this.value.slice(),
+    selection: copy(this.selection),
+    _lastOp: this._lastOp,
+    _history: this._history.slice(),
+    _historyIndex: this._historyIndex,
+    _lastSelection: copy(this._lastSelection)
+  }
+
+  // If there are static characters at the start of the pattern and the cursor
+  // or selection is within them, the static characters must match for a valid
+  // paste.
+  if (this.selection.start < this.pattern.firstEditableIndex) {
+    for (var i = 0, l = this.pattern.firstEditableIndex - this.selection.start; i < l; i++) {
+      if (input.charAt(i) !== this.pattern.pattern[i]) {
+        return false
+      }
+    }
+
+    // Continue as if the selection and input started from the editable part of
+    // the pattern.
+    input = input.substring(this.pattern.firstEditableIndex - this.selection.start)
+    this.selection.start = this.pattern.firstEditableIndex
+  }
+
+  for (i = 0, l = input.length;
+       i < l && this.selection.start <= this.pattern.lastEditableIndex;
+       i++) {
+    var valid = this.input(input.charAt(i))
+    // Allow static parts of the pattern to appear in pasted input - they will
+    // already have been stepped over by input(), so verify that the value
+    // deemed invalid by input() was the expected static character.
+    if (!valid) {
+      if (this.selection.start > 0) {
+        // XXX This only allows for one static character to be skipped
+        var patternIndex = this.selection.start - 1
+        if (!this.pattern.isEditableIndex(patternIndex) &&
+            input.charAt(i) === this.pattern.pattern[patternIndex]) {
+          continue
+        }
+      }
+      extend(this, initialState)
+      return false
+    }
+  }
+
+  return true
+}
+
+// History
+
+InputMask.prototype.undo = function undo() {
+  // If there is no history, or nothing more on the history stack, we can't undo
+  if (this._history.length === 0 || this._historyIndex === 0) {
+    return false
+  }
+
+  var historyItem
+  if (this._historyIndex == null) {
+    // Not currently undoing, set up the initial history index
+    this._historyIndex = this._history.length - 1
+    historyItem = this._history[this._historyIndex]
+    // Add a new history entry if anything has changed since the last one, so we
+    // can redo back to the initial state we started undoing from.
+    var value = this.getValue()
+    if (historyItem.value !== value ||
+        historyItem.selection.start !== this.selection.start ||
+        historyItem.selection.end !== this.selection.end) {
+      this._history.push({value: value, selection: copy(this.selection), lastOp: this._lastOp, startUndo: true})
+    }
+  }
+  else {
+    historyItem = this._history[--this._historyIndex]
+  }
+
+  this.value = historyItem.value.split('')
+  this.selection = historyItem.selection
+  this._lastOp = historyItem.lastOp
+  return true
+}
+
+InputMask.prototype.redo = function redo() {
+  if (this._history.length === 0 || this._historyIndex == null) {
+    return false
+  }
+  var historyItem = this._history[++this._historyIndex]
+  // If this is the last history item, we're done redoing
+  if (this._historyIndex === this._history.length - 1) {
+    this._historyIndex = null
+    // If the last history item was only added to start undoing, remove it
+    if (historyItem.startUndo) {
+      this._history.pop()
+    }
+  }
+  this.value = historyItem.value.split('')
+  this.selection = historyItem.selection
+  this._lastOp = historyItem.lastOp
+  return true
+}
+
+// Getters & setters
+
+InputMask.prototype.setPattern = function setPattern(pattern, options) {
+  options = extend({
+    selection: {start: 0, end: 0},
+    value: ''
+  }, options)
+  this.pattern = new Pattern(pattern, this.formatCharacters, this.placeholderChar, options.isRevealingMask)
+  this.setValue(options.value)
+  this.emptyValue = this.pattern.formatValue([]).join('')
+  this.selection = options.selection
+  this._resetHistory()
+}
+
+InputMask.prototype.setSelection = function setSelection(selection) {
+  this.selection = copy(selection)
+  if (this.selection.start === this.selection.end) {
+    if (this.selection.start < this.pattern.firstEditableIndex) {
+      this.selection.start = this.selection.end = this.pattern.firstEditableIndex
+      return true
+    }
+    // Set selection to the first editable, non-placeholder character before the selection
+    // OR to the beginning of the pattern
+    var index = this.selection.start
+    while (index >= this.pattern.firstEditableIndex) {
+      if (this.pattern.isEditableIndex(index - 1) &&
+          this.value[index - 1] !== this.placeholderChar ||
+          index === this.pattern.firstEditableIndex) {
+        this.selection.start = this.selection.end = index
+        break
+      }
+      index--
+    }
+    return true
+  }
+  return false
+}
+
+InputMask.prototype.setValue = function setValue(value) {
+  if (value == null) {
+    value = ''
+  }
+  this.value = this.pattern.formatValue(value.split(''))
+}
+
+InputMask.prototype.getValue = function getValue() {
+  return this.value.join('')
+}
+
+InputMask.prototype.getRawValue = function getRawValue() {
+  var rawValue = []
+  for (var i = 0; i < this.value.length; i++) {
+    if (this.pattern._editableIndices[i] === true) {
+      rawValue.push(this.value[i])
+    }
+  }
+  return rawValue.join('')
+}
+
+InputMask.prototype._resetHistory = function _resetHistory() {
+  this._history = []
+  this._historyIndex = null
+  this._lastOp = null
+  this._lastSelection = copy(this.selection)
+}
+
+InputMask.Pattern = Pattern
+
+module.exports = InputMask
+
 
 /***/ }),
 
@@ -25563,6 +26121,320 @@ Slider.defaultProps = {
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Slider);
 
+
+/***/ }),
+
+/***/ "./node_modules/react-maskedinput/es/index.js":
+/*!****************************************************!*\
+  !*** ./node_modules/react-maskedinput/es/index.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var inputmask_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! inputmask-core */ "./node_modules/inputmask-core/lib/index.js");
+/* harmony import */ var inputmask_core__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(inputmask_core__WEBPACK_IMPORTED_MODULE_2__);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _class, _temp2;
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+var KEYCODE_Z = 90;
+var KEYCODE_Y = 89;
+
+function isUndo(e) {
+  return (e.ctrlKey || e.metaKey) && e.keyCode === (e.shiftKey ? KEYCODE_Y : KEYCODE_Z);
+}
+
+function isRedo(e) {
+  return (e.ctrlKey || e.metaKey) && e.keyCode === (e.shiftKey ? KEYCODE_Z : KEYCODE_Y);
+}
+
+function getSelection(el) {
+  var start = void 0,
+      end = void 0;
+  if (el.selectionStart !== undefined) {
+    start = el.selectionStart;
+    end = el.selectionEnd;
+  } else {
+    try {
+      el.focus();
+      var rangeEl = el.createTextRange();
+      var clone = rangeEl.duplicate();
+
+      rangeEl.moveToBookmark(document.selection.createRange().getBookmark());
+      clone.setEndPoint('EndToStart', rangeEl);
+
+      start = clone.text.length;
+      end = start + rangeEl.text.length;
+    } catch (e) {/* not focused or not visible */}
+  }
+
+  return { start: start, end: end };
+}
+
+function setSelection(el, selection) {
+  try {
+    if (el.selectionStart !== undefined) {
+      el.focus();
+      el.setSelectionRange(selection.start, selection.end);
+    } else {
+      el.focus();
+      var rangeEl = el.createTextRange();
+      rangeEl.collapse(true);
+      rangeEl.moveStart('character', selection.start);
+      rangeEl.moveEnd('character', selection.end - selection.start);
+      rangeEl.select();
+    }
+  } catch (e) {/* not focused or not visible */}
+}
+
+var MaskedInput = (_temp2 = _class = function (_React$Component) {
+  _inherits(MaskedInput, _React$Component);
+
+  function MaskedInput() {
+    var _temp, _this, _ret;
+
+    _classCallCheck(this, MaskedInput);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this._onChange = function (e) {
+      // console.log('onChange', JSON.stringify(getSelection(this.input)), e.target.value)
+
+      var maskValue = _this.mask.getValue();
+      var incomingValue = e.target.value;
+      if (incomingValue !== maskValue) {
+        // only modify mask if form contents actually changed
+        _this._updateMaskSelection();
+        _this.mask.setValue(incomingValue); // write the whole updated value into the mask
+        e.target.value = _this._getDisplayValue(); // update the form with pattern applied to the value
+        _this._updateInputSelection();
+      }
+
+      if (_this.props.onChange) {
+        _this.props.onChange(e);
+      }
+    }, _this._onKeyDown = function (e) {
+      // console.log('onKeyDown', JSON.stringify(getSelection(this.input)), e.key, e.target.value)
+
+      if (isUndo(e)) {
+        e.preventDefault();
+        if (_this.mask.undo()) {
+          e.target.value = _this._getDisplayValue();
+          _this._updateInputSelection();
+          if (_this.props.onChange) {
+            _this.props.onChange(e);
+          }
+        }
+        return;
+      } else if (isRedo(e)) {
+        e.preventDefault();
+        if (_this.mask.redo()) {
+          e.target.value = _this._getDisplayValue();
+          _this._updateInputSelection();
+          if (_this.props.onChange) {
+            _this.props.onChange(e);
+          }
+        }
+        return;
+      }
+
+      if (e.key === 'Backspace') {
+        e.preventDefault();
+        _this._updateMaskSelection();
+        if (_this.mask.backspace()) {
+          var value = _this._getDisplayValue();
+          e.target.value = value;
+          if (value) {
+            _this._updateInputSelection();
+          }
+          if (_this.props.onChange) {
+            _this.props.onChange(e);
+          }
+        }
+      }
+    }, _this._onKeyPress = function (e) {
+      // console.log('onKeyPress', JSON.stringify(getSelection(this.input)), e.key, e.target.value)
+
+      // Ignore modified key presses
+      // Ignore enter key to allow form submission
+      if (e.metaKey || e.altKey || e.ctrlKey || e.key === 'Enter') {
+        return;
+      }
+
+      e.preventDefault();
+      _this._updateMaskSelection();
+      if (_this.mask.input(e.key || e.data)) {
+        e.target.value = _this.mask.getValue();
+        _this._updateInputSelection();
+        if (_this.props.onChange) {
+          _this.props.onChange(e);
+        }
+      }
+    }, _this._onPaste = function (e) {
+      // console.log('onPaste', JSON.stringify(getSelection(this.input)), e.clipboardData.getData('Text'), e.target.value)
+
+      e.preventDefault();
+      _this._updateMaskSelection();
+      // getData value needed for IE also works in FF & Chrome
+      if (_this.mask.paste(e.clipboardData.getData('Text'))) {
+        e.target.value = _this.mask.getValue();
+        // Timeout needed for IE
+        setTimeout(function () {
+          return _this._updateInputSelection();
+        }, 0);
+        if (_this.props.onChange) {
+          _this.props.onChange(e);
+        }
+      }
+    }, _temp), _possibleConstructorReturn(_this, _ret);
+  }
+
+  MaskedInput.prototype.componentWillMount = function componentWillMount() {
+    var options = {
+      pattern: this.props.mask,
+      value: this.props.value,
+      formatCharacters: this.props.formatCharacters
+    };
+    if (this.props.placeholderChar) {
+      options.placeholderChar = this.props.placeholderChar;
+    }
+    this.mask = new (inputmask_core__WEBPACK_IMPORTED_MODULE_2___default())(options);
+  };
+
+  MaskedInput.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+    if (this.props.mask !== nextProps.mask && this.props.value !== nextProps.mask) {
+      // if we get a new value and a new mask at the same time
+      // check if the mask.value is still the initial value
+      // - if so use the nextProps value
+      // - otherwise the `this.mask` has a value for us (most likely from paste action)
+      if (this.mask.getValue() === this.mask.emptyValue) {
+        this.mask.setPattern(nextProps.mask, { value: nextProps.value });
+      } else {
+        this.mask.setPattern(nextProps.mask, { value: this.mask.getRawValue() });
+      }
+    } else if (this.props.mask !== nextProps.mask) {
+      this.mask.setPattern(nextProps.mask, { value: this.mask.getRawValue() });
+    } else if (this.props.value !== nextProps.value) {
+      this.mask.setValue(nextProps.value);
+    }
+  };
+
+  MaskedInput.prototype.componentWillUpdate = function componentWillUpdate(nextProps, nextState) {
+    if (nextProps.mask !== this.props.mask) {
+      this._updatePattern(nextProps);
+    }
+  };
+
+  MaskedInput.prototype.componentDidUpdate = function componentDidUpdate(prevProps) {
+    if (prevProps.mask !== this.props.mask && this.mask.selection.start) {
+      this._updateInputSelection();
+    }
+  };
+
+  MaskedInput.prototype._updatePattern = function _updatePattern(props) {
+    this.mask.setPattern(props.mask, {
+      value: this.mask.getRawValue(),
+      selection: getSelection(this.input)
+    });
+  };
+
+  MaskedInput.prototype._updateMaskSelection = function _updateMaskSelection() {
+    this.mask.selection = getSelection(this.input);
+  };
+
+  MaskedInput.prototype._updateInputSelection = function _updateInputSelection() {
+    setSelection(this.input, this.mask.selection);
+  };
+
+  MaskedInput.prototype._getDisplayValue = function _getDisplayValue() {
+    var value = this.mask.getValue();
+    return value === this.mask.emptyValue ? '' : value;
+  };
+
+  MaskedInput.prototype._keyPressPropName = function _keyPressPropName() {
+    if (typeof navigator !== 'undefined') {
+      return navigator.userAgent.match(/Android/i) ? 'onBeforeInput' : 'onKeyPress';
+    }
+    return 'onKeyPress';
+  };
+
+  MaskedInput.prototype._getEventHandlers = function _getEventHandlers() {
+    var _ref;
+
+    return _ref = {
+      onChange: this._onChange,
+      onKeyDown: this._onKeyDown,
+      onPaste: this._onPaste
+    }, _ref[this._keyPressPropName()] = this._onKeyPress, _ref;
+  };
+
+  MaskedInput.prototype.focus = function focus() {
+    this.input.focus();
+  };
+
+  MaskedInput.prototype.blur = function blur() {
+    this.input.blur();
+  };
+
+  MaskedInput.prototype.render = function render() {
+    var _this2 = this;
+
+    var ref = function ref(r) {
+      _this2.input = r;
+    };
+    var maxLength = this.mask.pattern.length;
+    var value = this._getDisplayValue();
+    var eventHandlers = this._getEventHandlers();
+    var _props = this.props,
+        _props$size = _props.size,
+        size = _props$size === undefined ? maxLength : _props$size,
+        _props$placeholder = _props.placeholder,
+        placeholder = _props$placeholder === undefined ? this.mask.emptyValue : _props$placeholder;
+
+    var _props2 = this.props,
+        placeholderChar = _props2.placeholderChar,
+        formatCharacters = _props2.formatCharacters,
+        cleanedProps = _objectWithoutProperties(_props2, ['placeholderChar', 'formatCharacters']); // eslint-disable-line no-unused-vars
+
+
+    var inputProps = _extends({}, cleanedProps, eventHandlers, { ref: ref, maxLength: maxLength, value: value, size: size, placeholder: placeholder });
+    return react__WEBPACK_IMPORTED_MODULE_0__.createElement('input', inputProps);
+  };
+
+  return MaskedInput;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component), _class.defaultProps = {
+  value: ''
+}, _temp2);
+MaskedInput.propTypes =  true ? {
+  mask: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().string.isRequired),
+
+  formatCharacters: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().object),
+  placeholderChar: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().string)
+} : 0;
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MaskedInput);
 
 /***/ }),
 
