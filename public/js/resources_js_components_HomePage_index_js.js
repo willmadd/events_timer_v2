@@ -3304,6 +3304,18 @@ var CreateCountdown = function CreateCountdown(_ref) {
           },
           placement: "bottom"
         })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+        className: "form__countdown__option",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", {
+          htmlFor: "ms__timer",
+          className: "form__countdown__ms",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
+            children: "Show ms"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", {
+          id: "ms__timer",
+          type: "checkbox"
+        })]
       })]
     }), "Is contract ratio enough?"]
   });
