@@ -29,6 +29,12 @@ const CreateCountdown = ({ time, setTime, textColor, setColor }) => {
                         placement="bottom"
                     />
                 </div>
+                <div className="form__countdown__option">
+                    <label htmlFor="ms__timer" className="form__countdown__ms">
+                    <p>{`Show ms`}</p>
+                    </label>
+                        <input id="ms__timer" type="checkbox" /> 
+                </div>
             </div>
             Is contract ratio enough?
         </div>
