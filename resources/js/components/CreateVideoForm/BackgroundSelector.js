@@ -19,7 +19,7 @@ const BackgroundSelector = ({ onChange, currentlySelected, backgroundColor, setB
                             onChange={(e) => onChange(e.target.value)}
                             id="color"
                         ></input>
-                    <label htmlFor={"color"} className="colour__label" style={{backgroundColor:backgroundColor.hex}}>
+                    <label htmlFor={"color"} className="colour__label" style={{backgroundColor:backgroundColor}}>
                         {/* <div
                             
                             onClick={() => console.log(";clkickll")}
@@ -28,8 +28,8 @@ const BackgroundSelector = ({ onChange, currentlySelected, backgroundColor, setB
                     <div className="colour__picker">
 
                     <InputColor
-                        initialValue={backgroundColor.hex}
-                        onChange={(e) => setBackgroundColor(e)}
+                        initialValue={backgroundColor}
+                        onChange={(e) => setBackgroundColor(e.hex)}
                         placement="right"
                         />
                         </div>

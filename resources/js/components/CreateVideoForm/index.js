@@ -9,18 +9,27 @@ import ImageUpload from "./ImageUpload";
 import AudioSelector from "./AudioSelector";
 
 const CreateVideoForm = () => {
-    const [time, setTime] = useState(2);
-    const [textColor, setTextColor] = useState("#333333");
+    const [time, setTime] = useState(60000);
+
+    const [textColor, setTextColor] = useState(localStorage.getItem("eventsTimer:video:txtCol", backgroundColor)||"#333333");
 
     const [loadingState, setLoadingState] = useState("ready");
 
     const [backgroundImage, setBackgroundImage] = useState("color");
 
-    const [backgroundColor, setBackgroundColor] = useState({hex:"#ff4500"});
+    const [backgroundColor, setBackgroundColor] = useState(
+        localStorage.getItem("eventsTimer:video:bgCol", backgroundColor) ||
+            "#ff4500"
+    );
 
-    const setColor = (e) => {
-        setTextColor(e.hex);
-    };
+    useEffect(() => {
+        localStorage.setItem("eventsTimer:video:bgCol", backgroundColor);
+    }, [backgroundColor]);
+
+    useEffect(() => {
+        localStorage.setItem("eventsTimer:video:txtCol", textColor);
+    }, [textColor]);
+
 
     const handleSubmit = () => {
         setLoadingState("loading");
@@ -46,17 +55,25 @@ const CreateVideoForm = () => {
             }
         });
     };
-console.log(backgroundImage)
+
     return (
         <div className="form">
             <div className="form__wrapper">
-                <div className="form__preview" style={{backgroundColor:backgroundImage==='color'?backgroundColor.hex:'inherit'}}>
-                    {backgroundImage && backgroundImage !== 'color' &&(
+                <div
+                    className="form__preview"
+                    style={{
+                        backgroundColor:
+                            backgroundImage === "color"
+                                ? backgroundColor
+                                : "inherit",
+                    }}
+                >
+                    {backgroundImage && backgroundImage !== "color" && (
                         <img
                             src={`/images/backgrounds/${backgroundImage}.jpg`}
                         />
                     )}
-                    <span style={{ color: textColor }}>{`${time}:00`}</span>
+                    <span style={{ color: textColor }}>{`${time/1000}:00`}</span>
                 </div>
 
                 <BackgroundSelector
@@ -64,13 +81,12 @@ console.log(backgroundImage)
                     onChange={setBackgroundImage}
                     backgroundColor={backgroundColor}
                     setBackgroundColor={setBackgroundColor}
-                    
                 />
                 <CreateCountdown
                     time={time}
                     setTime={setTime}
                     textColor={textColor}
-                    setColor={setColor}
+                    setColor={setTextColor}
                 />
                 <ImageUpload />
                 <AudioSelector />
