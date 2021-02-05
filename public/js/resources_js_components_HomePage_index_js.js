@@ -3542,7 +3542,7 @@ var CreateVideoForm = function CreateVideoForm() {
       hideTimer = _useState12[0],
       setHideTimer = _useState12[1];
 
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('center'),
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("center"),
       _useState14 = _slicedToArray(_useState13, 2),
       featureImgPos = _useState14[0],
       setFeatureImgPos = _useState14[1];
@@ -3586,9 +3586,26 @@ var CreateVideoForm = function CreateVideoForm() {
     });
   };
 
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(2000),
+      _useState18 = _slicedToArray(_useState17, 2),
+      timer = _useState18[0],
+      setTimer = _useState18[1];
+
+  var startTimer = function startTimer() {
+    setInterval(function () {
+      var newTime = timer - 100;
+      setTimer(newTime);
+    }, 500);
+  };
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
     className: "form",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h1", {
+      onClick: function onClick(e) {
+        return startTimer();
+      },
+      children: timer
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
       className: "form__wrapper",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: "form__preview",
@@ -3596,7 +3613,7 @@ var CreateVideoForm = function CreateVideoForm() {
           backgroundColor: backgroundImage === "color" ? backgroundColor : "inherit"
         },
         children: [featureImage && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", {
-          className: "feature__image ".concat(featureImgPos === 'left' ? 'left' : featureImgPos === 'right' ? "right" : undefined),
+          className: "feature__image ".concat(featureImgPos === "left" ? "left" : featureImgPos === "right" ? "right" : undefined),
           src: featureImage
         }), backgroundImage && backgroundImage !== "color" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", {
           src: "/images/backgrounds/".concat(backgroundImage, ".jpg")
@@ -3620,7 +3637,7 @@ var CreateVideoForm = function CreateVideoForm() {
         setFeatureImage: setFeatureImage,
         setFeatureImgPos: setFeatureImgPos,
         featureImgPos: featureImgPos
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_AudioSelector__WEBPACK_IMPORTED_MODULE_8__.default, {})]
+      })]
     }), loadingState === "ready" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
       className: "form__download",
       type: "button",

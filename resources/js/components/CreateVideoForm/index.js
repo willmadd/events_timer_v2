@@ -11,7 +11,10 @@ import AudioSelector from "./AudioSelector";
 const CreateVideoForm = () => {
     const [time, setTime] = useState(60000);
 
-    const [textColor, setTextColor] = useState(localStorage.getItem("eventsTimer:video:txtCol", backgroundColor)||"#333333");
+    const [textColor, setTextColor] = useState(
+        localStorage.getItem("eventsTimer:video:txtCol", backgroundColor) ||
+            "#333333"
+    );
 
     const [loadingState, setLoadingState] = useState("ready");
 
@@ -21,7 +24,7 @@ const CreateVideoForm = () => {
 
     const [hideTimer, setHideTimer] = useState(false);
 
-    const [featureImgPos, setFeatureImgPos] = useState('center');
+    const [featureImgPos, setFeatureImgPos] = useState("center");
 
     const [backgroundColor, setBackgroundColor] = useState(
         localStorage.getItem("eventsTimer:video:bgCol", backgroundColor) ||
@@ -35,7 +38,6 @@ const CreateVideoForm = () => {
     useEffect(() => {
         localStorage.setItem("eventsTimer:video:txtCol", textColor);
     }, [textColor]);
-
 
     const handleSubmit = () => {
         setLoadingState("loading");
@@ -62,8 +64,18 @@ const CreateVideoForm = () => {
         });
     };
 
+    const [timer, setTimer] = useState(2000);
+
+    const startTimer = () => {
+        setInterval(() => {
+            const newTime = timer - 100;
+            setTimer(newTime);
+        }, 500);
+    };
+
     return (
         <div className="form">
+            <h1 onClick={(e) => startTimer()}>{timer}</h1>
             <div className="form__wrapper">
                 <div
                     className="form__preview"
@@ -74,13 +86,28 @@ const CreateVideoForm = () => {
                                 : "inherit",
                     }}
                 >
-                    {featureImage&&<img className={`feature__image ${featureImgPos==='left'?'left':featureImgPos==='right'?"right":undefined}`} src={featureImage}/>}
+                    {featureImage && (
+                        <img
+                            className={`feature__image ${
+                                featureImgPos === "left"
+                                    ? "left"
+                                    : featureImgPos === "right"
+                                    ? "right"
+                                    : undefined
+                            }`}
+                            src={featureImage}
+                        />
+                    )}
                     {backgroundImage && backgroundImage !== "color" && (
                         <img
                             src={`/images/backgrounds/${backgroundImage}.jpg`}
                         />
                     )}
-                   { !hideTimer && <span style={{ color: textColor }}>{`${time/1000}:00`}</span>}
+                    {!hideTimer && (
+                        <span style={{ color: textColor }}>{`${
+                            time / 1000
+                        }:00`}</span>
+                    )}
                 </div>
 
                 <BackgroundSelector
@@ -95,8 +122,12 @@ const CreateVideoForm = () => {
                     textColor={textColor}
                     setColor={setTextColor}
                 />
-                <ImageUpload setFeatureImage={setFeatureImage} setFeatureImgPos={setFeatureImgPos} featureImgPos={featureImgPos}/>
-                <AudioSelector />
+                <ImageUpload
+                    setFeatureImage={setFeatureImage}
+                    setFeatureImgPos={setFeatureImgPos}
+                    featureImgPos={featureImgPos}
+                />
+                {/* <AudioSelector /> */}
             </div>
             {loadingState === "ready" ? (
                 <button
