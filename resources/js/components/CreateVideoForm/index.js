@@ -64,18 +64,19 @@ const CreateVideoForm = () => {
         });
     };
 
-    const [timer, setTimer] = useState(2000);
+    const [seconds, setSeconds] = React.useState(10);
 
     const startTimer = () => {
-        setInterval(() => {
-            const newTime = timer - 100;
-            setTimer(newTime);
-        }, 500);
+        if (seconds > 0) {
+            setInterval(() => setSeconds(seconds - 1), 1000);
+          } else {
+            setSeconds('BOOOOM!');
+          }
     };
 
     return (
         <div className="form">
-            <h1 onClick={(e) => startTimer()}>{timer}</h1>
+            <h1 onClick={(e) => startTimer()}>{seconds}</h1>
             <div className="form__wrapper">
                 <div
                     className="form__preview"

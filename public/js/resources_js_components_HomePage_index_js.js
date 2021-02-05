@@ -3586,16 +3586,19 @@ var CreateVideoForm = function CreateVideoForm() {
     });
   };
 
-  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(2000),
-      _useState18 = _slicedToArray(_useState17, 2),
-      timer = _useState18[0],
-      setTimer = _useState18[1];
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_1__.useState(10),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      seconds = _React$useState2[0],
+      setSeconds = _React$useState2[1];
 
   var startTimer = function startTimer() {
-    setInterval(function () {
-      var newTime = timer - 100;
-      setTimer(newTime);
-    }, 500);
+    if (seconds > 0) {
+      setInterval(function () {
+        return setSeconds(seconds - 1);
+      }, 1000);
+    } else {
+      setSeconds('BOOOOM!');
+    }
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
@@ -3604,7 +3607,7 @@ var CreateVideoForm = function CreateVideoForm() {
       onClick: function onClick(e) {
         return startTimer();
       },
-      children: timer
+      children: seconds
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
       className: "form__wrapper",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
