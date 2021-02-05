@@ -10031,8 +10031,8 @@ section .wrapper {
 }
 
 @font-face {
-  font-family: "c059bold";
-  src: url("/fonts/c059-bold-webfont.woff2") format("woff2"), url("/fonts/c059-bold-webfont.woff") format("woff");
+  font-family: "digitaldream-webfont";
+  src: url("/fonts/digitaldream-webfont.woff2") format("woff2"), url("/fonts/digitaldream-webfont.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -10073,7 +10073,7 @@ header {
   overflow: hidden;
 }
 .form__preview span {
-  font-family: "c059bold";
+  font-family: "digitaldream-webfont";
   position: absolute;
   bottom: 12px;
   font-size: 48px;

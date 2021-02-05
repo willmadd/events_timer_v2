@@ -3561,10 +3561,17 @@ var CreateVideoForm = function CreateVideoForm() {
 
   var handleSubmit = function handleSubmit() {
     setLoadingState("loading");
+    var bg = backgroundImage;
+
+    if (bg === "color") {
+      console.log('its color');
+      bg = backgroundColor;
+    }
+
     var data = {
       time: time,
       textColor: textColor,
-      backgroundImage: backgroundImage
+      backgroundImage: bg
     };
     axios__WEBPACK_IMPORTED_MODULE_2___default().post("/api/video", data).then(function (res) {
       var data = res.data,

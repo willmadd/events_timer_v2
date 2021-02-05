@@ -1,11 +1,11 @@
 @font-face {
-    font-family: 'c059bold';
-    src: url('/fonts/c059-bold-webfont.woff2') format('woff2'),
-         url('/fonts/c059-bold-webfont.woff') format('woff');
+    font-family: 'digitaldream-webfont';
+    src: url('/fonts/digitaldream-webfont.woff2') format('woff2'),
+         url('/fonts/digitaldream-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
     // src: url('../../../fonts/Orkney\ Bold.woff')
 
 }
 
-$counterFont : 'c059bold';
+$counterFont : 'digitaldream-webfont';

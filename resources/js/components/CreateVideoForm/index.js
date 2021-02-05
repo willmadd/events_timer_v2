@@ -41,10 +41,15 @@ const CreateVideoForm = () => {
 
     const handleSubmit = () => {
         setLoadingState("loading");
+        let bg = backgroundImage;
+        if(bg === "color"){
+            console.log('its color');
+            bg = backgroundColor;
+        }
         const data = {
             time,
             textColor,
-            backgroundImage,
+            backgroundImage:bg
         };
         axios.post("/api/video", data).then((res) => {
             const { data, status } = res;
