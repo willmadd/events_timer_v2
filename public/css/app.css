@@ -10041,6 +10041,16 @@ header {
   background-color: #F0F0F0;
   height: 40px;
 }
+header nav ul {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+header nav ul li {
+  list-style: none;
+}
 
 .video {
   background: #14a3d4;
