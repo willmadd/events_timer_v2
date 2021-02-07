@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { randomString } from "../../helpers/randomstring";
 import Loading from "../Loader";
-import {toHHMMSS} from '../../helpers/time';
+import { toHHMMSS } from "../../helpers/time";
 
 import BackgroundSelector from "./BackgroundSelector";
 import CreateCountdown from "./CreateCountdown";
@@ -17,7 +17,7 @@ const CreateVideoForm = () => {
             "#333333"
     );
 
-const [featureImgPos, setFeatureImgPos] = useState("center");
+    const [featureImgPos, setFeatureImgPos] = useState("center");
 
     const [loadingState, setLoadingState] = useState("ready");
 
@@ -25,10 +25,9 @@ const [featureImgPos, setFeatureImgPos] = useState("center");
 
     const [featureImage, setFeatureImage] = useState("");
 
-
     const [hideMs, setHideMs] = useState(false);
 
-    const toggleHideMs = () => setHideMs(hideMs => !hideMs);
+    const toggleHideMs = () => setHideMs((hideMs) => !hideMs);
 
     const [backgroundColor, setBackgroundColor] = useState(
         localStorage.getItem("eventsTimer:video:bgCol", backgroundColor) ||
@@ -46,18 +45,18 @@ const [featureImgPos, setFeatureImgPos] = useState("center");
     const handleSubmit = () => {
         setLoadingState("loading");
         let bg = backgroundImage;
-        if(bg === "color"){
+        if (bg === "color") {
             bg = backgroundColor;
         }
         const data = {
-            time:time/1000,
+            time: time / 1000,
             featureImage,
             textColor,
-            backgroundImage:bg,
+            backgroundImage: bg,
             fps,
             hideMs,
             audio,
-            featureImgPos
+            featureImgPos,
         };
         axios.post("/api/create", data).then((res) => {
             const { data, status } = res;
@@ -68,7 +67,7 @@ const [featureImgPos, setFeatureImgPos] = useState("center");
                 console.log(url);
                 const link = document.createElement("a");
                 link.href = url;
-                link.setAttribute("download", `${data.file_name}`);
+                link.setAttribute("download", `${data.file_alias}`);
                 document.body.appendChild(link);
                 link.click();
                 link.parentNode.removeChild(link);
@@ -80,7 +79,7 @@ const [featureImgPos, setFeatureImgPos] = useState("center");
 
     const [fps, setFps] = React.useState(15);
 
-const [audio, setAudio] = useState(null);
+    const [audio, setAudio] = useState(null);
 
     return (
         <div className="form">
@@ -112,14 +111,18 @@ const [audio, setAudio] = useState(null);
                         />
                     )}
 
-                        <span style={{ color: textColor }}>{`${
-                            toHHMMSS(time / 1000)
-                        }${hideMs?"":":00"}`}</span>
-
+                    <span style={{ color: textColor }}>{`${toHHMMSS(
+                        time / 1000
+                    )}${hideMs ? "" : ":00"}`}</span>
                 </div>
-<div>FPS: FOR TESTING ONLY
-    <input value={fps} name="fps" onChange={(e)=>setFps(e.target.value)}/>
-</div>
+                <div>
+                    FPS: FOR TESTING ONLY
+                    <input
+                        value={fps}
+                        name="fps"
+                        onChange={(e) => setFps(e.target.value)}
+                    />
+                </div>
                 <BackgroundSelector
                     currentlySelected={backgroundImage}
                     onChange={setBackgroundImage}
@@ -141,10 +144,7 @@ const [audio, setAudio] = useState(null);
                     setFeatureImgPos={setFeatureImgPos}
                     featureImgPos={featureImgPos}
                 />
-                <AudioSelector 
-                setAudio={setAudio}
-                audio={audio}
-                />
+                <AudioSelector setAudio={setAudio} audio={audio} />
             </div>
             {loadingState === "ready" ? (
                 <button

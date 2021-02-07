@@ -85,6 +85,12 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
 
     public function create(Request $request)
     {
+        $relPath = "outputs/".date('Y-m-d')."-generated";
+        if (!file_exists($relPath)) {
+            mkdir($relPath, 777, true);
+            chmod($relPath, 0777);
+        }
+
         $font = env("APP_FONT", "/").'DIGITALDREAM.ttf';
 
         $id = Str::random(6);
@@ -95,7 +101,7 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
         $color=$request->textColor;
         $upperFont = 50;
         $fps=$request->fps;
-        $name="generated/countdown_timer_$id.mp4";
+        $name=$relPath."/countdown_timer_$id.mp4";
         $featureImage = $request->featureImage;
 
         $audioFile = $request->audio;
@@ -134,7 +140,8 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
 
         $type = (isset($image_info["mime"]) ? explode('/', $image_info["mime"] )[1]: "");
 
-        $imgPath = 'generated/'.$id.'.'.$type;
+
+        $imgPath = $relPath.'/'.$id.'.'.$type;
         $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $featureImage));
         file_put_contents($imgPath, $data);
 
@@ -156,6 +163,7 @@ $name
         [
             'success'=>true,
             'file_name'=> $name,
+            'file_alias' => "countdown_timer_$id.mp4",
             'audio' => $audio,
             'img' => $featureImage,
             'type'=> $type,

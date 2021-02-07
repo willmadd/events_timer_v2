@@ -776,7 +776,7 @@ var CreateVideoForm = function CreateVideoForm() {
         console.log(url);
         var link = document.createElement("a");
         link.href = url;
-        link.setAttribute("download", "".concat(data.file_name));
+        link.setAttribute("download", "".concat(data.file_alias));
         document.body.appendChild(link);
         link.click();
         link.parentNode.removeChild(link);
