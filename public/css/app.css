@@ -10119,13 +10119,13 @@ header nav ul li {
 .background__wrapper input[type=radio]:checked + label {
   border: 3px solid black;
 }
-.background__wrapper label {
+.background__wrapper label.color__label {
   height: 75px;
   width: 75px;
   display: flex;
   margin-left: 12px;
 }
-.background__wrapper label img {
+.background__wrapper label.color__label img {
   width: 100%;
   border: 1px solid #333333;
   -o-object-fit: none;
@@ -10144,13 +10144,12 @@ header nav ul li {
 }
 .background__wrapper .colour__picker {
   position: absolute;
-  bottom: 10px;
+  bottom: 20px;
 }
 
 .droparea {
-  border: 3px dashed darkgrey;
+  border: 3px dashed #bebebe;
   width: 100%;
-  padding: 24px 0;
   border-radius: 3px;
   display: flex;
   justify-content: center;
@@ -10168,6 +10167,65 @@ header nav ul li {
   height: 65%;
   margin-top: 5%;
   position: absolute;
+}
+
+.root__drop {
+  width: 100%;
+  padding: 24px;
+  height: 100%;
+}
+
+.color__picker__wrap {
+  position: relative;
+}
+.color__picker__wrap .picker {
+  position: absolute;
+  top: 35px;
+  z-index: 3;
+}
+.color__picker__wrap .picker__arrow {
+  position: relative;
+}
+.color__picker__wrap .picker__arrow::after {
+  bottom: 100%;
+  left: 24px;
+  border: solid transparent;
+  content: "";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(0, 0, 0, 0);
+  border-bottom-color: #000000;
+  border-width: 10px;
+  margin-left: -10px;
+}
+
+.swatch {
+  width: 49px;
+  height: 24px;
+  background-color: white;
+  border: 1px solid #bebebe;
+  border-radius: 3px;
+  padding: 3px;
+  box-sizing: border-box;
+}
+.swatch__area {
+  height: 16px;
+  width: 41px;
+  border: 1px solid #bebebe;
+  border-radius: 2px;
+  box-sizing: border-box;
+}
+.swatch__overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
 }
 
 .howto .wrapper {

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import backgrounds from "./backgrounds";
 import InputColor from "react-input-color";
+import ColourPicker from "../common/ColourPicker";
 
 const BackgroundSelector = ({
     onChange,
@@ -33,17 +34,17 @@ const BackgroundSelector = ({
                         ></div> */}
                     </label>
                     <div className="colour__picker">
-                        <InputColor
-                            initialValue={backgroundColor}
-                            onChange={(e) => setBackgroundColor(e.hex)}
-                            placement="right"
-                        />
+<ColourPicker 
+value={backgroundColor}
+onChange={setBackgroundColor}
+/>
                     </div>
                 </div>
                 {backgrounds.map((background, index) => (
                     <div key={background.thumb}>
                         <input
                             // class="hidden"
+                            className="color__label"
                             type="radio"
                             name="background"
                             value={background.id}
@@ -51,7 +52,7 @@ const BackgroundSelector = ({
                             onChange={(e) => onChange(e.target.value)}
                             id={`radio__${index}`}
                         ></input>
-                        <label htmlFor={`radio__${index}`}>
+                        <label htmlFor={`radio__${index}`} className="color__label">
                             <img
                                 src={`/images/backgrounds/${background.thumb}`}
                             ></img>

@@ -23,4 +23,7 @@ Route::post('/video', [VideoController::class, 'makeVideo']);
 
 Route::get('/test', [VideoController::class, 'test']);
 
+Route::post('/create', [VideoController::class, 'create']);
+Route::get('/c', [VideoController::class, 'testTwo']);
+
 // Route::post('/video', [VideoController::class, 'ffmpeg']);

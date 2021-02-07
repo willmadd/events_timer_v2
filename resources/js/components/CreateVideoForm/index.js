@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { randomString } from "../../helpers/randomstring";
 import Loading from "../Loader";
+import {toHHMMSS} from '../../helpers/time';
 
 import BackgroundSelector from "./BackgroundSelector";
 import CreateCountdown from "./CreateCountdown";
@@ -16,15 +17,18 @@ const CreateVideoForm = () => {
             "#333333"
     );
 
+const [featureImgPos, setFeatureImgPos] = useState("center");
+
     const [loadingState, setLoadingState] = useState("ready");
 
     const [backgroundImage, setBackgroundImage] = useState("color");
 
     const [featureImage, setFeatureImage] = useState("");
 
-    const [hideTimer, setHideTimer] = useState(false);
 
-    const [featureImgPos, setFeatureImgPos] = useState("center");
+    const [hideMs, setHideMs] = useState(false);
+
+    const toggleHideMs = () => setHideMs(hideMs => !hideMs);
 
     const [backgroundColor, setBackgroundColor] = useState(
         localStorage.getItem("eventsTimer:video:bgCol", backgroundColor) ||
@@ -43,17 +47,20 @@ const CreateVideoForm = () => {
         setLoadingState("loading");
         let bg = backgroundImage;
         if(bg === "color"){
-            console.log('its color');
             bg = backgroundColor;
         }
         const data = {
-            time,
+            time:time/1000,
+            featureImage,
             textColor,
-            backgroundImage:bg
+            backgroundImage:bg,
+            fps,
+            hideMs,
+            audio,
+            featureImgPos
         };
-        axios.post("/api/video", data).then((res) => {
+        axios.post("/api/create", data).then((res) => {
             const { data, status } = res;
-            console.log(data);
             if (status === 200) {
                 // setLoadingState("complete");
                 setLoadingState("ready");
@@ -71,17 +78,12 @@ const CreateVideoForm = () => {
 
     const [seconds, setSeconds] = React.useState(10);
 
-    const startTimer = () => {
-        if (seconds > 0) {
-            setInterval(() => setSeconds(seconds - 1), 1000);
-          } else {
-            setSeconds('BOOOOM!');
-          }
-    };
+    const [fps, setFps] = React.useState(15);
+
+const [audio, setAudio] = useState(null);
 
     return (
         <div className="form">
-            <h1 onClick={(e) => startTimer()}>{seconds}</h1>
             <div className="form__wrapper">
                 <div
                     className="form__preview"
@@ -109,37 +111,47 @@ const CreateVideoForm = () => {
                             src={`/images/backgrounds/${backgroundImage}.jpg`}
                         />
                     )}
-                    {!hideTimer && (
-                        <span style={{ color: textColor }}>{`${
-                            time / 1000
-                        }:00`}</span>
-                    )}
-                </div>
 
+                        <span style={{ color: textColor }}>{`${
+                            toHHMMSS(time / 1000)
+                        }${hideMs?"":":00"}`}</span>
+
+                </div>
+<div>FPS: FOR TESTING ONLY
+    <input value={fps} name="fps" onChange={(e)=>setFps(e.target.value)}/>
+</div>
                 <BackgroundSelector
                     currentlySelected={backgroundImage}
                     onChange={setBackgroundImage}
                     backgroundColor={backgroundColor}
                     setBackgroundColor={setBackgroundColor}
+                    featureImgPos={featureImgPos}
+                    setFeatureImgPos={setFeatureImgPos}
                 />
                 <CreateCountdown
                     time={time}
                     setTime={setTime}
                     textColor={textColor}
                     setColor={setTextColor}
+                    toggleHideMs={toggleHideMs}
+                    hideMs={hideMs}
                 />
                 <ImageUpload
                     setFeatureImage={setFeatureImage}
                     setFeatureImgPos={setFeatureImgPos}
                     featureImgPos={featureImgPos}
                 />
-                {/* <AudioSelector /> */}
+                <AudioSelector 
+                setAudio={setAudio}
+                audio={audio}
+                />
             </div>
             {loadingState === "ready" ? (
                 <button
                     className="form__download"
                     type="button"
                     onClick={() => handleSubmit()}
+                    disabled={!featureImage}
                 >
                     Download Video
                 </button>
