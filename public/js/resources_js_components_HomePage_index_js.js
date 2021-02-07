@@ -989,10 +989,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var Logo = function Logo() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+    className: "logo",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("h1", {
       children: ["Events:", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("br", {}), "Countdown"]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h2", {
-      children: "Make your onlinr or in-person event standout with a countdown timer. Simply select a background, set-up your timer, overlay and audiotrack and download."
+      children: "Make your online or in-person event standout with a countdown timer. Simply select a background, set-up your timer, overlay and audiotrack and download."
     })]
   });
 };

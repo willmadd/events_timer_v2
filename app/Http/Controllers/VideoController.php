@@ -107,7 +107,7 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
         $audioFile = $request->audio;
 
         if($audioFile){
-            $audio="-stream_loop 1 -i mp3/$audioFile.mp3 -c:v copy ";
+            $audio="-stream_loop -1 -i mp3/$audioFile.mp3 -c:v copy ";
         }else{
             $audio="";
         }

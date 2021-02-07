@@ -1,12 +1,13 @@
 import React from 'react';
-
+import { Link, NavLink } from "react-router-dom";
+import RouteID from '../../routes/routeID';
 const Header = () => {
     return (
         <header>
             <nav>
                 <ul>
                     <li>
-                        Home
+                    <NavLink exact to={RouteID.home}>{'Events Countdown'}</NavLink>
                     </li>
                     <li>
                         Tour
@@ -19,6 +20,9 @@ const Header = () => {
                     </li>
                     <li>
                         Support
+                    </li>
+                    <li>
+                    <NavLink exact to={RouteID.signin}>{'Sign In'}</NavLink>
                     </li>
                     <li>
                         My Account
