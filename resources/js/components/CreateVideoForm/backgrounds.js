@@ -1,4 +1,4 @@
-const files = ['1', '2']
+const files = ['1', '2', '3']
 
 export default files.map(file=>(
     {

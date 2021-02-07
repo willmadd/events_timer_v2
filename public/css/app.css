@@ -10119,13 +10119,13 @@ header nav ul li {
 .background__wrapper input[type=radio]:checked + label {
   border: 3px solid black;
 }
-.background__wrapper label.color__label {
+.background__wrapper .color__label {
   height: 75px;
   width: 75px;
   display: flex;
   margin-left: 12px;
 }
-.background__wrapper label.color__label img {
+.background__wrapper .color__label img, .background__wrapper .color__label div {
   width: 100%;
   border: 1px solid #333333;
   -o-object-fit: none;
@@ -10145,6 +10145,22 @@ header nav ul li {
 .background__wrapper .colour__picker {
   position: absolute;
   bottom: 20px;
+}
+.background__wrapper .disabled {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  align-items: baseline;
+}
+.background__wrapper .disabled .signup__cta {
+  position: absolute;
+  max-width: 225px;
+  background: white;
+  display: flex;
+  justify-content: center;
+  margin-top: 14px;
+  border: 1px solid #333333;
+  margin-left: 12px;
 }
 
 .droparea {

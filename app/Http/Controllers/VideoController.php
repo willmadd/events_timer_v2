@@ -95,7 +95,7 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
         $color=$request->textColor;
         $upperFont = 50;
         $fps=$request->fps;
-        $name="countdown_timer_$id.mp4";
+        $name="generated/countdown_timer_$id.mp4";
         $featureImage = $request->featureImage;
 
         $audioFile = $request->audio;
@@ -134,7 +134,7 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
 
         $type = (isset($image_info["mime"]) ? explode('/', $image_info["mime"] )[1]: "");
 
-        $imgPath = $id.'.'.$type;
+        $imgPath = 'generated/'.$id.'.'.$type;
         $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $featureImage));
         file_put_contents($imgPath, $data);
 

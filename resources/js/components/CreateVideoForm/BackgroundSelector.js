@@ -27,17 +27,12 @@ const BackgroundSelector = ({
                         htmlFor={"color"}
                         className="colour__label"
                         style={{ backgroundColor: backgroundColor }}
-                    >
-                        {/* <div
-                            
-                            onClick={() => console.log(";clkickll")}
-                        ></div> */}
-                    </label>
+                    ></label>
                     <div className="colour__picker">
-<ColourPicker 
-value={backgroundColor}
-onChange={setBackgroundColor}
-/>
+                        <ColourPicker
+                            value={backgroundColor}
+                            onChange={setBackgroundColor}
+                        />
                     </div>
                 </div>
                 {backgrounds.map((background, index) => (
@@ -52,13 +47,22 @@ onChange={setBackgroundColor}
                             onChange={(e) => onChange(e.target.value)}
                             id={`radio__${index}`}
                         ></input>
-                        <label htmlFor={`radio__${index}`} className="color__label">
+                        <label
+                            htmlFor={`radio__${index}`}
+                            className="color__label"
+                        >
                             <img
                                 src={`/images/backgrounds/${background.thumb}`}
                             ></img>
                         </label>
                     </div>
                 ))}
+                <div className="disabled">
+                    <div className="signup__cta">Sign up for Free to get access to more backgrounds</div>
+                <div className="color__label"><div></div></div>
+                <div className="color__label"><div></div></div>
+                <div className="color__label"><div></div></div>
+                </div>
             </div>
         </div>
     );

@@ -72,12 +72,12 @@
         input[type="radio"]:checked + label{
             border:3px solid black;
         }
-        label.color__label {
+        .color__label {
             height: 75px;
             width: 75px;
             display: flex;
             margin-left:12px;
-            img {
+            img, div {
                 width: 100%;
                 border: 1px solid $black;
                 object-fit: none;
@@ -99,6 +99,23 @@
                 position: absolute;
                 bottom: 20px;
         
+            }
+        }
+        .disabled{
+            display: flex;
+            justify-content: center;
+            position: relative;
+            align-items: baseline;
+            .signup__cta{
+                position: absolute;
+                max-width: 225px;
+                background: white;
+                display: flex;
+                justify-content: center;
+                margin-top: 14px;
+                border: 1px solid $black;
+                margin-left: 12px;
+                
             }
         }
     }
