@@ -90,8 +90,8 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
             mkdir($relPath, 777, true);
             chmod($relPath, 0777);
         }
-
-        $font = env("APP_FONT", "/").'DIGITALDREAM.ttf';
+        // counterFont
+        $font = env("APP_FONT", "/").$request->counterFont;
 
         $id = Str::random(6);
         $seconds = $request->time;
@@ -139,26 +139,32 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
         $image_info = getimagesize($featureImage);
 
         $type = (isset($image_info["mime"]) ? explode('/', $image_info["mime"] )[1]: "");
+if ($seconds > 3600){
+    $hours = '%{eif\:(mod(($seconds-t)/3600, 60))\:d\:2}\:';
+}else{
 
+    $hours = ''; 
+}
 
         $imgPath = $relPath.'/'.$id.'.'.$type;
         $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $featureImage));
         file_put_contents($imgPath, $data);
-
-`ffmpeg \
-$bg \
--i $imgPath \
-$audio \
--c:v libx264 \
--r $fps \
--t $duration \
--pix_fmt yuv420p \
--filter_complex \
-"[1]scale=-1:560[wm];[0][wm]overlay=$ft_img_pos:[km];[km]drawtext=fontfile='$font':fontcolor=$color:x=(w-text_w)/2:y=(h-text_h)-40:\
-fontsize=$upperFont:\
-text='%{eif\:(mod(($seconds-t)/3600, 60))\:d\:2}\:%{eif\:(mod(($seconds-t)/60, 60))\:d\:2}\:%{eif\:(mod($seconds-t, 60))\:d\:2}$ms'" \
-$name
-`;
+        
+        `ffmpeg \
+        $bg \
+        -i $imgPath \
+        $audio \
+        -c:v libx264 \
+        -r $fps \
+        -t $duration \
+        -pix_fmt yuv420p \
+        -filter_complex \
+        "[1]scale=-1:560[wm];[0][wm]overlay=$ft_img_pos:[km];[km]drawtext=fontfile='$font':fontcolor=$color:x=(w-text_w)/2:y=(h-text_h)-40:\
+        fontsize=$upperFont:\
+        text='$hours%{eif\:(mod(($seconds-t)/60, 60))\:d\:2}\:%{eif\:(mod($seconds-t, 60))\:d\:2}$ms'" \
+        $name
+        `;
+        // text='%{eif\:(mod(($seconds-t)/3600, 60))\:d\:2}\:%{eif\:(mod(($seconds-t)/60, 60))\:d\:2}\:%{eif\:(mod($seconds-t, 60))\:d\:2}$ms'" \
     return response()->json(
         [
             'success'=>true,

@@ -25,6 +25,11 @@ const CreateVideoForm = () => {
 
     const [featureImage, setFeatureImage] = useState("");
 
+    const [counterFont, setCounterFont] = useState(
+        localStorage.getItem("eventsTimer:video:font", counterFont) ||
+            "ds-digital.ttf"
+    );
+
     const [hideMs, setHideMs] = useState(false);
 
     const toggleHideMs = () => setHideMs((hideMs) => !hideMs);
@@ -57,6 +62,7 @@ const CreateVideoForm = () => {
             hideMs,
             audio,
             featureImgPos,
+            counterFont
         };
         axios.post("/api/create", data).then((res) => {
             const { data, status } = res;
@@ -111,7 +117,7 @@ const CreateVideoForm = () => {
                         />
                     )}
 
-                    <span style={{ color: textColor }}>{`${toHHMMSS(
+                    <span style={{ color: textColor, fontFamily:counterFont.split('.')[0] }}>{`${toHHMMSS(
                         time / 1000
                     )}${hideMs ? "" : ":00"}`}</span>
                 </div>
@@ -130,6 +136,7 @@ const CreateVideoForm = () => {
                     setBackgroundColor={setBackgroundColor}
                     featureImgPos={featureImgPos}
                     setFeatureImgPos={setFeatureImgPos}
+                    
                 />
                 <CreateCountdown
                     time={time}
@@ -138,6 +145,8 @@ const CreateVideoForm = () => {
                     setColor={setTextColor}
                     toggleHideMs={toggleHideMs}
                     hideMs={hideMs}
+                    setCounterFont={setCounterFont}
+                    counterFont={counterFont}
                 />
                 <ImageUpload
                     setFeatureImage={setFeatureImage}

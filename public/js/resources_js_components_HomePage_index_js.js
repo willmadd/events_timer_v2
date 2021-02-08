@@ -374,6 +374,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
 
 
 
@@ -386,7 +399,9 @@ var CreateCountdown = function CreateCountdown(_ref) {
       textColor = _ref.textColor,
       setColor = _ref.setColor,
       toggleHideMs = _ref.toggleHideMs,
-      hideMs = _ref.hideMs;
+      hideMs = _ref.hideMs,
+      setCounterFont = _ref.setCounterFont,
+      counterFont = _ref.counterFont;
 
   var stringToSeconds = function stringToSeconds(e) {
     var value = e.target.value;
@@ -398,6 +413,19 @@ var CreateCountdown = function CreateCountdown(_ref) {
     if (total) {
       setTime(total);
     }
+  };
+
+  var fontList = ["ds-digital.ttf", "gotham-bold.otf", "librebaskerville-regular.ttf"];
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      fontOpen = _useState2[0],
+      setFontOpen = _useState2[1];
+
+  var selectFont = function selectFont(font) {
+    setFontOpen(false);
+    setCounterFont(font);
+    localStorage.setItem("eventsTimer:video:font", font);
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
@@ -456,6 +484,48 @@ var CreateCountdown = function CreateCountdown(_ref) {
           },
           checked: hideMs,
           type: "checkbox"
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+        className: "form__countdown__option",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h6", {
+          children: "Font"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+          className: "font__selector",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+            className: "font__card font__card__title",
+            onClick: function onClick(e) {
+              return setFontOpen(!fontOpen);
+            },
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h6", {
+              children: counterFont.replace("-", " ").split('.')[0]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h6", {
+              className: "".concat(counterFont.split('.')[0]),
+              children: "12:43:56"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+              className: " font__chevron ".concat(fontOpen ? "active" : null)
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+            className: "font__card__children",
+            children: fontOpen && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+              style: {
+                position: "relative"
+              },
+              children: fontList.map(function (font) {
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                  className: "font__card font__card__child",
+                  onClick: function onClick() {
+                    return selectFont(font);
+                  },
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h6", {
+                    children: font.replace("-", " ").split('.')[0]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h6", {
+                    className: "".concat(font.split('.')[0]),
+                    children: "12:43:56"
+                  })]
+                });
+              })
+            })
+          })]
         })]
       })]
     }), "Is contract ratio enough?"]
@@ -724,10 +794,15 @@ var CreateVideoForm = function CreateVideoForm() {
       featureImage = _useState12[0],
       setFeatureImage = _useState12[1];
 
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(localStorage.getItem("eventsTimer:video:font", counterFont) || "ds-digital.ttf"),
       _useState14 = _slicedToArray(_useState13, 2),
-      hideMs = _useState14[0],
-      setHideMs = _useState14[1];
+      counterFont = _useState14[0],
+      setCounterFont = _useState14[1];
+
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState16 = _slicedToArray(_useState15, 2),
+      hideMs = _useState16[0],
+      setHideMs = _useState16[1];
 
   var toggleHideMs = function toggleHideMs() {
     return setHideMs(function (hideMs) {
@@ -735,10 +810,10 @@ var CreateVideoForm = function CreateVideoForm() {
     });
   };
 
-  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(localStorage.getItem("eventsTimer:video:bgCol", backgroundColor) || "#ff4500"),
-      _useState16 = _slicedToArray(_useState15, 2),
-      backgroundColor = _useState16[0],
-      setBackgroundColor = _useState16[1];
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(localStorage.getItem("eventsTimer:video:bgCol", backgroundColor) || "#ff4500"),
+      _useState18 = _slicedToArray(_useState17, 2),
+      backgroundColor = _useState18[0],
+      setBackgroundColor = _useState18[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     localStorage.setItem("eventsTimer:video:bgCol", backgroundColor);
@@ -763,7 +838,8 @@ var CreateVideoForm = function CreateVideoForm() {
       fps: fps,
       hideMs: hideMs,
       audio: audio,
-      featureImgPos: featureImgPos
+      featureImgPos: featureImgPos,
+      counterFont: counterFont
     };
     axios__WEBPACK_IMPORTED_MODULE_2___default().post("/api/create", data).then(function (res) {
       var data = res.data,
@@ -794,10 +870,10 @@ var CreateVideoForm = function CreateVideoForm() {
       fps = _React$useState4[0],
       setFps = _React$useState4[1];
 
-  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
-      _useState18 = _slicedToArray(_useState17, 2),
-      audio = _useState18[0],
-      setAudio = _useState18[1];
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
+      _useState20 = _slicedToArray(_useState19, 2),
+      audio = _useState20[0],
+      setAudio = _useState20[1];
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
     className: "form",
@@ -815,7 +891,8 @@ var CreateVideoForm = function CreateVideoForm() {
           src: "/images/backgrounds/".concat(backgroundImage, ".jpg")
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
           style: {
-            color: textColor
+            color: textColor,
+            fontFamily: counterFont.split('.')[0]
           },
           children: "".concat((0,_helpers_time__WEBPACK_IMPORTED_MODULE_5__.toHHMMSS)(time / 1000)).concat(hideMs ? "" : ":00")
         })]
@@ -840,7 +917,9 @@ var CreateVideoForm = function CreateVideoForm() {
         textColor: textColor,
         setColor: setTextColor,
         toggleHideMs: toggleHideMs,
-        hideMs: hideMs
+        hideMs: hideMs,
+        setCounterFont: setCounterFont,
+        counterFont: counterFont
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_ImageUpload__WEBPACK_IMPORTED_MODULE_8__.default, {
         setFeatureImage: setFeatureImage,
         setFeatureImgPos: setFeatureImgPos,
@@ -1211,7 +1290,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "toHHMMSS": () => (/* binding */ toHHMMSS)
 /* harmony export */ });
 var toHHMMSS = function toHHMMSS(sec_num) {
-  // var sec_num = parseInt(this, 10); // don't forget the second param
+  console.log(sec_num); // var sec_num = parseInt(this, 10); // don't forget the second param
+
   var hours = Math.floor(sec_num / 3600);
   var minutes = Math.floor((sec_num - hours * 3600) / 60);
   var seconds = sec_num - hours * 3600 - minutes * 60;
@@ -1228,7 +1308,9 @@ var toHHMMSS = function toHHMMSS(sec_num) {
     seconds = "0" + seconds;
   }
 
-  return hours + ':' + minutes + ':' + seconds;
+  console.log(Number(hours));
+  console.log("".concat(Number(hours) ? "".concat(hours, ":") : '').concat(minutes, ":").concat(seconds));
+  return "".concat(Number(hours) ? "".concat(hours, ":") : '').concat(minutes, ":").concat(seconds);
 };
 
 /***/ }),

@@ -1,11 +1,39 @@
 @font-face {
-    font-family: 'digitaldream-webfont';
-    src: url('/fonts/digitaldream-webfont.woff2') format('woff2'),
-         url('/fonts/digitaldream-webfont.woff') format('woff');
+    font-family: "ds-digital";
+    src: url("/fonts/ds-digib-webfont.woff2") format("woff2"),
+        url("/fonts/ds-digib-webfont.woff") format("woff");
     font-weight: normal;
     font-style: normal;
-    // src: url('../../../fonts/Orkney\ Bold.woff')
-
 }
 
-$counterFont : 'digitaldream-webfont';
+@font-face {
+    font-family: "gotham-bold";
+    src: url("/fonts/Gotham-Bold.woff2") format("woff2"),
+        url("/fonts/Gotham-Bold.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "librebaskerville-regular";
+    src: url("/fonts/librebaskerville-regular-webfont.woff2") format("woff2"),
+        url("/fonts/librebaskerville-regular-webfont.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+$counterFont: "ds-digital";
+.ds-digital {
+    font-family: "ds-digital";
+}
+.gotham-bold {
+    font-family: "gotham-bold";
+}
+.librebaskerville-regular {
+    font-family: "librebaskerville-regular";
+}
+
+
+h1,h2,h3,h4,h5,h6{
+    margin:0;
+}

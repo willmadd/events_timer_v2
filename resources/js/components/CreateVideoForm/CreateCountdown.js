@@ -12,6 +12,8 @@ const CreateCountdown = ({
     setColor,
     toggleHideMs,
     hideMs,
+    setCounterFont,
+    counterFont,
 }) => {
     const stringToSeconds = (e) => {
         const { value } = e.target;
@@ -22,6 +24,16 @@ const CreateCountdown = ({
         if (total) {
             setTime(total);
         }
+    };
+
+    const fontList = ["ds-digital.ttf", "gotham-bold.otf", "librebaskerville-regular.ttf"];
+
+    const [fontOpen, setFontOpen] = useState(false);
+
+    const selectFont = (font) => {
+        setFontOpen(false);
+        setCounterFont(font);
+        localStorage.setItem("eventsTimer:video:font", font)
     };
 
     return (
@@ -65,6 +77,41 @@ const CreateCountdown = ({
                         checked={hideMs}
                         type="checkbox"
                     />
+                </div>
+                <div className="form__countdown__option">
+                    <h6>{`Font`}</h6>
+                    <div className="font__selector">
+                        <div
+                            className="font__card font__card__title"
+                            onClick={(e) => setFontOpen(!fontOpen)}
+                        >
+                            <h6>{counterFont.replace("-", " ").split('.')[0]}</h6>
+                            <h6 className={`${counterFont.split('.')[0]}`}>{"12:43:56"}</h6>
+                            <div
+                                className={` font__chevron ${
+                                    fontOpen ? "active" : null
+                                }`}
+                            ></div>
+                        </div>
+                        <div className="font__card__children">
+                            {fontOpen && (
+                                <div style={{ position: "relative" }}>
+                                    {/* <div onClick={()=>setFontOpen(false)} className="font__overlay"></div> */}
+                                    {fontList.map((font) => (
+                                        <div
+                                            className="font__card font__card__child"
+                                            onClick={() => selectFont(font)}
+                                        >
+                                            <h6>{font.replace("-", " ").split('.')[0]}</h6>
+                                            <h6 className={`${font.split('.')[0]}`}>
+                                                {"12:43:56"}
+                                            </h6>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    </div>
                 </div>
             </div>
             Is contract ratio enough?
