@@ -415,7 +415,7 @@ var CreateCountdown = function CreateCountdown(_ref) {
     }
   };
 
-  var fontList = ["ds-digital.ttf", "gotham-bold.otf", "librebaskerville-regular.ttf"];
+  var fontList = ["ds-digital.ttf", "gotham-bold.ttf", "librebaskerville-regular.ttf"];
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),

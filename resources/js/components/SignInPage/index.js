@@ -4,6 +4,8 @@ import axios from 'axios';
 import sha256 from 'js-sha256';
 import { useDispatch } from "react-redux";
 import { initUser } from "../../store/init/actions";
+import { useHistory } from "react-router-dom";
+
 
 const SignInPage = () => {
 
@@ -45,7 +47,7 @@ const SignInPage = () => {
            <h1>Sign In To your EventsCountdown account</h1> 
                 <input type="text" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder={'email'}/>
                 <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder={'password'}/>
-                <button type="button">Sign In</button>
+                <button type="button" onClick={handleSubmit}>Sign In</button>
             </div>
            </div>
         </main>

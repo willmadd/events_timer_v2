@@ -174,6 +174,8 @@ if ($seconds > 3600){
             'img' => $featureImage,
             'type'=> $type,
             'imgpath' => $imgPath,
+            'font'=> $font,
+            'kkk'=>env("APP_FONT", "/"),
         ],
             200
         );

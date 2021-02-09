@@ -1,8 +1,8 @@
-(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_components_SignUpPage_index_js"],{
+(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_components_SignUpActivate_index_js"],{
 
-/***/ "./resources/js/components/SignUpPage/index.js":
+/***/ "./resources/js/components/SignInPage/index.js":
 /*!*****************************************************!*\
-  !*** ./resources/js/components/SignUpPage/index.js ***!
+  !*** ./resources/js/components/SignInPage/index.js ***!
   \*****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -17,8 +17,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var js_sha256__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! js-sha256 */ "./node_modules/js-sha256/src/sha256.js");
 /* harmony import */ var js_sha256__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(js_sha256__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var _routes_routeID__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../routes/routeID */ "./resources/js/routes/routeID.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store_init_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../store/init/actions */ "./resources/js/store/init/actions/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 
 
 
@@ -40,58 +41,32 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var SignUpPage = function SignUpPage() {
-  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useHistory)();
+
+var SignInPage = function SignInPage() {
+  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useHistory)();
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_4__.useDispatch)();
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
       _useState2 = _slicedToArray(_useState, 2),
-      name = _useState2[0],
-      setName = _useState2[1];
+      email = _useState2[0],
+      setEmail = _useState2[1];
 
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
       _useState4 = _slicedToArray(_useState3, 2),
       password = _useState4[0],
       setPassword = _useState4[1];
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
-      _useState6 = _slicedToArray(_useState5, 2),
-      confirmPassword = _useState6[0],
-      setConfirmPassword = _useState6[1];
-
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
-      _useState8 = _slicedToArray(_useState7, 2),
-      company = _useState8[0],
-      setCompany = _useState8[1];
-
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
-      _useState10 = _slicedToArray(_useState9, 2),
-      email = _useState10[0],
-      setEmail = _useState10[1];
-
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
-      _useState12 = _slicedToArray(_useState11, 2),
-      error = _useState12[0],
-      setError = _useState12[1];
-
   var handleSubmit = function handleSubmit() {
+    var remember_me = true;
     var data = {
-      name: name,
-      password: (0,js_sha256__WEBPACK_IMPORTED_MODULE_3__.sha256)(password),
-      password_confirmation: (0,js_sha256__WEBPACK_IMPORTED_MODULE_3__.sha256)(confirmPassword),
-      company: company,
-      email: email
+      email: email,
+      password: js_sha256__WEBPACK_IMPORTED_MODULE_3___default()(password),
+      remember_me: remember_me
     };
-    axios__WEBPACK_IMPORTED_MODULE_2___default().post('/api/auth/signup', data).then(function (res) {
+    axios__WEBPACK_IMPORTED_MODULE_2___default().post('/api/auth/login', data).then(function (res) {
       console.log(res);
-
-      if (res.status === 201) {
-        history.push(_routes_routeID__WEBPACK_IMPORTED_MODULE_4__.default.signupsuccess, {
-          from: "signup",
-          email: res.data.email
-        });
-      } else {
-        setError("An error occured, please try again later!");
-      }
+      localStorage.setItem("eventcountdown:all:userToken", res.data.access_token);
+      dispatch((0,_store_init_actions__WEBPACK_IMPORTED_MODULE_5__.initUser)(res.data.access_token)); // history.push(RouteID.memberDashboard)
     })["catch"](function (e) {
       console.log(e);
     });
@@ -109,55 +84,155 @@ var SignUpPage = function SignUpPage() {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: "signin__modal",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h1", {
-          children: "Create an Events Countdown Account"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", {
-          type: "text",
-          value: name,
-          onChange: function onChange(e) {
-            return setName(e.target.value);
-          },
-          placeholder: 'Name'
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", {
-          type: "text",
-          value: company,
-          onChange: function onChange(e) {
-            return setCompany(e.target.value);
-          },
-          placeholder: 'Company'
+          children: "Sign In To your EventsCountdown account"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", {
           type: "text",
           value: email,
           onChange: function onChange(e) {
             return setEmail(e.target.value);
           },
-          placeholder: 'Email'
+          placeholder: 'email'
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", {
           type: "password",
           value: password,
           onChange: function onChange(e) {
             return setPassword(e.target.value);
           },
-          placeholder: 'Password'
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", {
-          type: "password",
-          value: confirmPassword,
-          onChange: function onChange(e) {
-            return setConfirmPassword(e.target.value);
-          },
-          placeholder: 'Confirm Password'
+          placeholder: 'password'
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
           type: "button",
-          onClick: function onClick() {
-            return handleSubmit();
-          },
-          children: "Sign Up"
+          onClick: handleSubmit,
+          children: "Sign In"
         })]
       })]
     })
   });
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SignUpPage);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SignInPage);
+
+/***/ }),
+
+/***/ "./resources/js/components/SignUpActivate/index.js":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/SignUpActivate/index.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _SignInPage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../SignInPage */ "./resources/js/components/SignInPage/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+var SignUpActivate = function SignUpActivate(_ref) {
+  var match = _ref.match;
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
+      _useState2 = _slicedToArray(_useState, 2),
+      message = _useState2[0],
+      setMessage = _useState2[1];
+
+  var token = match.params.token;
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    console.log('use effect');
+    axios.get("/api/auth/signup/activate/".concat(token)).then(function (res) {
+      console.log(res);
+      setMessage("Thanks for Signing up. Your account has now been activated. Please sign in to continue!");
+    })["catch"](function (error) {
+      if (error.response) {
+        switch (error.response.status) {
+          case 404:
+            setMessage("Could not activate you account. Your token is invalid!");
+            break;
+
+          default:
+            setMessage("There was an error activating our account!");
+        }
+      } else {
+        setMessage("Could not connect to the server. Please check your internet connection");
+      }
+    });
+  }, []);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", {
+      children: message
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+      to: '/signin',
+      children: "Click here to sign in "
+    })]
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SignUpActivate);
+
+/***/ }),
+
+/***/ "./resources/js/store/init/actions/index.js":
+/*!**************************************************!*\
+  !*** ./resources/js/store/init/actions/index.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "LOADING": () => (/* binding */ LOADING),
+/* harmony export */   "SUCCESS": () => (/* binding */ SUCCESS),
+/* harmony export */   "FAILURE": () => (/* binding */ FAILURE),
+/* harmony export */   "UPDATE": () => (/* binding */ UPDATE),
+/* harmony export */   "SUCCESSFUL_UPDATE": () => (/* binding */ SUCCESSFUL_UPDATE),
+/* harmony export */   "initUser": () => (/* binding */ initUser)
+/* harmony export */ });
+var LOADING = "LOADING";
+var SUCCESS = "SUCCESS";
+var FAILURE = "FAILURE";
+var UPDATE = "UPDATE";
+var SUCCESSFUL_UPDATE = "SUCCESSFUL_UPDATE";
+var initUser = function initUser(token) {
+  return function (dispatch) {
+    dispatch({
+      type: LOADING
+    });
+    return axios.get("api/auth/user", {
+      headers: {
+        Authorization: "Bearer ".concat(token)
+      }.then(function (res) {
+        return dispatch({
+          type: SUCCESS,
+          payload: res.data
+        });
+      })["catch"](function (err) {
+        return dispatch({
+          type: FAILURE,
+          payload: err
+        });
+      })
+    });
+  };
+};
 
 /***/ }),
 

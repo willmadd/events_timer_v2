@@ -2,5 +2,8 @@ export default {
     home:'/',
     signin:'/signin',
     signup:'/signup',
-    signupsuccess:'/signupsuccess'
+    signupsuccess:'/signupsuccess',
+    signupActivate:'/signup/activate/:token',
+    memberDashboard:'/dashboard',
+    signUpSuccess:'/signup/success',
 }

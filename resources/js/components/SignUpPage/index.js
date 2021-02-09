@@ -20,7 +20,7 @@ const SignUpPage = () => {
         const data = {
             name,
             password:sha256(password),
-            password:sha256(confirmPassword),
+            password_confirmation:sha256(confirmPassword),
             company,
             email
         }

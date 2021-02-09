@@ -26,7 +26,7 @@ const CreateCountdown = ({
         }
     };
 
-    const fontList = ["ds-digital.ttf", "gotham-bold.otf", "librebaskerville-regular.ttf"];
+    const fontList = ["ds-digital.ttf", "gotham-bold.ttf", "librebaskerville-regular.ttf"];
 
     const [fontOpen, setFontOpen] = useState(false);
 
