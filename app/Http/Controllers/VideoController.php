@@ -15,7 +15,7 @@ class VideoController extends Controller
     public function makeVideo(Request $request)
     {
         $id = Str::random(6);
-        $fps=30;
+        $fps=$request->fps;
         // $seconds=$request->time;
         $seconds=20;
         $mantissaDigits=2;
