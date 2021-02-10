@@ -13,26 +13,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var _routes_routeID__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../routes/routeID */ "./resources/js/routes/routeID.js");
 
-
-
-
+ // import { useHistory } from "react-router-dom";
+// import routeID from "../../routes/routeID";
 
 var LogOut = function LogOut() {
-  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useHistory)();
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    var token = localStorage.getItem("trailshub:all:userToken");
-    localStorage.removeItem("trailshub:all:userToken");
-    return axios.get("/api/auth/logout", {
-      headers: {
-        Authorization: "Bearer ".concat(token)
-      }
-    }).then(function (res) {
-      history.push(_routes_routeID__WEBPACK_IMPORTED_MODULE_2__.default.home);
-    });
-  }, []);
+  // const history = useHistory();
+  // useEffect(() => {
+  //     let token = localStorage.getItem("trailshub:all:userToken");
+  //     localStorage.removeItem("trailshub:all:userToken");
+  //     return axios
+  //         .get(`/api/auth/logout`, {
+  //             headers: {
+  //                 Authorization: `Bearer ${token}`,
+  //             },
+  //         })
+  //         .then((res) => {
+  //             history.push(routeID.home);
+  //         });
+  // }, []);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
     children: "Logging out..."
   });

@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->boolean('active')->default(false);
             $table->string('activation_token');
+            $table->integer('membership_level')->default(0);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

@@ -1,0 +1,10 @@
+.dashboard{
+    img{
+        width:100%;
+    }
+    &__wrapper{
+        display:grid;
+        grid-template-columns: 320px auto;
+        grid-gap:36px;
+    }
+}

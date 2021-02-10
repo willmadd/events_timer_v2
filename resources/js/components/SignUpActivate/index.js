@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SignInPage from '../SignInPage';
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 const SignUpActivate = ({match}) => {
 

@@ -66,11 +66,13 @@ var SignInPage = function SignInPage() {
       remember_me: remember_me
     };
     axios__WEBPACK_IMPORTED_MODULE_2___default().post('/api/auth/login', data).then(function (res) {
+      console.log('success');
       console.log(res);
       localStorage.setItem("eventcountdown:all:userToken", res.data.access_token);
       dispatch((0,_store_init_actions__WEBPACK_IMPORTED_MODULE_5__.initUser)(res.data.access_token));
       history.push(_routes_routeID__WEBPACK_IMPORTED_MODULE_6__.default.memberDashboard);
     })["catch"](function (e) {
+      console.log('fail');
       console.log(e);
     });
   };
@@ -113,52 +115,6 @@ var SignInPage = function SignInPage() {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SignInPage);
-
-/***/ }),
-
-/***/ "./resources/js/store/init/actions/index.js":
-/*!**************************************************!*\
-  !*** ./resources/js/store/init/actions/index.js ***!
-  \**************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "LOADING": () => (/* binding */ LOADING),
-/* harmony export */   "SUCCESS": () => (/* binding */ SUCCESS),
-/* harmony export */   "FAILURE": () => (/* binding */ FAILURE),
-/* harmony export */   "UPDATE": () => (/* binding */ UPDATE),
-/* harmony export */   "SUCCESSFUL_UPDATE": () => (/* binding */ SUCCESSFUL_UPDATE),
-/* harmony export */   "initUser": () => (/* binding */ initUser)
-/* harmony export */ });
-var LOADING = "LOADING";
-var SUCCESS = "SUCCESS";
-var FAILURE = "FAILURE";
-var UPDATE = "UPDATE";
-var SUCCESSFUL_UPDATE = "SUCCESSFUL_UPDATE";
-var initUser = function initUser(token) {
-  return function (dispatch) {
-    dispatch({
-      type: LOADING
-    });
-    return axios.get("api/auth/user", {
-      headers: {
-        Authorization: "Bearer ".concat(token)
-      }.then(function (res) {
-        return dispatch({
-          type: SUCCESS,
-          payload: res.data
-        });
-      })["catch"](function (err) {
-        return dispatch({
-          type: FAILURE,
-          payload: err
-        });
-      })
-    });
-  };
-};
 
 /***/ }),
 

@@ -6,5 +6,6 @@ export default {
     signupActivate:'/signup/activate/:token',
     memberDashboard:'/dashboard',
     signUpSuccess:'/signup/success',
-    logout:'logout'
+    logout:'/logout',
+    getPro:'dashboard/getpro'
 }

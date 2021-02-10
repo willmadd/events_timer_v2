@@ -7,13 +7,17 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import {rootReducer} from '../store/reducers';
 import App from './App';
 import { Provider } from "react-redux";
+import thunk from "redux-thunk";
 
+// const initialState = {
+//     test:'test'
+// }
 
 const store = createStore(
     rootReducer,
-    // initalState,
+    // initialState,
     compose(
-        // applyMiddleware(thunk),
+        applyMiddleware(thunk),
         window.__REDUX_DEVTOOLS_EXTENSION__ &&
             window.__REDUX_DEVTOOLS_EXTENSION__(),
     )

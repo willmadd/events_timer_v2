@@ -66,11 +66,13 @@ var SignInPage = function SignInPage() {
       remember_me: remember_me
     };
     axios__WEBPACK_IMPORTED_MODULE_2___default().post('/api/auth/login', data).then(function (res) {
+      console.log('success');
       console.log(res);
       localStorage.setItem("eventcountdown:all:userToken", res.data.access_token);
       dispatch((0,_store_init_actions__WEBPACK_IMPORTED_MODULE_5__.initUser)(res.data.access_token));
       history.push(_routes_routeID__WEBPACK_IMPORTED_MODULE_6__.default.memberDashboard);
     })["catch"](function (e) {
+      console.log('fail');
       console.log(e);
     });
   };
@@ -130,7 +132,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _SignInPage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../SignInPage */ "./resources/js/components/SignInPage/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
 
 
 
@@ -150,6 +154,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var SignUpActivate = function SignUpActivate(_ref) {
   var match = _ref.match;
 
@@ -161,7 +166,7 @@ var SignUpActivate = function SignUpActivate(_ref) {
   var token = match.params.token;
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     console.log('use effect');
-    axios.get("/api/auth/signup/activate/".concat(token)).then(function (res) {
+    axios__WEBPACK_IMPORTED_MODULE_3___default().get("/api/auth/signup/activate/".concat(token)).then(function (res) {
       console.log(res);
       setMessage("Thanks for Signing up. Your account has now been activated. Please sign in to continue!");
     })["catch"](function (error) {
@@ -182,7 +187,7 @@ var SignUpActivate = function SignUpActivate(_ref) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", {
       children: message
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
       to: '/signin',
       children: "Click here to sign in "
     })]
@@ -190,52 +195,6 @@ var SignUpActivate = function SignUpActivate(_ref) {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SignUpActivate);
-
-/***/ }),
-
-/***/ "./resources/js/store/init/actions/index.js":
-/*!**************************************************!*\
-  !*** ./resources/js/store/init/actions/index.js ***!
-  \**************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "LOADING": () => (/* binding */ LOADING),
-/* harmony export */   "SUCCESS": () => (/* binding */ SUCCESS),
-/* harmony export */   "FAILURE": () => (/* binding */ FAILURE),
-/* harmony export */   "UPDATE": () => (/* binding */ UPDATE),
-/* harmony export */   "SUCCESSFUL_UPDATE": () => (/* binding */ SUCCESSFUL_UPDATE),
-/* harmony export */   "initUser": () => (/* binding */ initUser)
-/* harmony export */ });
-var LOADING = "LOADING";
-var SUCCESS = "SUCCESS";
-var FAILURE = "FAILURE";
-var UPDATE = "UPDATE";
-var SUCCESSFUL_UPDATE = "SUCCESSFUL_UPDATE";
-var initUser = function initUser(token) {
-  return function (dispatch) {
-    dispatch({
-      type: LOADING
-    });
-    return axios.get("api/auth/user", {
-      headers: {
-        Authorization: "Bearer ".concat(token)
-      }.then(function (res) {
-        return dispatch({
-          type: SUCCESS,
-          payload: res.data
-        });
-      })["catch"](function (err) {
-        return dispatch({
-          type: FAILURE,
-          payload: err
-        });
-      })
-    });
-  };
-};
 
 /***/ }),
 

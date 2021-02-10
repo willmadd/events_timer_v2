@@ -1,6 +1,5 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import "./menu.scss";
 import menuItems from "./menuitems";
 import {preloadRouteComponent} from '../../routes/helpers'
 const Menu = () => {
