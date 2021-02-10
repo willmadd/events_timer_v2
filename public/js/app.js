@@ -2021,7 +2021,6 @@ var App = function App() {
     var userToken = localStorage.getItem("eventcountdown:all:userToken");
 
     if (userToken) {
-      console.log('were dispatching');
       dispatch((0,_store_init_actions__WEBPACK_IMPORTED_MODULE_6__.initUser)(userToken));
     }
   }, []);
@@ -2362,7 +2361,6 @@ var FAILURE = "FAILURE";
 var UPDATE = "UPDATE";
 var SUCCESSFUL_UPDATE = "SUCCESSFUL_UPDATE";
 var initUser = function initUser(token) {
-  console.log('init user');
   return function (dispatch) {
     dispatch({
       type: LOADING

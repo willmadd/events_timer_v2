@@ -13,7 +13,6 @@ const dispatch = useDispatch();
     useEffect(() => {
         const userToken = localStorage.getItem("eventcountdown:all:userToken");
         if (userToken) {
-            console.log('were dispatching');
             dispatch(initUser(userToken));
         }
     }, []);
