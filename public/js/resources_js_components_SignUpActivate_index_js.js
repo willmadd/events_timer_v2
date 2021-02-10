@@ -19,7 +19,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var js_sha256__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(js_sha256__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store_init_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../store/init/actions */ "./resources/js/store/init/actions/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _routes_routeID__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../routes/routeID */ "./resources/js/routes/routeID.js");
 
 
 
@@ -42,8 +43,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var SignInPage = function SignInPage() {
-  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useHistory)();
+  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.useHistory)();
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_4__.useDispatch)();
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
@@ -66,7 +68,8 @@ var SignInPage = function SignInPage() {
     axios__WEBPACK_IMPORTED_MODULE_2___default().post('/api/auth/login', data).then(function (res) {
       console.log(res);
       localStorage.setItem("eventcountdown:all:userToken", res.data.access_token);
-      dispatch((0,_store_init_actions__WEBPACK_IMPORTED_MODULE_5__.initUser)(res.data.access_token)); // history.push(RouteID.memberDashboard)
+      dispatch((0,_store_init_actions__WEBPACK_IMPORTED_MODULE_5__.initUser)(res.data.access_token));
+      history.push(_routes_routeID__WEBPACK_IMPORTED_MODULE_6__.default.memberDashboard);
     })["catch"](function (e) {
       console.log(e);
     });

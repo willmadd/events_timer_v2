@@ -22,6 +22,10 @@ const SignUpActivate = ReactLazyPreload(() =>
 import("../components/SignUpActivate")
 );
 
+const LogOut = ReactLazyPreload(() =>
+import("../components/Logout")
+);
+
 const Test = ReactLazyPreload(() =>
 import("../components/Test")
 );
@@ -35,4 +39,5 @@ export const routes = [
     {path: RouteID.signup, exact:true, component: SignUpPage},
     {path: RouteID.signupsuccess, exact:true, component: SignUpSuccess},
     {path: RouteID.signupActivate, exact:true, component: SignUpActivate},
+    {path: RouteID.logout, exact:true, component: LogOut},
 ];

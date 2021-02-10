@@ -5,6 +5,7 @@ import sha256 from 'js-sha256';
 import { useDispatch } from "react-redux";
 import { initUser } from "../../store/init/actions";
 import { useHistory } from "react-router-dom";
+import RouteID from '../../routes/routeID';
 
 
 const SignInPage = () => {
@@ -29,7 +30,7 @@ const SignInPage = () => {
             console.log(res);
             localStorage.setItem("eventcountdown:all:userToken", res.data.access_token);
             dispatch(initUser(res.data.access_token));
-            // history.push(RouteID.memberDashboard)
+            history.push(RouteID.memberDashboard)
         })
         .catch(e=>{
             console.log(e);
