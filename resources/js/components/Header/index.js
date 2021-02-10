@@ -25,6 +25,9 @@ const Header = () => {
                     <NavLink exact to={RouteID.signin}>{'Sign In'}</NavLink>
                     </li>
                     <li>
+                    <NavLink exact to={RouteID.signup}>{'Sign Up'}</NavLink>
+                    </li>
+                    <li>
                         My Account
                     </li>
                 </ul>
