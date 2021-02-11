@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import globalAudio from './globalAudio';
-const audioFiles = ['happy', 'hermit'];
+const audioFiles = ['happy', 'hermit', 'Alone', 'Empire-Seasons', 'Fairy-Meeting','Stairway','Wander'];
 
 const AudioSelector = ({audio, setAudio}) => {
 

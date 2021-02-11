@@ -176,7 +176,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var audioFiles = ['happy', 'hermit'];
+var audioFiles = ['happy', 'hermit', 'Alone', 'Empire-Seasons', 'Fairy-Meeting', 'Stairway', 'Wander'];
 
 var AudioSelector = function AudioSelector(_ref) {
   var _jsx2;
@@ -289,7 +289,8 @@ var BackgroundSelector = function BackgroundSelector(_ref) {
   var _onChange = _ref.onChange,
       currentlySelected = _ref.currentlySelected,
       backgroundColor = _ref.backgroundColor,
-      setBackgroundColor = _ref.setBackgroundColor;
+      setBackgroundColor = _ref.setBackgroundColor,
+      loggedin = _ref.loggedin;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", {
       children: "Step 1: Choose a background"
@@ -321,26 +322,28 @@ var BackgroundSelector = function BackgroundSelector(_ref) {
           })
         })]
       }), _backgrounds__WEBPACK_IMPORTED_MODULE_2__.default.map(function (background, index) {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", {
-            // class="hidden"
-            className: "color__label",
-            type: "radio",
-            name: "background",
-            value: background.id,
-            checked: background.id == currentlySelected,
-            onChange: function onChange(e) {
-              return _onChange(e.target.value);
-            },
-            id: "radio__".concat(index)
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", {
-            htmlFor: "radio__".concat(index),
-            className: "color__label",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", {
-              src: "/images/backgrounds/".concat(background.thumb)
-            })
-          })]
-        }, background.thumb);
+        if (!background.paid || loggedin) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", {
+              // class="hidden"
+              className: "color__label",
+              type: "radio",
+              name: "background",
+              value: background.id,
+              checked: background.id == currentlySelected,
+              onChange: function onChange(e) {
+                return _onChange(e.target.value);
+              },
+              id: "radio__".concat(index)
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", {
+              htmlFor: "radio__".concat(index),
+              className: "color__label",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", {
+                src: "/images/backgrounds/".concat(background.thumb)
+              })
+            })]
+          }, background.thumb);
+        }
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: "disabled",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
@@ -678,12 +681,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-var files = ['1', '2', '3'];
+var files = [{
+  id: '1',
+  paid: false
+}, {
+  id: '2',
+  paid: false
+}, {
+  id: '3',
+  paid: false
+}, {
+  id: '4',
+  paid: true
+}, {
+  id: '5',
+  paid: true
+}];
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (files.map(function (file) {
   return {
-    id: file,
-    img: "".concat(file, ".jpg"),
-    thumb: "".concat(file, "_thumb.jpg")
+    id: file.id,
+    img: "".concat(file.id, ".jpg"),
+    thumb: "".concat(file.id, "_thumb.jpg"),
+    paid: file.paid
   };
 }));
 
@@ -702,7 +721,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 var audios = {
   'happy': new Audio('/mp3/happy.mp3'),
-  'hermit': new Audio('/mp3/hermit.mp3')
+  'hermit': new Audio('/mp3/hermit.mp3'),
+  'Alone': new Audio('/mp3/Alone.mp3'),
+  'Empire-Seasons': new Audio('/mp3/Empire-Seasons.mp3'),
+  'Fairy-Meeting': new Audio('/mp3/Fairy-Meeting.mp3'),
+  'Stairway': new Audio('/mp3/Stairway.mp3'),
+  'Wander': new Audio('/mp3/Wander.mp3')
 };
 var currentlyPlaying = null;
 
@@ -776,7 +800,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var CreateVideoForm = function CreateVideoForm() {
+var CreateVideoForm = function CreateVideoForm(_ref) {
+  var loggedin = _ref.loggedin;
+
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(60000),
       _useState2 = _slicedToArray(_useState, 2),
       time = _useState2[0],
@@ -873,7 +899,7 @@ var CreateVideoForm = function CreateVideoForm() {
     });
   };
 
-  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(true),
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
       _useState20 = _slicedToArray(_useState19, 2),
       displayPaymentModal = _useState20[0],
       setDisplayPaymentModal = _useState20[1];
@@ -894,7 +920,9 @@ var CreateVideoForm = function CreateVideoForm() {
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
     className: "form",
-    children: [displayPaymentModal && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_GuestPayment__WEBPACK_IMPORTED_MODULE_10__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+    children: [displayPaymentModal && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_GuestPayment__WEBPACK_IMPORTED_MODULE_10__.default, {
+      setDisplayPaymentModal: setDisplayPaymentModal
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
       className: "form__wrapper",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: "form__preview",
@@ -927,7 +955,8 @@ var CreateVideoForm = function CreateVideoForm() {
         backgroundColor: backgroundColor,
         setBackgroundColor: setBackgroundColor,
         featureImgPos: featureImgPos,
-        setFeatureImgPos: setFeatureImgPos
+        setFeatureImgPos: setFeatureImgPos,
+        loggedin: loggedin
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_CreateCountdown__WEBPACK_IMPORTED_MODULE_7__.default, {
         time: time,
         setTime: setTime,
@@ -1001,12 +1030,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
-var GuestPayment = function GuestPayment() {
+var GuestPayment = function GuestPayment(_ref) {
+  var setDisplayPaymentModal = _ref.setDisplayPaymentModal;
   var stripe = (0,_stripe_react_stripe_js__WEBPACK_IMPORTED_MODULE_3__.useStripe)();
   var elements = (0,_stripe_react_stripe_js__WEBPACK_IMPORTED_MODULE_3__.useElements)();
 
   var handleSubmit = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee(event) {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee(event) {
       var cardElement, _yield$stripe$createP, error, paymentMethod;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee$(_context) {
@@ -1055,12 +1085,15 @@ var GuestPayment = function GuestPayment() {
     }));
 
     return function handleSubmit(_x) {
-      return _ref.apply(this, arguments);
+      return _ref2.apply(this, arguments);
     };
   }();
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
     className: "guest__payment__overlay",
+    onClick: function onClick() {
+      return setDisplayPaymentModal(false);
+    },
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
       className: "guest__payment__modal",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h2", {
@@ -1219,11 +1252,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var Logo = function Logo() {
+var Logo = function Logo(props) {
+  console.log(props);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
     className: "logo",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("h1", {
       children: ["Events:", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("br", {}), "Countdown"]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", {
+      children: "".concat(props.region, "'s most popular webinar tool")
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h2", {
       children: "Make your online or in-person event standout with a countdown timer. Simply select a background, set-up your timer, overlay and audiotrack and download."
     })]
@@ -1304,9 +1340,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _CreateVideoForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../CreateVideoForm */ "./resources/js/components/CreateVideoForm/index.js");
+/* harmony import */ var _containers_CreateVideoForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../containers/CreateVideoForm */ "./resources/js/containers/CreateVideoForm/index.js");
 /* harmony import */ var _HowToArea__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../HowToArea */ "./resources/js/components/HowToArea/index.js");
-/* harmony import */ var _Logo__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Logo */ "./resources/js/components/Logo/index.js");
+/* harmony import */ var _containers_Logo__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../containers/Logo */ "./resources/js/containers/Logo/index.js");
 
 
 
@@ -1319,7 +1355,7 @@ var VideoArea = function VideoArea() {
     className: "video",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
       className: "wrapper",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Logo__WEBPACK_IMPORTED_MODULE_4__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_CreateVideoForm__WEBPACK_IMPORTED_MODULE_2__.default, {})]
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_containers_Logo__WEBPACK_IMPORTED_MODULE_4__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_containers_CreateVideoForm__WEBPACK_IMPORTED_MODULE_2__.default, {})]
     })
   });
 };
@@ -1404,6 +1440,68 @@ var ColourPicker = function ColourPicker(_ref) {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ColourPicker);
+
+/***/ }),
+
+/***/ "./resources/js/containers/CreateVideoForm/index.js":
+/*!**********************************************************!*\
+  !*** ./resources/js/containers/CreateVideoForm/index.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _components_CreateVideoForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/CreateVideoForm */ "./resources/js/components/CreateVideoForm/index.js");
+
+
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    loggedin: state.user.active
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps)(_components_CreateVideoForm__WEBPACK_IMPORTED_MODULE_1__.default));
+
+/***/ }),
+
+/***/ "./resources/js/containers/Logo/index.js":
+/*!***********************************************!*\
+  !*** ./resources/js/containers/Logo/index.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _components_Logo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/Logo */ "./resources/js/components/Logo/index.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+var mapStateToProps = function mapStateToProps(state) {
+  return _objectSpread({}, state.locale);
+}; // const mapDispatchToProps = dispatch => {
+//     return {
+//         toggleUnits: (bool) => {
+//             return dispatch(config({imperial:bool}))}
+//     }
+//   }
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps)(_components_Logo__WEBPACK_IMPORTED_MODULE_1__.default));
 
 /***/ }),
 

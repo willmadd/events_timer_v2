@@ -71,7 +71,9 @@
 
 .background {
     &__wrapper {
-        display: flex;
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        grid-gap:8px;
         input[type="radio"]{
             position:absolute;
             left:-99999px;
@@ -83,7 +85,7 @@
             height: 75px;
             width: 75px;
             display: flex;
-            margin-left:12px;
+            // margin-left:12px;
             img, div {
                 width: 100%;
                 border: 1px solid $black;

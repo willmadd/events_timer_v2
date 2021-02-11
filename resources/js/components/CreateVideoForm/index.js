@@ -10,7 +10,7 @@ import ImageUpload from "./ImageUpload";
 import AudioSelector from "./AudioSelector";
 import GuestPayment from "../GuestPayment";
 
-const CreateVideoForm = () => {
+const CreateVideoForm = ({loggedin}) => {
     const [time, setTime] = useState(60000);
 
     const [textColor, setTextColor] = useState(
@@ -82,7 +82,7 @@ const CreateVideoForm = () => {
         });
     };
 
-    const [displayPaymentModal, setDisplayPaymentModal] = useState(true);
+    const [displayPaymentModal, setDisplayPaymentModal] = useState(false);
 
     const [fps, setFps] = React.useState(15);
 
@@ -94,7 +94,7 @@ const CreateVideoForm = () => {
 
     return (
         <div className="form">
-            {displayPaymentModal && <GuestPayment />}
+            {displayPaymentModal && <GuestPayment setDisplayPaymentModal={setDisplayPaymentModal}/>}
             <div className="form__wrapper">
                 <div
                     className="form__preview"
@@ -142,6 +142,7 @@ const CreateVideoForm = () => {
                     setBackgroundColor={setBackgroundColor}
                     featureImgPos={featureImgPos}
                     setFeatureImgPos={setFeatureImgPos}
+                    loggedin={loggedin}
                     
                 />
                 <CreateCountdown

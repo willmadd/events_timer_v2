@@ -8,6 +8,7 @@ const BackgroundSelector = ({
     currentlySelected,
     backgroundColor,
     setBackgroundColor,
+    loggedin
 }) => {
     return (
         <div>
@@ -35,8 +36,9 @@ const BackgroundSelector = ({
                         />
                     </div>
                 </div>
-                {backgrounds.map((background, index) => (
-                    <div key={background.thumb}>
+                {backgrounds.map((background, index) => {
+                    if(!background.paid||loggedin){
+                       return  <div key={background.thumb}>
                         <input
                             // class="hidden"
                             className="color__label"
@@ -46,17 +48,18 @@ const BackgroundSelector = ({
                             checked={background.id == currentlySelected}
                             onChange={(e) => onChange(e.target.value)}
                             id={`radio__${index}`}
-                        ></input>
+                            ></input>
                         <label
                             htmlFor={`radio__${index}`}
                             className="color__label"
-                        >
+                            >
                             <img
                                 src={`/images/backgrounds/${background.thumb}`}
-                            ></img>
+                                ></img>
                         </label>
                     </div>
-                ))}
+                            }
+                })}
                 <div className="disabled">
                     <div className="signup__cta">Sign up for Free to get access to more backgrounds</div>
                 <div className="color__label"><div></div></div>

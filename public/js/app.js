@@ -2936,7 +2936,9 @@ __webpack_require__.r(__webpack_exports__);
 
 var stripePromise = (0,_stripe_stripe_js__WEBPACK_IMPORTED_MODULE_10__.loadStripe)("pk_test_51IJag6LrsmQqsvaawht9s51amhFcbQVvWsSmBf1Zsy4yKcG5w0ztf8eIVufboJcIvAjaGIg4K0c7rBOExUKPjZoq003c5A3tLF");
 var store = (0,redux__WEBPACK_IMPORTED_MODULE_11__.createStore)(_store_reducers__WEBPACK_IMPORTED_MODULE_5__.rootReducer, // initialState,
-(0,redux__WEBPACK_IMPORTED_MODULE_11__.compose)((0,redux__WEBPACK_IMPORTED_MODULE_11__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_8__.default), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
+(0,redux__WEBPACK_IMPORTED_MODULE_11__.compose)((0,redux__WEBPACK_IMPORTED_MODULE_11__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_8__.default) // window.__REDUX_DEVTOOLS_EXTENSION__ &&
+//     window.__REDUX_DEVTOOLS_EXTENSION__()
+));
 
 if (document.getElementById("events")) {
   react_dom__WEBPACK_IMPORTED_MODULE_2__.render(
@@ -3232,6 +3234,73 @@ var locale = function locale(token) {
 
 /***/ }),
 
+/***/ "./resources/js/store/loading/reducer.js":
+/*!***********************************************!*\
+  !*** ./resources/js/store/loading/reducer.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "locale": () => (/* binding */ locale)
+/* harmony export */ });
+/* harmony import */ var _init_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../init/actions */ "./resources/js/store/init/actions/index.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+// import { GET_USER_DETAILS } from "./types";
+// const initialStateU = {};
+// export const userData = (state = initialStateU, {type, payload}) => {
+//     console.log('userdata');
+//     console.log(type);
+//     console.log(payload);
+//     switch (type) {
+//         case GET_USER_DETAILS:
+//             return {...payload};
+//         default:
+//             return state;
+//     }
+// }
+
+var initialState = {
+  loading: false,
+  error: false
+};
+var locale = function locale() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  console.log(action.type);
+
+  switch (action.type) {
+    case 'LOCALE_LOADING':
+      return _objectSpread(_objectSpread({}, state), {}, {
+        loading: true
+      });
+
+    case 'LOCALE_SUCCESS':
+      console.log('locale success');
+      return _objectSpread(_objectSpread(_objectSpread({}, state), action.payload), {}, {
+        loading: false,
+        error: false
+      });
+
+    case 'LOCALE_FAILURE':
+      return _objectSpread(_objectSpread({}, state), {}, {
+        loading: false,
+        error: true
+      });
+
+    default:
+      return state;
+  }
+};
+
+/***/ }),
+
 /***/ "./resources/js/store/login/reducers.js":
 /*!**********************************************!*\
   !*** ./resources/js/store/login/reducers.js ***!
@@ -3337,15 +3406,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "rootReducer": () => (/* binding */ rootReducer)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _LoadReducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LoadReducer */ "./resources/js/store/reducers/LoadReducer.js");
 /* harmony import */ var _login_reducers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../login/reducers */ "./resources/js/store/login/reducers.js");
+/* harmony import */ var _loading_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../loading/reducer */ "./resources/js/store/loading/reducer.js");
 
 
 
-var rootReducer = (0,redux__WEBPACK_IMPORTED_MODULE_2__.combineReducers)({
+
+var rootReducer = (0,redux__WEBPACK_IMPORTED_MODULE_3__.combineReducers)({
   loadReducer: _LoadReducer__WEBPACK_IMPORTED_MODULE_0__.loadReducer,
-  user: _login_reducers__WEBPACK_IMPORTED_MODULE_1__.user
+  user: _login_reducers__WEBPACK_IMPORTED_MODULE_1__.user,
+  locale: _loading_reducer__WEBPACK_IMPORTED_MODULE_2__.locale
 });
 
 /***/ }),

@@ -1,7 +1,7 @@
 import React from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
-const GuestPayment = () => {
+const GuestPayment = ({setDisplayPaymentModal}) => {
     const stripe = useStripe();
     const elements = useElements();
 
@@ -34,7 +34,7 @@ const GuestPayment = () => {
     };
 
     return (
-        <div className="guest__payment__overlay">
+        <div className="guest__payment__overlay" onClick={()=>setDisplayPaymentModal(false)}>
             <div className="guest__payment__modal">
                 <h2>Guest Payment!</h2>
                 <div className="guest__payment__card">

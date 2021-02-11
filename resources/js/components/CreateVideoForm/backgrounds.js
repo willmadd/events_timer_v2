@@ -1,10 +1,17 @@
-const files = ['1', '2', '3']
+const files = [
+    {id:'1', paid:false},
+    {id:'2', paid:false}, 
+    {id:'3', paid:false},
+    {id:'4', paid:true },
+    {id:'5', paid:true }
+    ]
 
 export default files.map(file=>(
     {
-        id:file,
-        img:`${file}.jpg`,
-        thumb:`${file}_thumb.jpg`
+        id:file.id,
+        img:`${file.id}.jpg`,
+        thumb:`${file.id}_thumb.jpg`,
+        paid: file.paid
     }
 
 ))

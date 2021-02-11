@@ -10157,7 +10157,9 @@ header nav ul li {
 }
 
 .background__wrapper {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-gap: 8px;
 }
 .background__wrapper input[type=radio] {
   position: absolute;
@@ -10170,7 +10172,6 @@ header nav ul li {
   height: 75px;
   width: 75px;
   display: flex;
-  margin-left: 12px;
 }
 .background__wrapper .color__label img, .background__wrapper .color__label div {
   width: 100%;
@@ -10463,11 +10464,11 @@ Animate the stripes
 }
 .guest__payment__modal {
   background-color: #fefefe;
-  margin: 15% auto;
+  margin: 25% auto;
   /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+  width: 50%;
   /* Could be more or less, depending on screen size */
 }
 .guest__payment__card {

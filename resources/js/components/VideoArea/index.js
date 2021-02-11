@@ -1,7 +1,7 @@
 import React from 'react';
-import CreateVideoForm from '../CreateVideoForm';
+import CreateVideoForm from '../../containers/CreateVideoForm';
 import HowToArea from '../HowToArea';
-import Logo from '../Logo';
+import Logo from '../../containers/Logo';
 
 const VideoArea = () => {
     return (
