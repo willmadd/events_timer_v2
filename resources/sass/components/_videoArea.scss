@@ -86,6 +86,7 @@
             width: 75px;
             display: flex;
             // margin-left:12px;
+
             img, div {
                 width: 100%;
                 border: 1px solid $black;
@@ -101,6 +102,12 @@
                 width:75px;
                 border: 1px solid $black;
                 margin-left:0;
+                &.colourbg{
+                    background-image: url('/images/backgrounds/colour.png');
+                    background-size: 75px 75px;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                }
         
             }
             &__picker{

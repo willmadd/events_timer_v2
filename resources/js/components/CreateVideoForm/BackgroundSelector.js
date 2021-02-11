@@ -26,8 +26,8 @@ const BackgroundSelector = ({
                     ></input>
                     <label
                         htmlFor={"color"}
-                        className="colour__label"
-                        style={{ backgroundColor: backgroundColor }}
+                        className="colour__label colourbg"
+                        // style={{ backgroundColor: backgroundColor }}
                     ></label>
                     <div className="colour__picker">
                         <ColourPicker

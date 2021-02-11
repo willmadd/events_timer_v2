@@ -310,10 +310,8 @@ var BackgroundSelector = function BackgroundSelector(_ref) {
           id: "color"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", {
           htmlFor: "color",
-          className: "colour__label",
-          style: {
-            backgroundColor: backgroundColor
-          }
+          className: "colour__label colourbg" // style={{ backgroundColor: backgroundColor }}
+
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
           className: "colour__picker",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common_ColourPicker__WEBPACK_IMPORTED_MODULE_3__.default, {
