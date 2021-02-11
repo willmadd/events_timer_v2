@@ -8,6 +8,7 @@ import BackgroundSelector from "./BackgroundSelector";
 import CreateCountdown from "./CreateCountdown";
 import ImageUpload from "./ImageUpload";
 import AudioSelector from "./AudioSelector";
+import GuestPayment from "../GuestPayment";
 
 const CreateVideoForm = () => {
     const [time, setTime] = useState(60000);
@@ -81,14 +82,19 @@ const CreateVideoForm = () => {
         });
     };
 
-    const [seconds, setSeconds] = React.useState(10);
+    const [displayPaymentModal, setDisplayPaymentModal] = useState(true);
 
     const [fps, setFps] = React.useState(15);
 
     const [audio, setAudio] = useState(null);
 
+    const handlePremiumSubmit = () =>{
+        setDisplayPaymentModal(true);
+    }
+
     return (
         <div className="form">
+            {displayPaymentModal && <GuestPayment />}
             <div className="form__wrapper">
                 <div
                     className="form__preview"
@@ -156,14 +162,24 @@ const CreateVideoForm = () => {
                 <AudioSelector setAudio={setAudio} audio={audio} />
             </div>
             {loadingState === "ready" ? (
+                <div>
                 <button
                     className="form__download"
                     type="button"
-                    onClick={() => handleSubmit()}
+                    onClick={() => handleSubmit('sd')}
                     disabled={!featureImage}
                 >
-                    Download Video
+                    Download Video (SD)
                 </button>
+                <button
+                    className="form__download"
+                    type="button"
+                    onClick={() => handlePremiumSubmit()}
+                    disabled={!featureImage}
+                >
+                    Download Video (HD)
+                </button>
+                </div>
             ) : loadingState === "loading" ? (
                 <Loading />
             ) : (

@@ -9,7 +9,7 @@ export const SUCCESSFUL_UPDATE = "SUCCESSFUL_UPDATE";
 export const initUser = (token) => {
     return (dispatch) => {
         dispatch({ type: LOADING });
-       return axios
+        return axios
             .get(`api/auth/user`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
