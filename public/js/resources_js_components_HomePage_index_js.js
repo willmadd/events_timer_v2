@@ -772,6 +772,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ImageUpload__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./ImageUpload */ "./resources/js/components/CreateVideoForm/ImageUpload.js");
 /* harmony import */ var _AudioSelector__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./AudioSelector */ "./resources/js/components/CreateVideoForm/AudioSelector.js");
 /* harmony import */ var _GuestPayment__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../GuestPayment */ "./resources/js/components/GuestPayment/index.js");
+/* harmony import */ var react_currency_conv__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-currency-conv */ "./node_modules/react-currency-conv/index.js");
+/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../settings */ "./resources/js/settings.js");
 
 
 
@@ -798,6 +800,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
 var CreateVideoForm = function CreateVideoForm(_ref) {
   var loggedin = _ref.loggedin;
 
@@ -810,6 +814,8 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
       _useState4 = _slicedToArray(_useState3, 2),
       textColor = _useState4[0],
       setTextColor = _useState4[1];
+
+  console.log(_settings__WEBPACK_IMPORTED_MODULE_12__.settings);
 
   var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("center"),
       _useState6 = _slicedToArray(_useState5, 2),
@@ -1560,6 +1566,26 @@ var toHHMMSS = function toHHMMSS(sec_num) {
   console.log(Number(hours));
   console.log("".concat(Number(hours) ? "".concat(hours, ":") : '').concat(minutes, ":").concat(seconds));
   return "".concat(Number(hours) ? "".concat(hours, ":") : '').concat(minutes, ":").concat(seconds);
+};
+
+/***/ }),
+
+/***/ "./resources/js/settings.js":
+/*!**********************************!*\
+  !*** ./resources/js/settings.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "settings": () => (/* binding */ settings)
+/* harmony export */ });
+var settings = {
+  singleVideoCost: {
+    amount: 200,
+    currency: "GBP"
+  }
 };
 
 /***/ }),
@@ -21564,6 +21590,85 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+/***/ }),
+
+/***/ "./node_modules/react-currency-conv/dist/currencyConverter.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/react-currency-conv/dist/currencyConverter.js ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ CurrencyConverter)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+class CurrencyConverter extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
+  constructor(props) {
+    super(props);
+
+    if (props.from && props.to && props.value) {
+      this.state = {
+        from: props.from.toUpperCase(),
+        to: props.to.toUpperCase(),
+        value: props.value,
+        date: props.date ? props.date : 'latest',
+        convertedValue: null,
+        precision: props.precision ? props.precision > 0 ? props.precision : 2 : 2
+      };
+    } else {
+      throw new Error('Enter valid value as props');
+    }
+  }
+
+  componentDidMount() {
+    const codes = ['CAD', 'HKD', 'ISK', 'PHP', 'DKK', 'HUF', 'CZK', 'AUD', 'RON', 'SEK', 'IDR', 'INR', 'BRL', 'RUB', 'HRK', 'JPY', 'THB', 'CHF', 'SGD', 'PLN', 'BGN', 'TRY', 'CNY', 'NOK', 'NZD', 'ZAR', 'USD', 'MXN', 'ILS', 'GBP', 'KRW', 'MYR', 'EUR'];
+
+    if (!(codes.includes(this.state.from) && codes.includes(this.state.to))) {
+      throw new Error(`Country code is not supprted, supported country codes are: ${codes}`);
+    } else if (typeof this.state.value !== "number") {
+      throw new Error(`Input value of exchange is not of type number`);
+    } else {
+      fetch(`https://api.exchangeratesapi.io/${this.state.date}?base=${this.state.from}`, {
+        type: 'GET'
+      }).then(data => data.json()).then(res => {
+        if (res.error) {
+          throw new Error(res.error);
+        } else {
+          let value = this.state.value * res.rates[this.state.to];
+          this.setState({
+            convertedValue: value.toFixed(this.state.precision)
+          });
+        }
+      }).catch(err => {
+        throw new Error(err);
+      });
+    }
+  }
+
+  render() {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, this.state.convertedValue);
+  }
+
+}
+
+/***/ }),
+
+/***/ "./node_modules/react-currency-conv/index.js":
+/*!***************************************************!*\
+  !*** ./node_modules/react-currency-conv/index.js ***!
+  \***************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+module.exports = __webpack_require__(/*! ./dist/currencyConverter.js */ "./node_modules/react-currency-conv/dist/currencyConverter.js");
 
 
 

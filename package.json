@@ -29,6 +29,8 @@
         "@stripe/stripe-js": "^1.12.1",
         "js-sha256": "^0.9.0",
         "react-color": "^2.19.3",
+        "react-currency-conv": "^1.1.0",
+        "react-currency-conversion": "^1.0.5",
         "react-dropzone": "^11.3.0",
         "react-input-color": "^4.0.0",
         "react-maskedinput": "^4.0.1",

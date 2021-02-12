@@ -9,14 +9,18 @@ import CreateCountdown from "./CreateCountdown";
 import ImageUpload from "./ImageUpload";
 import AudioSelector from "./AudioSelector";
 import GuestPayment from "../GuestPayment";
+import CurrencyConverter from 'react-currency-conv';
+import {settings} from '../../settings'
+
 
 const CreateVideoForm = ({loggedin}) => {
     const [time, setTime] = useState(60000);
-
+    
     const [textColor, setTextColor] = useState(
         localStorage.getItem("eventsTimer:video:txtCol", backgroundColor) ||
-            "#333333"
-    );
+        "#333333"
+        );
+        console.log(settings);
 
     const [featureImgPos, setFeatureImgPos] = useState("center");
 
@@ -178,7 +182,8 @@ const CreateVideoForm = ({loggedin}) => {
                     onClick={() => handlePremiumSubmit()}
                     disabled={!featureImage}
                 >
-                    Download Video (HD)
+                    Download Video (HD) 
+                    {/* <CurrencyConverter from={settings.singleVideoCost.currency} to={'JPY'} value={settings.singleVideoCost.ammount}/> */}
                 </button>
                 </div>
             ) : loadingState === "loading" ? (
