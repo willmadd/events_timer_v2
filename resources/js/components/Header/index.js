@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, NavLink } from "react-router-dom";
 import RouteID from '../../routes/routeID';
+import PostsMenuEntry from './PostsMenuEntry';
 const Header = () => {
     return (
         <header>
@@ -11,6 +12,9 @@ const Header = () => {
                     </li>
                     <li>
                         Tour
+                    </li>
+                    <li>
+                        <PostsMenuEntry />
                     </li>
                     <li>
                         Gallery
