@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { randomString } from "../../helpers/randomstring";
+import {currencyConverter} from '../../helpers/currencyConversion';
 import Loading from "../Loader";
 import { toHHMMSS } from "../../helpers/time";
 
@@ -9,18 +10,18 @@ import CreateCountdown from "./CreateCountdown";
 import ImageUpload from "./ImageUpload";
 import AudioSelector from "./AudioSelector";
 import GuestPayment from "../GuestPayment";
-import CurrencyConverter from 'react-currency-conv';
+// import CurrencyConverter from 'react-currency-conv';
 import {settings} from '../../settings'
 
 
-const CreateVideoForm = ({loggedin}) => {
+const CreateVideoForm = ({loggedin, userCurrency}) => {
     const [time, setTime] = useState(60000);
     
     const [textColor, setTextColor] = useState(
         localStorage.getItem("eventsTimer:video:txtCol", backgroundColor) ||
         "#333333"
         );
-        console.log(settings);
+        console.log(settings.singleVideoCost.currency);
 
     const [featureImgPos, setFeatureImgPos] = useState("center");
 
@@ -43,6 +44,25 @@ const CreateVideoForm = ({loggedin}) => {
         localStorage.getItem("eventsTimer:video:bgCol", backgroundColor) ||
             "#ff4500"
     );
+
+    const [payment, setPayment] = useState({
+        currency:settings.singleVideoCost.currency,
+        amount:settings.singleVideoCost.amount
+    })
+
+    useEffect(()=>{
+            currencyConverter(userCurrency||"GBP",settings.singleVideoCost.currency,settings.singleVideoCost.amount).then(res=>{
+                setPayment({
+                    currency:userCurrency,
+                    amount:res
+                })
+            })
+
+        // setPayment({
+        //     currency: userCurrency,
+        //     amount:<CurrencyConverter from={settings.singleVideoCost.currency} to={userCurrency} value={settings.singleVideoCost.amount}/>,
+        // });
+    },[userCurrency])
 
     useEffect(() => {
         localStorage.setItem("eventsTimer:video:bgCol", backgroundColor);
@@ -95,10 +115,10 @@ const CreateVideoForm = ({loggedin}) => {
     const handlePremiumSubmit = () =>{
         setDisplayPaymentModal(true);
     }
-
+console.log('xxxxx', payment)
     return (
         <div className="form">
-            {displayPaymentModal && <GuestPayment setDisplayPaymentModal={setDisplayPaymentModal}/>}
+            {displayPaymentModal && <GuestPayment userCurrency={payment.currency} amount={payment.amount.toFixed(2)} setDisplayPaymentModal={setDisplayPaymentModal}/>}
             <div className="form__wrapper">
                 <div
                     className="form__preview"
@@ -183,7 +203,7 @@ const CreateVideoForm = ({loggedin}) => {
                     disabled={!featureImage}
                 >
                     Download Video (HD) 
-                    {/* <CurrencyConverter from={settings.singleVideoCost.currency} to={'JPY'} value={settings.singleVideoCost.ammount}/> */}
+                    {`${payment.amount.toFixed(2)} ${payment.currency}`}
                 </button>
                 </div>
             ) : loadingState === "loading" ? (

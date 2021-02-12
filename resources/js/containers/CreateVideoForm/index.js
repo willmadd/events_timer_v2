@@ -4,6 +4,7 @@ import CreateVideoForm from "../../components/CreateVideoForm";
 const mapStateToProps = state => {
     return {
         loggedin:state.user.active,
+        userCurrency: state.locale.currency
     };
 };
 

@@ -20,10 +20,12 @@ class PaymentsController extends Controller
 
     private function guestCharge($request)
     {
-        $paymentMethod= $request->id;
+        $paymentMethod = $request->id;
+        $currency = $request->userCurrency;
+        $amount = $request->amount*100;
 
         try {
-            $stripeCharge = (new User)->charge(100, $paymentMethod);
+            $stripeCharge = (new User)->charge($amount, $paymentMethod, ['currency'=>$currency]);
             return response()->json([
                 "res"=>$stripeCharge,
                 "success"=>true]

@@ -1,6 +1,6 @@
 export const settings = {
     singleVideoCost:{
-        amount:200,
+        amount:2,
         currency: "GBP"
     }
 }
