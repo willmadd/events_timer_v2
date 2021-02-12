@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 
 const Logo = (props) => {
-console.log(props);
     return (
         <div className="logo">
             <h1>Events:<br/>

@@ -3343,7 +3343,6 @@ var initialState = {
 var locale = function locale() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
   var action = arguments.length > 1 ? arguments[1] : undefined;
-  console.log(action.type);
 
   switch (action.type) {
     case 'LOCALE_LOADING':
@@ -3352,7 +3351,6 @@ var locale = function locale() {
       });
 
     case 'LOCALE_SUCCESS':
-      console.log('locale success');
       return _objectSpread(_objectSpread(_objectSpread({}, state), action.payload), {}, {
         loading: false,
         error: false

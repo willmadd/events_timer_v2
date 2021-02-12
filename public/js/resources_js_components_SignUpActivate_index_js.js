@@ -165,9 +165,7 @@ var SignUpActivate = function SignUpActivate(_ref) {
 
   var token = match.params.token;
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    console.log('use effect');
     axios__WEBPACK_IMPORTED_MODULE_3___default().get("/api/auth/signup/activate/".concat(token)).then(function (res) {
-      console.log(res);
       setMessage("Thanks for Signing up. Your account has now been activated. Please sign in to continue!");
     })["catch"](function (error) {
       if (error.response) {

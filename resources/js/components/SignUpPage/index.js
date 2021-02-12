@@ -26,7 +26,6 @@ const SignUpPage = () => {
         }
         axios.post('/api/auth/signup', data)
         .then(res=>{
-            console.log(res);
             if (res.status === 201) {
                 history.push(RouteID.signupsuccess, {from:"signup",email:res.data.email})
             } else {

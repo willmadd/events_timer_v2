@@ -1017,6 +1017,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _stripe_react_stripe_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @stripe/react-stripe-js */ "./node_modules/@stripe/react-stripe-js/dist/react-stripe.umd.js");
 /* harmony import */ var _stripe_react_stripe_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_stripe_react_stripe_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
 
 
 
@@ -1028,6 +1030,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+
 var GuestPayment = function GuestPayment(_ref) {
   var setDisplayPaymentModal = _ref.setDisplayPaymentModal;
   var stripe = (0,_stripe_react_stripe_js__WEBPACK_IMPORTED_MODULE_3__.useStripe)();
@@ -1035,14 +1038,15 @@ var GuestPayment = function GuestPayment(_ref) {
 
   var handleSubmit = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee(event) {
-      var cardElement, _yield$stripe$createP, error, paymentMethod;
+      var cardElement, _yield$stripe$createP, error, paymentMethod, id;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               // Block native form submission.
-              event.preventDefault();
+              // event.preventDefault();
+              console.log('submit hit');
 
               if (!(!stripe || !elements)) {
                 _context.next = 3;
@@ -1072,6 +1076,16 @@ var GuestPayment = function GuestPayment(_ref) {
                 console.log("[error]", error);
               } else {
                 console.log("[PaymentMethod]", paymentMethod);
+                id = paymentMethod.id;
+                console.log(id);
+                axios__WEBPACK_IMPORTED_MODULE_4___default().post('/api/charge', {
+                  id: id,
+                  amount: "200"
+                }).then(function (res) {
+                  console.log(res);
+                })["catch"](function (e) {
+                  console.log(e);
+                });
               }
 
             case 10:
@@ -1088,10 +1102,8 @@ var GuestPayment = function GuestPayment(_ref) {
   }();
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-    className: "guest__payment__overlay",
-    onClick: function onClick() {
-      return setDisplayPaymentModal(false);
-    },
+    className: "guest__payment__overlay" // onClick={()=>setDisplayPaymentModal(false)}
+    ,
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
       className: "guest__payment__modal",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h2", {
@@ -1116,7 +1128,10 @@ var GuestPayment = function GuestPayment(_ref) {
               }
             }
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
-            type: "submit",
+            type: "button",
+            onClick: function onClick() {
+              return handleSubmit();
+            },
             disabled: !stripe,
             children: "Pay"
           })]
@@ -1251,7 +1266,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Logo = function Logo(props) {
-  console.log(props);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
     className: "logo",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("h1", {
@@ -1539,8 +1553,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "toHHMMSS": () => (/* binding */ toHHMMSS)
 /* harmony export */ });
 var toHHMMSS = function toHHMMSS(sec_num) {
-  console.log(sec_num); // var sec_num = parseInt(this, 10); // don't forget the second param
-
+  // var sec_num = parseInt(this, 10); // don't forget the second param
   var hours = Math.floor(sec_num / 3600);
   var minutes = Math.floor((sec_num - hours * 3600) / 60);
   var seconds = sec_num - hours * 3600 - minutes * 60;
@@ -1557,8 +1570,6 @@ var toHHMMSS = function toHHMMSS(sec_num) {
     seconds = "0" + seconds;
   }
 
-  console.log(Number(hours));
-  console.log("".concat(Number(hours) ? "".concat(hours, ":") : '').concat(minutes, ":").concat(seconds));
   return "".concat(Number(hours) ? "".concat(hours, ":") : '').concat(minutes, ":").concat(seconds);
 };
 

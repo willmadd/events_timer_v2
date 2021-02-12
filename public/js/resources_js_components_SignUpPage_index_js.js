@@ -82,8 +82,6 @@ var SignUpPage = function SignUpPage() {
       email: email
     };
     axios__WEBPACK_IMPORTED_MODULE_2___default().post('/api/auth/signup', data).then(function (res) {
-      console.log(res);
-
       if (res.status === 201) {
         history.push(_routes_routeID__WEBPACK_IMPORTED_MODULE_4__.default.signupsuccess, {
           from: "signup",

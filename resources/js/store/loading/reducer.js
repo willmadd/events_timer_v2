@@ -31,7 +31,6 @@ const initialState = {
 };
 
 export const locale = (state = initialState, action) => {
-    console.log(action.type)
     switch (action.type) {
         case 'LOCALE_LOADING':
             return {
@@ -40,7 +39,6 @@ export const locale = (state = initialState, action) => {
             };
 
         case 'LOCALE_SUCCESS':
-            console.log('locale success');
             return {
                 ...state,
                 ...action.payload,

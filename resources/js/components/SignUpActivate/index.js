@@ -10,10 +10,8 @@ const SignUpActivate = ({match}) => {
     let { token } = match.params;
 
     useEffect(() => {
-        console.log('use effect');
         axios.get(`/api/auth/signup/activate/${token}`)
             .then(res => {
-                console.log(res);
                 setMessage(
                     `Thanks for Signing up. Your account has now been activated. Please sign in to continue!`
                 );
