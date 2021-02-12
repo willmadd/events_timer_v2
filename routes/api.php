@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PaymentsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,8 @@ Route::get('/test', [VideoController::class, 'test']);
 
 Route::post('/create', [VideoController::class, 'create']);
 Route::get('/c', [VideoController::class, 'testTwo']);
+
+Route::post('/charge', [PaymentsController::class, 'singleCharge']);
 
 // Route::post('/video', [VideoController::class, 'ffmpeg']);
 

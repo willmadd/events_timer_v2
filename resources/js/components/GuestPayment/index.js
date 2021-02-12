@@ -1,5 +1,6 @@
 import React from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import axios from "axios";
 
 const GuestPayment = ({setDisplayPaymentModal}) => {
     const stripe = useStripe();
@@ -7,7 +8,8 @@ const GuestPayment = ({setDisplayPaymentModal}) => {
 
     const handleSubmit = async (event) => {
         // Block native form submission.
-        event.preventDefault();
+        // event.preventDefault();
+        console.log('submit hit');
 
         if (!stripe || !elements) {
             // Stripe.js has not loaded yet. Make sure to disable
@@ -30,11 +32,22 @@ const GuestPayment = ({setDisplayPaymentModal}) => {
             console.log("[error]", error);
         } else {
             console.log("[PaymentMethod]", paymentMethod);
+            const {id} = paymentMethod;
+            console.log(id);
+            axios.post('/api/charge', {id, amount:"200"})
+            .then(res=>{
+                console.log(res)
+            })
+            .catch(e=>{
+                console.log(e)
+            })
         }
     };
 
     return (
-        <div className="guest__payment__overlay" onClick={()=>setDisplayPaymentModal(false)}>
+        <div className="guest__payment__overlay" 
+        // onClick={()=>setDisplayPaymentModal(false)}
+        >
             <div className="guest__payment__modal">
                 <h2>Guest Payment!</h2>
                 <div className="guest__payment__card">
@@ -55,7 +68,7 @@ const GuestPayment = ({setDisplayPaymentModal}) => {
                                 },
                             }}
                         />
-                        <button type="submit" disabled={!stripe}>
+                        <button type="button" onClick={()=>handleSubmit()} disabled={!stripe}>
                             Pay
                         </button>
                     </form>

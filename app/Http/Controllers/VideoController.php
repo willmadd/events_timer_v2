@@ -129,7 +129,7 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
         $image=env("APP_BACKGROUND_URL", "/").'/public/images/backgrounds/'.$request->backgroundImage.'.jpg';
         if (preg_match($pattern, $request->backgroundImage)) {
             $col = $request->backgroundImage;
-            $bg="-f lavfi -i color=c=$col:s=1280x720:r=24 ";
+            $bg="-f lavfi -i color=c=$col:s=1920x1080:r=24 ";
         } else {
             $bg = '-loop 1 -i '.$image ;
         }
@@ -159,7 +159,7 @@ if ($seconds > 3600){
         -t $duration \
         -pix_fmt yuv420p \
         -filter_complex \
-        "[1]scale=-1:560[wm];[0][wm]overlay=$ft_img_pos:[km];[km]drawtext=fontfile='$font':fontcolor=$color:x=(w-text_w)/2:y=(h-text_h)-40:\
+        "[1]scale=iw*0.2:ih*0.2[wm];[0][wm]overlay=$ft_img_pos:[km];[km]drawtext=fontfile='$font':fontcolor=$color:x=(w-text_w)/2:y=(h-text_h)-40:\
         fontsize=$upperFont:\
         text='$hours%{eif\:(mod(($seconds-t)/60, 60))\:d\:2}\:%{eif\:(mod($seconds-t, 60))\:d\:2}$ms'" \
         $name
