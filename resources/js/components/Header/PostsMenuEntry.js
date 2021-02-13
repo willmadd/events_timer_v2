@@ -8,7 +8,7 @@ const PostsMenuEntry = () => {
     useEffect(() => {
         axios
             .get(
-                "/blogadmin/index.php/wp-json/wp/v2/posts?categories=2",
+                "/blogadmin/?rest_route=/wp/v2/posts/&categories=2",
                 {
                     headers: {
                         "Access-Control-Allow-Origin": "*",
