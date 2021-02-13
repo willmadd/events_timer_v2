@@ -39,9 +39,16 @@ export const locale = (state = initialState, action) => {
             };
 
         case 'LOCALE_SUCCESS':
+            const codes = ['CAD', 'HKD', 'ISK', 'PHP', 'DKK', 'HUF', 'CZK', 'AUD', 'RON', 'SEK', 'IDR', 'INR', 'BRL', 'RUB', 'HRK', 'JPY', 'THB', 'CHF', 'SGD', 'PLN', 'BGN', 'TRY', 'CNY', 'NOK', 'NZD', 'ZAR', 'USD', 'MXN', 'ILS', 'GBP', 'KRW', 'MYR', 'EUR'];
+            let currency = "USD";
+            if(codes.find(action.payload.currency)){
+                    currency = action.payload.currency;
+            }
+
             return {
                 ...state,
                 ...action.payload,
+                currency,
                 loading: false,
                 error: false,
             };
@@ -49,7 +56,8 @@ export const locale = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                error: true
+                error: true,
+                e:action.payload
             };
         default:
             return state;
