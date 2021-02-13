@@ -115,7 +115,6 @@ const CreateVideoForm = ({loggedin, userCurrency}) => {
     const handlePremiumSubmit = () =>{
         setDisplayPaymentModal(true);
     }
-console.log('xxxxx', payment)
     return (
         <div className="form">
             {displayPaymentModal && <GuestPayment userCurrency={payment.currency} amount={payment.amount.toFixed(2)} setDisplayPaymentModal={setDisplayPaymentModal}/>}

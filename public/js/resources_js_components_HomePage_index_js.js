@@ -943,7 +943,6 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
     setDisplayPaymentModal(true);
   };
 
-  console.log('xxxxx', payment);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
     className: "form",
     children: [displayPaymentModal && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_GuestPayment__WEBPACK_IMPORTED_MODULE_11__.default, {
