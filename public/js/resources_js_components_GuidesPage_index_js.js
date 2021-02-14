@@ -83,7 +83,7 @@ var GuidesPage = function GuidesPage(props) {
       },
       method: "post"
     }).then(function (res) {
-      var postBy = res.data.postBy;
+      var postBy = res.data.data.postBy;
       setArticle({
         title: postBy.title,
         content: postBy.content,

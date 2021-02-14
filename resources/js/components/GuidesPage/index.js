@@ -65,7 +65,7 @@ const GuidesPage = (props) => {
             method: "post",
         })
         .then(res=>{
-            const { postBy } = res.data;
+            const { postBy } = res.data.data;
             setArticle({
                 title: postBy.title,
                 content: postBy.content,
