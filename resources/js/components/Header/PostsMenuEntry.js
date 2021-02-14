@@ -20,9 +20,10 @@ const PostsMenuEntry = () => {
 
     useEffect(() => {
         axios
-            .post(
-                "/blogadmin/graphql",
-                query
+            .post({
+                url:"/blogadmin/graphql",
+                data:{query}
+                }
             )
             .then((res) => {
                 console.log(res);
