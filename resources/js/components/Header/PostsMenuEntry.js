@@ -25,7 +25,7 @@ const PostsMenuEntry = () => {
             .then((res) => {
                 console.log(res);
                 // setEntries(res.data);
-                setEntries(res.data.posts.nodes);
+                setEntries(res.data.data.posts.nodes);
             });
 
     }, []);
