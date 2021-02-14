@@ -75,7 +75,7 @@
 .background {
     &__wrapper {
         display: grid;
-        grid-template-columns: repeat(7, 1fr);
+        grid-template-columns: repeat(9, 1fr);
         grid-gap: 8px;
         input[type="radio"] {
             position: absolute;
@@ -105,14 +105,14 @@
                 margin-left: 0;
                 &.colourbg {
                     background-image: url("/images/backgrounds/colour.png");
-                    background-size: 75px 75px;
+                    background-size: 60px 60px;
                     background-repeat: no-repeat;
                     background-position: center;
                 }
             }
             &__picker {
                 position: absolute;
-                bottom: 20px;
+                bottom: 16px;
             }
         }
         .disabled {
