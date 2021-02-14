@@ -41,9 +41,9 @@ const PostsMenuEntry = () => {
             </div>
             <ul className="dropdown__content">
 
-            {entries.map((entry) => (
+            {/* {entries.map((entry) => (
                 <li><Link to={`guide/${entry.slug}`}>{decodeURI(entry.title.rendered)}</Link></li>
-                ))}
+                ))} */}
                 </ul>
         </div>
     );
