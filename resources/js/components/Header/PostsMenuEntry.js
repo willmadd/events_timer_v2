@@ -21,7 +21,7 @@ const PostsMenuEntry = () => {
     useEffect(() => {
         axios
             .post(
-                "/blogadmin/grapgql",
+                "/blogadmin/graphql",
                 query
             )
             .then((res) => {
