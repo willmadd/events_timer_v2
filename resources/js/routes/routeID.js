@@ -7,6 +7,6 @@ export default {
     memberDashboard:'/dashboard',
     signUpSuccess:'/signup/success',
     logout:'/logout',
-    getPro:'dashboard/getpro',
-    guides:'guides/:guide'
+    getPro:'/dashboard/getpro',
+    guides:'/guide/:guide'
 }

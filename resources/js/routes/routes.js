@@ -30,6 +30,10 @@ const Dashboard = ReactLazyPreload(() =>
 import("../containers/Dashboard")
 );
 
+const GuidesPage = ReactLazyPreload(() =>
+import("../components/GuidesPage")
+);
+
 const Test = ReactLazyPreload(() =>
 import("../components/Test")
 );
@@ -44,5 +48,6 @@ export const routes = [
     {path: RouteID.signupsuccess, exact:true, component: SignUpSuccess},
     {path: RouteID.signupActivate, exact:true, component: SignUpActivate},
     // {path: RouteID.logout, exact:true, component: LogOut},
+    {path: RouteID.guides, exact:true, component: GuidesPage},
     {path: RouteID.dashboard, exact:true, component: Dashboard},
 ];

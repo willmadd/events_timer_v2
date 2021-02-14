@@ -4,35 +4,43 @@ header {
 
     height: 40px;
     nav {
-        height:100%;
+        height: 100%;
         ul {
             display: flex;
             justify-content: space-around;
             align-items: center;
             margin: 0;
             padding: 0;
-            height:100%;
+            height: 100%;
             li {
                 list-style: none;
+                padding:12px;
+                &.dd{
+                    padding:none;
+                }
             }
         }
     }
-    .dropdown{
+    .dropdown {
         position: relative;
-        &__content{
+        padding:12px;
+        &:hover .dropdown__content{
+            display: flex;
+        }
+        &__content {
             position: absolute;
-    display: flex;
-    background-color: beige;
-    flex-direction: column;
-    bottom: -59px;
-    min-width:250px;
-    li{
-        background-color: bisque;
-        min-width:250px;
-        z-index:20;
-        padding:8px;
-    }
+            display: none;
+            background-color: $menuBg;
+            flex-direction: column;
+            bottom: -96px;
+            min-width: 250px;
+            height:100px;
+            li {
+                background-color: $menuBg;
+                min-width: 250px;
+                z-index: 20;
+                padding: 8px;
+            }
         }
     }
 }
-
