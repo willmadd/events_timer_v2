@@ -1,0 +1,14 @@
+input{
+    &:focus{
+        outline:none;
+    }
+}
+audio{
+    &:focus{
+        outline:none;
+    }
+}
+
+audio:focus {
+    outline: none;
+}

@@ -60,12 +60,12 @@ const BackgroundSelector = ({
                     </div>
                             }
                 })}
-                <div className="disabled">
+                {/* <div className="disabled">
                     <div className="signup__cta">Sign up for Free to get access to more backgrounds</div>
                 <div className="color__label"><div></div></div>
                 <div className="color__label"><div></div></div>
                 <div className="color__label"><div></div></div>
-                </div>
+                </div> */}
             </div>
         </div>
     );

@@ -114,7 +114,7 @@ const CreateCountdown = ({
                     </div>
                 </div>
             </div>
-            Is contract ratio enough?
+            {/* Is contract ratio enough? */}
         </div>
     );
 };

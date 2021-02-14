@@ -38,8 +38,9 @@ const ImageUpload = ({setFeatureImage, setFeatureImgPos, featureImgPos}) => {
                     )}
                 </div>
             </div>
-                <h4>Position of featured image</h4>
             <div className="featuredimage__position">
+                
+                <h4>Position of featured image</h4>
                 <div >
                 <input type="radio" name="position" id="left" onChange={()=>setFeatureImgPos('left')} checked={featureImgPos==="left"}/>
                 <label htmlFor="left">Left</label>

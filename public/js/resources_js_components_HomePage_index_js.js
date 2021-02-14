@@ -143,10 +143,10 @@ exports.default = function (file, acceptedFiles) {
 
 /***/ }),
 
-/***/ "./resources/js/components/CreateVideoForm/AudioSelector.js":
-/*!******************************************************************!*\
-  !*** ./resources/js/components/CreateVideoForm/AudioSelector.js ***!
-  \******************************************************************/
+/***/ "./resources/js/components/CreateVideoForm/AudioPlayer.js":
+/*!****************************************************************!*\
+  !*** ./resources/js/components/CreateVideoForm/AudioPlayer.js ***!
+  \****************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -156,107 +156,74 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _globalAudio__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./globalAudio */ "./resources/js/components/CreateVideoForm/globalAudio.js");
 
 
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+var audioFiles = ["happy", "hermit", "Alone", "Empire-Seasons", "Fairy-Meeting", "Stairway", "Wander"];
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
-
-var audioFiles = ['happy', 'hermit', 'Alone', 'Empire-Seasons', 'Fairy-Meeting', 'Stairway', 'Wander'];
-
-var AudioSelector = function AudioSelector(_ref) {
-  var _jsx2;
-
-  var audio = _ref.audio,
-      setAudio = _ref.setAudio;
-
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      playing = _useState2[0],
-      setPlaying = _useState2[1];
-
-  var togglePlay = function togglePlay(file) {
-    audioFiles.forEach(function (file) {
-      return _globalAudio__WEBPACK_IMPORTED_MODULE_2__.default.pause(file);
-    });
-
-    if (playing) {
-      setPlaying(false);
-      _globalAudio__WEBPACK_IMPORTED_MODULE_2__.default.pause(file);
-    } else {
-      setPlaying(file);
-      _globalAudio__WEBPACK_IMPORTED_MODULE_2__.default.play(file);
-    }
-  };
-
+var AudioPlayer = function AudioPlayer(_ref) {
+  var currentAudio = _ref.currentAudio,
+      setCurrentAudio = _ref.setCurrentAudio,
+      selectedAudio = _ref.selectedAudio,
+      setSelectedAudio = _ref.setSelectedAudio;
+  // const [currentAudio, setCurrentAudio] = useState(null);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+    className: "audio",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", {
       children: "Step 4. Pick an Audio Track"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", {
-      htmlFor: "no__audio",
-      children: "None"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", (_jsx2 = {
-      type: "radio",
-      name: "audio__track",
-      onChange: function onChange() {
-        return setAudio(false);
-      },
-      id: "no__audio"
-    }, _defineProperty(_jsx2, "name", "no__audio"), _defineProperty(_jsx2, "value", false), _defineProperty(_jsx2, "checked", !audio), _jsx2)), audioFiles.map(function (file) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(AudioButton, {
-        setAudio: setAudio,
-        audio: audio,
-        file: file,
-        playing: playing,
-        togglePlay: togglePlay
-      }, file);
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+      className: "audio__wrapper",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+        className: "audio__button none",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+          className: "audio__label ".concat(!selectedAudio ? "active" : "inactive"),
+          onClick: function onClick(e) {
+            return setSelectedAudio(null);
+          },
+          children: "None"
+        })
+      }), audioFiles.map(function (file) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(AudioSelector, {
+          file: file,
+          setCurrentAudio: setCurrentAudio,
+          currentAudio: currentAudio,
+          selectedAudio: selectedAudio,
+          setSelectedAudio: setSelectedAudio
+        }, file);
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("audio", {
+      src: "/mp3/".concat(currentAudio, ".mp3"),
+      autoPlay: true,
+      type: "audio/mp3",
+      controls: true
     })]
   });
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AudioSelector);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AudioPlayer);
 
-var AudioButton = function AudioButton(_ref2) {
-  var _jsx3;
-
-  var audio = _ref2.audio,
-      setAudio = _ref2.setAudio,
-      file = _ref2.file,
-      playing = _ref2.playing,
-      start = _ref2.start,
-      togglePlay = _ref2.togglePlay;
+var AudioSelector = function AudioSelector(_ref2) {
+  var file = _ref2.file,
+      setCurrentAudio = _ref2.setCurrentAudio,
+      currentAudio = _ref2.currentAudio,
+      selectedAudio = _ref2.selectedAudio,
+      setSelectedAudio = _ref2.setSelectedAudio;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", {
-      htmlFor: "".concat(file, "__audio"),
-      children: file
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", (_jsx3 = {
-      type: "radio",
-      name: "audio__track",
-      onChange: function onChange() {
-        return setAudio(file);
-      },
-      id: "".concat(file, "__audio"),
-      value: "".concat(file)
-    }, _defineProperty(_jsx3, "name", "".concat(file, "__audio")), _defineProperty(_jsx3, "checked", audio === file), _jsx3)), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
-      type: "button",
+    className: "audio__button",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+      "class": "blobs-container",
       onClick: function onClick() {
-        return togglePlay(file);
+        return setCurrentAudio(currentAudio ? null : "".concat(file));
       },
-      children: playing === file ? 'stop' : 'play'
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+        "class": "blob ".concat(currentAudio === file ? "playing" : undefined)
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+      className: "audio__label ".concat(file === selectedAudio ? "active" : "inactive"),
+      onClick: function onClick(e) {
+        return setSelectedAudio(file);
+      },
+      children: file
     })]
   });
 };
@@ -342,21 +309,6 @@ var BackgroundSelector = function BackgroundSelector(_ref) {
             })]
           }, background.thumb);
         }
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-        className: "disabled",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-          className: "signup__cta",
-          children: "Sign up for Free to get access to more backgrounds"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-          className: "color__label",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {})
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-          className: "color__label",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {})
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-          className: "color__label",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {})
-        })]
       })]
     })]
   });
@@ -540,7 +492,7 @@ var CreateCountdown = function CreateCountdown(_ref) {
           })]
         })]
       })]
-    }), "Is contract ratio enough?"]
+    })]
   });
 };
 
@@ -616,11 +568,11 @@ var ImageUpload = function ImageUpload(_ref) {
           children: "Drag 'n' drop some files here, or click to select files"
         })]
       }))
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h4", {
-      children: "Position of featured image"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
       className: "featuredimage__position",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h4", {
+        children: "Position of featured image"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", {
           type: "radio",
           name: "position",
@@ -680,19 +632,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 var files = [{
-  id: '1',
+  id: "1",
   paid: false
 }, {
-  id: '2',
+  id: "2",
   paid: false
 }, {
-  id: '3',
+  id: "3",
   paid: false
 }, {
-  id: '4',
+  id: "4",
   paid: true
 }, {
-  id: '5',
+  id: "5",
+  paid: true
+}, {
+  id: "6",
+  paid: true
+}, {
+  id: "7",
+  paid: true
+}, {
+  id: "8",
   paid: true
 }];
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (files.map(function (file) {
@@ -703,49 +664,6 @@ var files = [{
     paid: file.paid
   };
 }));
-
-/***/ }),
-
-/***/ "./resources/js/components/CreateVideoForm/globalAudio.js":
-/*!****************************************************************!*\
-  !*** ./resources/js/components/CreateVideoForm/globalAudio.js ***!
-  \****************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-var audios = {
-  'happy': new Audio('/mp3/happy.mp3'),
-  'hermit': new Audio('/mp3/hermit.mp3'),
-  'Alone': new Audio('/mp3/Alone.mp3'),
-  'Empire-Seasons': new Audio('/mp3/Empire-Seasons.mp3'),
-  'Fairy-Meeting': new Audio('/mp3/Fairy-Meeting.mp3'),
-  'Stairway': new Audio('/mp3/Stairway.mp3'),
-  'Wander': new Audio('/mp3/Wander.mp3')
-};
-var currentlyPlaying = null;
-
-var play = function play(name) {
-  if (currentlyPlaying) {
-    audios[currentlyPlaying].pause();
-  }
-
-  audios[name].play();
-  currentlyPlaying = name;
-};
-
-var pause = function pause(name) {
-  currentlyPlaying = null;
-  audios[name].pause();
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  pause: pause,
-  play: play
-});
 
 /***/ }),
 
@@ -771,9 +689,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _BackgroundSelector__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./BackgroundSelector */ "./resources/js/components/CreateVideoForm/BackgroundSelector.js");
 /* harmony import */ var _CreateCountdown__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./CreateCountdown */ "./resources/js/components/CreateVideoForm/CreateCountdown.js");
 /* harmony import */ var _ImageUpload__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ImageUpload */ "./resources/js/components/CreateVideoForm/ImageUpload.js");
-/* harmony import */ var _AudioSelector__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./AudioSelector */ "./resources/js/components/CreateVideoForm/AudioSelector.js");
-/* harmony import */ var _GuestPayment__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../GuestPayment */ "./resources/js/components/GuestPayment/index.js");
-/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../settings */ "./resources/js/settings.js");
+/* harmony import */ var _GuestPayment__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../GuestPayment */ "./resources/js/components/GuestPayment/index.js");
+/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../settings */ "./resources/js/settings.js");
+/* harmony import */ var _AudioPlayer__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./AudioPlayer */ "./resources/js/components/CreateVideoForm/AudioPlayer.js");
 
 
 
@@ -797,9 +715,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
+ // import AudioSelector from "./AudioSelector";
 
  // import CurrencyConverter from 'react-currency-conv';
+
 
 
 
@@ -817,7 +736,7 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
       textColor = _useState4[0],
       setTextColor = _useState4[1];
 
-  console.log(_settings__WEBPACK_IMPORTED_MODULE_12__.settings.singleVideoCost.currency);
+  console.log(_settings__WEBPACK_IMPORTED_MODULE_11__.settings.singleVideoCost.currency);
 
   var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("center"),
       _useState6 = _slicedToArray(_useState5, 2),
@@ -861,15 +780,15 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
       setBackgroundColor = _useState18[1];
 
   var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
-    currency: _settings__WEBPACK_IMPORTED_MODULE_12__.settings.singleVideoCost.currency,
-    amount: _settings__WEBPACK_IMPORTED_MODULE_12__.settings.singleVideoCost.amount
+    currency: _settings__WEBPACK_IMPORTED_MODULE_11__.settings.singleVideoCost.currency,
+    amount: _settings__WEBPACK_IMPORTED_MODULE_11__.settings.singleVideoCost.amount
   }),
       _useState20 = _slicedToArray(_useState19, 2),
       payment = _useState20[0],
       setPayment = _useState20[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    (0,_helpers_currencyConversion__WEBPACK_IMPORTED_MODULE_4__.currencyConverter)(userCurrency || "GBP", _settings__WEBPACK_IMPORTED_MODULE_12__.settings.singleVideoCost.currency, _settings__WEBPACK_IMPORTED_MODULE_12__.settings.singleVideoCost.amount).then(function (res) {
+    (0,_helpers_currencyConversion__WEBPACK_IMPORTED_MODULE_4__.currencyConverter)(userCurrency || "GBP", _settings__WEBPACK_IMPORTED_MODULE_11__.settings.singleVideoCost.currency, _settings__WEBPACK_IMPORTED_MODULE_11__.settings.singleVideoCost.amount).then(function (res) {
       setPayment({
         currency: userCurrency,
         amount: res
@@ -939,13 +858,18 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
       audio = _useState24[0],
       setAudio = _useState24[1];
 
+  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
+      _useState26 = _slicedToArray(_useState25, 2),
+      audioPlaying = _useState26[0],
+      setAudioPlaying = _useState26[1];
+
   var handlePremiumSubmit = function handlePremiumSubmit() {
     setDisplayPaymentModal(true);
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
     className: "form",
-    children: [displayPaymentModal && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_GuestPayment__WEBPACK_IMPORTED_MODULE_11__.default, {
+    children: [displayPaymentModal && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_GuestPayment__WEBPACK_IMPORTED_MODULE_10__.default, {
       userCurrency: payment.currency,
       amount: payment.amount.toFixed(2),
       setDisplayPaymentModal: setDisplayPaymentModal
@@ -964,17 +888,9 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
           style: {
             color: textColor,
-            fontFamily: counterFont.split('.')[0]
+            fontFamily: counterFont.split(".")[0]
           },
           children: "".concat((0,_helpers_time__WEBPACK_IMPORTED_MODULE_6__.toHHMMSS)(time / 1000)).concat(hideMs ? "" : ":00")
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-        children: ["FPS: FOR TESTING ONLY", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", {
-          value: fps,
-          name: "fps",
-          onChange: function onChange(e) {
-            return setFps(e.target.value);
-          }
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_BackgroundSelector__WEBPACK_IMPORTED_MODULE_7__.default, {
         currentlySelected: backgroundImage,
@@ -984,43 +900,89 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
         featureImgPos: featureImgPos,
         setFeatureImgPos: setFeatureImgPos,
         loggedin: loggedin
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_CreateCountdown__WEBPACK_IMPORTED_MODULE_8__.default, {
-        time: time,
-        setTime: setTime,
-        textColor: textColor,
-        setColor: setTextColor,
-        toggleHideMs: toggleHideMs,
-        hideMs: hideMs,
-        setCounterFont: setCounterFont,
-        counterFont: counterFont
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_ImageUpload__WEBPACK_IMPORTED_MODULE_9__.default, {
-        setFeatureImage: setFeatureImage,
-        setFeatureImgPos: setFeatureImgPos,
-        featureImgPos: featureImgPos
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_AudioSelector__WEBPACK_IMPORTED_MODULE_10__.default, {
-        setAudio: setAudio,
-        audio: audio
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+        className: "step__wrapper",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_CreateCountdown__WEBPACK_IMPORTED_MODULE_8__.default, {
+          time: time,
+          setTime: setTime,
+          textColor: textColor,
+          setColor: setTextColor,
+          toggleHideMs: toggleHideMs,
+          hideMs: hideMs,
+          setCounterFont: setCounterFont,
+          counterFont: counterFont
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_ImageUpload__WEBPACK_IMPORTED_MODULE_9__.default, {
+          setFeatureImage: setFeatureImage,
+          setFeatureImgPos: setFeatureImgPos,
+          featureImgPos: featureImgPos
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_AudioPlayer__WEBPACK_IMPORTED_MODULE_12__.default, {
+        setCurrentAudio: setAudioPlaying,
+        currentAudio: audioPlaying,
+        selectedAudio: audio,
+        setSelectedAudio: setAudio
+      }), loadingState === "ready" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+        className: "button__wrapper",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
+          className: "form__download",
+          type: "button",
+          onClick: function onClick() {
+            return handleSubmit("sd");
+          },
+          disabled: !featureImage,
+          children: "Download Video (SD)"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("button", {
+          className: "form__download",
+          type: "button",
+          onClick: function onClick() {
+            return handlePremiumSubmit();
+          },
+          disabled: !featureImage,
+          children: ["Download Video (HD)", "".concat(payment.amount.toFixed(2), " ").concat(payment.currency)]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+          className: "button__explainer",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h5", {
+            children: "Free SD Countdown Timer"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+            className: "usp free",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
+              children: "Free"
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+            className: "usp sd480",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
+              children: "480p Standard definition"
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+            className: "usp watermark",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
+              children: "Watermarked Video"
+            })
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+          className: "button__explainer",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h5", {
+            children: "HD Pro Countdown Timer"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+            className: "usp professional",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
+              children: "Professional"
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+            className: "usp hd",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
+              children: "High definition"
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+            className: "usp nowatermark",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
+              children: "No Watermark"
+            })
+          })]
+        })]
+      }) : loadingState === "loading" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Loader__WEBPACK_IMPORTED_MODULE_5__.default, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", {
+        children: "download"
       })]
-    }), loadingState === "ready" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
-        className: "form__download",
-        type: "button",
-        onClick: function onClick() {
-          return handleSubmit('sd');
-        },
-        disabled: !featureImage,
-        children: "Download Video (SD)"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("button", {
-        className: "form__download",
-        type: "button",
-        onClick: function onClick() {
-          return handlePremiumSubmit();
-        },
-        disabled: !featureImage,
-        children: ["Download Video (HD)", "".concat(payment.amount.toFixed(2), " ").concat(payment.currency)]
-      })]
-    }) : loadingState === "loading" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Loader__WEBPACK_IMPORTED_MODULE_5__.default, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", {
-      children: "download"
     })]
   });
 };

@@ -8,7 +8,7 @@
     .wrapper {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-gap:48px;
+        grid-gap: 48px;
     }
 }
 
@@ -18,11 +18,9 @@
         background-color: $grey;
         border: 1px solid $black;
         box-shadow: 0px 0px 15px #333333;
-        h3{
-            margin-top:24px;
-            padding-top:8px;
-            padding-bottom:8px;
-            border-top: 1px solid $grey-dark;
+        h3 {
+            padding-top: 16px;
+            padding-bottom: 16px;
         }
     }
     &__buttons {
@@ -34,7 +32,7 @@
         height: 360px;
         background-color: $white;
         border: 1px solid $black;
-        margin-bottom: 24px;
+        margin-bottom: 8px;
         position: relative;
         display: flex;
         justify-content: center;
@@ -49,15 +47,20 @@
     &__countdown {
         display: flex;
         flex-direction: column;
+        margin-right: 24px;
 
-        &__wrapper{
-            display: flex;
+        &__wrapper {
+            // display: flex;
             justify-content: space-evenly;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 8px;
+            padding-bottom: 24px;
         }
-        &__hide{
+        &__hide {
             display: flex;
         }
-        &__option{
+        &__option {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -72,57 +75,52 @@
 .background {
     &__wrapper {
         display: grid;
-        grid-template-columns: repeat(8, 1fr);
-        grid-gap:8px;
-        input[type="radio"]{
-            position:absolute;
-            left:-99999px;
+        grid-template-columns: repeat(7, 1fr);
+        grid-gap: 8px;
+        input[type="radio"] {
+            position: absolute;
+            left: -99999px;
         }
-        input[type="radio"]:checked + label{
-            border:3px solid black;
+        input[type="radio"]:checked + label {
+            border: 3px solid black;
         }
         .color__label {
-            height: 75px;
-            width: 75px;
             display: flex;
             // margin-left:12px;
 
-            img, div {
+            img,
+            div {
                 width: 100%;
                 border: 1px solid $black;
-                object-fit: none;
+                // object-fit: none;
             }
         }
-        .colour{
+        .colour {
             position: relative;
             display: flex;
             justify-content: center;
-            &__label{
-                height:75px;
-                width:75px;
+            &__label {
+                width: 100%;
                 border: 1px solid $black;
-                margin-left:0;
-                &.colourbg{
-                    background-image: url('/images/backgrounds/colour.png');
+                margin-left: 0;
+                &.colourbg {
+                    background-image: url("/images/backgrounds/colour.png");
                     background-size: 75px 75px;
                     background-repeat: no-repeat;
                     background-position: center;
                 }
-        
             }
-            &__picker{
-
+            &__picker {
                 position: absolute;
                 bottom: 20px;
-        
             }
         }
-        .disabled{
+        .disabled {
             display: flex;
             justify-content: center;
             position: relative;
             align-items: baseline;
-            .signup__cta{
+            .signup__cta {
                 position: absolute;
                 max-width: 225px;
                 background: white;
@@ -131,54 +129,68 @@
                 margin-top: 14px;
                 border: 1px solid $black;
                 margin-left: 12px;
-                
             }
         }
     }
 }
 
-
-
-.droparea{
+.droparea {
     border: 3px dashed $grey-dark;
-    width:100%;
+    width: 100%;
     border-radius: 3px;
     display: flex;
     justify-content: center;
-    p{
-        margin:0;
+    p {
+        margin: 0;
     }
 }
 
-.featuredimage{
-    &__position{
+.featuredimage {
+    padding-left: 24px;
+    padding-right: 24px;
+    border-left: 1px solid $grey-dark;
+    &__position {
         display: flex;
         justify-content: space-between;
+        display: none;
     }
 }
 
-.feature__image{
+.feature__image {
     height: 65%;
     margin-top: 5%;
     position: absolute;
-}   
+}
 
-.root__drop{
+.root__drop {
     width: 100%;
     padding: 24px;
     height: 100%;
+    p {
+        display: grid;
+        grid-template-columns: 75px auto;
+        grid-gap: 24px;
+        &:before {
+            background-image: url("/images/icons/upload.svg");
+            width: 75px;
+            height: 75px;
+            // background-color: red;;
+            content: "";
+            display: flex;
+        }
+    }
 }
 
-.color__picker__wrap{
+.color__picker__wrap {
     position: relative;
-    .picker{
+    .picker {
         position: absolute;
         // bottom: -10px;
         top: 35px;
-        z-index:3;
-        &__arrow{
+        z-index: 3;
+        &__arrow {
             position: relative;
-            &::after{
+            &::after {
                 bottom: 100%;
                 left: 24px;
                 border: solid transparent;
@@ -196,22 +208,22 @@
     }
 }
 
-.swatch{
-    width:49px;
-    height:24px;
+.swatch {
+    width: 49px;
+    height: 24px;
     background-color: white;
-    border:1px solid $grey-dark;
+    border: 1px solid $grey-dark;
     border-radius: 3px;
-    padding:3px;
+    padding: 3px;
     box-sizing: border-box;
-    &__area{
-        height:16px;
-        width:41px;
-        border:1px solid $grey-dark;
+    &__area {
+        height: 16px;
+        width: 41px;
+        border: 1px solid $grey-dark;
         border-radius: 2px;
         box-sizing: border-box;
     }
-    &__overlay{
+    &__overlay {
         position: fixed;
         width: 100%;
         height: 100%;
@@ -223,47 +235,47 @@
     }
 }
 
-.font{
-    &__overlay{
+.font {
+    &__overlay {
         position: fixed; /* Sit on top of the page content */
-         width: 100%; /* Full width (cover the whole page) */
+        width: 100%; /* Full width (cover the whole page) */
         height: 100%; /* Full height (cover the whole page) */
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
         z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
-       background: rgba(255,255,255,0.3);
+        background: rgba(255, 255, 255, 0.3);
     }
-    &__selector{
+    &__selector {
         position: relative;
     }
-    &__card{
+    &__card {
         min-width: 180px;
-        padding:8px;
+        padding: 8px;
         text-transform: capitalize;
         background-color: $white;
         cursor: pointer;
-        &__title{
+        &__title {
             border: 1px solid black;
             position: relative;
-            min-width:172px;
+            min-width: 172px;
         }
-        &__child{
+        &__child {
             border-bottom: 1px solid $grey;
             z-index: 99;
         }
-        &__children{
+        &__children {
             position: absolute;
             border: 1px solid $grey-dark;
             border-top-width: 0;
         }
     }
-    &__chevron{
-        position:absolute;
-        top:16px;
+    &__chevron {
+        position: absolute;
+        top: 16px;
         right: 9px;
-        background-image: url('/images/icons/chevron.svg');
+        background-image: url("/images/icons/chevron.svg");
         background-size: 20px 20px;
         background-repeat: no-repeat;
         background-position: center;
@@ -272,12 +284,96 @@
         transform: rotate(180deg);
         transition: 0.25s;
         transition-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
-    
-        &.active{
+
+        &.active {
             transition: 0.25s;
             transform: rotate(0deg);
             transition-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
         }
-
     }
 }
+
+.step__wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 24px;
+    // margin-bottom:24px;
+    border-top: 1px solid $grey-dark;
+    border-bottom: 1px solid $grey-dark;
+}
+
+.button {
+    &__wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 24px;
+    }
+    &__explainer{
+        background-color: palegoldenrod;
+        padding:16px;
+        box-shadow: 0px 0px 10px #333333;
+        position: relative;
+        // background: #88b7d5;
+        border: 4px solid palegoldenrod;
+
+        &:after{
+            left: 50%;
+            border: solid transparent;
+            content: "";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+            border-color: rgba(136, 183, 213, 0);
+            border-bottom-color: palegoldenrod;
+            border-width: 15px;
+            margin-left: -15px;
+            top: -30px;
+        }
+        h5{
+            margin-bottom:8px;
+        }
+        .usp{
+            display: grid;
+            grid-template-columns: 40px auto;
+            grid-gap:12px;
+            p{
+                margin-bottom: 0;
+                line-height: 36px;
+            }
+            &:before{
+                background-size: 32px;
+                background-position: center;
+                background-repeat: no-repeat;
+                content:"";
+            }
+            &.sd480:before{
+                background-image: url('/images/icons/480-pixels.svg');
+            }
+            &.free:before{
+                background-image: url('/images/icons/free.svg');
+   
+            }
+            &.watermark:before{
+                background-image: url('/images/icons/watermark.svg');
+   
+            }
+            &.professional:before{
+                background-image: url('/images/icons/premium.svg');
+   
+            }
+            &.hd:before{
+                background-image: url('/images/icons/hd.svg');
+   
+            }
+            &.nowatermark:before{
+                background-image: url('/images/icons/nowatermark.svg');
+   
+            }
+ 
+ 
+
+        }
+    }
+}
+
