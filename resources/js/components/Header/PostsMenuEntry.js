@@ -30,7 +30,7 @@ const PostsMenuEntry = () => {
 
     }, []);
 
-    console.log(sampleResponse.data.posts.nodes);
+    // console.log(sampleResponse.data.posts.nodes);
 
     return (
         <div className="dropdown">
