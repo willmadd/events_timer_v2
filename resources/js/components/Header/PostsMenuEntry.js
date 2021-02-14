@@ -19,9 +19,9 @@ const PostsMenuEntry = () => {
     const [entries, setEntries] = useState([]);
 
     useEffect(() => {
-        axios
-            .post({
-                url:"/blogadmin/graphql",
+        axios({
+                method:'post',
+                url:"//www.eventscountdown.com/blogadmin/graphql",
                 data:{query}
                 }
             )
