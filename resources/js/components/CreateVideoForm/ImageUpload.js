@@ -24,7 +24,7 @@ const ImageUpload = ({setFeatureImage, setFeatureImgPos, featureImgPos}) => {
     });
     return (
         <div className="featuredimage">
-            <h3>Step 3. Upload a featured Image</h3>
+            <h3>Step 3. Upload a feature Image</h3>
             <div className="droparea">
                 <div {...getRootProps()} className="root__drop">
                     <input {...getInputProps()} />
@@ -32,14 +32,14 @@ const ImageUpload = ({setFeatureImage, setFeatureImgPos, featureImgPos}) => {
                         <p>Drop the files here ...</p>
                     ) : (
                         <p>
-                            Drag 'n' drop some files here, or click to select
+                            Drag files here, or click to select
                             files
                         </p>
                     )}
                 </div>
             </div>
             <div className="featuredimage__position">
-                
+
                 <h4>Position of featured image</h4>
                 <div >
                 <input type="radio" name="position" id="left" onChange={()=>setFeatureImgPos('left')} checked={featureImgPos==="left"}/>
