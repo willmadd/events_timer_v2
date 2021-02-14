@@ -92,7 +92,7 @@ var GuidesPage = function GuidesPage(props) {
         sourceUrl: postBy.featuredImage.node.sourceUrl
       });
     });
-  }, []);
+  }, [props.match.params]);
   var title = article.title,
       content = article.content,
       sourceUrl = article.sourceUrl,

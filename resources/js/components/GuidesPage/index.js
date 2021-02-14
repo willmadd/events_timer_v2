@@ -76,7 +76,7 @@ const GuidesPage = (props) => {
 
         });
 
-    }, []);
+    }, [props.match.params]);
 
     const {title, content, sourceUrl, metaDesc, slug} = article; 
     return (
