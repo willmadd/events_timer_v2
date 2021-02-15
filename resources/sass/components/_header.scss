@@ -1,10 +1,13 @@
 header {
     width: 100%;
-    background-color: $grey;
+    background-color: $black;
 
-    height: 40px;
+    height: 60px;
     nav {
         height: 100%;
+        max-width: 1440px;
+        margin-left: auto;
+        margin-right: auto;
         ul {
             display: flex;
             justify-content: space-around;
@@ -15,8 +18,17 @@ header {
             li {
                 list-style: none;
                 padding:12px;
+                color:$offwhite;
+                font-family: $headFont;
+                font-size: 18px;
                 &.dd{
                     padding:none;
+                }
+                a{
+                    color: $offwhite;
+                    &:hover{
+                        color: inherit;
+                    }
                 }
             }
         }
