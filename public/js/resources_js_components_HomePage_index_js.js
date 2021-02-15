@@ -159,7 +159,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var audioFiles = ["happy", "hermit", "Alone", "Empire-Seasons", "Fairy-Meeting", "Stairway", "Wander"];
+var audioFiles = ["Happy", "Hermit", "Alone", "Seasons", "Meeting", "Stairway", "Wander"];
 
 var AudioPlayer = function AudioPlayer(_ref) {
   var currentAudio = _ref.currentAudio,
@@ -223,7 +223,9 @@ var AudioSelector = function AudioSelector(_ref2) {
       onClick: function onClick(e) {
         return setSelectedAudio(file);
       },
-      children: file
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
+        children: file
+      })
     })]
   });
 };
@@ -402,7 +404,7 @@ var CreateCountdown = function CreateCountdown(_ref) {
         className: "form__countdown__option",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", {
           htmlFor: "",
-          children: "Countdown Length"
+          children: "Duration:"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_maskedinput__WEBPACK_IMPORTED_MODULE_4__.default, {
           value: "0:01",
           onChange: function onChange(e) {
@@ -425,7 +427,7 @@ var CreateCountdown = function CreateCountdown(_ref) {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: "form__countdown__option",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
-          children: "Countdown Color"
+          children: "Color"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
           className: "colour__picker",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common_ColourPicker__WEBPACK_IMPORTED_MODULE_5__.default, {
@@ -435,22 +437,22 @@ var CreateCountdown = function CreateCountdown(_ref) {
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: "form__countdown__option",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", {
-          htmlFor: "ms__timer",
-          className: "form__countdown__ms",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
-            children: "Hide ms"
-          })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", {
           id: "ms__timer",
           onChange: function onChange() {
             return toggleHideMs();
           },
           checked: hideMs,
           type: "checkbox"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", {
+          htmlFor: "ms__timer",
+          className: "form__countdown__ms",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
+            children: "Hide ms"
+          })
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-        className: "form__countdown__option",
+        className: "form__countdown__option font",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h6", {
           children: "Font"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
@@ -460,11 +462,11 @@ var CreateCountdown = function CreateCountdown(_ref) {
             onClick: function onClick(e) {
               return setFontOpen(!fontOpen);
             },
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h6", {
-              children: counterFont.replace("-", " ").split('.')[0]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h6", {
-              className: "".concat(counterFont.split('.')[0]),
-              children: "12:43:56"
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("h6", {
+              children: [counterFont.replace("-", " ").split('.')[0], /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+                className: "".concat(counterFont.split('.')[0]),
+                children: "12:43:56"
+              })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
               className: " font__chevron ".concat(fontOpen ? "active" : null)
             })]
@@ -475,17 +477,17 @@ var CreateCountdown = function CreateCountdown(_ref) {
                 position: "relative"
               },
               children: fontList.map(function (font) {
-                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
                   className: "font__card font__card__child",
                   onClick: function onClick() {
                     return selectFont(font);
                   },
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h6", {
-                    children: font.replace("-", " ").split('.')[0]
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h6", {
-                    className: "".concat(font.split('.')[0]),
-                    children: "12:43:56"
-                  })]
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("h6", {
+                    children: [font.replace("-", " ").split('.')[0], /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+                      className: "".concat(font.split('.')[0]),
+                      children: "12:43:56"
+                    })]
+                  })
                 });
               })
             })
@@ -1276,6 +1278,16 @@ var Logo = function Logo(props) {
       children: "".concat(props.region, "'s most popular webinar tool")
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h2", {
       children: "Make your online or in-person event standout with a countdown timer. Simply select a background, set-up your timer, overlay and audiotrack and download."
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("ul", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
+        children: "USP 1"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
+        children: "USP 2"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
+        children: "USP 3"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
+        children: "USP 4"
+      })]
     })]
   });
 };

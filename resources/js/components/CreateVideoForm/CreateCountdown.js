@@ -41,7 +41,7 @@ const CreateCountdown = ({
             <h3>Step 2: Configure your timer</h3>
             <div className="form__countdown__wrapper">
                 <div className="form__countdown__option">
-                    <label htmlFor="">Countdown Length</label>
+                    <label htmlFor="">Duration:</label>
 
                     <MaskedInput
                         value={"0:01"}
@@ -62,31 +62,32 @@ const CreateCountdown = ({
                     />
                 </div>
                 <div className="form__countdown__option">
-                    <p>{`Countdown Color`}</p>
+                    <p>{`Color`}</p>
                     <div className="colour__picker">
                         <ColourPicker value={textColor} onChange={setColor} />
                     </div>
                 </div>
                 <div className="form__countdown__option">
-                    <label htmlFor="ms__timer" className="form__countdown__ms">
-                        <p>{`Hide ms`}</p>
-                    </label>
                     <input
                         id="ms__timer"
                         onChange={() => toggleHideMs()}
                         checked={hideMs}
                         type="checkbox"
-                    />
+                        />
+                    <label htmlFor="ms__timer" className="form__countdown__ms">
+                        <p>{`Hide ms`}</p>
+                        </label>
                 </div>
-                <div className="form__countdown__option">
+                <div className="form__countdown__option font">
                     <h6>{`Font`}</h6>
                     <div className="font__selector">
                         <div
                             className="font__card font__card__title"
                             onClick={(e) => setFontOpen(!fontOpen)}
                         >
-                            <h6>{counterFont.replace("-", " ").split('.')[0]}</h6>
-                            <h6 className={`${counterFont.split('.')[0]}`}>{"12:43:56"}</h6>
+                            <h6>{counterFont.replace("-", " ").split('.')[0]}
+                            <span className={`${counterFont.split('.')[0]}`}>{"12:43:56"}</span>
+                            </h6>
                             <div
                                 className={` font__chevron ${
                                     fontOpen ? "active" : null
@@ -102,9 +103,10 @@ const CreateCountdown = ({
                                             className="font__card font__card__child"
                                             onClick={() => selectFont(font)}
                                         >
-                                            <h6>{font.replace("-", " ").split('.')[0]}</h6>
-                                            <h6 className={`${font.split('.')[0]}`}>
+                                            <h6>{font.replace("-", " ").split('.')[0]}
+                                            <span className={`${font.split('.')[0]}`}>
                                                 {"12:43:56"}
+                                            </span>
                                             </h6>
                                         </div>
                                     ))}

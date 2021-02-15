@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
 const audioFiles = [
-    "happy",
-    "hermit",
+    "Happy",
+    "Hermit",
     "Alone",
-    "Empire-Seasons",
-    "Fairy-Meeting",
+    "Seasons",
+    "Meeting",
     "Stairway",
     "Wander",
 ];
@@ -80,7 +80,7 @@ const AudioSelector = ({
                 }`}
                 onClick={(e) => setSelectedAudio(file)}
             >
-                {file}
+                <p>{file}</p>
             </div>
         </div>
     );

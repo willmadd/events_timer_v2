@@ -15,9 +15,10 @@
 .form {
     &__wrapper {
         padding: 24px;
-        background-color: $grey;
+        background-color: $greygreen;
         border: 1px solid $black;
         box-shadow: 0px 0px 15px #333333;
+        border-radius: 7px;
         h3 {
             padding-top: 16px;
             padding-bottom: 16px;
@@ -53,7 +54,7 @@
             // display: flex;
             justify-content: space-evenly;
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr;
             grid-gap: 8px;
             padding-bottom: 24px;
         }
@@ -64,6 +65,40 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: flex-end;
+            &.font{
+                grid-column: 1/span 3;
+            }
+            input{
+                text-align: center;
+                padding: 8px;
+                letter-spacing: 1px;
+                width: 100%;
+                color: #333333;
+                font-weight: 700;
+            }
+            input[type="checkbox"]{
+                position: absolute;
+                left:-999999px;
+            }
+            input[type="checkbox"] + label{
+                border: 1px solid $black;
+                padding:2px 6px;
+                border-radius: 3px;
+                cursor: pointer;
+                &:hover{
+                    background-color: $grey-dark;
+                }
+                p{
+                    margin:0;
+                }
+
+            }
+            input[type="checkbox"]:checked + label{
+                background-color: $black;
+                color: $white;
+                box-shadow: 0px 0px 5px #333333;
+            }
         }
     }
     &__download {
@@ -82,7 +117,7 @@
             left: -99999px;
         }
         input[type="radio"]:checked + label {
-            border: 3px solid black;
+            border: 3px solid $black;
         }
         .color__label {
             display: flex;
@@ -135,7 +170,7 @@
 }
 
 .droparea {
-    border: 3px dashed $grey-dark;
+    border: 3px dashed $black;
     width: 100%;
     border-radius: 3px;
     display: flex;
@@ -148,7 +183,7 @@
 .featuredimage {
     padding-left: 24px;
     padding-right: 24px;
-    border-left: 1px solid $grey-dark;
+    border-left: 1px solid $black;
     &__position {
         display: flex;
         justify-content: space-between;
@@ -249,13 +284,19 @@
     }
     &__selector {
         position: relative;
+        position: relative;
+    width: 100%;
+    margin-top: 8px;
     }
     &__card {
-        min-width: 180px;
+        min-width: 294px;
         padding: 8px;
         text-transform: capitalize;
         background-color: $white;
         cursor: pointer;
+        span{
+            margin-left:12px;
+        }
         &__title {
             border: 1px solid black;
             position: relative;
@@ -269,11 +310,12 @@
             position: absolute;
             border: 1px solid $grey-dark;
             border-top-width: 0;
+            z-index: 23;
         }
     }
     &__chevron {
         position: absolute;
-        top: 16px;
+        top: 8px;
         right: 9px;
         background-image: url("/images/icons/chevron.svg");
         background-size: 20px 20px;
@@ -281,6 +323,7 @@
         background-position: center;
         width: 20px;
         height: 20px;
+        transform-origin: 50% 50%;
         transform: rotate(180deg);
         transition: 0.25s;
         transition-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
@@ -298,8 +341,8 @@
     grid-template-columns: 1fr 1fr;
     margin-top: 24px;
     // margin-bottom:24px;
-    border-top: 1px solid $grey-dark;
-    border-bottom: 1px solid $grey-dark;
+    border-top: 1px solid $black;
+    border-bottom: 1px solid $black;
 }
 
 .button {

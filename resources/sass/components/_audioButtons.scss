@@ -7,6 +7,8 @@
     border-radius: 50%;
     box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
     margin: 10px;
+    margin-top: 0px;
+    margin-bottom: 16px;
     height: 20px;
     width: 20px;
     transform: scale(1);
@@ -41,7 +43,7 @@
 .audio {
     audio{
         width: 100%;
-        margin-top:8px;
+        margin-top:24px;
     }
     &__wrapper {
         display: flex;
@@ -58,8 +60,9 @@
     }
     &__label{
         cursor: pointer;
-        padding: 0 4px;
+        padding: 2px 6px;
         border-radius: 2px;
+        border: 1px solid $black;
         &:hover{
             background-color: $grey-dark;
         }
