@@ -34,3 +34,9 @@ button{
     padding:12px;
     border-radius: 3px;
 }
+
+button:disabled,
+button[disabled]{
+    background: $grey-dark;
+    cursor:not-allowed;
+}
