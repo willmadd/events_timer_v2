@@ -10,6 +10,8 @@ use FFMpeg;
 
 use FFMpeg\Format\Video\X264;
 
+// use Pbmedia\LaravelFFMpeg\FFMpeg;
+
 class VideoController extends Controller
 {
     public function makeVideo(Request $request)
@@ -240,12 +242,45 @@ return response()->json(
     public function ffmpeg()
     {
 
-        FFMpeg::fromDisk('public')
-        ->open('images/backgrounds/1.jpg')
+        // new FFMpeg\FFMpeg::fromDisk('public')
+        // ->open('biggles.jpg')
+        // ->export()
+        // ->asTimelapseWithFramerate(1)
+        // ->inFormat(new X264)
+        // ->save('timelapse.mp4');
+        // $bgcol = FFMpeg::create();
+
+        // $bgcol->open('images/backgrounds/1.jpg');
+
+        // $ffmpeg = new ffmpeg_wrapper("/usr/local/bin/ffmpeg");
+
+        $ffmpeg = FFMpeg\FFMpeg::create(array(
+            'ffmpeg.binaries'  => '/usr/local/bin/ffmpeg',
+            'ffprobe.binaries' => '/usr/local/bin/ffprobe',
+            'timeout'          => 3600, // The timeout for the underlying process
+            'ffmpeg.threads'   => 12,   // The number of threads that FFMpeg should use
+        ));
+
+        FFMpeg::open('biggles.jpg')
         ->export()
-        ->asTimelapseWithFramerate(1)
+        ->asTimelapseWithFramerate(0.2)
         ->inFormat(new X264)
-        ->save('timelapse.mp4');
+        ->save('timelapse2.mp4');
+
+        
+        // $ffmpeg->save('lll.mp4');
+        // ->asTimelapseWithFramerate(1)
+        // ->inFormat(new X264)
+        // ->save('timelapse.mp4');
+
+
+        // $ffmpegtwo = new ffmpeg_wrapper("/usr/local/bin/ffmpeg");
+        // $ffmpeg = ffmpeg_presets::empty_movie("1280x720",10);
+// $ffmpeg->set_output("empty.mp4");
+// $ffmpeg->run();
+
+// echo $ffmpeg->response() . PHP_EOL;
+
 
         return "success";
     }
