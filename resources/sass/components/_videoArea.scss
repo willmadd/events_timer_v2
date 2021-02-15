@@ -112,6 +112,7 @@
         display: grid;
         grid-template-columns: repeat(9, 1fr);
         grid-gap: 8px;
+        position: relative;
         input[type="radio"] {
             position: absolute;
             left: -99999px;
@@ -151,21 +152,23 @@
                 bottom: 16px;
             }
         }
+        .signup__cta {
+            position: absolute;
+            max-width: 333px;
+            background: $white;
+            display: flex;
+            justify-content: center;
+            border: 1px solid $black;
+            right: 16px;
+            top: 14px;
+            padding: 6px 18px;
+            box-shadow: 0px 0px 5px #333333;
+        }
         .disabled {
             display: flex;
             justify-content: center;
             position: relative;
             align-items: baseline;
-            .signup__cta {
-                position: absolute;
-                max-width: 225px;
-                background: white;
-                display: flex;
-                justify-content: center;
-                margin-top: 14px;
-                border: 1px solid $black;
-                margin-left: 12px;
-            }
         }
     }
 }

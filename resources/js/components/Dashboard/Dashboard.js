@@ -7,7 +7,7 @@ const Dashboard = ({user}) => {
     return (
         <div>
             <h1>{`Welcome ${user.name}`}</h1>
-            <h3>{`Membership Level ${membershipLevel(user.membership_level)}`}</h3><Link to={RouteID.getpro}>Upgrade Now</Link>
+            <h3>{`Membership Level ${membershipLevel(user.membership_level)}`}</h3><Link to={RouteID.getPro}>Upgrade Now</Link>
         </div>
     );
 };
