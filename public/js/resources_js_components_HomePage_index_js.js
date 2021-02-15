@@ -478,7 +478,7 @@ var CreateCountdown = function CreateCountdown(_ref) {
           htmlFor: "ms__timer",
           className: "form__countdown__ms",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
-            children: "Hide ms"
+            children: "Show ms"
           })
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {

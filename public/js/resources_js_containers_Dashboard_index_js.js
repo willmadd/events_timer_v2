@@ -82,12 +82,7 @@ var Dashboard = function Dashboard(props) {
     return __webpack_require__.e(/*! import() */ "resources_js_components_Dashboard_Dashboard_js").then(__webpack_require__.bind(__webpack_require__, /*! ./Dashboard */ "./resources/js/components/Dashboard/Dashboard.js"));
   });
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useLayoutEffect)(function () {
-    console.log('use efect');
-    console.log(props);
-    console.log(!props.user.loading && props.user.error);
-
     if (!props.user.loading && props.user.error) {
-      console.log('in if statement');
       history.push(_routes_routeID__WEBPACK_IMPORTED_MODULE_3__.default.signup);
     }
   }, [props.user]);

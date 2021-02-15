@@ -75,7 +75,7 @@ const CreateCountdown = ({
                         type="checkbox"
                         />
                     <label htmlFor="ms__timer" className="form__countdown__ms">
-                        <p>{`Hide ms`}</p>
+                        <p>{`Show ms`}</p>
                         </label>
                 </div>
                 <div className="form__countdown__option font">
