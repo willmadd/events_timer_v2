@@ -25,7 +25,8 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
         localStorage.getItem("eventsTimer:video:txtCol", backgroundColor) ||
             "#333333"
     );
-    console.log(settings.singleVideoCost.currency);
+
+    const [uniqueId, setId] = useState();
 
     const [featureImgPos, setFeatureImgPos] = useState("center");
 
@@ -77,6 +78,12 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
     }, [backgroundColor]);
 
     useEffect(() => {
+        const id = randomString(5);
+        console.log(id);
+        setId(id);
+    }, []);
+
+    useEffect(() => {
         localStorage.setItem("eventsTimer:video:txtCol", textColor);
     }, [textColor]);
 
@@ -96,6 +103,7 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
             audio,
             featureImgPos,
             counterFont,
+            uniqueId
         };
 
         // const checkStatus = setInterval(()=>{
@@ -104,10 +112,13 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
 
         // checkStatus();
         const timer = setIntervalAsync(
-            () => console.log('Hello'),
+            () => checkVideoStatus(),
             1000
           )
 
+
+
+          
         axios.post("/api/create", data).then((res) => {
             const { data, status } = res;
             // clearInterval(checkStatus)
@@ -128,7 +139,11 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
     };
 
     const checkVideoStatus = ()=>{
-
+        console.log('check video status');
+        axios.get(`/progress-${uniqueId}.txt`)
+        .then(res=>{
+            console.log(res.data);
+        })
     }
 
     const [displayPaymentModal, setDisplayPaymentModal] = useState(false);

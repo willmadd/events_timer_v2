@@ -257,12 +257,12 @@ var AudioSelector = function AudioSelector(_ref2) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
     className: "audio__button",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-      "class": "blobs-container",
+      className: "blobs-container",
       onClick: function onClick() {
         return setCurrentAudio(currentAudio ? null : "".concat(file));
       },
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-        "class": "blob ".concat(currentAudio === file ? "playing" : undefined)
+        className: "blob ".concat(currentAudio === file ? "playing" : undefined)
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
       className: "audio__label ".concat(file === selectedAudio ? "active" : "inactive"),
@@ -816,37 +816,40 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
       textColor = _useState4[0],
       setTextColor = _useState4[1];
 
-  console.log(_settings__WEBPACK_IMPORTED_MODULE_12__.settings.singleVideoCost.currency);
-
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("center"),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(),
       _useState6 = _slicedToArray(_useState5, 2),
-      featureImgPos = _useState6[0],
-      setFeatureImgPos = _useState6[1];
+      uniqueId = _useState6[0],
+      setId = _useState6[1];
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("ready"),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("center"),
       _useState8 = _slicedToArray(_useState7, 2),
-      loadingState = _useState8[0],
-      setLoadingState = _useState8[1];
+      featureImgPos = _useState8[0],
+      setFeatureImgPos = _useState8[1];
 
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("color"),
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("ready"),
       _useState10 = _slicedToArray(_useState9, 2),
-      backgroundImage = _useState10[0],
-      setBackgroundImage = _useState10[1];
+      loadingState = _useState10[0],
+      setLoadingState = _useState10[1];
 
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("color"),
       _useState12 = _slicedToArray(_useState11, 2),
-      featureImage = _useState12[0],
-      setFeatureImage = _useState12[1];
+      backgroundImage = _useState12[0],
+      setBackgroundImage = _useState12[1];
 
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(localStorage.getItem("eventsTimer:video:font", counterFont) || "ds-digital.ttf"),
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
       _useState14 = _slicedToArray(_useState13, 2),
-      counterFont = _useState14[0],
-      setCounterFont = _useState14[1];
+      featureImage = _useState14[0],
+      setFeatureImage = _useState14[1];
 
-  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(localStorage.getItem("eventsTimer:video:font", counterFont) || "ds-digital.ttf"),
       _useState16 = _slicedToArray(_useState15, 2),
-      hideMs = _useState16[0],
-      setHideMs = _useState16[1];
+      counterFont = _useState16[0],
+      setCounterFont = _useState16[1];
+
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState18 = _slicedToArray(_useState17, 2),
+      hideMs = _useState18[0],
+      setHideMs = _useState18[1];
 
   var toggleHideMs = function toggleHideMs() {
     return setHideMs(function (hideMs) {
@@ -854,18 +857,18 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
     });
   };
 
-  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(localStorage.getItem("eventsTimer:video:bgCol", backgroundColor) || "#ff4500"),
-      _useState18 = _slicedToArray(_useState17, 2),
-      backgroundColor = _useState18[0],
-      setBackgroundColor = _useState18[1];
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(localStorage.getItem("eventsTimer:video:bgCol", backgroundColor) || "#ff4500"),
+      _useState20 = _slicedToArray(_useState19, 2),
+      backgroundColor = _useState20[0],
+      setBackgroundColor = _useState20[1];
 
-  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
     currency: _settings__WEBPACK_IMPORTED_MODULE_12__.settings.singleVideoCost.currency,
     amount: _settings__WEBPACK_IMPORTED_MODULE_12__.settings.singleVideoCost.amount
   }),
-      _useState20 = _slicedToArray(_useState19, 2),
-      payment = _useState20[0],
-      setPayment = _useState20[1];
+      _useState22 = _slicedToArray(_useState21, 2),
+      payment = _useState22[0],
+      setPayment = _useState22[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     (0,_helpers_currencyConversion__WEBPACK_IMPORTED_MODULE_4__.currencyConverter)(userCurrency || "GBP", _settings__WEBPACK_IMPORTED_MODULE_12__.settings.singleVideoCost.currency, _settings__WEBPACK_IMPORTED_MODULE_12__.settings.singleVideoCost.amount).then(function (res) {
@@ -881,6 +884,11 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     localStorage.setItem("eventsTimer:video:bgCol", backgroundColor);
   }, [backgroundColor]);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    var id = (0,_helpers_randomstring__WEBPACK_IMPORTED_MODULE_3__.randomString)(5);
+    console.log(id);
+    setId(id);
+  }, []);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     localStorage.setItem("eventsTimer:video:txtCol", textColor);
   }, [textColor]);
@@ -902,14 +910,15 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
       hideMs: hideMs,
       audio: audio,
       featureImgPos: featureImgPos,
-      counterFont: counterFont
+      counterFont: counterFont,
+      uniqueId: uniqueId
     }; // const checkStatus = setInterval(()=>{
     //     console.log('hhhh');
     // },1000)
     // checkStatus();
 
     var timer = (0,set_interval_async_dynamic__WEBPACK_IMPORTED_MODULE_7__.setIntervalAsync)(function () {
-      return console.log('Hello');
+      return checkVideoStatus();
     }, 1000);
     axios__WEBPACK_IMPORTED_MODULE_2___default().post("/api/create", data).then(function (res) {
       var data = res.data,
@@ -932,27 +941,32 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
     });
   };
 
-  var checkVideoStatus = function checkVideoStatus() {};
+  var checkVideoStatus = function checkVideoStatus() {
+    console.log('check video status');
+    axios__WEBPACK_IMPORTED_MODULE_2___default().get("/progress-".concat(uniqueId, ".txt")).then(function (res) {
+      console.log(res.data);
+    });
+  };
 
-  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
-      _useState22 = _slicedToArray(_useState21, 2),
-      displayPaymentModal = _useState22[0],
-      setDisplayPaymentModal = _useState22[1];
+  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState24 = _slicedToArray(_useState23, 2),
+      displayPaymentModal = _useState24[0],
+      setDisplayPaymentModal = _useState24[1];
 
   var _React$useState = react__WEBPACK_IMPORTED_MODULE_1__.useState(15),
       _React$useState2 = _slicedToArray(_React$useState, 2),
       fps = _React$useState2[0],
       setFps = _React$useState2[1];
 
-  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
-      _useState24 = _slicedToArray(_useState23, 2),
-      audio = _useState24[0],
-      setAudio = _useState24[1];
-
   var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
       _useState26 = _slicedToArray(_useState25, 2),
-      audioPlaying = _useState26[0],
-      setAudioPlaying = _useState26[1];
+      audio = _useState26[0],
+      setAudio = _useState26[1];
+
+  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
+      _useState28 = _slicedToArray(_useState27, 2),
+      audioPlaying = _useState28[0],
+      setAudioPlaying = _useState28[1];
 
   var handlePremiumSubmit = function handlePremiumSubmit() {
     setDisplayPaymentModal(true);
@@ -1637,11 +1651,6 @@ var _require = __webpack_require__(/*! exchange-rates-api */ "./node_modules/exc
     convert = _require.convert;
 
 var currencyConverter = function currencyConverter(to, from, amount) {
-  console.log('---');
-  console.log(amount);
-  console.log(to);
-  console.log(from);
-  console.log('---');
   return convert(amount, from, to, '2020-01-01');
 };
 

@@ -91,7 +91,7 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
 
         $font = $this->getFont($request->counterFont);
 
-        $id = Str::random(6);
+        $id = $request->uniqueId;
 
         $seconds = $request->time;
 
