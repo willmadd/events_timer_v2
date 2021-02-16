@@ -48,6 +48,7 @@
         "redux-devtools-extension": "^2.13.8",
         "redux-thunk": "^2.3.0",
         "sanitize-html": "^2.3.2",
+        "set-interval-async": "^1.0.34",
         "use-sound": "^2.0.1"
     }
 }

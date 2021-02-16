@@ -131,27 +131,40 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
         -pix_fmt yuv420p \
         -filter_complex \
          $complexFilters \
+         -progress progress-$id.txt \
         $name
         ";
-        // text='%{eif\:(mod(($seconds-t)/3600, 60))\:d\:2}\:%{eif\:(mod(($seconds-t)/60, 60))\:d\:2}\:%{eif\:(mod($seconds-t, 60))\:d\:2}$ms'" \
-        exec($command);
+            //  exec($command."  > ".$id."output.txt");
 
-/* Add redirection so we can get stderr. */
-// $handle = popen($command, 'r');
-// echo "'$handle'; " . gettype($handle) . "\n";
-// $read = fread($handle, 2096);
-// echo $read;
-// pclose($handle);
+            exec($command." > ".$id."out.txt 2> ".$id."err.txt", $output, $returnStatus);
+            // print_r($output);
+
+if($returnStatus === 0){
+   // success
+}
+else {
+   //fail
+}
+
+
+// $sCmd = $command." > xxxffmpeg.log";
+// $proc = popen($sCmd." 2>&1", "r");
+// $read = fread($proc, 2096);
+// pclose($proc);
+
+
 
         return response()->json(
         [
             'success'=>true,
             'file_name'=> $name,
             'file_alias' => "countdown_timer_$id.mp4",
-            'audio' => $audio,
-            // 'img' => $featureImage,
+             'output' => $output,
+             '$returnStatus'=> $returnStatus,
+            'command' => $command." > out.txt 2> err.txt",
             // 'type'=> $type,
             // 'imgpath' => $imgPath,
+            // '$s'=>$output,
             'font'=> $font,
             'kkk'=>env("APP_FONT", "/"),
         ],
@@ -359,3 +372,41 @@ return response()->json(
     }
 }
 
+class ExecAsync {
+
+    public function __construct($cmd) {
+        $this->cmd = $cmd;
+        $this->cacheFile = ".cache-pipe-".uniqid();
+        $this->lineNumber = 0;
+    }
+
+    public function getLine() {
+        $file = new \SplFileObject($this->cacheFile);
+        $file->seek($this->lineNumber);
+        if($file->valid())
+        {
+            $this->lineNumber++;
+            $current = $file->current();
+            return $current;
+        } else
+            return NULL;
+    }
+
+    public function hasFinished() {
+        if(file_exists(".status-".$this->cacheFile) ||
+            (!file_exists(".status-".$this->cacheFile) && !file_exists($this->cacheFile)))
+        {
+            unlink($this->cacheFile);
+            unlink(".status-".$this->cacheFile);
+            $this->lineNumber = 0;
+            return TRUE;
+        } else
+            return FALSE;
+    }
+
+    public function run() {
+        if($this->cmd) {
+            $out = exec('{ '.$this->cmd." > ".$this->cacheFile." && echo finished > .status-".$this->cacheFile.";} > /dev/null 2>/dev/null &");
+        }
+    }
+}

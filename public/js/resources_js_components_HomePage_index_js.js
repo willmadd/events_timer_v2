@@ -1,5 +1,51 @@
 (self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_components_HomePage_index_js"],{
 
+/***/ "./node_modules/@babel/runtime/helpers/asyncToGenerator.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/asyncToGenerator.js ***!
+  \*****************************************************************/
+/***/ ((module) => {
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+module.exports = _asyncToGenerator;
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/regenerator/index.js":
 /*!**********************************************************!*\
   !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
@@ -718,12 +764,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helpers_currencyConversion__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../helpers/currencyConversion */ "./resources/js/helpers/currencyConversion.js");
 /* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Loader */ "./resources/js/components/Loader/index.js");
 /* harmony import */ var _helpers_time__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../helpers/time */ "./resources/js/helpers/time.js");
-/* harmony import */ var _BackgroundSelector__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./BackgroundSelector */ "./resources/js/components/CreateVideoForm/BackgroundSelector.js");
-/* harmony import */ var _CreateCountdown__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./CreateCountdown */ "./resources/js/components/CreateVideoForm/CreateCountdown.js");
-/* harmony import */ var _ImageUpload__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ImageUpload */ "./resources/js/components/CreateVideoForm/ImageUpload.js");
-/* harmony import */ var _GuestPayment__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../GuestPayment */ "./resources/js/components/GuestPayment/index.js");
-/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../settings */ "./resources/js/settings.js");
-/* harmony import */ var _AudioPlayer__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./AudioPlayer */ "./resources/js/components/CreateVideoForm/AudioPlayer.js");
+/* harmony import */ var set_interval_async_dynamic__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! set-interval-async/dynamic */ "./node_modules/set-interval-async/dynamic/index.mjs");
+/* harmony import */ var _BackgroundSelector__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./BackgroundSelector */ "./resources/js/components/CreateVideoForm/BackgroundSelector.js");
+/* harmony import */ var _CreateCountdown__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./CreateCountdown */ "./resources/js/components/CreateVideoForm/CreateCountdown.js");
+/* harmony import */ var _ImageUpload__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./ImageUpload */ "./resources/js/components/CreateVideoForm/ImageUpload.js");
+/* harmony import */ var _GuestPayment__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../GuestPayment */ "./resources/js/components/GuestPayment/index.js");
+/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../settings */ "./resources/js/settings.js");
+/* harmony import */ var _AudioPlayer__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./AudioPlayer */ "./resources/js/components/CreateVideoForm/AudioPlayer.js");
 
 
 
@@ -738,6 +785,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -768,7 +816,7 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
       textColor = _useState4[0],
       setTextColor = _useState4[1];
 
-  console.log(_settings__WEBPACK_IMPORTED_MODULE_11__.settings.singleVideoCost.currency);
+  console.log(_settings__WEBPACK_IMPORTED_MODULE_12__.settings.singleVideoCost.currency);
 
   var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("center"),
       _useState6 = _slicedToArray(_useState5, 2),
@@ -812,15 +860,15 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
       setBackgroundColor = _useState18[1];
 
   var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
-    currency: _settings__WEBPACK_IMPORTED_MODULE_11__.settings.singleVideoCost.currency,
-    amount: _settings__WEBPACK_IMPORTED_MODULE_11__.settings.singleVideoCost.amount
+    currency: _settings__WEBPACK_IMPORTED_MODULE_12__.settings.singleVideoCost.currency,
+    amount: _settings__WEBPACK_IMPORTED_MODULE_12__.settings.singleVideoCost.amount
   }),
       _useState20 = _slicedToArray(_useState19, 2),
       payment = _useState20[0],
       setPayment = _useState20[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    (0,_helpers_currencyConversion__WEBPACK_IMPORTED_MODULE_4__.currencyConverter)(userCurrency || "GBP", _settings__WEBPACK_IMPORTED_MODULE_11__.settings.singleVideoCost.currency, _settings__WEBPACK_IMPORTED_MODULE_11__.settings.singleVideoCost.amount).then(function (res) {
+    (0,_helpers_currencyConversion__WEBPACK_IMPORTED_MODULE_4__.currencyConverter)(userCurrency || "GBP", _settings__WEBPACK_IMPORTED_MODULE_12__.settings.singleVideoCost.currency, _settings__WEBPACK_IMPORTED_MODULE_12__.settings.singleVideoCost.amount).then(function (res) {
       setPayment({
         currency: userCurrency,
         amount: res
@@ -855,10 +903,19 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
       audio: audio,
       featureImgPos: featureImgPos,
       counterFont: counterFont
-    };
+    }; // const checkStatus = setInterval(()=>{
+    //     console.log('hhhh');
+    // },1000)
+    // checkStatus();
+
+    var timer = (0,set_interval_async_dynamic__WEBPACK_IMPORTED_MODULE_7__.setIntervalAsync)(function () {
+      return console.log('Hello');
+    }, 1000);
     axios__WEBPACK_IMPORTED_MODULE_2___default().post("/api/create", data).then(function (res) {
       var data = res.data,
-          status = res.status;
+          status = res.status; // clearInterval(checkStatus)
+
+      (0,set_interval_async_dynamic__WEBPACK_IMPORTED_MODULE_7__.clearIntervalAsync)(timer);
 
       if (status === 200) {
         // setLoadingState("complete");
@@ -874,6 +931,8 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
       }
     });
   };
+
+  var checkVideoStatus = function checkVideoStatus() {};
 
   var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
       _useState22 = _slicedToArray(_useState21, 2),
@@ -901,7 +960,7 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
     className: "form",
-    children: [displayPaymentModal && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_GuestPayment__WEBPACK_IMPORTED_MODULE_10__.default, {
+    children: [displayPaymentModal && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_GuestPayment__WEBPACK_IMPORTED_MODULE_11__.default, {
       userCurrency: payment.currency,
       amount: payment.amount.toFixed(2),
       setDisplayPaymentModal: setDisplayPaymentModal
@@ -924,7 +983,7 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
           },
           children: "".concat((0,_helpers_time__WEBPACK_IMPORTED_MODULE_6__.toHHMMSS)(time / 1000)).concat(hideMs ? "" : ":00")
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_BackgroundSelector__WEBPACK_IMPORTED_MODULE_7__.default, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_BackgroundSelector__WEBPACK_IMPORTED_MODULE_8__.default, {
         currentlySelected: backgroundImage,
         onChange: setBackgroundImage,
         backgroundColor: backgroundColor,
@@ -934,7 +993,7 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
         loggedin: loggedin
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: "step__wrapper",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_CreateCountdown__WEBPACK_IMPORTED_MODULE_8__.default, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_CreateCountdown__WEBPACK_IMPORTED_MODULE_9__.default, {
           time: time,
           setTime: setTime,
           textColor: textColor,
@@ -943,12 +1002,12 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
           hideMs: hideMs,
           setCounterFont: setCounterFont,
           counterFont: counterFont
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_ImageUpload__WEBPACK_IMPORTED_MODULE_9__.default, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_ImageUpload__WEBPACK_IMPORTED_MODULE_10__.default, {
           setFeatureImage: setFeatureImage,
           setFeatureImgPos: setFeatureImgPos,
           featureImgPos: featureImgPos
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_AudioPlayer__WEBPACK_IMPORTED_MODULE_12__.default, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_AudioPlayer__WEBPACK_IMPORTED_MODULE_13__.default, {
         setCurrentAudio: setAudioPlaying,
         currentAudio: audioPlaying,
         selectedAudio: audio,
@@ -37304,6 +37363,185 @@ try {
   // problems, please detail your unique predicament in a GitHub issue.
   Function("r", "regeneratorRuntime = r")(runtime);
 }
+
+
+/***/ }),
+
+/***/ "./node_modules/set-interval-async/dynamic/index.mjs":
+/*!***********************************************************!*\
+  !*** ./node_modules/set-interval-async/dynamic/index.mjs ***!
+  \***********************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "SetIntervalAsyncError": () => (/* binding */ SetIntervalAsyncError),
+/* harmony export */   "clearIntervalAsync": () => (/* binding */ clearIntervalAsync),
+/* harmony export */   "setIntervalAsync": () => (/* binding */ setIntervalAsync)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/asyncToGenerator.js");
+
+
+/**
+ * Copyright (c) 2019 Emilio Almansi. All rights reserved.
+ * This work is licensed under the terms of the MIT license.
+ * For a copy, see the file LICENSE in the root directory.
+ */
+const MAX_INTERVAL_MS = Math.pow(2, 31) - 1;
+/**
+ * Stops an execution cycle started by setIntervalAsync.<br>
+ * Any ongoing function executions will run until completion,
+ * but all future ones will be cancelled.
+ *
+ * @param {SetIntervalAsyncTimer} timer
+ * @returns {Promise}
+ *          A promise which resolves when all pending executions have finished.
+ */
+
+function clearIntervalAsync(_x) {
+  return _clearIntervalAsync.apply(this, arguments);
+}
+
+function _clearIntervalAsync() {
+  _clearIntervalAsync = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__(function* (timer) {
+    timer.stopped = true;
+
+    for (var _i = 0, _Object$values = Object.values(timer.timeouts); _i < _Object$values.length; _i++) {
+      const timeout = _Object$values[_i];
+      clearTimeout(timeout);
+    }
+
+    const noop = () => {};
+
+    const promises = Object.values(timer.promises).map(promise => {
+      promise.catch(noop);
+    });
+    const noopInterval = setInterval(noop, MAX_INTERVAL_MS);
+    yield Promise.all(promises);
+    clearInterval(noopInterval);
+  });
+  return _clearIntervalAsync.apply(this, arguments);
+}
+
+/**
+ * Copyright (c) 2019 Emilio Almansi. All rights reserved.
+ * This work is licensed under the terms of the MIT license.
+ * For a copy, see the file LICENSE in the root directory.
+ */
+
+/**
+ * Error thrown by setIntervalAsync when invalid arguments are provided.
+ */
+class SetIntervalAsyncError extends Error {}
+
+Object.defineProperty(SetIntervalAsyncError.prototype, 'name', {
+  value: 'SetIntervalAsyncError'
+});
+
+/**
+ * Copyright (c) 2019 Emilio Almansi. All rights reserved.
+ * This work is licensed under the terms of the MIT license.
+ * For a copy, see the file LICENSE in the root directory.
+ */
+const MIN_INTERVAL_MS = 10;
+/**
+ * @private
+ *
+ * @param {function} handler - Handler function to be executed in intervals.<br>
+ *                             May be asynchronous.
+ */
+
+function validateHandler(handler) {
+  if (!(typeof handler === 'function')) {
+    throw new SetIntervalAsyncError('Invalid argument: "handler". Expected a function.');
+  }
+}
+/**
+ * @private
+ *
+ * @param {number} interval - Interval in milliseconds. Must be at least 10 ms.
+ */
+
+function validateInterval(interval) {
+  if (!(typeof interval === 'number' && MIN_INTERVAL_MS <= interval)) {
+    throw new SetIntervalAsyncError(`Invalid argument: "interval". Expected a number greater than or equal to ${MIN_INTERVAL_MS}.`);
+  }
+}
+
+/**
+ * Copyright (c) 2019 Emilio Almansi. All rights reserved.
+ * This work is licensed under the terms of the MIT license.
+ * For a copy, see the file LICENSE in the root directory.
+ */
+
+/**
+ * Timer object returned by setIntervalAsync.<br>
+ * Can be used together with {@link clearIntervalAsync} to stop execution.
+ */
+class SetIntervalAsyncTimer {
+  constructor() {
+    this.stopped = false;
+    this.id = 0;
+    this.timeouts = {};
+    this.promises = {};
+  }
+
+}
+
+/**
+ * Attempts to execute the given handler at regular intervals, while preventing<br>
+ * multiple concurrent executions. The handler will never be executed concurrently<br>
+ * more than once in any given moment. If the running time of any execution exceeds<br>
+ * the desired interval, the following execution will be scheduled as soon as<br>
+ * possible; ie. immediately after the previous execution concludes.
+ *
+ * @param {function} handler - Handler function to be executed in intervals.<br>
+ *                             May be asynchronous.
+ * @param {number} interval - Interval in milliseconds. Must be at least 10 ms.
+ * @param {...*} args - Any number of arguments to pass on to the handler.
+ * @returns {SetIntervalAsyncTimer}
+ *          A timer object which can be used to stop execution with {@link clearIntervalAsync}.
+ *
+ * @alias [Dynamic] setIntervalAsync
+ */
+
+function setIntervalAsync(handler, interval, ...args) {
+  validateHandler(handler);
+  validateInterval(interval);
+  const timer = new SetIntervalAsyncTimer();
+  const id = timer.id;
+  timer.timeouts[id] = setTimeout(timeoutHandler, interval, timer, handler, interval, ...args);
+  return timer;
+}
+
+function timeoutHandler(timer, handler, interval, ...args) {
+  const id = timer.id;
+  timer.promises[id] = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__(function* () {
+    const startTime = new Date();
+
+    try {
+      yield handler(...args);
+    } catch (err) {
+      console.error(err);
+    }
+
+    const endTime = new Date();
+
+    if (!timer.stopped) {
+      const executionTime = endTime - startTime;
+      const timeout = interval > executionTime ? interval - executionTime : 0;
+      timer.timeouts[id + 1] = setTimeout(timeoutHandler, timeout, timer, handler, interval, ...args);
+    }
+
+    delete timer.timeouts[id];
+    delete timer.promises[id];
+  })();
+  timer.id = id + 1;
+}
+
+
+//# sourceMappingURL=index.mjs.map
 
 
 /***/ }),

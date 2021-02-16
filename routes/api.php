@@ -30,6 +30,8 @@ Route::get('/c', [VideoController::class, 'testTwo']);
 
 Route::post('/charge', [PaymentsController::class, 'singleCharge']);
 
+Route::post('/progress', [PVideoController::class, 'progress']);
+
 // Route::post('/video', [VideoController::class, 'ffmpeg']);
 
 Route::group([

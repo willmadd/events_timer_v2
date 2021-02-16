@@ -4,6 +4,10 @@ import { randomString } from "../../helpers/randomstring";
 import { currencyConverter } from "../../helpers/currencyConversion";
 import Loading from "../Loader";
 import { toHHMMSS } from "../../helpers/time";
+import {
+    setIntervalAsync,
+    clearIntervalAsync
+  } from'set-interval-async/dynamic';
 
 import BackgroundSelector from "./BackgroundSelector";
 import CreateCountdown from "./CreateCountdown";
@@ -93,8 +97,21 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
             featureImgPos,
             counterFont,
         };
+
+        // const checkStatus = setInterval(()=>{
+        //     console.log('hhhh');
+        // },1000)
+
+        // checkStatus();
+        const timer = setIntervalAsync(
+            () => console.log('Hello'),
+            1000
+          )
+
         axios.post("/api/create", data).then((res) => {
             const { data, status } = res;
+            // clearInterval(checkStatus)
+            clearIntervalAsync(timer)
             if (status === 200) {
                 // setLoadingState("complete");
                 setLoadingState("ready");
@@ -109,6 +126,10 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
             }
         });
     };
+
+    const checkVideoStatus = ()=>{
+
+    }
 
     const [displayPaymentModal, setDisplayPaymentModal] = useState(false);
 
