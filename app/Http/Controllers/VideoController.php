@@ -119,8 +119,9 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
 
         $imgPath= $this->getImagePath($request->featureImage, $relPath, $id);
 
-        
-        `ffmpeg \
+        $complexFilters = $this->getComplexFilters($ft_img_pos, $font, $color, $upperFont, $hours, $seconds, $ms);
+
+        $command = "ffmpeg \
         $bg \
         -i $imgPath \
         $audio \
@@ -129,13 +130,20 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
         -t $duration \
         -pix_fmt yuv420p \
         -filter_complex \
-        "[1]scale=iw*0.2:ih*0.2[wm];[0][wm]overlay=$ft_img_pos:[km];[km]drawtext=fontfile='$font':fontcolor=$color:x=(w-text_w)/2:y=(h-text_h)-40:\
-        fontsize=$upperFont:\
-        text='$hours%{eif\:(mod(($seconds-t)/60, 60))\:d\:2}\:%{eif\:(mod($seconds-t, 60))\:d\:2}$ms'" \
+         $complexFilters \
         $name
-        `;
+        ";
         // text='%{eif\:(mod(($seconds-t)/3600, 60))\:d\:2}\:%{eif\:(mod(($seconds-t)/60, 60))\:d\:2}\:%{eif\:(mod($seconds-t, 60))\:d\:2}$ms'" \
-    return response()->json(
+        exec($command);
+
+/* Add redirection so we can get stderr. */
+// $handle = popen($command, 'r');
+// echo "'$handle'; " . gettype($handle) . "\n";
+// $read = fread($handle, 2096);
+// echo $read;
+// pclose($handle);
+
+        return response()->json(
         [
             'success'=>true,
             'file_name'=> $name,
@@ -206,6 +214,13 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
         }
     }
 
+    private function getComplexFilters($ft_img_pos, $font, $color, $upperFont, $hours, $seconds, $ms)
+    {
+        return "\"[1]scale=iw*0.2:ih*0.2[wm];[0][wm]overlay=$ft_img_pos:[km];[km]drawtext=fontfile='$font':fontcolor=$color:x=(w-text_w)/2:y=(h-text_h)-40:\
+        fontsize=$upperFont:\
+        text='$hours%{eif\:(mod(($seconds-t)/60, 60))\:d\:2}\:%{eif\:(mod($seconds-t, 60))\:d\:2}$ms'\"";
+    }
+
     private function getImagePath($featureImage, $relPath, $id)
     {
         $image_info = getimagesize($featureImage);
@@ -219,6 +234,7 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
 
         return $imgPath;
     }
+
 
 
     private function getBackground($background)
