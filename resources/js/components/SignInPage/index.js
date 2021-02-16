@@ -41,6 +41,7 @@ const SignInPage = () => {
 
     return (
         <main className="signin">
+            
            <div className="signin__wrapper">
 
             <div className="signin__image">

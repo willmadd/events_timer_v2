@@ -35,20 +35,21 @@ header {
     }
     .dropdown {
         position: relative;
-        padding:12px;
+        padding:16px;
         &:hover .dropdown__content{
             display: flex;
         }
         &__content {
             position: absolute;
             display: none;
-            background-color: $menuBg;
+            background-color: $black;
             flex-direction: column;
-            bottom: -96px;
+            bottom: -100px;
             min-width: 250px;
             height:100px;
+            color: $white;
             li {
-                background-color: $menuBg;
+                background-color: $black;
                 min-width: 250px;
                 z-index: 20;
                 padding: 8px;

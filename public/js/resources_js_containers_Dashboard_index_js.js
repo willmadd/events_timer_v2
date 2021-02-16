@@ -83,7 +83,7 @@ var Dashboard = function Dashboard(props) {
   });
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useLayoutEffect)(function () {
     if (!props.user.loading && props.user.error) {
-      history.push(_routes_routeID__WEBPACK_IMPORTED_MODULE_3__.default.signUp);
+      history.push(_routes_routeID__WEBPACK_IMPORTED_MODULE_3__.default.signup);
     }
   }, [props.user]);
 

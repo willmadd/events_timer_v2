@@ -16,7 +16,7 @@ const Dashboard = (props) => {
 
     useLayoutEffect(() => {
         if (!props.user.loading && props.user.error) {
-            history.push(routeID.signUp);
+            history.push(routeID.signup);
         }
     }, [props.user]);
 

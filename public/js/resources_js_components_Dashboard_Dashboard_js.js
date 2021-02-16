@@ -31,7 +31,7 @@ var Dashboard = function Dashboard(_ref) {
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", {
       children: "Membership Level ".concat((0,_helpers_getMemberShopLevel__WEBPACK_IMPORTED_MODULE_2__.default)(user.membership_level))
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
-      to: _routes_routeID__WEBPACK_IMPORTED_MODULE_3__.default.getpro,
+      to: _routes_routeID__WEBPACK_IMPORTED_MODULE_3__.default.getPro,
       children: "Upgrade Now"
     })]
   });

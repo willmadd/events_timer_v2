@@ -2,7 +2,22 @@ import React from 'react';
 import { Link, NavLink } from "react-router-dom";
 import RouteID from '../../routes/routeID';
 import PostsMenuEntry from './PostsMenuEntry';
-const Header = () => {
+const Header = ({loggedin}) => {
+
+    
+    const logout = () =>{
+
+        let token = localStorage.getItem("eventcountdown:all:userToken");
+        
+        localStorage.removeItem("eventcountdown:all:userToken");
+        
+        return axios.get(`/api/auth/logout`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+    }
+
     return (
         <header>
             <nav>
@@ -25,15 +40,21 @@ const Header = () => {
                     <li>
                         Support
                     </li>
+                    {!loggedin?<>
                     <li>
                     <NavLink exact to={RouteID.signin}>{'Sign In'}</NavLink>
                     </li>
                     <li>
                     <NavLink exact to={RouteID.signup}>{'Sign Up'}</NavLink>
                     </li>
+                    </>:<>
                     <li>
                         My Account
                     </li>
+                    <li onClick={()=>logout()}>
+                        Log Out
+                    </li>
+                    </>}
                 </ul>
             </nav>
         </header>
