@@ -87,70 +87,38 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
 
     public function create(Request $request)
     {
-        $relPath = "outputs/".date('Y-m-d')."-generated";
-        if (!file_exists($relPath)) {
-            mkdir($relPath, 777, true);
-            chmod($relPath, 0777);
-        }
-        // counterFont
-        $font = env("APP_FONT", "/").$request->counterFont;
+        $relPath = $this->getRelPath();
+
+        $font = $this->getFont($request->counterFont);
 
         $id = Str::random(6);
+
         $seconds = $request->time;
-        // $seconds= 5;
-        $duration = $seconds+0.05;
+
+        $duration = $this->getTotalDuration($seconds);
+
         $mantissaDigits = 2;
+
         $color=$request->textColor;
+
         $upperFont = 50;
+
         $fps=$request->fps;
-        $name=$relPath."/countdown_timer_$id.mp4";
-        $featureImage = $request->featureImage;
 
-        $audioFile = $request->audio;
+        $name=$this->getFileName($relPath, $id);
 
-        if($audioFile){
-            $audio="-stream_loop -1 -i mp3/$audioFile.mp3 -c:v copy ";
-        }else{
-            $audio="";
-        }
-        if($request->featureImgPos === "right"){
-            $ft_img_pos='x=W-w:y=(H-h)/2-40';
-        }else if($request->featureImgPos === "left"){
-            $ft_img_pos='x=0:y=(H-h)/2-40';
-        }else{
-            $ft_img_pos='x=(W-w)/2:y=(H-h)/2-40';
-        }
+        $audio = $this->getAudio($request->audio);
+        
+        $ft_img_pos = $this->getFeatureImgPos($request->featureImgPos);
+        
+        $ms=$this->getMs($request->hideMs, $seconds, $mantissaDigits);
+        
+        $bg = $this->getBackground($request->backgroundImage);
 
-        if($request->hideMs){
-            $ms="";
-        }else{
-            $ms="\:%{eif\:(mod($seconds-t, 1)*pow(10,$mantissaDigits))\:d\:$mantissaDigits}";
-        }
+        $hours = $this->getHours($seconds);
 
-        $pattern = "/#\w{4,8}/i";
-        $image=env("APP_BACKGROUND_URL", "/").'/public/images/backgrounds/'.$request->backgroundImage.'.jpg';
-        if (preg_match($pattern, $request->backgroundImage)) {
-            $col = $request->backgroundImage;
-            $bg="-f lavfi -i color=c=$col:s=1920x1080:r=24 ";
-        } else {
-            $bg = '-loop 1 -i '.$image ;
-        }
+        $imgPath= $this->getImagePath($request->featureImage, $relPath, $id);
 
-        // $bg='-f lavfi -i color=c=#8f629d:s=1280x720:r=24 ';
-
-        $image_info = getimagesize($featureImage);
-
-        $type = (isset($image_info["mime"]) ? explode('/', $image_info["mime"] )[1]: "");
-if ($seconds > 3600){
-    $hours = '%{eif\:(mod(($seconds-t)/3600, 60))\:d\:2}\:';
-}else{
-
-    $hours = ''; 
-}
-
-        $imgPath = $relPath.'/'.$id.'.'.$type;
-        $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $featureImage));
-        file_put_contents($imgPath, $data);
         
         `ffmpeg \
         $bg \
@@ -173,9 +141,9 @@ if ($seconds > 3600){
             'file_name'=> $name,
             'file_alias' => "countdown_timer_$id.mp4",
             'audio' => $audio,
-            'img' => $featureImage,
-            'type'=> $type,
-            'imgpath' => $imgPath,
+            // 'img' => $featureImage,
+            // 'type'=> $type,
+            // 'imgpath' => $imgPath,
             'font'=> $font,
             'kkk'=>env("APP_FONT", "/"),
         ],
@@ -184,7 +152,96 @@ if ($seconds > 3600){
 }
     
 
+    private function getTotalDuration($seconds)
+    {
+        return $seconds+0.5;
+    }
 
+    private function getFont($font)
+    {
+        return env("APP_FONT", "/").$font;
+    }
+
+    private function getFileName($path, $id)
+    {
+        return $path."/countdown_timer_$id.mp4";
+    }
+
+    private function getFeatureImgPos($featureImgPos)
+    {
+        if($featureImgPos === "right"){
+            return 'x=W-w:y=(H-h)/2-40';
+        }else if($featureImgPos === "left"){
+            return 'x=0:y=(H-h)/2-40';
+        }else{
+            return 'x=(W-w)/2:y=(H-h)/2-40';
+        }
+    }
+
+    private function getAudio($audioFile)
+    {
+        if($audioFile){
+            return "-stream_loop -1 -i mp3/$audioFile.mp3 -c:v copy ";
+        }else{
+            return "";
+        }
+    }
+
+    private function getMs($hideMs, $seconds, $mantissaDigits)
+    {
+        if($hideMs){
+            return "";
+        }else{
+            return "\:%{eif\:(mod($seconds-t, 1)*pow(10,$mantissaDigits))\:d\:$mantissaDigits}";
+        }
+    }
+
+    private function getHours($seconds)
+    {
+        if ($seconds > 3600){
+            return '%{eif\:(mod(($seconds-t)/3600, 60))\:d\:2}\:';
+        }else{
+        
+            return ''; 
+        }
+    }
+
+    private function getImagePath($featureImage, $relPath, $id)
+    {
+        $image_info = getimagesize($featureImage);
+
+        $type = (isset($image_info["mime"]) ? explode('/', $image_info["mime"] )[1]: "");
+
+
+        $imgPath = $relPath.'/'.$id.'.'.$type;
+        $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $featureImage));
+        file_put_contents($imgPath, $data);
+
+        return $imgPath;
+    }
+
+
+    private function getBackground($background)
+    {
+        $pattern = "/#\w{4,8}/i";
+        $image=env("APP_BACKGROUND_URL", "/").'/public/images/backgrounds/'.$background.'.jpg';
+        if (preg_match($pattern, $background)) {
+            $col = $background;
+            return "-f lavfi -i color=c=$col:s=1920x1080:r=24 ";
+        } else {
+            return'-loop 1 -i '.$image ;
+        }
+    }
+
+    private function getRelPath()
+    {
+        $path =  "outputs/".date('Y-m-d')."-generated";
+        if (!file_exists($path)) {
+            mkdir($path, 777, true);
+            chmod($path, 0777);
+        }
+        return $path;
+    }
     
     public function createBackup(Request $request)
     {
