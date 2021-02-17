@@ -125,6 +125,8 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
 
         $complexFilters = $this->getComplexFilters($ft_img_pos, $font, $color, $upperFont, $hours, $seconds, $ms);
 
+        $publicPath = public_path();
+
         $command = "ffmpeg \
         $bg \
         -i $imgPath \
@@ -135,7 +137,7 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
         -pix_fmt yuv420p \
         -filter_complex \
          $complexFilters \
-         -progress progress-$id.txt \
+         -progress $publicPath/progress/progress-$id.txt \
         $name
         ";
             //  exec($command."  > ".$id."output.txt");
@@ -158,11 +160,12 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
         [
             'success'=>true,
             'file_name'=> $name,
+            'id'=> $id,
             'file_alias' => "countdown_timer_$id.mp4",
             'command' => $command." > out.txt 2> err.txt",
             // 'type'=> $type,
             // 'imgpath' => $imgPath,
-            // '$s'=>$output,
+            '$pathpath'=>public_path()."/outputs/".date('Y-m-d')."-generated",
             'font'=> $font,
             'kkk'=>env("APP_FONT", "/"),
         ],
@@ -262,7 +265,7 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
 
     private function getRelPath()
     {
-        $path =  "outputs/".date('Y-m-d')."-generated";
+        $path =  public_path()."/outputs/".date('Y-m-d')."-generated";
         if (!file_exists($path)) {
             mkdir($path, 777, true);
             chmod($path, 0777);

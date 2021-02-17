@@ -938,15 +938,19 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
           status = res.status;
 
       if (status === 200) {
+        var id = data.id;
+        checkVideoStatus(); // axios.get("/progress").then((res)=>{
+        //     console.log(res.data)
+        // })
         // setLoadingState("complete");
-        setLoadingState("ready");
-        var url = "/".concat(data.file_name);
-        var link = document.createElement("a");
-        link.href = url;
-        link.setAttribute("download", "".concat(data.file_alias));
-        document.body.appendChild(link);
-        link.click();
-        link.parentNode.removeChild(link);
+        // setLoadingState("ready");
+        // const url = `/${data.file_name}`;
+        // const link = document.createElement("a");
+        // link.href = url;
+        // link.setAttribute("download", `${data.file_alias}`);
+        // document.body.appendChild(link);
+        // link.click();
+        // link.parentNode.removeChild(link);
       }
     })["catch"](function (e) {
       setErrorMsg('Your Video count not be created due to this error: ' + e.response.data.message || 0);
@@ -983,6 +987,15 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
 
       check();
     }
+  };
+
+  var checkVideoStatus = function checkVideoStatus() {
+    axios__WEBPACK_IMPORTED_MODULE_3___default().get('/progress/progress-bStQvW.txt').then(function (res) {
+      var dataArr = res.data.split('progress=continue');
+      var lastUpdate = dataArr[dataArr.length - 1];
+      var frameNo = lastUpdate.split("\n");
+      console.log(frameNo);
+    });
   }; // const checkVideoStatus = ()=>{
   //     console.log('check video status');
   //     axios.get(`/progress-${uniqueId}.txt`)

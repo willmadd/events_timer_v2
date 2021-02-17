@@ -46,7 +46,7 @@ class CreateCountdownVideo implements ShouldQueue
     public function handle()
     {
 
-        exec($this->command." > ".$this->id."out.txt 2> ".$this->id."err.txt");
+        exec($this->command);
 
         return response()->json(
         [

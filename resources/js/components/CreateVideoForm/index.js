@@ -121,15 +121,20 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
         axios.post("/api/create", data).then((res) => {
             const { data, status } = res;
             if (status === 200) {
+                const {id} = data;
+                checkVideoStatus();
+                // axios.get("/progress").then((res)=>{
+                //     console.log(res.data)
+                // })
                 // setLoadingState("complete");
-                setLoadingState("ready");
-                const url = `/${data.file_name}`;
-                const link = document.createElement("a");
-                link.href = url;
-                link.setAttribute("download", `${data.file_alias}`);
-                document.body.appendChild(link);
-                link.click();
-                link.parentNode.removeChild(link);
+                // setLoadingState("ready");
+                // const url = `/${data.file_name}`;
+                // const link = document.createElement("a");
+                // link.href = url;
+                // link.setAttribute("download", `${data.file_alias}`);
+                // document.body.appendChild(link);
+                // link.click();
+                // link.parentNode.removeChild(link);
             }
         })
         .catch(e=>{
@@ -145,6 +150,15 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
             check();
         }
     };
+
+    const checkVideoStatus = () => {
+        axios.get('/progress/progress-bStQvW.txt').then(res=>{
+            const dataArr = res.data.split('progress=continue');
+            const lastUpdate = dataArr[dataArr.length-1];
+            const frameNo = lastUpdate.split("\n")
+            console.log(frameNo);
+        });
+    }
 
     // const checkVideoStatus = ()=>{
     //     console.log('check video status');
