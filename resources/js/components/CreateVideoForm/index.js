@@ -106,23 +106,11 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
             uniqueId
         };
 
-        // const checkStatus = setInterval(()=>{
-        //     console.log('hhhh');
-        // },1000)
+        var promiseResolved = false;
 
-        // checkStatus();
-        const timer = setIntervalAsync(
-            () => checkVideoStatus(),
-            1000
-          )
-
-
-
-          
         axios.post("/api/create", data).then((res) => {
             const { data, status } = res;
-            // clearInterval(checkStatus)
-            clearIntervalAsync(timer)
+             promiseResolved = true;
             if (status === 200) {
                 // setLoadingState("complete");
                 setLoadingState("ready");
@@ -136,15 +124,22 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
                 link.parentNode.removeChild(link);
             }
         });
+        while(!promiseResolved){
+            const check = async () => {
+                const progress = await progressFactory();
+                console.log("progress", progress);
+            }
+            check();
+        }
     };
 
-    const checkVideoStatus = ()=>{
-        console.log('check video status');
-        axios.get(`/progress-${uniqueId}.txt`)
-        .then(res=>{
-            console.log(res.data);
-        })
-    }
+    // const checkVideoStatus = ()=>{
+    //     console.log('check video status');
+    //     axios.get(`/progress-${uniqueId}.txt`)
+    //     .then(res=>{
+    //         console.log(res.data);
+    //     })
+    // }
 
     const [displayPaymentModal, setDisplayPaymentModal] = useState(false);
 
