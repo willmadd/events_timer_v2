@@ -14,3 +14,4 @@ yarn-error.log
 .history
 generated
 public/outputs
+public/progress

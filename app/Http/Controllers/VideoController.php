@@ -131,26 +131,12 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
         -pix_fmt yuv420p \
         -filter_complex \
          $complexFilters \
-         -progress progress-$id.txt \
+         -progress progress/progress-$id.txt \
         $name
         ";
-            //  exec($command."  > ".$id."output.txt");
-
-            exec($command." > ".$id."out.txt 2> ".$id."err.txt", $output, $returnStatus);
-            // print_r($output);
-
-if($returnStatus === 0){
-   // success
-}
-else {
-   //fail
-}
 
 
-// $sCmd = $command." > xxxffmpeg.log";
-// $proc = popen($sCmd." 2>&1", "r");
-// $read = fread($proc, 2096);
-// pclose($proc);
+        exec($command." > ".$id."out.txt 2> ".$id."err.txt");
 
 
 

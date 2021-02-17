@@ -29,6 +29,8 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
 
     const [featureImgPos, setFeatureImgPos] = useState("center");
 
+    const [errorMsg, setErrorMsg] = useState("");
+
     const [loadingState, setLoadingState] = useState("ready");
 
     const [backgroundImage, setBackgroundImage] = useState("color");
@@ -103,10 +105,10 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
         // },1000)
 
         // checkStatus();
-        const timer = setIntervalAsync(
-            () => console.log('Hello'),
-            1000
-          )
+        // const timer = setIntervalAsync(
+        //     () => console.log('Hello'),
+        //     1000
+        //   )
 
         axios.post("/api/create", data).then((res) => {
             const { data, status } = res;
@@ -116,7 +118,6 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
                 // setLoadingState("complete");
                 setLoadingState("ready");
                 const url = `/${data.file_name}`;
-                console.log(url);
                 const link = document.createElement("a");
                 link.href = url;
                 link.setAttribute("download", `${data.file_alias}`);
@@ -124,6 +125,11 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
                 link.click();
                 link.parentNode.removeChild(link);
             }
+        })
+        .catch(e=>{
+
+            setErrorMsg('Your Video count not be created due to this error: '+e.response.data.message||e.message)
+            setLoadingState("ready");
         });
     };
 
@@ -226,6 +232,7 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
                     selectedAudio={audio}
                     setSelectedAudio={setAudio}
                 />
+                {errorMsg && <p>{errorMsg}</p>}
 
                 {loadingState === "ready" ? (
                     <div className="button__wrapper">
