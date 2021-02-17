@@ -66,13 +66,10 @@ var SignInPage = function SignInPage() {
       remember_me: remember_me
     };
     axios__WEBPACK_IMPORTED_MODULE_2___default().post('/api/auth/login', data).then(function (res) {
-      console.log('success');
-      console.log(res);
       localStorage.setItem("eventcountdown:all:userToken", res.data.access_token);
       dispatch((0,_store_init_actions__WEBPACK_IMPORTED_MODULE_5__.initUser)(res.data.access_token));
       history.push(_routes_routeID__WEBPACK_IMPORTED_MODULE_6__.default.memberDashboard);
     })["catch"](function (e) {
-      console.log('fail');
       console.log(e);
     });
   };

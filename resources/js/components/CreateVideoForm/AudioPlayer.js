@@ -65,11 +65,11 @@ const AudioSelector = ({
     return (
         <div className="audio__button">
             <div
-                class="blobs-container"
+                className="blobs-container"
                 onClick={() => setCurrentAudio(currentAudio ? null : `${file}`)}
             >
                 <div
-                    class={`blob ${
+                    className={`blob ${
                         currentAudio === file ? "playing" : undefined
                     }`}
                 ></div>

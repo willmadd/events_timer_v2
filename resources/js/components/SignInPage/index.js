@@ -27,14 +27,11 @@ const SignInPage = () => {
         };
         axios.post('/api/auth/login', data)
         .then(res=>{
-            console.log('success');
-            console.log(res);
             localStorage.setItem("eventcountdown:all:userToken", res.data.access_token);
             dispatch(initUser(res.data.access_token));
             history.push(RouteID.memberDashboard)
         })
         .catch(e=>{
-            console.log('fail');
             console.log(e);
         })
     }

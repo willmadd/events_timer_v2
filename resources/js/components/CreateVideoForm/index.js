@@ -25,7 +25,8 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
         localStorage.getItem("eventsTimer:video:txtCol", backgroundColor) ||
             "#333333"
     );
-    console.log(settings.singleVideoCost.currency);
+
+    const [uniqueId, setId] = useState();
 
     const [featureImgPos, setFeatureImgPos] = useState("center");
 
@@ -79,6 +80,12 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
     }, [backgroundColor]);
 
     useEffect(() => {
+        const id = randomString(5);
+        console.log(id);
+        setId(id);
+    }, []);
+
+    useEffect(() => {
         localStorage.setItem("eventsTimer:video:txtCol", textColor);
     }, [textColor]);
 
@@ -98,6 +105,7 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
             audio,
             featureImgPos,
             counterFont,
+            uniqueId
         };
 
         // const checkStatus = setInterval(()=>{
@@ -112,8 +120,6 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
 
         axios.post("/api/create", data).then((res) => {
             const { data, status } = res;
-            // clearInterval(checkStatus)
-            clearIntervalAsync(timer)
             if (status === 200) {
                 // setLoadingState("complete");
                 setLoadingState("ready");
@@ -131,11 +137,22 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
             setErrorMsg('Your Video count not be created due to this error: '+e.response.data.message||e.message)
             setLoadingState("ready");
         });
+        while(!promiseResolved){
+            const check = async () => {
+                const progress = await progressFactory();
+                console.log("progress", progress);
+            }
+            check();
+        }
     };
 
-    const checkVideoStatus = ()=>{
-
-    }
+    // const checkVideoStatus = ()=>{
+    //     console.log('check video status');
+    //     axios.get(`/progress-${uniqueId}.txt`)
+    //     .then(res=>{
+    //         console.log(res.data);
+    //     })
+    // }
 
     const [displayPaymentModal, setDisplayPaymentModal] = useState(false);
 

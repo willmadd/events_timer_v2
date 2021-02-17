@@ -3422,7 +3422,9 @@ var locale = function locale() {
       var codes = ['CAD', 'HKD', 'ISK', 'PHP', 'DKK', 'HUF', 'CZK', 'AUD', 'RON', 'SEK', 'IDR', 'INR', 'BRL', 'RUB', 'HRK', 'JPY', 'THB', 'CHF', 'SGD', 'PLN', 'BGN', 'TRY', 'CNY', 'NOK', 'NZD', 'ZAR', 'USD', 'MXN', 'ILS', 'GBP', 'KRW', 'MYR', 'EUR'];
       var currency = "USD";
 
-      if (codes.find(action.payload.currency)) {
+      if (codes.find(function (code) {
+        return code === action.payload.currency;
+      })) {
         currency = action.payload.currency;
       }
 

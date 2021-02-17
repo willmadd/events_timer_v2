@@ -257,12 +257,12 @@ var AudioSelector = function AudioSelector(_ref2) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
     className: "audio__button",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-      "class": "blobs-container",
+      className: "blobs-container",
       onClick: function onClick() {
         return setCurrentAudio(currentAudio ? null : "".concat(file));
       },
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-        "class": "blob ".concat(currentAudio === file ? "playing" : undefined)
+        className: "blob ".concat(currentAudio === file ? "playing" : undefined)
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
       className: "audio__label ".concat(file === selectedAudio ? "active" : "inactive"),
@@ -757,22 +757,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _helpers_randomstring__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../helpers/randomstring */ "./resources/js/helpers/randomstring.js");
-/* harmony import */ var _helpers_currencyConversion__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../helpers/currencyConversion */ "./resources/js/helpers/currencyConversion.js");
-/* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Loader */ "./resources/js/components/Loader/index.js");
-/* harmony import */ var _helpers_time__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../helpers/time */ "./resources/js/helpers/time.js");
-/* harmony import */ var set_interval_async_dynamic__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! set-interval-async/dynamic */ "./node_modules/set-interval-async/dynamic/index.mjs");
-/* harmony import */ var _BackgroundSelector__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./BackgroundSelector */ "./resources/js/components/CreateVideoForm/BackgroundSelector.js");
-/* harmony import */ var _CreateCountdown__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./CreateCountdown */ "./resources/js/components/CreateVideoForm/CreateCountdown.js");
-/* harmony import */ var _ImageUpload__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./ImageUpload */ "./resources/js/components/CreateVideoForm/ImageUpload.js");
-/* harmony import */ var _GuestPayment__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../GuestPayment */ "./resources/js/components/GuestPayment/index.js");
-/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../settings */ "./resources/js/settings.js");
-/* harmony import */ var _AudioPlayer__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./AudioPlayer */ "./resources/js/components/CreateVideoForm/AudioPlayer.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _helpers_randomstring__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../helpers/randomstring */ "./resources/js/helpers/randomstring.js");
+/* harmony import */ var _helpers_currencyConversion__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../helpers/currencyConversion */ "./resources/js/helpers/currencyConversion.js");
+/* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Loader */ "./resources/js/components/Loader/index.js");
+/* harmony import */ var _helpers_time__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../helpers/time */ "./resources/js/helpers/time.js");
+/* harmony import */ var set_interval_async_dynamic__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! set-interval-async/dynamic */ "./node_modules/set-interval-async/dynamic/index.mjs");
+/* harmony import */ var _BackgroundSelector__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./BackgroundSelector */ "./resources/js/components/CreateVideoForm/BackgroundSelector.js");
+/* harmony import */ var _CreateCountdown__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./CreateCountdown */ "./resources/js/components/CreateVideoForm/CreateCountdown.js");
+/* harmony import */ var _ImageUpload__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./ImageUpload */ "./resources/js/components/CreateVideoForm/ImageUpload.js");
+/* harmony import */ var _GuestPayment__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../GuestPayment */ "./resources/js/components/GuestPayment/index.js");
+/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../settings */ "./resources/js/settings.js");
+/* harmony import */ var _AudioPlayer__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./AudioPlayer */ "./resources/js/components/CreateVideoForm/AudioPlayer.js");
 
 
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -806,52 +813,55 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
   var loggedin = _ref.loggedin,
       userCurrency = _ref.userCurrency;
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(60000),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(60000),
       _useState2 = _slicedToArray(_useState, 2),
       time = _useState2[0],
       setTime = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(localStorage.getItem("eventsTimer:video:txtCol", backgroundColor) || "#333333"),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(localStorage.getItem("eventsTimer:video:txtCol", backgroundColor) || "#333333"),
       _useState4 = _slicedToArray(_useState3, 2),
       textColor = _useState4[0],
       setTextColor = _useState4[1];
 
-  console.log(_settings__WEBPACK_IMPORTED_MODULE_12__.settings.singleVideoCost.currency);
-
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("center"),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(),
       _useState6 = _slicedToArray(_useState5, 2),
-      featureImgPos = _useState6[0],
-      setFeatureImgPos = _useState6[1];
+      uniqueId = _useState6[0],
+      setId = _useState6[1];
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)("center"),
       _useState8 = _slicedToArray(_useState7, 2),
-      errorMsg = _useState8[0],
-      setErrorMsg = _useState8[1];
+      featureImgPos = _useState8[0],
+      setFeatureImgPos = _useState8[1];
 
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("ready"),
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(""),
       _useState10 = _slicedToArray(_useState9, 2),
-      loadingState = _useState10[0],
-      setLoadingState = _useState10[1];
+      errorMsg = _useState10[0],
+      setErrorMsg = _useState10[1];
 
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("color"),
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)("ready"),
       _useState12 = _slicedToArray(_useState11, 2),
-      backgroundImage = _useState12[0],
-      setBackgroundImage = _useState12[1];
+      loadingState = _useState12[0],
+      setLoadingState = _useState12[1];
 
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)("color"),
       _useState14 = _slicedToArray(_useState13, 2),
-      featureImage = _useState14[0],
-      setFeatureImage = _useState14[1];
+      backgroundImage = _useState14[0],
+      setBackgroundImage = _useState14[1];
 
-  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(localStorage.getItem("eventsTimer:video:font", counterFont) || "ds-digital.ttf"),
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(""),
       _useState16 = _slicedToArray(_useState15, 2),
-      counterFont = _useState16[0],
-      setCounterFont = _useState16[1];
+      featureImage = _useState16[0],
+      setFeatureImage = _useState16[1];
 
-  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(localStorage.getItem("eventsTimer:video:font", counterFont) || "ds-digital.ttf"),
       _useState18 = _slicedToArray(_useState17, 2),
-      hideMs = _useState18[0],
-      setHideMs = _useState18[1];
+      counterFont = _useState18[0],
+      setCounterFont = _useState18[1];
+
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
+      _useState20 = _slicedToArray(_useState19, 2),
+      hideMs = _useState20[0],
+      setHideMs = _useState20[1];
 
   var toggleHideMs = function toggleHideMs() {
     return setHideMs(function (hideMs) {
@@ -859,21 +869,21 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
     });
   };
 
-  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(localStorage.getItem("eventsTimer:video:bgCol", backgroundColor) || "#ff4500"),
-      _useState20 = _slicedToArray(_useState19, 2),
-      backgroundColor = _useState20[0],
-      setBackgroundColor = _useState20[1];
-
-  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
-    currency: _settings__WEBPACK_IMPORTED_MODULE_12__.settings.singleVideoCost.currency,
-    amount: _settings__WEBPACK_IMPORTED_MODULE_12__.settings.singleVideoCost.amount
-  }),
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(localStorage.getItem("eventsTimer:video:bgCol", backgroundColor) || "#ff4500"),
       _useState22 = _slicedToArray(_useState21, 2),
-      payment = _useState22[0],
-      setPayment = _useState22[1];
+      backgroundColor = _useState22[0],
+      setBackgroundColor = _useState22[1];
 
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    (0,_helpers_currencyConversion__WEBPACK_IMPORTED_MODULE_4__.currencyConverter)(userCurrency || "GBP", _settings__WEBPACK_IMPORTED_MODULE_12__.settings.singleVideoCost.currency, _settings__WEBPACK_IMPORTED_MODULE_12__.settings.singleVideoCost.amount).then(function (res) {
+  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)({
+    currency: _settings__WEBPACK_IMPORTED_MODULE_13__.settings.singleVideoCost.currency,
+    amount: _settings__WEBPACK_IMPORTED_MODULE_13__.settings.singleVideoCost.amount
+  }),
+      _useState24 = _slicedToArray(_useState23, 2),
+      payment = _useState24[0],
+      setPayment = _useState24[1];
+
+  (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
+    (0,_helpers_currencyConversion__WEBPACK_IMPORTED_MODULE_5__.currencyConverter)(userCurrency || "GBP", _settings__WEBPACK_IMPORTED_MODULE_13__.settings.singleVideoCost.currency, _settings__WEBPACK_IMPORTED_MODULE_13__.settings.singleVideoCost.amount).then(function (res) {
       setPayment({
         currency: userCurrency,
         amount: res
@@ -883,10 +893,15 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
     //     amount:<CurrencyConverter from={settings.singleVideoCost.currency} to={userCurrency} value={settings.singleVideoCost.amount}/>,
     // });
   }, [userCurrency]);
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+  (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
     localStorage.setItem("eventsTimer:video:bgCol", backgroundColor);
   }, [backgroundColor]);
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+  (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
+    var id = (0,_helpers_randomstring__WEBPACK_IMPORTED_MODULE_4__.randomString)(5);
+    console.log(id);
+    setId(id);
+  }, []);
+  (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
     localStorage.setItem("eventsTimer:video:txtCol", textColor);
   }, [textColor]);
 
@@ -907,7 +922,8 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
       hideMs: hideMs,
       audio: audio,
       featureImgPos: featureImgPos,
-      counterFont: counterFont
+      counterFont: counterFont,
+      uniqueId: uniqueId
     }; // const checkStatus = setInterval(()=>{
     //     console.log('hhhh');
     // },1000)
@@ -917,11 +933,9 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
     //     1000
     //   )
 
-    axios__WEBPACK_IMPORTED_MODULE_2___default().post("/api/create", data).then(function (res) {
+    axios__WEBPACK_IMPORTED_MODULE_3___default().post("/api/create", data).then(function (res) {
       var data = res.data,
-          status = res.status; // clearInterval(checkStatus)
-
-      (0,set_interval_async_dynamic__WEBPACK_IMPORTED_MODULE_7__.clearIntervalAsync)(timer);
+          status = res.status;
 
       if (status === 200) {
         // setLoadingState("complete");
@@ -938,29 +952,65 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
       setErrorMsg('Your Video count not be created due to this error: ' + e.response.data.message || 0);
       setLoadingState("ready");
     });
-  };
 
-  var checkVideoStatus = function checkVideoStatus() {};
+    while (!promiseResolved) {
+      var check = /*#__PURE__*/function () {
+        var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee() {
+          var progress;
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  _context.next = 2;
+                  return progressFactory();
 
-  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
-      _useState24 = _slicedToArray(_useState23, 2),
-      displayPaymentModal = _useState24[0],
-      setDisplayPaymentModal = _useState24[1];
+                case 2:
+                  progress = _context.sent;
+                  console.log("progress", progress);
 
-  var _React$useState = react__WEBPACK_IMPORTED_MODULE_1__.useState(15),
+                case 4:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee);
+        }));
+
+        return function check() {
+          return _ref2.apply(this, arguments);
+        };
+      }();
+
+      check();
+    }
+  }; // const checkVideoStatus = ()=>{
+  //     console.log('check video status');
+  //     axios.get(`/progress-${uniqueId}.txt`)
+  //     .then(res=>{
+  //         console.log(res.data);
+  //     })
+  // }
+
+
+  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
+      _useState26 = _slicedToArray(_useState25, 2),
+      displayPaymentModal = _useState26[0],
+      setDisplayPaymentModal = _useState26[1];
+
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_2__.useState(15),
       _React$useState2 = _slicedToArray(_React$useState, 2),
       fps = _React$useState2[0],
       setFps = _React$useState2[1];
 
-  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
-      _useState26 = _slicedToArray(_useState25, 2),
-      audio = _useState26[0],
-      setAudio = _useState26[1];
-
-  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
+  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
       _useState28 = _slicedToArray(_useState27, 2),
-      audioPlaying = _useState28[0],
-      setAudioPlaying = _useState28[1];
+      audio = _useState28[0],
+      setAudio = _useState28[1];
+
+  var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
+      _useState30 = _slicedToArray(_useState29, 2),
+      audioPlaying = _useState30[0],
+      setAudioPlaying = _useState30[1];
 
   var handlePremiumSubmit = function handlePremiumSubmit() {
     setDisplayPaymentModal(true);
@@ -968,7 +1018,7 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
     className: "form",
-    children: [displayPaymentModal && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_GuestPayment__WEBPACK_IMPORTED_MODULE_11__.default, {
+    children: [displayPaymentModal && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_GuestPayment__WEBPACK_IMPORTED_MODULE_12__.default, {
       userCurrency: payment.currency,
       amount: payment.amount.toFixed(2),
       setDisplayPaymentModal: setDisplayPaymentModal
@@ -989,9 +1039,9 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
             color: textColor,
             fontFamily: counterFont.split(".")[0]
           },
-          children: "".concat((0,_helpers_time__WEBPACK_IMPORTED_MODULE_6__.toHHMMSS)(time / 1000)).concat(hideMs ? "" : ":00")
+          children: "".concat((0,_helpers_time__WEBPACK_IMPORTED_MODULE_7__.toHHMMSS)(time / 1000)).concat(hideMs ? "" : ":00")
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_BackgroundSelector__WEBPACK_IMPORTED_MODULE_8__.default, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_BackgroundSelector__WEBPACK_IMPORTED_MODULE_9__.default, {
         currentlySelected: backgroundImage,
         onChange: setBackgroundImage,
         backgroundColor: backgroundColor,
@@ -1001,7 +1051,7 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
         loggedin: loggedin
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: "step__wrapper",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_CreateCountdown__WEBPACK_IMPORTED_MODULE_9__.default, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_CreateCountdown__WEBPACK_IMPORTED_MODULE_10__.default, {
           time: time,
           setTime: setTime,
           textColor: textColor,
@@ -1010,12 +1060,12 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
           hideMs: hideMs,
           setCounterFont: setCounterFont,
           counterFont: counterFont
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_ImageUpload__WEBPACK_IMPORTED_MODULE_10__.default, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_ImageUpload__WEBPACK_IMPORTED_MODULE_11__.default, {
           setFeatureImage: setFeatureImage,
           setFeatureImgPos: setFeatureImgPos,
           featureImgPos: featureImgPos
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_AudioPlayer__WEBPACK_IMPORTED_MODULE_13__.default, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_AudioPlayer__WEBPACK_IMPORTED_MODULE_14__.default, {
         setCurrentAudio: setAudioPlaying,
         currentAudio: audioPlaying,
         selectedAudio: audio,
@@ -1081,7 +1131,7 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
             })
           })]
         })]
-      }) : loadingState === "loading" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Loader__WEBPACK_IMPORTED_MODULE_5__.default, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", {
+      }) : loadingState === "loading" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Loader__WEBPACK_IMPORTED_MODULE_6__.default, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", {
         children: "download"
       })]
     })]
@@ -1647,11 +1697,6 @@ var _require = __webpack_require__(/*! exchange-rates-api */ "./node_modules/exc
     convert = _require.convert;
 
 var currencyConverter = function currencyConverter(to, from, amount) {
-  console.log('---');
-  console.log(amount);
-  console.log(to);
-  console.log(from);
-  console.log('---');
   return convert(amount, from, to, '2020-01-01');
 };
 
