@@ -10,6 +10,10 @@ use FFMpeg;
 
 use FFMpeg\Format\Video\X264;
 
+use App\Jobs\CreateCountdownVideo;
+
+use Carbon\Carbon;
+
 // use Pbmedia\LaravelFFMpeg\FFMpeg;
 
 class VideoController extends Controller
@@ -91,7 +95,7 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
 
         $font = $this->getFont($request->counterFont);
 
-        $id = $request->uniqueId;
+        $id = Str::random(6);
 
         $seconds = $request->time;
 
@@ -131,12 +135,22 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
         -pix_fmt yuv420p \
         -filter_complex \
          $complexFilters \
-         -progress progress/progress-$id.txt \
+         -progress progress-$id.txt \
         $name
         ";
+            //  exec($command."  > ".$id."output.txt");
+            $job = (new CreateCountdownVideo($command, $id))->delay(Carbon::now()->addMinutes(1));
+
+            dispatch($job);
+            // exec($command." > ".$id."out.txt 2> ".$id."err.txt", $output, $returnStatus);
+            // print_r($output);
 
 
-        exec($command." > ".$id."out.txt 2> ".$id."err.txt");
+
+// $sCmd = $command." > xxxffmpeg.log";
+// $proc = popen($sCmd." 2>&1", "r");
+// $read = fread($proc, 2096);
+// pclose($proc);
 
 
 
@@ -145,8 +159,6 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
             'success'=>true,
             'file_name'=> $name,
             'file_alias' => "countdown_timer_$id.mp4",
-             'output' => $output,
-             '$returnStatus'=> $returnStatus,
             'command' => $command." > out.txt 2> err.txt",
             // 'type'=> $type,
             // 'imgpath' => $imgPath,
