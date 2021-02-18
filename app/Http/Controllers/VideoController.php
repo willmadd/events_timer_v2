@@ -269,7 +269,7 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
         $image=env("APP_BACKGROUND_URL", "/").'/public/images/backgrounds/'.$background.'.jpg';
         if (preg_match($pattern, $background)) {
             $col = $background;
-            return "-f lavfi -i color=c=$col:s=1920x1080:r=24 ";
+            return "-f lavfi -i color=c=$col:s=720x480:r=24 ";
         } else {
             return'-loop 1 -i '.$image ;
         }
