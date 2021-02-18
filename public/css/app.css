@@ -10690,6 +10690,12 @@ header .dropdown__content li {
   background-image: url("/images/icons/nowatermark.svg");
 }
 
+.status__wrapper {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 16px;
+}
+
 .howto .wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -10716,6 +10722,7 @@ This is the actual bar with stripes
   left: 6px;
   display: inline-block;
   height: 15px;
+  min-width: 15px;
   width: calc(100% - 12px);
   border: 1px solid #ff9a1a;
   border-bottom-color: #ff6201;

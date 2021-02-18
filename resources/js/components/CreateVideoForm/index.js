@@ -6,8 +6,8 @@ import Loading from "../Loader";
 import { toHHMMSS } from "../../helpers/time";
 import {
     setIntervalAsync,
-    clearIntervalAsync
-  } from'set-interval-async/dynamic';
+    clearIntervalAsync,
+} from "set-interval-async/dynamic";
 
 import BackgroundSelector from "./BackgroundSelector";
 import CreateCountdown from "./CreateCountdown";
@@ -26,8 +26,6 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
             "#333333"
     );
 
-    const [uniqueId, setId] = useState();
-
     const [featureImgPos, setFeatureImgPos] = useState("center");
 
     const [errorMsg, setErrorMsg] = useState("");
@@ -42,8 +40,6 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
         localStorage.getItem("eventsTimer:video:font", counterFont) ||
             "ds-digital.ttf"
     );
-
-    const [hideMs, setHideMs] = useState(false);
 
     const toggleHideMs = () => setHideMs((hideMs) => !hideMs);
 
@@ -68,11 +64,6 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
                 amount: res,
             });
         });
-
-        // setPayment({
-        //     currency: userCurrency,
-        //     amount:<CurrencyConverter from={settings.singleVideoCost.currency} to={userCurrency} value={settings.singleVideoCost.amount}/>,
-        // });
     }, [userCurrency]);
 
     useEffect(() => {
@@ -80,14 +71,11 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
     }, [backgroundColor]);
 
     useEffect(() => {
-        const id = randomString(5);
-        console.log(id);
-        setId(id);
-    }, []);
-
-    useEffect(() => {
         localStorage.setItem("eventsTimer:video:txtCol", textColor);
     }, [textColor]);
+    const [hideMs, setHideMs] = useState(false);
+
+    const [secondsLeft, setSecondsLeft] = useState("Calculating Time");
 
     const handleSubmit = () => {
         setLoadingState("loading");
@@ -105,68 +93,100 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
             audio,
             featureImgPos,
             counterFont,
-            uniqueId
         };
 
-        // const checkStatus = setInterval(()=>{
-        //     console.log('hhhh');
-        // },1000)
+        axios
+            .post("/api/create", data)
+            .then((res) => {
+                const startTime = Date.now();
 
-        // checkStatus();
-        // const timer = setIntervalAsync(
-        //     () => console.log('Hello'),
-        //     1000
-        //   )
+                const { data, status } = res;
+                if (status === 200) {
+                    const { id, destination } = data;
+                    setTimeout(() => {
+                        checkVideoStatus(id, destination, startTime, i);
+                    }, 2000);
+                }
+            })
+            .catch((e) => {
+                setErrorMsg(
+                    "Your Video count not be created due to this error: " +
+                        e.response.data.message || e.message
+                );
+                setLoadingState("ready");
+            });
+    };
 
-        axios.post("/api/create", data).then((res) => {
-            const { data, status } = res;
-            if (status === 200) {
-                const {id} = data;
-                checkVideoStatus();
-                // axios.get("/progress").then((res)=>{
-                //     console.log(res.data)
-                // })
-                // setLoadingState("complete");
-                // setLoadingState("ready");
-                // const url = `/${data.file_name}`;
-                // const link = document.createElement("a");
-                // link.href = url;
-                // link.setAttribute("download", `${data.file_alias}`);
-                // document.body.appendChild(link);
-                // link.click();
-                // link.parentNode.removeChild(link);
-            }
-        })
-        .catch(e=>{
-
-            setErrorMsg('Your Video count not be created due to this error: '+e.response.data.message||e.message)
-            setLoadingState("ready");
-        });
-        while(!promiseResolved){
-            const check = async () => {
-                const progress = await progressFactory();
-                console.log("progress", progress);
-            }
-            check();
+    const [percentageComplete, setPercentageComplete] = useState(0);
+    let i = 0;
+    const checkVideoStatus = (vId, destination, startTime, i) => {
+        if (!vId) {
+            console.error("a unique id could not be found");
+            setErrorMsg(
+                "The server did not respond. Please wait a few minutes and try again"
+            );
+        } else {
+            axios.get(`/progress/progress-${vId}.txt`).then((res) => {
+                const frames = fps * (time / 1000);
+                const dataArr = res.data
+                    .split("progress=continue")
+                    .filter((data) => data !== "\n");
+                const lastUpdate = dataArr[dataArr.length - 1];
+                const generationStatus = keyValueToJson(lastUpdate);
+                const percentage =
+                    (Number(generationStatus.frame) / frames) * 100;
+                if (percentage >= 100) {
+                    tidyUpAfterDownload(vId, destination)
+                } else {
+                    setPercentageComplete(
+                        percentage === NaN ? 0 : Math.round(percentage)
+                    );
+                    const now = Date.now();
+                    const totalTime = Math.round(
+                        (now - startTime) / 10 / percentage -
+                            (now - startTime) / 1000
+                    );
+                    if (i > 3) {
+                        setSecondsLeft(totalTime);
+                    }
+                    i++;
+                    setTimeout(() => {
+                        checkVideoStatus(vId, destination, startTime, i);
+                    }, 2000);
+                }
+            });
         }
     };
 
-    const checkVideoStatus = () => {
-        axios.get('/progress/progress-bStQvW.txt').then(res=>{
-            const dataArr = res.data.split('progress=continue');
-            const lastUpdate = dataArr[dataArr.length-1];
-            const frameNo = lastUpdate.split("\n")
-            console.log(frameNo);
-        });
+    const tidyUpAfterDownload = (vId, destination) =>{
+        // const data={id}
+        // axios.post('api').then(res=>{
+            setPercentageComplete(0);
+            downloadVideo(vId, destination);
+            setLoadingState("ready");
+            setSecondsLeft(0);
+        // })
     }
 
-    // const checkVideoStatus = ()=>{
-    //     console.log('check video status');
-    //     axios.get(`/progress-${uniqueId}.txt`)
-    //     .then(res=>{
-    //         console.log(res.data);
-    //     })
-    // }
+    const downloadVideo = (vId, destination) => {
+        const url = `${destination}`;
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", `countdown_timer_${vId}.mp4`);
+        document.body.appendChild(link);
+        link.click();
+        link.parentNode.removeChild(link);
+    };
+
+    const keyValueToJson = (lastUpdate) => {
+        const set = lastUpdate.split("\n").filter((i) => i !== "");
+        let obj = {};
+        for (let i in set) {
+            let pair = set[i].split("=");
+            obj[pair[0]] = pair[1];
+        }
+        return obj;
+    };
 
     const [displayPaymentModal, setDisplayPaymentModal] = useState(false);
 
@@ -179,6 +199,7 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
     const handlePremiumSubmit = () => {
         setDisplayPaymentModal(true);
     };
+
     return (
         <div className="form">
             {displayPaymentModal && (
@@ -310,7 +331,13 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
                         </div>
                     </div>
                 ) : loadingState === "loading" ? (
-                    <Loading />
+                    <>
+                    <Loading percentage={percentageComplete} />
+                    <div className="status__wrapper">
+                    <p>{`${percentageComplete}% complete`}</p>
+                <p>{`${secondsLeft} remaining`}</p>
+                    </div>
+                    </>
                 ) : (
                     <h3>download</h3>
                 )}

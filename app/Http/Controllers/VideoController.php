@@ -141,7 +141,7 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
         $name
         ";
             //  exec($command."  > ".$id."output.txt");
-            $job = (new CreateCountdownVideo($command, $id))->delay(Carbon::now()->addMinutes(1));
+            $job = (new CreateCountdownVideo($command, $id))->delay(Carbon::now()->addSeconds(2));
 
             dispatch($job);
             // exec($command." > ".$id."out.txt 2> ".$id."err.txt", $output, $returnStatus);
@@ -162,7 +162,8 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
             'file_name'=> $name,
             'id'=> $id,
             'file_alias' => "countdown_timer_$id.mp4",
-            'command' => $command." > out.txt 2> err.txt",
+            // 'command' => $command." > out.txt 2> err.txt",
+            'destination' => $this->getDetination($id),
             // 'type'=> $type,
             // 'imgpath' => $imgPath,
             '$pathpath'=>public_path()."/outputs/".date('Y-m-d')."-generated",
@@ -187,6 +188,11 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
     private function getFileName($path, $id)
     {
         return $path."/countdown_timer_$id.mp4";
+    }
+
+    private function getDetination($id)
+    {
+        return "/outputs/".date('Y-m-d')."-generated/countdown_timer_$id.mp4";
     }
 
     private function getFeatureImgPos($featureImgPos)
