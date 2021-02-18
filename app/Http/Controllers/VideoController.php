@@ -14,10 +14,27 @@ use App\Jobs\CreateCountdownVideo;
 
 use Carbon\Carbon;
 
+use Illuminate\Support\Facades\File;
+
 // use Pbmedia\LaravelFFMpeg\FFMpeg;
 
 class VideoController extends Controller
 {
+
+    public function cleanup(Request $request)
+    {
+        $id = $request->vId;
+
+        File::delete(public_path("progress/progress-$id.txt"));
+
+        return response()->json(
+            [
+                'success'=>true,
+            ],
+                200
+            );
+    }
+
     public function makeVideo(Request $request)
     {
         $id = Str::random(6);
@@ -140,20 +157,10 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
          -progress $publicPath/progress/progress-$id.txt \
         $name
         ";
-            //  exec($command."  > ".$id."output.txt");
+
             $job = (new CreateCountdownVideo($command, $id))->delay(Carbon::now()->addSeconds(2));
 
             dispatch($job);
-            // exec($command." > ".$id."out.txt 2> ".$id."err.txt", $output, $returnStatus);
-            // print_r($output);
-
-
-
-// $sCmd = $command." > xxxffmpeg.log";
-// $proc = popen($sCmd." 2>&1", "r");
-// $read = fread($proc, 2096);
-// pclose($proc);
-
 
 
         return response()->json(
@@ -162,7 +169,6 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
             'file_name'=> $name,
             'id'=> $id,
             'file_alias' => "countdown_timer_$id.mp4",
-            // 'command' => $command." > out.txt 2> err.txt",
             'destination' => $this->getDetination($id),
             // 'type'=> $type,
             // 'imgpath' => $imgPath,
@@ -360,60 +366,7 @@ return response()->json(
         ->inFormat(new X264)
         ->save('timelapse2.mp4');
 
-        
-        // $ffmpeg->save('lll.mp4');
-        // ->asTimelapseWithFramerate(1)
-        // ->inFormat(new X264)
-        // ->save('timelapse.mp4');
-
-
-        // $ffmpegtwo = new ffmpeg_wrapper("/usr/local/bin/ffmpeg");
-        // $ffmpeg = ffmpeg_presets::empty_movie("1280x720",10);
-// $ffmpeg->set_output("empty.mp4");
-// $ffmpeg->run();
-
-// echo $ffmpeg->response() . PHP_EOL;
-
 
         return "success";
-    }
-}
-
-class ExecAsync {
-
-    public function __construct($cmd) {
-        $this->cmd = $cmd;
-        $this->cacheFile = ".cache-pipe-".uniqid();
-        $this->lineNumber = 0;
-    }
-
-    public function getLine() {
-        $file = new \SplFileObject($this->cacheFile);
-        $file->seek($this->lineNumber);
-        if($file->valid())
-        {
-            $this->lineNumber++;
-            $current = $file->current();
-            return $current;
-        } else
-            return NULL;
-    }
-
-    public function hasFinished() {
-        if(file_exists(".status-".$this->cacheFile) ||
-            (!file_exists(".status-".$this->cacheFile) && !file_exists($this->cacheFile)))
-        {
-            unlink($this->cacheFile);
-            unlink(".status-".$this->cacheFile);
-            $this->lineNumber = 0;
-            return TRUE;
-        } else
-            return FALSE;
-    }
-
-    public function run() {
-        if($this->cmd) {
-            $out = exec('{ '.$this->cmd." > ".$this->cacheFile." && echo finished > .status-".$this->cacheFile.";} > /dev/null 2>/dev/null &");
-        }
     }
 }

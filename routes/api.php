@@ -30,7 +30,7 @@ Route::get('/c', [VideoController::class, 'testTwo']);
 
 Route::post('/charge', [PaymentsController::class, 'singleCharge']);
 
-Route::post('/progress', [PVideoController::class, 'progress']);
+Route::post('/cleanup', [VideoController::class, 'cleanup']);
 
 // Route::post('/video', [VideoController::class, 'ffmpeg']);
 

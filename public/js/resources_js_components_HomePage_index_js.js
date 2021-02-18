@@ -957,7 +957,7 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
           var totalTime = Math.round((now - startTime) / 10 / percentage - (now - startTime) / 1000);
 
           if (i > 3) {
-            setSecondsLeft(totalTime);
+            setSecondsLeft("".concat(totalTime, " Seconds remaining"));
           }
 
           i++;
@@ -970,12 +970,16 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
   };
 
   var tidyUpAfterDownload = function tidyUpAfterDownload(vId, destination) {
-    // const data={id}
-    // axios.post('api').then(res=>{
-    setPercentageComplete(0);
-    downloadVideo(vId, destination);
-    setLoadingState("ready");
-    setSecondsLeft(0); // })
+    setSecondsLeft("Cleaning Up... (nearly there)");
+    var data = {
+      vId: vId
+    };
+    axios__WEBPACK_IMPORTED_MODULE_2___default().post('api/cleanup', data).then(function (res) {
+      setPercentageComplete(0);
+      downloadVideo(vId, destination);
+      setLoadingState("ready");
+      setSecondsLeft("Calculating Time Remaining");
+    });
   };
 
   var downloadVideo = function downloadVideo(vId, destination) {
@@ -986,6 +990,7 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
     document.body.appendChild(link);
     link.click();
     link.parentNode.removeChild(link);
+    setErrorMsg('Your video should start downloading soon, if it doesn\'t please click here:');
   };
 
   var keyValueToJson = function keyValueToJson(lastUpdate) {

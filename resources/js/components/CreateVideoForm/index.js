@@ -147,7 +147,7 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
                             (now - startTime) / 1000
                     );
                     if (i > 3) {
-                        setSecondsLeft(totalTime);
+                        setSecondsLeft(`${totalTime} Seconds remaining`);
                     }
                     i++;
                     setTimeout(() => {
@@ -159,13 +159,14 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
     };
 
     const tidyUpAfterDownload = (vId, destination) =>{
-        // const data={id}
-        // axios.post('api').then(res=>{
+        setSecondsLeft(`Cleaning Up... (nearly there)`)
+        const data={vId}
+        axios.post('api/cleanup', data).then(res=>{
             setPercentageComplete(0);
             downloadVideo(vId, destination);
             setLoadingState("ready");
-            setSecondsLeft(0);
-        // })
+            setSecondsLeft("Calculating Time Remaining");
+        })
     }
 
     const downloadVideo = (vId, destination) => {
@@ -176,6 +177,7 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
         document.body.appendChild(link);
         link.click();
         link.parentNode.removeChild(link);
+        setErrorMsg('Your video should start downloading soon, if it doesn\'t please click here:');
     };
 
     const keyValueToJson = (lastUpdate) => {
