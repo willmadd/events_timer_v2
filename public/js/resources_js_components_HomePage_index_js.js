@@ -473,7 +473,7 @@ var CreateCountdown = function CreateCountdown(_ref) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
     className: "form__countdown",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", {
-      children: "Step 2: Configure your timer"
+      children: "Step 3: Configure your timer"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
       className: "form__countdown__wrapper",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
@@ -635,7 +635,7 @@ var ImageUpload = function ImageUpload(_ref) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
     className: "featuredimage",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", {
-      children: "Step 3. Upload a feature Image"
+      children: "Step 2. Upload a feature Image"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
       className: "droparea",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", _objectSpread(_objectSpread({}, getRootProps()), {}, {
@@ -812,40 +812,45 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
       time = _useState2[0],
       setTime = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(localStorage.getItem("eventsTimer:video:txtCol", backgroundColor) || "#333333"),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
       _useState4 = _slicedToArray(_useState3, 2),
-      textColor = _useState4[0],
-      setTextColor = _useState4[1];
+      generatedDestination = _useState4[0],
+      setGeneratedDestination = _useState4[1];
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("center"),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(localStorage.getItem("eventsTimer:video:txtCol", backgroundColor) || "#333333"),
       _useState6 = _slicedToArray(_useState5, 2),
-      featureImgPos = _useState6[0],
-      setFeatureImgPos = _useState6[1];
+      textColor = _useState6[0],
+      setTextColor = _useState6[1];
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("center"),
       _useState8 = _slicedToArray(_useState7, 2),
-      errorMsg = _useState8[0],
-      setErrorMsg = _useState8[1];
+      featureImgPos = _useState8[0],
+      setFeatureImgPos = _useState8[1];
 
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("ready"),
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
       _useState10 = _slicedToArray(_useState9, 2),
-      loadingState = _useState10[0],
-      setLoadingState = _useState10[1];
+      errorMsg = _useState10[0],
+      setErrorMsg = _useState10[1];
 
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("color"),
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("ready"),
       _useState12 = _slicedToArray(_useState11, 2),
-      backgroundImage = _useState12[0],
-      setBackgroundImage = _useState12[1];
+      loadingState = _useState12[0],
+      setLoadingState = _useState12[1];
 
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("color"),
       _useState14 = _slicedToArray(_useState13, 2),
-      featureImage = _useState14[0],
-      setFeatureImage = _useState14[1];
+      backgroundImage = _useState14[0],
+      setBackgroundImage = _useState14[1];
 
-  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(localStorage.getItem("eventsTimer:video:font", counterFont) || "ds-digital.ttf"),
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
       _useState16 = _slicedToArray(_useState15, 2),
-      counterFont = _useState16[0],
-      setCounterFont = _useState16[1];
+      featureImage = _useState16[0],
+      setFeatureImage = _useState16[1];
+
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(localStorage.getItem("eventsTimer:video:font", counterFont) || "ds-digital.ttf"),
+      _useState18 = _slicedToArray(_useState17, 2),
+      counterFont = _useState18[0],
+      setCounterFont = _useState18[1];
 
   var toggleHideMs = function toggleHideMs() {
     return setHideMs(function (hideMs) {
@@ -853,18 +858,18 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
     });
   };
 
-  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(localStorage.getItem("eventsTimer:video:bgCol", backgroundColor) || "#ff4500"),
-      _useState18 = _slicedToArray(_useState17, 2),
-      backgroundColor = _useState18[0],
-      setBackgroundColor = _useState18[1];
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(localStorage.getItem("eventsTimer:video:bgCol", backgroundColor) || "#ff4500"),
+      _useState20 = _slicedToArray(_useState19, 2),
+      backgroundColor = _useState20[0],
+      setBackgroundColor = _useState20[1];
 
-  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
     currency: _settings__WEBPACK_IMPORTED_MODULE_12__.settings.singleVideoCost.currency,
     amount: _settings__WEBPACK_IMPORTED_MODULE_12__.settings.singleVideoCost.amount
   }),
-      _useState20 = _slicedToArray(_useState19, 2),
-      payment = _useState20[0],
-      setPayment = _useState20[1];
+      _useState22 = _slicedToArray(_useState21, 2),
+      payment = _useState22[0],
+      setPayment = _useState22[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     (0,_helpers_currencyConversion__WEBPACK_IMPORTED_MODULE_4__.currencyConverter)(userCurrency || "GBP", _settings__WEBPACK_IMPORTED_MODULE_12__.settings.singleVideoCost.currency, _settings__WEBPACK_IMPORTED_MODULE_12__.settings.singleVideoCost.amount).then(function (res) {
@@ -881,15 +886,15 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
     localStorage.setItem("eventsTimer:video:txtCol", textColor);
   }, [textColor]);
 
-  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
-      _useState22 = _slicedToArray(_useState21, 2),
-      hideMs = _useState22[0],
-      setHideMs = _useState22[1];
-
-  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("Calculating Time"),
+  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
       _useState24 = _slicedToArray(_useState23, 2),
-      secondsLeft = _useState24[0],
-      setSecondsLeft = _useState24[1];
+      hideMs = _useState24[0],
+      setHideMs = _useState24[1];
+
+  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("Calculating Time"),
+      _useState26 = _slicedToArray(_useState25, 2),
+      secondsLeft = _useState26[0],
+      setSecondsLeft = _useState26[1];
 
   var handleSubmit = function handleSubmit() {
     setLoadingState("loading");
@@ -928,10 +933,10 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
     });
   };
 
-  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
-      _useState26 = _slicedToArray(_useState25, 2),
-      percentageComplete = _useState26[0],
-      setPercentageComplete = _useState26[1];
+  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+      _useState28 = _slicedToArray(_useState27, 2),
+      percentageComplete = _useState28[0],
+      setPercentageComplete = _useState28[1];
 
   var i = 0;
 
@@ -974,11 +979,12 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
     var data = {
       vId: vId
     };
-    axios__WEBPACK_IMPORTED_MODULE_2___default().post('api/cleanup', data).then(function (res) {
+    axios__WEBPACK_IMPORTED_MODULE_2___default().post("api/cleanup", data).then(function (res) {
       setPercentageComplete(0);
       downloadVideo(vId, destination);
       setLoadingState("ready");
       setSecondsLeft("Calculating Time Remaining");
+      setGeneratedDestination(destination);
     });
   };
 
@@ -990,7 +996,7 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
     document.body.appendChild(link);
     link.click();
     link.parentNode.removeChild(link);
-    setErrorMsg('Your video should start downloading soon, if it doesn\'t please click here:');
+    setErrorMsg(true);
   };
 
   var keyValueToJson = function keyValueToJson(lastUpdate) {
@@ -1008,25 +1014,25 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
     return obj;
   };
 
-  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
-      _useState28 = _slicedToArray(_useState27, 2),
-      displayPaymentModal = _useState28[0],
-      setDisplayPaymentModal = _useState28[1];
+  var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState30 = _slicedToArray(_useState29, 2),
+      displayPaymentModal = _useState30[0],
+      setDisplayPaymentModal = _useState30[1];
 
   var _React$useState = react__WEBPACK_IMPORTED_MODULE_1__.useState(15),
       _React$useState2 = _slicedToArray(_React$useState, 2),
       fps = _React$useState2[0],
       setFps = _React$useState2[1];
 
-  var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
-      _useState30 = _slicedToArray(_useState29, 2),
-      audio = _useState30[0],
-      setAudio = _useState30[1];
-
   var _useState31 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
       _useState32 = _slicedToArray(_useState31, 2),
-      audioPlaying = _useState32[0],
-      setAudioPlaying = _useState32[1];
+      audio = _useState32[0],
+      setAudio = _useState32[1];
+
+  var _useState33 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
+      _useState34 = _slicedToArray(_useState33, 2),
+      audioPlaying = _useState34[0],
+      setAudioPlaying = _useState34[1];
 
   var handlePremiumSubmit = function handlePremiumSubmit() {
     setDisplayPaymentModal(true);
@@ -1067,7 +1073,11 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
         loggedin: loggedin
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: "step__wrapper",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_CreateCountdown__WEBPACK_IMPORTED_MODULE_9__.default, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_ImageUpload__WEBPACK_IMPORTED_MODULE_10__.default, {
+          setFeatureImage: setFeatureImage,
+          setFeatureImgPos: setFeatureImgPos,
+          featureImgPos: featureImgPos
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_CreateCountdown__WEBPACK_IMPORTED_MODULE_9__.default, {
           time: time,
           setTime: setTime,
           textColor: textColor,
@@ -1076,10 +1086,6 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
           hideMs: hideMs,
           setCounterFont: setCounterFont,
           counterFont: counterFont
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_ImageUpload__WEBPACK_IMPORTED_MODULE_10__.default, {
-          setFeatureImage: setFeatureImage,
-          setFeatureImgPos: setFeatureImgPos,
-          featureImgPos: featureImgPos
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_AudioPlayer__WEBPACK_IMPORTED_MODULE_13__.default, {
         setCurrentAudio: setAudioPlaying,
@@ -1088,6 +1094,13 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
         setSelectedAudio: setAudio
       }), errorMsg && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
         children: errorMsg
+      }), generatedDestination && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
+        className: "download__message",
+        children: ["Your video should start downloading soon. If it doesn't please click ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", {
+          download: true,
+          href: generatedDestination,
+          children: "here"
+        })]
       }), loadingState === "ready" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: "button__wrapper",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {

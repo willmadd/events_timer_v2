@@ -24,7 +24,7 @@ const ImageUpload = ({setFeatureImage, setFeatureImgPos, featureImgPos}) => {
     });
     return (
         <div className="featuredimage">
-            <h3>Step 3. Upload a feature Image</h3>
+            <h3>Step 2. Upload a feature Image</h3>
             <div className="droparea">
                 <div {...getRootProps()} className="root__drop">
                     <input {...getInputProps()} />

@@ -21,6 +21,8 @@ import AudioPlayer from "./AudioPlayer";
 const CreateVideoForm = ({ loggedin, userCurrency }) => {
     const [time, setTime] = useState(60000);
 
+    const [generatedDestination, setGeneratedDestination] = useState("");
+
     const [textColor, setTextColor] = useState(
         localStorage.getItem("eventsTimer:video:txtCol", backgroundColor) ||
             "#333333"
@@ -136,7 +138,7 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
                 const percentage =
                     (Number(generationStatus.frame) / frames) * 100;
                 if (percentage >= 100) {
-                    tidyUpAfterDownload(vId, destination)
+                    tidyUpAfterDownload(vId, destination);
                 } else {
                     setPercentageComplete(
                         percentage === NaN ? 0 : Math.round(percentage)
@@ -158,16 +160,17 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
         }
     };
 
-    const tidyUpAfterDownload = (vId, destination) =>{
-        setSecondsLeft(`Cleaning Up... (nearly there)`)
-        const data={vId}
-        axios.post('api/cleanup', data).then(res=>{
+    const tidyUpAfterDownload = (vId, destination) => {
+        setSecondsLeft(`Cleaning Up... (nearly there)`);
+        const data = { vId };
+        axios.post("api/cleanup", data).then((res) => {
             setPercentageComplete(0);
             downloadVideo(vId, destination);
             setLoadingState("ready");
             setSecondsLeft("Calculating Time Remaining");
-        })
-    }
+            setGeneratedDestination(destination);
+        });
+    };
 
     const downloadVideo = (vId, destination) => {
         const url = `${destination}`;
@@ -177,7 +180,7 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
         document.body.appendChild(link);
         link.click();
         link.parentNode.removeChild(link);
-        setErrorMsg('Your video should start downloading soon, if it doesn\'t please click here:');
+        setErrorMsg(true);
     };
 
     const keyValueToJson = (lastUpdate) => {
@@ -264,6 +267,11 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
                     loggedin={loggedin}
                 />
                 <div className={"step__wrapper"}>
+                    <ImageUpload
+                        setFeatureImage={setFeatureImage}
+                        setFeatureImgPos={setFeatureImgPos}
+                        featureImgPos={featureImgPos}
+                    />
                     <CreateCountdown
                         time={time}
                         setTime={setTime}
@@ -274,11 +282,6 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
                         setCounterFont={setCounterFont}
                         counterFont={counterFont}
                     />
-                    <ImageUpload
-                        setFeatureImage={setFeatureImage}
-                        setFeatureImgPos={setFeatureImgPos}
-                        featureImgPos={featureImgPos}
-                    />
                 </div>
                 <AudioPlayer
                     setCurrentAudio={setAudioPlaying}
@@ -287,7 +290,12 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
                     setSelectedAudio={setAudio}
                 />
                 {errorMsg && <p>{errorMsg}</p>}
-
+                {generatedDestination && (
+                    <p className="download__message">
+                        {`Your video should start downloading soon. If it doesn't please click `}
+                        <a download href={generatedDestination}>here</a>
+                    </p>
+                )}
                 {loadingState === "ready" ? (
                     <div className="button__wrapper">
                         <button
@@ -334,11 +342,11 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
                     </div>
                 ) : loadingState === "loading" ? (
                     <>
-                    <Loading percentage={percentageComplete} />
-                    <div className="status__wrapper">
-                    <p>{`${percentageComplete}% complete`}</p>
-                <p>{`${secondsLeft} remaining`}</p>
-                    </div>
+                        <Loading percentage={percentageComplete} />
+                        <div className="status__wrapper">
+                            <p>{`${percentageComplete}% complete`}</p>
+                            <p>{`${secondsLeft} remaining`}</p>
+                        </div>
                     </>
                 ) : (
                     <h3>download</h3>
