@@ -38,7 +38,7 @@ const CreateCountdown = ({
 
     return (
         <div className="form__countdown">
-            <h3>Step 2: Configure your timer</h3>
+            <h3>Step 3: Configure your timer</h3>
             <div className="form__countdown__wrapper">
                 <div className="form__countdown__option">
                     <label htmlFor="">Duration:</label>

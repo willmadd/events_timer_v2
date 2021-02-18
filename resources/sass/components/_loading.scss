@@ -3,7 +3,8 @@
     padding: 12px;
     position: relative;
 	height:20px;
-	width:200px;
+	width:100%;
+	margin-top:16px;
 	// padding:10px;
 	// margin:200px auto 0;
 	background-color:rgba(0,0,0,.1);
@@ -26,6 +27,7 @@ This is the actual bar with stripes
     left: 6px;
 	display:inline-block;
 	height:15px;
+	min-width:15px;
 	width:calc(100% - 12px);
 	border:1px solid #ff9a1a;
 	border-bottom-color:#ff6201;

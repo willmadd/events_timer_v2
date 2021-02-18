@@ -163,10 +163,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var Loading = function Loading() {
+var Loading = function Loading(_ref) {
+  var percentage = _ref.percentage;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
     className: "bar",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {})
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+      style: {
+        width: "".concat(percentage, "%")
+      }
+    })
   });
 };
 

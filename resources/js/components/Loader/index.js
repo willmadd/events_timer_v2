@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Loading = () => (
+const Loading = ({percentage}) => (
         <div className="bar">
-            <span></span>
+            <span style={{width:`${percentage}%`}}></span>
         </div>
     );
 

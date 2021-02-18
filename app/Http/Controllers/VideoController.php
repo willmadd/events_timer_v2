@@ -10,10 +10,31 @@ use FFMpeg;
 
 use FFMpeg\Format\Video\X264;
 
+use App\Jobs\CreateCountdownVideo;
+
+use Carbon\Carbon;
+
+use Illuminate\Support\Facades\File;
+
 // use Pbmedia\LaravelFFMpeg\FFMpeg;
 
 class VideoController extends Controller
 {
+
+    public function cleanup(Request $request)
+    {
+        $id = $request->vId;
+
+        File::delete(public_path("progress/progress-$id.txt"));
+
+        return response()->json(
+            [
+                'success'=>true,
+            ],
+                200
+            );
+    }
+
     public function makeVideo(Request $request)
     {
         $id = Str::random(6);
@@ -91,7 +112,7 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
 
         $font = $this->getFont($request->counterFont);
 
-        $id = $request->uniqueId;
+        $id = Str::random(6);
 
         $seconds = $request->time;
 
@@ -121,6 +142,8 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
 
         $complexFilters = $this->getComplexFilters($ft_img_pos, $font, $color, $upperFont, $hours, $seconds, $ms);
 
+        $publicPath = public_path();
+
         $command = "ffmpeg \
         $bg \
         -i $imgPath \
@@ -131,26 +154,25 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
         -pix_fmt yuv420p \
         -filter_complex \
          $complexFilters \
-         -progress progress/progress-$id.txt \
+         -progress $publicPath/progress/progress-$id.txt \
         $name
         ";
 
+            $job = (new CreateCountdownVideo($command, $id))->delay(Carbon::now()->addSeconds(2));
 
-        exec($command." > ".$id."out.txt 2> ".$id."err.txt");
-
+            dispatch($job);
 
 
         return response()->json(
         [
             'success'=>true,
             'file_name'=> $name,
+            'id'=> $id,
             'file_alias' => "countdown_timer_$id.mp4",
-             'output' => $output,
-             '$returnStatus'=> $returnStatus,
-            'command' => $command." > out.txt 2> err.txt",
+            'destination' => $this->getDetination($id),
             // 'type'=> $type,
             // 'imgpath' => $imgPath,
-            // '$s'=>$output,
+            '$pathpath'=>public_path()."/outputs/".date('Y-m-d')."-generated",
             'font'=> $font,
             'kkk'=>env("APP_FONT", "/"),
         ],
@@ -172,6 +194,11 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
     private function getFileName($path, $id)
     {
         return $path."/countdown_timer_$id.mp4";
+    }
+
+    private function getDetination($id)
+    {
+        return "/outputs/".date('Y-m-d')."-generated/countdown_timer_$id.mp4";
     }
 
     private function getFeatureImgPos($featureImgPos)
@@ -250,7 +277,7 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
 
     private function getRelPath()
     {
-        $path =  "outputs/".date('Y-m-d')."-generated";
+        $path =  public_path()."/outputs/".date('Y-m-d')."-generated";
         if (!file_exists($path)) {
             mkdir($path, 777, true);
             chmod($path, 0777);
@@ -339,60 +366,7 @@ return response()->json(
         ->inFormat(new X264)
         ->save('timelapse2.mp4');
 
-        
-        // $ffmpeg->save('lll.mp4');
-        // ->asTimelapseWithFramerate(1)
-        // ->inFormat(new X264)
-        // ->save('timelapse.mp4');
-
-
-        // $ffmpegtwo = new ffmpeg_wrapper("/usr/local/bin/ffmpeg");
-        // $ffmpeg = ffmpeg_presets::empty_movie("1280x720",10);
-// $ffmpeg->set_output("empty.mp4");
-// $ffmpeg->run();
-
-// echo $ffmpeg->response() . PHP_EOL;
-
 
         return "success";
-    }
-}
-
-class ExecAsync {
-
-    public function __construct($cmd) {
-        $this->cmd = $cmd;
-        $this->cacheFile = ".cache-pipe-".uniqid();
-        $this->lineNumber = 0;
-    }
-
-    public function getLine() {
-        $file = new \SplFileObject($this->cacheFile);
-        $file->seek($this->lineNumber);
-        if($file->valid())
-        {
-            $this->lineNumber++;
-            $current = $file->current();
-            return $current;
-        } else
-            return NULL;
-    }
-
-    public function hasFinished() {
-        if(file_exists(".status-".$this->cacheFile) ||
-            (!file_exists(".status-".$this->cacheFile) && !file_exists($this->cacheFile)))
-        {
-            unlink($this->cacheFile);
-            unlink(".status-".$this->cacheFile);
-            $this->lineNumber = 0;
-            return TRUE;
-        } else
-            return FALSE;
-    }
-
-    public function run() {
-        if($this->cmd) {
-            $out = exec('{ '.$this->cmd." > ".$this->cacheFile." && echo finished > .status-".$this->cacheFile.";} > /dev/null 2>/dev/null &");
-        }
     }
 }

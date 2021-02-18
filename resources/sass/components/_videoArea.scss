@@ -48,7 +48,7 @@
     &__countdown {
         display: flex;
         flex-direction: column;
-        margin-right: 24px;
+        margin-left: 24px;
 
         &__wrapper {
             // display: flex;
@@ -190,7 +190,7 @@
 .featuredimage {
     padding-left: 24px;
     padding-right: 24px;
-    border-left: 1px solid $black;
+    border-right: 1px solid $black;
     &__position {
         display: flex;
         justify-content: space-between;
@@ -211,6 +211,9 @@
     width: 100%;
     padding: 24px;
     height: 100%;
+    &:focus{
+        outline:0;
+    }
 
     p {
         display: grid;
@@ -432,3 +435,14 @@
     }
 }
 
+.status__wrapper{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top:16px;
+}
+
+.download__message{
+    width:100%;
+    margin-top:16px;
+    text-align: center;
+}

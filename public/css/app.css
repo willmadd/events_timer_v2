@@ -10332,7 +10332,7 @@ header .dropdown__content li {
 .form__countdown {
   display: flex;
   flex-direction: column;
-  margin-right: 24px;
+  margin-left: 24px;
 }
 .form__countdown__wrapper {
   justify-content: space-evenly;
@@ -10465,7 +10465,7 @@ header .dropdown__content li {
 .featuredimage {
   padding-left: 24px;
   padding-right: 24px;
-  border-left: 1px solid #333333;
+  border-right: 1px solid #333333;
 }
 .featuredimage__position {
   display: flex;
@@ -10485,6 +10485,9 @@ header .dropdown__content li {
   width: 100%;
   padding: 24px;
   height: 100%;
+}
+.root__drop:focus {
+  outline: 0;
 }
 .root__drop p {
   display: grid;
@@ -10690,6 +10693,18 @@ header .dropdown__content li {
   background-image: url("/images/icons/nowatermark.svg");
 }
 
+.status__wrapper {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 16px;
+}
+
+.download__message {
+  width: 100%;
+  margin-top: 16px;
+  text-align: center;
+}
+
 .howto .wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -10699,7 +10714,8 @@ header .dropdown__content li {
   padding: 12px;
   position: relative;
   height: 20px;
-  width: 200px;
+  width: 100%;
+  margin-top: 16px;
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 20px;
   -ms-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03), inset 0 1px 0 rgba(0, 0, 0, 0.1);
@@ -10715,6 +10731,7 @@ This is the actual bar with stripes
   left: 6px;
   display: inline-block;
   height: 15px;
+  min-width: 15px;
   width: calc(100% - 12px);
   border: 1px solid #ff9a1a;
   border-bottom-color: #ff6201;
