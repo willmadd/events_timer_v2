@@ -195,7 +195,7 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
 
     const [displayPaymentModal, setDisplayPaymentModal] = useState(false);
 
-    const [fps, setFps] = React.useState(15);
+    const [fps, setFps] = React.useState(25);
 
     const [audio, setAudio] = useState(null);
 

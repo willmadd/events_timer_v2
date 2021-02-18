@@ -122,7 +122,7 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
 
         $color=$request->textColor;
 
-        $upperFont = 50;
+        $upperFont = 100;
 
         $fps=$request->fps;
 
@@ -162,6 +162,8 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
 
             dispatch($job);
 
+            // exec($command);
+
 
         return response()->json(
         [
@@ -183,7 +185,7 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
 
     private function getTotalDuration($seconds)
     {
-        return $seconds+0.5;
+        return $seconds+0.15;
     }
 
     private function getFont($font)
@@ -214,8 +216,9 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
 
     private function getAudio($audioFile)
     {
+        $publicPath = public_path();
         if($audioFile){
-            return "-stream_loop -1 -i mp3/$audioFile.mp3 -c:v copy ";
+            return "-stream_loop -1 -i $publicPath/mp3/$audioFile.mp3 -c:v copy ";
         }else{
             return "";
         }
@@ -242,9 +245,12 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
 
     private function getComplexFilters($ft_img_pos, $font, $color, $upperFont, $hours, $seconds, $ms)
     {
-        return "\"[1]scale=iw*0.2:ih*0.2[wm];[0][wm]overlay=$ft_img_pos:[km];[km]drawtext=fontfile='$font':fontcolor=$color:x=(w-text_w)/2:y=(h-text_h)-40:\
+        return "\"[1]scale=iw*0.2:ih*0.2[wm];[0][wm]overlay=$ft_img_pos:[km];\
+        [km]drawtext=fontfile='$font':fontcolor=$color:x=(w-text_w)/2:y=(h-text_h)-40:\
         fontsize=$upperFont:\
-        text='$hours%{eif\:(mod(($seconds-t)/60, 60))\:d\:2}\:%{eif\:(mod($seconds-t, 60))\:d\:2}$ms'\"";
+        text='$hours%{eif\:(mod(($seconds-t)/60, 60))\:d\:2}\:%{eif\:(mod($seconds-t, 60))\:d\:2}$ms',drawtext=fontcolor=#ffffff:x=10/2:y=(h-text_h)-10:\
+        fontsize=20:\
+        text='Made for free with eventscountdown.com'\"";
     }
 
     private function getImagePath($featureImage, $relPath, $id)
