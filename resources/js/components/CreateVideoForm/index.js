@@ -321,6 +321,7 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
                         counterFont={counterFont}
                     />
                 </div>
+                
                 <AudioPlayer
                     setCurrentAudio={setAudioPlaying}
                     currentAudio={audioPlaying}
