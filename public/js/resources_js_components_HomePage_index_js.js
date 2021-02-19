@@ -733,7 +733,7 @@ var files = [{
   return {
     id: file.id,
     img: "".concat(file.id, ".jpg"),
-    thumb: "".concat(file.id, "_thumb.jpg"),
+    thumb: "".concat(file.id, "_thumb.webp"),
     paid: file.paid
   };
 }));

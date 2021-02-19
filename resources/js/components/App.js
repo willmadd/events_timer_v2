@@ -7,6 +7,7 @@ import RouteFromArray from "../routes/RoutesFromArray";
 import { initUser } from "../store/init/actions";
 import { locale } from "../store/loading/actions";
 import Footer from "./Footer";
+import {preloadRouteComponent} from '../routes/helpers';
 
 const App = () => {
     const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const App = () => {
 
     return (
         <div className="eventsapp">
-            <Header />
+            <Header preloadRouteComponent={preloadRouteComponent}/>
             <Switch>
                 {routes.map((route, index) => (
                     <RouteFromArray

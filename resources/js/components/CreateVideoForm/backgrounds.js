@@ -12,6 +12,6 @@ const files = [
 export default files.map((file) => ({
     id: file.id,
     img: `${file.id}.jpg`,
-    thumb: `${file.id}_thumb.jpg`,
+    thumb: `${file.id}_thumb.webp`,
     paid: file.paid,
 }));
