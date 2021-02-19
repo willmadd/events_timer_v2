@@ -8,16 +8,13 @@ import { rootReducer } from "../store/reducers";
 import App from "./App";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from '@stripe/stripe-js';
+
 import SiteLoading from "./SiteLoading";
 // const initialState = {
 //     test:'test'
 // }
 
-const stripePromise = loadStripe(
-    "pk_test_51IJag6LrsmQqsvaawht9s51amhFcbQVvWsSmBf1Zsy4yKcG5w0ztf8eIVufboJcIvAjaGIg4K0c7rBOExUKPjZoq003c5A3tLF"
-);
+
 
 const store = createStore(
     rootReducer,
@@ -35,14 +32,12 @@ if (document.getElementById("events")) {
         <React.Suspense fallback={<SiteLoading />}>
             <Provider store={store}>
                 <Router>
-                    <Elements stripe={stripePromise}>
                         <App />
-                    </Elements>
                 </Router>
             </Provider>
         </React.Suspense>,
         // </React.StrictMode>,
         document.getElementById("events")
-        
+
     );
 }

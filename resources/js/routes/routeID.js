@@ -8,5 +8,6 @@ export default {
     signUpSuccess:'/signup/success',
     logout:'/logout',
     getPro:'/dashboard/getpro',
-    guides:'/guide/:guide'
+    guides:'/guide/:guide',
+    buy:'/buy'
 }

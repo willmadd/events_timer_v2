@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, NavLink } from "react-router-dom";
 import RouteID from '../../routes/routeID';
 import PostsMenuEntry from './PostsMenuEntry';
+import { preloadRouteComponent } from '../../routes/helpers';
 const Header = ({loggedin}) => {
 
     
@@ -23,7 +24,7 @@ const Header = ({loggedin}) => {
             <nav>
                 <ul>
                     <li>
-                    <NavLink exact to={RouteID.home}>{'Events Countdown'}</NavLink>
+                    <NavLink exact onMouseEnter={() => preloadRouteComponent(routeID.home)} to={RouteID.home}>{'Events Countdown'}</NavLink>
                     </li>
                     <li>
                         Tour
@@ -42,10 +43,10 @@ const Header = ({loggedin}) => {
                     </li>
                     {!loggedin?<>
                     <li>
-                    <NavLink exact to={RouteID.signin}>{'Sign In'}</NavLink>
+                    <NavLink exact to={RouteID.signin} onMouseEnter={() => preloadRouteComponent(RouteID.signin)} >{'Sign In'}</NavLink>
                     </li>
                     <li>
-                    <NavLink exact to={RouteID.signup}>{'Sign Up'}</NavLink>
+                    <NavLink exact to={RouteID.signup} onMouseEnter={() => preloadRouteComponent(RouteID.signup)}>{'Sign Up'}</NavLink>
                     </li>
                     </>:<>
                     <li>

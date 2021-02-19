@@ -1,6 +1,11 @@
 import React from 'react';
-import {ReactLazyPreload} from './helpers';
-import RouteID from '../routes/routeID';
+
+import RouteID from './routeID';
+
+import  {ReactLazyPreload}  from './things';
+
+
+
 
 const HomePage = ReactLazyPreload(() =>
 import("../components/HomePage")
@@ -49,5 +54,5 @@ export const routes = [
     {path: RouteID.signupActivate, exact:true, component: SignUpActivate},
     // {path: RouteID.logout, exact:true, component: LogOut},
     {path: RouteID.guides, exact:true, component: GuidesPage},
-    {path: RouteID.dashboard, exact:true, component: Dashboard},
+    // {path: RouteID.dashboard, exact:true, component: Dashboard},
 ];

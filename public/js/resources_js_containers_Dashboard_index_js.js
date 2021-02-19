@@ -59,7 +59,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var _routes_helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../routes/helpers */ "./resources/js/routes/helpers.js");
+/* harmony import */ var _routes_things__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../routes/things */ "./resources/js/routes/things.js");
 /* harmony import */ var _routes_routeID__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../routes/routeID */ "./resources/js/routes/routeID.js");
 /* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Loader */ "./resources/js/components/Loader/index.js");
 /* harmony import */ var _LogOut__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../LogOut */ "./resources/js/components/LogOut/index.js");
@@ -78,7 +78,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var Dashboard = function Dashboard(props) {
   var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_8__.useHistory)();
-  var DashboardMain = (0,_routes_helpers__WEBPACK_IMPORTED_MODULE_2__.ReactLazyPreload)(function () {
+  var DashboardMain = (0,_routes_things__WEBPACK_IMPORTED_MODULE_2__.ReactLazyPreload)(function () {
     return __webpack_require__.e(/*! import() */ "resources_js_components_Dashboard_Dashboard_js").then(__webpack_require__.bind(__webpack_require__, /*! ./Dashboard */ "./resources/js/components/Dashboard/Dashboard.js"));
   });
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useLayoutEffect)(function () {
@@ -144,38 +144,6 @@ __webpack_require__.r(__webpack_exports__);
   name: "Logout",
   url: "/dashboard/logout"
 }]);
-
-/***/ }),
-
-/***/ "./resources/js/components/Loader/index.js":
-/*!*************************************************!*\
-  !*** ./resources/js/components/Loader/index.js ***!
-  \*************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-
-
-var Loading = function Loading(_ref) {
-  var percentage = _ref.percentage;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-    className: "bar",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
-      style: {
-        width: "".concat(percentage, "%")
-      }
-    })
-  });
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Loading);
 
 /***/ }),
 

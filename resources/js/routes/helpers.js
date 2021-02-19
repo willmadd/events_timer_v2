@@ -2,11 +2,6 @@ import React from "react";
 import { matchPath } from "react-router-dom";
 import { routes } from "../routes/routes";
 
-export const ReactLazyPreload = (importStatement) => {
-    const Component = React.lazy(importStatement);
-    Component.preload = importStatement;
-    return Component;
-};
 
 export const preloadRouteComponent = (path) => {
     const component = findComponentForRoute(path, routes);
@@ -24,3 +19,9 @@ const findComponentForRoute = (path, routes) => {
     );
     return matchingRoute ? matchingRoute.component : null;
 };
+
+
+export const xyz = () =>{
+    console.log('hello')
+    return 'hello';
+}

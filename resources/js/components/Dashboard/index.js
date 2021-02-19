@@ -1,6 +1,6 @@
 import React, { useEffect, useLayoutEffect } from "react";
 import { Route, useHistory } from "react-router-dom";
-import { ReactLazyPreload } from "../../routes/helpers";
+import { ReactLazyPreload } from "../../routes/things";
 import routeID from "../../routes/routeID";
 import Loading from "../Loader";
 import LogOut from "../LogOut";
