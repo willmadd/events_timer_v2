@@ -36,8 +36,7 @@ if (document.getElementById("events")) {
             <Provider store={store}>
                 <Router>
                     <Elements stripe={stripePromise}>
-                        {/* <App /> */}
-                        <SiteLoading />
+                        <App />
                     </Elements>
                 </Router>
             </Provider>
