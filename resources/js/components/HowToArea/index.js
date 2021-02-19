@@ -1,12 +1,12 @@
 import React from "react";
 
-import ReactPlayer from "react-player";
+// import ReactPlayer from "react-player";
 
 const HowToArea = () => {
     return (
         <section className="howto">
             <div className="wrapper">
-                <ReactPlayer url="https://www.youtube.com/watch?v=ug50zmP9I7s" />
+                {/* <ReactPlayer url="https://www.youtube.com/watch?v=ug50zmP9I7s" /> */}
                 <div>
                     <h3>Create a Countdown for your event</h3>
                     <p>
