@@ -1,10 +1,14 @@
 import React from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import axios from "axios";
+import { withStripe } from "../../helpers/WithStripe";
+import { Link } from "react-router-dom";
+import routeID from "../../routes/routeID";
 
 const GuestPayment = ({setDisplayPaymentModal, userCurrency, amount}) => {
     const stripe = useStripe();
     const elements = useElements();
+
 
     const handleSubmit = async (event) => {
         // Block native form submission.
@@ -74,10 +78,11 @@ const GuestPayment = ({setDisplayPaymentModal, userCurrency, amount}) => {
                         </button>
                     </form>
                 </div>
-                <button type="button" onClick={()=>setDisplayPaymentModal(false)}> Close</button>
+                <Link to={routeID.home}>Close </Link>
+                {/* <button type="button" onClick={()=>setDisplayPaymentModal(false)}> Close</button> */}
             </div>
         </div>
     );
 };
 
-export default GuestPayment;
+export default withStripe(GuestPayment);

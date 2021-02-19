@@ -4,10 +4,7 @@ import { randomString } from "../../helpers/randomstring";
 import { currencyConverter } from "../../helpers/currencyConversion";
 import Loading from "../Loader";
 import { toHHMMSS } from "../../helpers/time";
-import {
-    setIntervalAsync,
-    clearIntervalAsync,
-} from "set-interval-async/dynamic";
+
 
 import BackgroundSelector from "./BackgroundSelector";
 import CreateCountdown from "./CreateCountdown";
@@ -17,6 +14,8 @@ import GuestPayment from "../GuestPayment";
 // import CurrencyConverter from 'react-currency-conv';
 import { settings } from "../../settings";
 import AudioPlayer from "./AudioPlayer";
+import { Link } from "react-router-dom";
+import routeID from '../../routes/routeID';
 
 const CreateVideoForm = ({ loggedin, userCurrency }) => {
     const [time, setTime] = useState(60000);
@@ -347,7 +346,7 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
                         >
                             Download Video (SD)
                         </button>
-                        <button
+                        {/* <button
                             className="form__download"
                             type="button"
                             onClick={() => handlePremiumSubmit()}
@@ -355,7 +354,18 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
                         >
                             Download Video (HD)
                             {`${payment.amount.toFixed(2)} ${payment.currency}`}
-                        </button>
+                        </button> */}
+                        
+                        <Link
+                        // onMouseEnter={() => preloadRouteComponent(routeID.buy)}
+                            to={{
+                                pathname: routeID.buy,
+                                state: { withCheckout: true },
+                            }}
+                        >
+                            Download Video (HD)
+                            {`${payment.amount.toFixed(2)} ${payment.currency}`}
+                        </Link>
                         <div className="button__explainer">
                             <h5>Free SD Countdown Timer</h5>
                             <div className="usp free">
