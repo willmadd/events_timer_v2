@@ -6,10 +6,10 @@ import Header from "../containers/Header";
 import RouteFromArray from "../routes/RoutesFromArray";
 import { initUser } from "../store/init/actions";
 import { locale } from "../store/loading/actions";
-
+import {preloadRouteComponent} from '../routes/helpers';
 const App = () => {
     const dispatch = useDispatch();
-
+// console.log(preloadRouteComponent);
     useEffect(() => {
         dispatch(locale());
         const userToken = localStorage.getItem("eventcountdown:all:userToken");
@@ -18,7 +18,7 @@ const App = () => {
 
     return (
         <div className="eventsapp">
-            <Header />
+            <Header preloadRouteComponent={preloadRouteComponent}/>
             <Switch>
                 {routes.map((route, index) => (
                     <RouteFromArray

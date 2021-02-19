@@ -2,9 +2,11 @@ import React from 'react';
 import { Link, NavLink } from "react-router-dom";
 import RouteID from '../../routes/routeID';
 import PostsMenuEntry from './PostsMenuEntry';
-const Header = ({loggedin}) => {
+// import {preloadRouteComponent} from '../../routes/helpers';
 
-    
+
+const Header = ({loggedin, preloadRouteComponent}) => {
+
     const logout = () =>{
 
         let token = localStorage.getItem("eventcountdown:all:userToken");
@@ -42,10 +44,10 @@ const Header = ({loggedin}) => {
                     </li>
                     {!loggedin?<>
                     <li>
-                    <NavLink exact to={RouteID.signin}>{'Sign In'}</NavLink>
+                    <NavLink exact to={RouteID.signin} onMouseOver={()=>preloadRouteComponent(RouteID.signin)}>{'Sign In'}</NavLink>
                     </li>
                     <li>
-                    <NavLink exact to={RouteID.signup}>{'Sign Up'}</NavLink>
+                    <NavLink exact to={RouteID.signup} onMouseOver={()=>preloadRouteComponent(RouteID.signin)}>{'Sign Up'}</NavLink>
                     </li>
                     </>:<>
                     <li>
