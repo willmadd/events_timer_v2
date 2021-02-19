@@ -80,6 +80,7 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
     const [secondsLeft, setSecondsLeft] = useState("Calculating Time");
 
     const handleSubmit = () => {
+        let frameArr = [];
         setLoadingState("loading");
         let bg = backgroundImage;
         if (bg === "color") {
@@ -106,8 +107,14 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
                 if (status === 200) {
                     const { id, destination } = data;
                     setTimeout(() => {
-                        checkVideoStatus(id, destination, startTime, i);
-                    }, 2000);
+                        checkVideoStatus(
+                            id,
+                            destination,
+                            startTime,
+                            i,
+                            frameArr
+                        );
+                    }, 1000);
                 }
             })
             .catch((e) => {
@@ -120,15 +127,17 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
     };
 
     const [percentageComplete, setPercentageComplete] = useState(0);
+
     let i = 0;
-    const checkVideoStatus = (vId, destination, startTime, i) => {
+
+    const checkVideoStatus = (vId, destination, startTime, i, frameArr) => {
         if (!vId) {
             console.error("a unique id could not be found");
             setErrorMsg(
                 "The server did not respond. Please wait a few minutes and try again"
             );
         } else {
-            axios.get(`/progress/progress-${vId}.txt`).then((res) => {
+            axios.get(`/progress/progress-${vId}`).then((res) => {
                 const frames = fps * (time / 1000);
                 const dataArr = res.data
                     .split("progress=continue")
@@ -137,38 +146,67 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
                 const generationStatus = keyValueToJson(lastUpdate);
                 const percentage =
                     (Number(generationStatus.frame) / frames) * 100;
-                if (percentage >= 100) {
-                    tidyUpAfterDownload(vId, destination);
+
+                frameArr.push(generationStatus.frame);
+
+                if (checkProcessingError(frameArr)) {
+                    setErrorMsg(
+                        "Your File could not be created. Please try again"
+                    );
+                    tidyUpAfterDownload(vId, destination, false);
                 } else {
-                    setPercentageComplete(
-                        percentage === NaN ? 0 : Math.round(percentage)
-                    );
-                    const now = Date.now();
-                    const totalTime = Math.round(
-                        (now - startTime) / 10 / percentage -
-                            (now - startTime) / 1000
-                    );
-                    if (i > 3) {
-                        setSecondsLeft(`${totalTime} Seconds remaining`);
+                    if (percentage >= 100) {
+                        tidyUpAfterDownload(vId, destination, true);
+                    } else {
+                        console.log('percetnage is nan', isNaN(percentage));
+                        setPercentageComplete(
+                            isNaN(percentage) ? 0 : Math.round(percentage)
+                        );
+                        const now = Date.now();
+                        const totalTime = Math.round(
+                            (now - startTime) / 10 / percentage -
+                                (now - startTime) / 1000
+                        );
+                        if (i > 3) {
+                            setSecondsLeft(`${totalTime} Seconds remaining`);
+                        }
+                        i++;
+                        setTimeout(() => {
+                            checkVideoStatus(
+                                vId,
+                                destination,
+                                startTime,
+                                i,
+                                frameArr
+                            );
+                        }, 2000);
                     }
-                    i++;
-                    setTimeout(() => {
-                        checkVideoStatus(vId, destination, startTime, i);
-                    }, 2000);
                 }
             });
         }
     };
 
-    const tidyUpAfterDownload = (vId, destination) => {
+    const checkProcessingError = (frameArr) => {
+        if (
+            frameArr.length > 2 &&
+            frameArr[0] === frameArr[1] &&
+            frameArr[0] === frameArr[2]
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    const tidyUpAfterDownload = (vId, destination, success) => {
         setSecondsLeft(`Cleaning Up... (nearly there)`);
         const data = { vId };
         axios.post("api/cleanup", data).then((res) => {
             setPercentageComplete(0);
-            downloadVideo(vId, destination);
+            success && downloadVideo(vId, destination);
             setLoadingState("ready");
             setSecondsLeft("Calculating Time Remaining");
-            setGeneratedDestination(destination);
+            success && setGeneratedDestination(destination);
         });
     };
 
@@ -293,7 +331,9 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
                 {generatedDestination && (
                     <p className="download__message">
                         {`Your video should start downloading soon. If it doesn't please click `}
-                        <a download href={generatedDestination}>here</a>
+                        <a download href={generatedDestination}>
+                            here
+                        </a>
                     </p>
                 )}
                 {loadingState === "ready" ? (
@@ -344,7 +384,7 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
                     <>
                         <Loading percentage={percentageComplete} />
                         <div className="status__wrapper">
-                            <p>{`${percentageComplete}% complete`}</p>
+                            <p>{`${percentageComplete === 0 ? 'Initializing Video...': `${percentageComplete}% Complete`}`}</p>
                             <p>{`${secondsLeft} remaining`}</p>
                         </div>
                     </>

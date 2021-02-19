@@ -26,7 +26,7 @@ const ImageUpload = ({setFeatureImage, setFeatureImgPos, featureImgPos}) => {
         <div className="featuredimage">
             <h3>Step 2. Upload a feature Image</h3>
             <div className="droparea">
-                <div {...getRootProps()} className="root__drop">
+                <div {...getRootProps()} className={`root__drop ${isDragActive?'drag':''}`}>
                     <input {...getInputProps()} />
                     {isDragActive ? (
                         <p>Drop the files here ...</p>

@@ -6,6 +6,7 @@ import Header from "../containers/Header";
 import RouteFromArray from "../routes/RoutesFromArray";
 import { initUser } from "../store/init/actions";
 import { locale } from "../store/loading/actions";
+import Footer from "./Footer";
 
 const App = () => {
     const dispatch = useDispatch();
@@ -28,6 +29,7 @@ const App = () => {
                     />
                 ))}
             </Switch>
+            <Footer />
         </div>
     );
 };

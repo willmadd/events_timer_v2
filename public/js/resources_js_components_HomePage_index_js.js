@@ -639,7 +639,7 @@ var ImageUpload = function ImageUpload(_ref) {
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
       className: "droparea",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", _objectSpread(_objectSpread({}, getRootProps()), {}, {
-        className: "root__drop",
+        className: "root__drop ".concat(isDragActive ? 'drag' : ''),
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", _objectSpread({}, getInputProps())), isDragActive ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
           children: "Drop the files here ..."
         }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
@@ -897,6 +897,7 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
       setSecondsLeft = _useState26[1];
 
   var handleSubmit = function handleSubmit() {
+    var frameArr = [];
     setLoadingState("loading");
     var bg = backgroundImage;
 
@@ -924,8 +925,8 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
         var id = data.id,
             destination = data.destination;
         setTimeout(function () {
-          checkVideoStatus(id, destination, startTime, i);
-        }, 2000);
+          checkVideoStatus(id, destination, startTime, i, frameArr);
+        }, 1000);
       }
     })["catch"](function (e) {
       setErrorMsg("Your Video count not be created due to this error: " + e.response.data.message || 0);
@@ -940,12 +941,12 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
 
   var i = 0;
 
-  var checkVideoStatus = function checkVideoStatus(vId, destination, startTime, i) {
+  var checkVideoStatus = function checkVideoStatus(vId, destination, startTime, i, frameArr) {
     if (!vId) {
       console.error("a unique id could not be found");
       setErrorMsg("The server did not respond. Please wait a few minutes and try again");
     } else {
-      axios__WEBPACK_IMPORTED_MODULE_2___default().get("/progress/progress-".concat(vId, ".txt")).then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default().get("/progress/progress-".concat(vId)).then(function (res) {
         var frames = fps * (time / 1000);
         var dataArr = res.data.split("progress=continue").filter(function (data) {
           return data !== "\n";
@@ -953,38 +954,53 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
         var lastUpdate = dataArr[dataArr.length - 1];
         var generationStatus = keyValueToJson(lastUpdate);
         var percentage = Number(generationStatus.frame) / frames * 100;
+        frameArr.push(generationStatus.frame);
 
-        if (percentage >= 100) {
-          tidyUpAfterDownload(vId, destination);
+        if (checkProcessingError(frameArr)) {
+          setErrorMsg("Your File could not be created. Please try again");
+          tidyUpAfterDownload(vId, destination, false);
         } else {
-          setPercentageComplete(percentage === NaN ? 0 : Math.round(percentage));
-          var now = Date.now();
-          var totalTime = Math.round((now - startTime) / 10 / percentage - (now - startTime) / 1000);
+          if (percentage >= 100) {
+            tidyUpAfterDownload(vId, destination, true);
+          } else {
+            console.log('percetnage is nan', isNaN(percentage));
+            setPercentageComplete(isNaN(percentage) ? 0 : Math.round(percentage));
+            var now = Date.now();
+            var totalTime = Math.round((now - startTime) / 10 / percentage - (now - startTime) / 1000);
 
-          if (i > 3) {
-            setSecondsLeft("".concat(totalTime, " Seconds remaining"));
+            if (i > 3) {
+              setSecondsLeft("".concat(totalTime, " Seconds remaining"));
+            }
+
+            i++;
+            setTimeout(function () {
+              checkVideoStatus(vId, destination, startTime, i, frameArr);
+            }, 2000);
           }
-
-          i++;
-          setTimeout(function () {
-            checkVideoStatus(vId, destination, startTime, i);
-          }, 2000);
         }
       });
     }
   };
 
-  var tidyUpAfterDownload = function tidyUpAfterDownload(vId, destination) {
+  var checkProcessingError = function checkProcessingError(frameArr) {
+    if (frameArr.length > 2 && frameArr[0] === frameArr[1] && frameArr[0] === frameArr[2]) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  var tidyUpAfterDownload = function tidyUpAfterDownload(vId, destination, success) {
     setSecondsLeft("Cleaning Up... (nearly there)");
     var data = {
       vId: vId
     };
     axios__WEBPACK_IMPORTED_MODULE_2___default().post("api/cleanup", data).then(function (res) {
       setPercentageComplete(0);
-      downloadVideo(vId, destination);
+      success && downloadVideo(vId, destination);
       setLoadingState("ready");
       setSecondsLeft("Calculating Time Remaining");
-      setGeneratedDestination(destination);
+      success && setGeneratedDestination(destination);
     });
   };
 
@@ -1166,7 +1182,7 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
           className: "status__wrapper",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
-            children: "".concat(percentageComplete, "% complete")
+            children: "".concat(percentageComplete === 0 ? 'Initializing Video...' : "".concat(percentageComplete, "% Complete"))
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
             children: "".concat(secondsLeft, " remaining")
           })]

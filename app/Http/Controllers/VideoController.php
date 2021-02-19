@@ -25,7 +25,7 @@ class VideoController extends Controller
     {
         $id = $request->vId;
 
-        File::delete(public_path("progress/progress-$id.txt"));
+        File::delete(public_path("progress/progress-$id"));
 
         return response()->json(
             [
@@ -154,7 +154,7 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
         -pix_fmt yuv420p \
         -filter_complex \
          $complexFilters \
-         -progress $publicPath/progress/progress-$id.txt \
+         -progress $publicPath/progress/progress-$id \
         $name
         ";
 
