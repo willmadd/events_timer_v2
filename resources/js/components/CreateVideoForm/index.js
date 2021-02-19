@@ -4,10 +4,6 @@ import { randomString } from "../../helpers/randomstring";
 import { currencyConverter } from "../../helpers/currencyConversion";
 import Loading from "../Loader";
 import { toHHMMSS } from "../../helpers/time";
-import {
-    setIntervalAsync,
-    clearIntervalAsync,
-} from "set-interval-async/dynamic";
 
 import BackgroundSelector from "./BackgroundSelector";
 import CreateCountdown from "./CreateCountdown";
