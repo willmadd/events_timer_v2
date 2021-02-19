@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from '@stripe/stripe-js';
+import SiteLoading from "./SiteLoading";
 // const initialState = {
 //     test:'test'
 // }
@@ -31,7 +32,7 @@ const store = createStore(
 if (document.getElementById("events")) {
     ReactDOM.render(
         // <React.StrictMode>
-        <React.Suspense fallback={"Loading"}>
+        <React.Suspense fallback={<SiteLoading />}>
             <Provider store={store}>
                 <Router>
                     <Elements stripe={stripePromise}>
