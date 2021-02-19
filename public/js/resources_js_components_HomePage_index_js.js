@@ -409,10 +409,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_color__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-color */ "./node_modules/react-color/es/index.js");
-/* harmony import */ var react_time_duration_input__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-time-duration-input */ "./node_modules/react-time-duration-input/dist/index.js");
-/* harmony import */ var react_maskedinput__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-maskedinput */ "./node_modules/react-maskedinput/es/index.js");
-/* harmony import */ var _common_ColourPicker__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../common/ColourPicker */ "./resources/js/components/common/ColourPicker.js");
+/* harmony import */ var react_maskedinput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-maskedinput */ "./node_modules/react-maskedinput/es/index.js");
+/* harmony import */ var _common_ColourPicker__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../common/ColourPicker */ "./resources/js/components/common/ColourPicker.js");
 
 
 
@@ -427,9 +425,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
-
 
 
 
@@ -481,7 +476,7 @@ var CreateCountdown = function CreateCountdown(_ref) {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", {
           htmlFor: "",
           children: "Duration:"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_maskedinput__WEBPACK_IMPORTED_MODULE_4__.default, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_maskedinput__WEBPACK_IMPORTED_MODULE_2__.default, {
           value: "0:01",
           onChange: function onChange(e) {
             return stringToSeconds(e);
@@ -506,7 +501,7 @@ var CreateCountdown = function CreateCountdown(_ref) {
           children: "Color"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
           className: "colour__picker",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common_ColourPicker__WEBPACK_IMPORTED_MODULE_5__.default, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common_ColourPicker__WEBPACK_IMPORTED_MODULE_3__.default, {
             value: textColor,
             onChange: setColor
           })
@@ -31014,169 +31009,6 @@ MaskedInput.propTypes =  true ? {
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MaskedInput);
-
-/***/ }),
-
-/***/ "./node_modules/react-time-duration-input/dist/components/TimeDurationInput/index.js":
-/*!*******************************************************************************************!*\
-  !*** ./node_modules/react-time-duration-input/dist/components/TimeDurationInput/index.js ***!
-  \*******************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-exports.TimeDurationInput = TimeDurationInput;
-exports.convertValueFromScale = convertValueFromScale;
-exports.convertValueToScale = convertValueToScale;
-exports.convertValueToDuration = convertValueToDuration;
-exports.convertDurationToValue = convertDurationToValue;
-exports.default = exports.convertToValue = exports.convertFromValue = exports.SCALE_CONVERSIONS = void 0;
-
-var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj["default"] = obj; return newObj; } }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-function TimeDurationInput(_ref) {
-  var value = _ref.value,
-      scale = _ref.scale,
-      onChange = _ref.onChange,
-      className = _ref.className;
-
-  var _useState = (0, _react.useState)(convertFromValue(value, scale)),
-      _useState2 = _slicedToArray(_useState, 2),
-      duration = _useState2[0],
-      setDuration = _useState2[1];
-
-  (0, _react.useEffect)(function () {
-    var newDuration = convertFromValue(value, scale);
-    if (newDuration !== duration) setDuration(newDuration);
-  }, [value, scale]);
-  var onInputChange = (0, _react.useCallback)(function (_ref2) {
-    var target = _ref2.target;
-    setDuration(target.value);
-    var newValue = convertToValue(target.value, scale);
-    if (!isNaN(newValue)) onChange(newValue);
-  }, [onChange, scale]);
-  return _react["default"].createElement("input", {
-    type: "text",
-    className: className,
-    value: duration,
-    onChange: onInputChange,
-    "data-testid": "duration-input"
-  });
-}
-
-TimeDurationInput.propTypes = {
-  value: _propTypes["default"].number,
-  scale: _propTypes["default"].oneOf(['d', 'h', 'm', 's', 'ms']),
-  onChange: _propTypes["default"].func,
-  className: _propTypes["default"].string
-};
-TimeDurationInput.defaultProps = {
-  scale: 'ms',
-  onChange: function onChange() {}
-};
-var SCALE_CONVERSIONS = {
-  ms: 1,
-  s: 1000,
-  m: 60000,
-  h: 3600000,
-  d: 86400000
-};
-exports.SCALE_CONVERSIONS = SCALE_CONVERSIONS;
-
-function convertValueFromScale(value, scale) {
-  return value * (SCALE_CONVERSIONS[scale] || 1);
-}
-
-function convertValueToScale(value, scale) {
-  return value / (SCALE_CONVERSIONS[scale] || 1);
-}
-
-function convertValueToDuration(value) {
-  var milliseconds = Math.round(value % 1000);
-  var seconds = Math.floor(value / 1000 % 60);
-  var minutes = Math.floor(value / 60000 % 60);
-  var hours = Math.floor(value / 3600000 % 24);
-  var days = Math.floor(value / 86400000);
-  return [days && "".concat(days, "d"), hours && "".concat(hours, "h"), minutes && "".concat(minutes, "m"), seconds && "".concat(seconds, "s"), (milliseconds || !value) && "".concat(milliseconds, "ms")].filter(function (x) {
-    return !!x;
-  }).join(' ');
-}
-
-function convertDurationToValue(duration) {
-  var matches = duration.trim().match(/^(\d+d)?\s*(\d+h)?\s*(\d+m)?\s*(\d+s)?\s*(\d+ms)?$/i);
-  if (!matches) return parseFloat(duration);
-
-  var _matches$slice$map = matches.slice(1).map(function (x) {
-    return parseInt(x) || 0;
-  }),
-      _matches$slice$map2 = _slicedToArray(_matches$slice$map, 5),
-      days = _matches$slice$map2[0],
-      hours = _matches$slice$map2[1],
-      minutes = _matches$slice$map2[2],
-      seconds = _matches$slice$map2[3],
-      milliseconds = _matches$slice$map2[4];
-
-  return (((days * 24 + hours) * 60 + minutes) * 60 + seconds) * 1000 + milliseconds;
-}
-
-var convertFromValue = function convertFromValue(value, scale) {
-  return convertValueToDuration(convertValueFromScale(value, scale));
-};
-
-exports.convertFromValue = convertFromValue;
-
-var convertToValue = function convertToValue(duration, scale) {
-  return convertValueToScale(convertDurationToValue(duration), scale);
-};
-
-exports.convertToValue = convertToValue;
-var _default = TimeDurationInput;
-exports.default = _default;
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uL3NyYy9jb21wb25lbnRzL1RpbWVEdXJhdGlvbklucHV0L2luZGV4LmpzIl0sIm5hbWVzIjpbIlRpbWVEdXJhdGlvbklucHV0IiwidmFsdWUiLCJzY2FsZSIsIm9uQ2hhbmdlIiwiY2xhc3NOYW1lIiwiY29udmVydEZyb21WYWx1ZSIsImR1cmF0aW9uIiwic2V0RHVyYXRpb24iLCJuZXdEdXJhdGlvbiIsIm9uSW5wdXRDaGFuZ2UiLCJ0YXJnZXQiLCJuZXdWYWx1ZSIsImNvbnZlcnRUb1ZhbHVlIiwiaXNOYU4iLCJwcm9wVHlwZXMiLCJQcm9wVHlwZXMiLCJudW1iZXIiLCJvbmVPZiIsImZ1bmMiLCJzdHJpbmciLCJkZWZhdWx0UHJvcHMiLCJTQ0FMRV9DT05WRVJTSU9OUyIsIm1zIiwicyIsIm0iLCJoIiwiZCIsImNvbnZlcnRWYWx1ZUZyb21TY2FsZSIsImNvbnZlcnRWYWx1ZVRvU2NhbGUiLCJjb252ZXJ0VmFsdWVUb0R1cmF0aW9uIiwibWlsbGlzZWNvbmRzIiwiTWF0aCIsInJvdW5kIiwic2Vjb25kcyIsImZsb29yIiwibWludXRlcyIsImhvdXJzIiwiZGF5cyIsImZpbHRlciIsIngiLCJqb2luIiwiY29udmVydER1cmF0aW9uVG9WYWx1ZSIsIm1hdGNoZXMiLCJ0cmltIiwibWF0Y2giLCJwYXJzZUZsb2F0Iiwic2xpY2UiLCJtYXAiLCJwYXJzZUludCJdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7O0FBQUE7O0FBQ0E7Ozs7Ozs7Ozs7Ozs7O0FBRU8sU0FBU0EsaUJBQVQsT0FBbUU7QUFBQSxNQUFyQ0MsS0FBcUMsUUFBckNBLEtBQXFDO0FBQUEsTUFBOUJDLEtBQThCLFFBQTlCQSxLQUE4QjtBQUFBLE1BQXZCQyxRQUF1QixRQUF2QkEsUUFBdUI7QUFBQSxNQUFiQyxTQUFhLFFBQWJBLFNBQWE7O0FBQUEsa0JBQ3RDLHFCQUFTQyxnQkFBZ0IsQ0FBQ0osS0FBRCxFQUFRQyxLQUFSLENBQXpCLENBRHNDO0FBQUE7QUFBQSxNQUNoRUks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Q0FBQ0YscUJBQXFCLENBQUMxQixLQUFELEVBQVFDLEtBQVIsQ0FBdEIsQ0FBeEM7QUFBQSxDQUF6Qjs7OztBQUVBLElBQU1VLGNBQWMsR0FBRyxTQUFqQkEsY0FBaUIsQ0FBQ04sUUFBRCxFQUFXSixLQUFYO0FBQUEsU0FBcUIwQixtQkFBbUIsQ0FBQ2Esc0JBQXNCLENBQUNuQyxRQUFELENBQXZCLEVBQW1DSixLQUFuQyxDQUF4QztBQUFBLENBQXZCOzs7ZUFFUUYsaUIiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgUmVhY3QsIHsgdXNlU3RhdGUsIHVzZUNhbGxiYWNrLCB1c2VFZmZlY3QgfSBmcm9tICdyZWFjdCdcbmltcG9ydCBQcm9wVHlwZXMgZnJvbSAncHJvcC10eXBlcydcblxuZXhwb3J0IGZ1bmN0aW9uIFRpbWVEdXJhdGlvbklucHV0ICh7IHZhbHVlLCBzY2FsZSwgb25DaGFuZ2UsIGNsYXNzTmFtZSB9KSB7XG4gIGNvbnN0IFsgZHVyYXRpb24sIHNldER1cmF0aW9uIF0gPSB1c2VTdGF0ZShjb252ZXJ0RnJvbVZhbHVlKHZhbHVlLCBzY2FsZSkpXG5cbiAgdXNlRWZmZWN0KCgpID0+IHtcbiAgICBjb25zdCBuZXdEdXJhdGlvbiA9IGNvbnZlcnRGcm9tVmFsdWUodmFsdWUsIHNjYWxlKVxuICAgIGlmIChuZXdEdXJhdGlvbiAhPT0gZHVyYXRpb24pIHNldER1cmF0aW9uKG5ld0R1cmF0aW9uKVxuICB9LCBbIHZhbHVlLCBzY2FsZSBdKVxuXG4gIGNvbnN0IG9uSW5wdXRDaGFuZ2UgPSB1c2VDYWxsYmFjaygoeyB0YXJnZXQgfSkgPT4ge1xuICAgIHNldER1cmF0aW9uKHRhcmdldC52YWx1ZSlcbiAgICBjb25zdCBuZXdWYWx1ZSA9IGNvbnZlcnRUb1ZhbHVlKHRhcmdldC52YWx1ZSwgc2NhbGUpXG4gICAgaWYgKCFpc05hTihuZXdWYWx1ZSkpIG9uQ2hhbmdlKG5ld1ZhbHVlKVxuICB9LCBbIG9uQ2hhbmdlLCBzY2FsZSBdKVxuXG4gIHJldHVybiAoXG4gICAgPGlucHV0IHR5cGU9XCJ0ZXh0XCIgY2xhc3NOYW1lPXtjbGFzc05hbWV9IHZhbHVlPXtkdXJhdGlvbn0gb25DaGFuZ2U9e29uSW5wdXRDaGFuZ2V9IGRhdGEtdGVzdGlkPVwiZHVyYXRpb24taW5wdXRcIiAvPlxuICApXG59XG5cblRpbWVEdXJhdGlvbklucHV0LnByb3BUeXBlcyA9IHtcbiAgdmFsdWU6IFByb3BUeXBlcy5udW1iZXIsXG4gIHNjYWxlOiBQcm9wVHlwZXMub25lT2YoWyAnZCcsICdoJywgJ20nLCAncycsICdtcycgXSksXG4gIG9uQ2hhbmdlOiBQcm9wVHlwZXMuZnVuYyxcbiAgY2xhc3NOYW1lOiBQcm9wVHlwZXMuc3RyaW5nXG59XG5cblRpbWVEdXJhdGlvbklucHV0LmRlZmF1bHRQcm9wcyA9IHtcbiAgc2NhbGU6ICdtcycsXG4gIG9uQ2hhbmdlOiAoKSA9PiB7fVxufVxuXG5leHBvcnQgY29uc3QgU0NBTEVfQ09OVkVSU0lPTlMgPSB7XG4gIG1zOiAxLFxuICBzOiAxMDAwLFxuICBtOiA2MDAwMCxcbiAgaDogMzYwMDAwMCxcbiAgZDogODY0MDAwMDBcbn1cblxuZXhwb3J0IGZ1bmN0aW9uIGNvbnZlcnRWYWx1ZUZyb21TY2FsZSAodmFsdWUsIHNjYWxlKSB7XG4gIHJldHVybiB2YWx1ZSAqIChTQ0FMRV9DT05WRVJTSU9OU1tzY2FsZV0gfHwgMSlcbn1cblxuZXhwb3J0IGZ1bmN0aW9uIGNvbnZlcnRWYWx1ZVRvU2NhbGUgKHZhbHVlLCBzY2FsZSkge1xuICByZXR1cm4gdmFsdWUgLyAoU0NBTEVfQ09OVkVSU0lPTlNbc2NhbGVdIHx8IDEpXG59XG5cbmV4cG9ydCBmdW5jdGlvbiBjb252ZXJ0VmFsdWVUb0R1cmF0aW9uICh2YWx1ZSkge1xuICBjb25zdCBtaWxsaXNlY29uZHMgPSBNYXRoLnJvdW5kKHZhbHVlICUgMTAwMClcbiAgY29uc3Qgc2Vjb25kcyA9IE1hdGguZmxvb3IodmFsdWUgLyAxMDAwICUgNjApXG4gIGNvbnN0IG1pbnV0ZXMgPSBNYXRoLmZsb29yKHZhbHVlIC8gNjAwMDAgJSA2MClcbiAgY29uc3QgaG91cnMgPSBNYXRoLmZsb29yKHZhbHVlIC8gMzYwMDAwMCAlIDI0KVxuICBjb25zdCBkYXlzID0gTWF0aC5mbG9vcih2YWx1ZSAvIDg2NDAwMDAwKVxuICByZXR1cm4gW1xuICAgIGRheXMgJiYgYCR7ZGF5c31kYCxcbiAgICBob3VycyAmJiBgJHtob3Vyc31oYCxcbiAgICBtaW51dGVzICYmIGAke21pbnV0ZXN9bWAsXG4gICAgc2Vjb25kcyAmJiBgJHtzZWNvbmRzfXNgLFxuICAgIChtaWxsaXNlY29uZHMgfHwgIXZhbHVlKSAmJiBgJHttaWxsaXNlY29uZHN9bXNgXG4gIF0uZmlsdGVyKHggPT4gISF4KS5qb2luKCcgJylcbn1cblxuZXhwb3J0IGZ1bmN0aW9uIGNvbnZlcnREdXJhdGlvblRvVmFsdWUgKGR1cmF0aW9uKSB7XG4gIGNvbnN0IG1hdGNoZXMgPSBkdXJhdGlvbi50cmltKCkubWF0Y2goL14oXFxkK2QpP1xccyooXFxkK2gpP1xccyooXFxkK20pP1xccyooXFxkK3MpP1xccyooXFxkK21zKT8kL2kpXG4gIGlmICghbWF0Y2hlcykgcmV0dXJuIHBhcnNlRmxvYXQoZHVyYXRpb24pXG4gIGNvbnN0IFtkYXlzLCBob3VycywgbWludXRlcywgc2Vjb25kcywgbWlsbGlzZWNvbmRzXSA9IG1hdGNoZXMuc2xpY2UoMSkubWFwKHggPT4gcGFyc2VJbnQoeCkgfHwgMClcbiAgcmV0dXJuICgoKGRheXMgKiAyNCArIGhvdXJzKSAqIDYwICsgbWludXRlcykgKiA2MCArIHNlY29uZHMpICogMTAwMCArIG1pbGxpc2Vjb25kc1xufVxuXG5leHBvcnQgY29uc3QgY29udmVydEZyb21WYWx1ZSA9ICh2YWx1ZSwgc2NhbGUpID0+IGNvbnZlcnRWYWx1ZVRvRHVyYXRpb24oY29udmVydFZhbHVlRnJvbVNjYWxlKHZhbHVlLCBzY2FsZSkpXG5cbmV4cG9ydCBjb25zdCBjb252ZXJ0VG9WYWx1ZSA9IChkdXJhdGlvbiwgc2NhbGUpID0+IGNvbnZlcnRWYWx1ZVRvU2NhbGUoY29udmVydER1cmF0aW9uVG9WYWx1ZShkdXJhdGlvbiksIHNjYWxlKVxuXG5leHBvcnQgZGVmYXVsdCBUaW1lRHVyYXRpb25JbnB1dFxuIl19
-
-/***/ }),
-
-/***/ "./node_modules/react-time-duration-input/dist/index.js":
-/*!**************************************************************!*\
-  !*** ./node_modules/react-time-duration-input/dist/index.js ***!
-  \**************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-Object.defineProperty(exports, "TimeDurationInput", ({
-  enumerable: true,
-  get: function get() {
-    return _TimeDurationInput["default"];
-  }
-}));
-
-var _TimeDurationInput = _interopRequireDefault(__webpack_require__(/*! ./components/TimeDurationInput */ "./node_modules/react-time-duration-input/dist/components/TimeDurationInput/index.js"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uL3NyYy9pbmRleC5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7QUFBQSIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBUaW1lRHVyYXRpb25JbnB1dCBmcm9tICcuL2NvbXBvbmVudHMvVGltZUR1cmF0aW9uSW5wdXQnXG5cbmV4cG9ydCB7IFRpbWVEdXJhdGlvbklucHV0IH1cbiJdfQ==
 
 /***/ }),
 

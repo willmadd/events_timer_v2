@@ -34,21 +34,16 @@
         "path": "^0.12.7",
         "path-browserify": "^0.0.1",
         "react-color": "^2.19.3",
-        "react-currency-conv": "^1.1.0",
-        "react-currency-conversion": "^1.0.5",
         "react-dropzone": "^11.3.0",
         "react-helmet": "^6.1.0",
         "react-input-color": "^4.0.0",
         "react-maskedinput": "^4.0.1",
-        "react-player": "^2.8.2",
         "react-redux": "^7.2.2",
         "react-router-dom": "^5.2.0",
-        "react-time-duration-input": "^1.1.1",
         "redux": "^4.0.5",
         "redux-devtools-extension": "^2.13.8",
         "redux-thunk": "^2.3.0",
         "sanitize-html": "^2.3.2",
-        "set-interval-async": "^1.0.34",
-        "use-sound": "^2.0.1"
+        "set-interval-async": "^1.0.34"
     }
 }

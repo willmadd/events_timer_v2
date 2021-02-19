@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-import { CompactPicker } from "react-color";
-import InputColor from "react-input-color";
-import { TimeDurationInput } from "react-time-duration-input";
 import MaskedInput from "react-maskedinput";
 import ColourPicker from "../common/ColourPicker";
 

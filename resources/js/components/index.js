@@ -43,5 +43,6 @@ if (document.getElementById("events")) {
         </React.Suspense>,
         // </React.StrictMode>,
         document.getElementById("events")
+        
     );
 }
