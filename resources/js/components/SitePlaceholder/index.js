@@ -1,5 +1,4 @@
 import React from 'react';
-import './_sitePlaceholder.scss';
 
 const SitePlaceholder = () => {
     return (
@@ -10,6 +9,7 @@ const SitePlaceholder = () => {
                 </div>
             </div> */}
             <div class="loader">Loading...</div>
+
             
         </div>
     );

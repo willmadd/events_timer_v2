@@ -238,7 +238,7 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
 
     const [audio, setAudio] = useState(null);
 
-    const [backgroundImageLoading, setBackgroundImageLoading] = useState(true);
+    const [backgroundImageLoading, setBackgroundImageLoading] = useState(false);
 
     const [audioPlaying, setAudioPlaying] = useState(null);
 
