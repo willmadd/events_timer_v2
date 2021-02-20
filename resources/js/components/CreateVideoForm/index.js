@@ -14,8 +14,10 @@ import GuestPayment from "../GuestPayment";
 import { settings } from "../../settings";
 import AudioPlayer from "./AudioPlayer";
 import { Link, useLocation } from "react-router-dom";
+import SiteLoading from '../SiteLoading';
 
 import RouteID from "../../routes/routeID";
+import SitePlaceholder from "../SitePlaceholder";
 
 const CreateVideoForm = ({ loggedin, userCurrency }) => {
     const [time, setTime] = useState(60000);
@@ -236,6 +238,8 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
 
     const [audio, setAudio] = useState(null);
 
+    const [backgroundImageLoading, setBackgroundImageLoading] = useState(true);
+
     const [audioPlaying, setAudioPlaying] = useState(null);
 
     return (
@@ -263,9 +267,14 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
                         />
                     )}
                     {backgroundImage && backgroundImage !== "color" && (
-                        <img
+                        <><img
                             src={`/images/backgrounds/${backgroundImage}.jpg`}
+                            alt="background image for video"
+                            onLoad={() => setBackgroundImageLoading(false)}
+                            style={backgroundImageLoading?{display:'none'}:{}}
                         />
+                        {backgroundImageLoading ? <SitePlaceholder />:null}
+                        </>
                     )}
 
                     <span
@@ -291,6 +300,7 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
                     featureImgPos={featureImgPos}
                     setFeatureImgPos={setFeatureImgPos}
                     loggedin={loggedin}
+                    setBackgroundImageLoading={setBackgroundImageLoading}
                 />
                 <div className={"step__wrapper"}>
                     <ImageUpload

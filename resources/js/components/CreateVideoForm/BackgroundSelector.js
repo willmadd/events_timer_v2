@@ -11,7 +11,15 @@ const BackgroundSelector = ({
     backgroundColor,
     setBackgroundColor,
     loggedin,
+    setBackgroundImageLoading
 }) => {
+
+    const setBackgroundInPreview = (value) =>{
+        console.log('set bg');
+        onChange(value);
+        setBackgroundImageLoading(true);
+    }
+
     return (
         <div>
             <h3>Step 1: Choose a background</h3>
@@ -49,7 +57,7 @@ const BackgroundSelector = ({
                                     name="background"
                                     value={background.id}
                                     checked={background.id == currentlySelected}
-                                    onChange={(e) => onChange(e.target.value)}
+                                    onChange={(e) => setBackgroundInPreview(e.target.value)}
                                     id={`radio__${index}`}
                                 ></input>
                                 <label
