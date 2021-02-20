@@ -4,7 +4,7 @@ import { randomString } from "../../helpers/randomstring";
 import { currencyConverter } from "../../helpers/currencyConversion";
 import Loading from "../Loader";
 import { toHHMMSS } from "../../helpers/time";
-import {preloadRouteComponent} from '../../routes/helpers';
+import { preloadRouteComponent } from "../../routes/helpers";
 import BackgroundSelector from "./BackgroundSelector";
 import CreateCountdown from "./CreateCountdown";
 import ImageUpload from "./ImageUpload";
@@ -13,12 +13,9 @@ import GuestPayment from "../GuestPayment";
 // import CurrencyConverter from 'react-currency-conv';
 import { settings } from "../../settings";
 import AudioPlayer from "./AudioPlayer";
-import {
-    Link,
-    useLocation,
-  } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-  import RouteID from '../../routes/routeID';
+import RouteID from "../../routes/routeID";
 
 const CreateVideoForm = ({ loggedin, userCurrency }) => {
     const [time, setTime] = useState(60000);
@@ -162,7 +159,7 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
                     if (percentage >= 100) {
                         tidyUpAfterDownload(vId, destination, true);
                     } else {
-                        console.log('percetnage is nan', isNaN(percentage));
+                        console.log("percetnage is nan", isNaN(percentage));
                         setPercentageComplete(
                             isNaN(percentage) ? 0 : Math.round(percentage)
                         );
@@ -235,27 +232,14 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
         return obj;
     };
 
-    const [displayPaymentModal, setDisplayPaymentModal] = useState(false);
-
     const [fps, setFps] = React.useState(25);
 
     const [audio, setAudio] = useState(null);
 
     const [audioPlaying, setAudioPlaying] = useState(null);
 
-    const handlePremiumSubmit = () => {
-        setDisplayPaymentModal(true);
-    };
-
     return (
         <div className="form">
-            {displayPaymentModal && (
-                <GuestPayment
-                    userCurrency={payment.currency}
-                    amount={payment.amount.toFixed(2)}
-                    setDisplayPaymentModal={setDisplayPaymentModal}
-                />
-            )}
             <div className="form__wrapper">
                 <div
                     className="form__preview"
@@ -325,7 +309,7 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
                         counterFont={counterFont}
                     />
                 </div>
-                
+
                 <AudioPlayer
                     setCurrentAudio={setAudioPlaying}
                     currentAudio={audioPlaying}
@@ -351,27 +335,24 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
                         >
                             Download Video (SD)
                         </button>
-                        {/* <button
-                            className="form__download"
-                            type="button"
-                            onClick={() => handlePremiumSubmit()}
-                            disabled={!featureImage}
+
+                        <Link
+                            onMouseEnter={() =>
+                                preloadRouteComponent(RouteID.buy)
+                            }
+                            to={{
+                                pathname: RouteID.buy,
+                                state: {
+                                    background: location,
+                                    userCurrency: payment.currency,
+                                    amount: payment.amount.toFixed(2),
+                                },
+                            }}
                         >
                             Download Video (HD)
                             {`${payment.amount.toFixed(2)} ${payment.currency}`}
-                        </button> */}
-                        
-                                <Link
-                                onMouseEnter={()=>preloadRouteComponent(RouteID.buy)}
-          to={{
-            pathname: RouteID.buy,
-            // This is the trick! This link sets
-            // the `background` in location state.
-            state: { background: location }
-          }}
-        >Download Video (HD)
-        {`${payment.amount.toFixed(2)} ${payment.currency}`}</Link>
-    
+                        </Link>
+
                         <div className="button__explainer">
                             <h5>Free SD Countdown Timer</h5>
                             <div className="usp free">
@@ -401,7 +382,11 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
                     <>
                         <Loading percentage={percentageComplete} />
                         <div className="status__wrapper">
-                            <p>{`${percentageComplete === 0 ? 'Initializing Video...': `${percentageComplete}% Complete`}`}</p>
+                            <p>{`${
+                                percentageComplete === 0
+                                    ? "Initializing Video..."
+                                    : `${percentageComplete}% Complete`
+                            }`}</p>
                             <p>{`${secondsLeft} remaining`}</p>
                         </div>
                     </>

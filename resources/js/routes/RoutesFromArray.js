@@ -10,3 +10,13 @@ const RouteFromArray = (route) => {
     );
 };
 export default RouteFromArray;
+
+
+export const ModalRouteFromArray = (route) => {
+    return (
+        <Route
+            path={route.path}
+            render={props => <route.children {...props} routes={route.routes} />}
+        />
+    );
+};

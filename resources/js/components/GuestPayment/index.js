@@ -6,7 +6,10 @@ import { Link } from "react-router-dom";
 import { withStripe } from "../../helpers/withStripe";
 
 
-const GuestPayment = ({userCurrency, amount}) => {
+const GuestPayment = ({location}) => {
+const {userCurrency, amount} = location.state;
+// console.log(location.state);
+
     const stripe = useStripe();
     const elements = useElements();
 

@@ -908,7 +908,7 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
           if (percentage >= 100) {
             tidyUpAfterDownload(vId, destination, true);
           } else {
-            console.log('percetnage is nan', isNaN(percentage));
+            console.log("percetnage is nan", isNaN(percentage));
             setPercentageComplete(isNaN(percentage) ? 0 : Math.round(percentage));
             var now = Date.now();
             var totalTime = Math.round((now - startTime) / 10 / percentage - (now - startTime) / 1000);
@@ -975,37 +975,24 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
     return obj;
   };
 
-  var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
-      _useState30 = _slicedToArray(_useState29, 2),
-      displayPaymentModal = _useState30[0],
-      setDisplayPaymentModal = _useState30[1];
-
   var _React$useState = react__WEBPACK_IMPORTED_MODULE_1__.useState(25),
       _React$useState2 = _slicedToArray(_React$useState, 2),
       fps = _React$useState2[0],
       setFps = _React$useState2[1];
 
+  var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
+      _useState30 = _slicedToArray(_useState29, 2),
+      audio = _useState30[0],
+      setAudio = _useState30[1];
+
   var _useState31 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
       _useState32 = _slicedToArray(_useState31, 2),
-      audio = _useState32[0],
-      setAudio = _useState32[1];
+      audioPlaying = _useState32[0],
+      setAudioPlaying = _useState32[1];
 
-  var _useState33 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
-      _useState34 = _slicedToArray(_useState33, 2),
-      audioPlaying = _useState34[0],
-      setAudioPlaying = _useState34[1];
-
-  var handlePremiumSubmit = function handlePremiumSubmit() {
-    setDisplayPaymentModal(true);
-  };
-
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
     className: "form",
-    children: [displayPaymentModal && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_GuestPayment__WEBPACK_IMPORTED_MODULE_11__.default, {
-      userCurrency: payment.currency,
-      amount: payment.amount.toFixed(2),
-      setDisplayPaymentModal: setDisplayPaymentModal
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
       className: "form__wrapper",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: "form__preview",
@@ -1078,10 +1065,10 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
           },
           to: {
             pathname: _routes_routeID__WEBPACK_IMPORTED_MODULE_14__.default.buy,
-            // This is the trick! This link sets
-            // the `background` in location state.
             state: {
-              background: location
+              background: location,
+              userCurrency: payment.currency,
+              amount: payment.amount.toFixed(2)
             }
           },
           children: ["Download Video (HD)", "".concat(payment.amount.toFixed(2), " ").concat(payment.currency)]
@@ -1132,7 +1119,7 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
           className: "status__wrapper",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
-            children: "".concat(percentageComplete === 0 ? 'Initializing Video...' : "".concat(percentageComplete, "% Complete"))
+            children: "".concat(percentageComplete === 0 ? "Initializing Video..." : "".concat(percentageComplete, "% Complete"))
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
             children: "".concat(secondsLeft, " remaining")
           })]
@@ -1140,7 +1127,7 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
       }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", {
         children: "download"
       })]
-    })]
+    })
   });
 };
 

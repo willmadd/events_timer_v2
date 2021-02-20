@@ -1,6 +1,7 @@
 import React from 'react';
 import {ReactLazyPreload} from './helpers';
 import RouteID from '../routes/routeID';
+import GuestPayment from '../components/GuestPayment';
 
 const HomePage = ReactLazyPreload(() =>
 import("../components/HomePage")
@@ -50,4 +51,9 @@ export const routes = [
     // {path: RouteID.logout, exact:true, component: LogOut},
     {path: RouteID.guides, exact:true, component: GuidesPage},
     {path: RouteID.dashboard, exact:true, component: Dashboard},
+];
+
+
+export const modalRoutes = [
+    {path: routes.buy, exact:false, children: GuestPayment},
 ];

@@ -2,14 +2,22 @@ import React, { useEffect } from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { routes } from "../routes/routes";
+import { modalRoutes } from "../routes/routes";
 import Header from "../containers/Header";
-import RouteFromArray from "../routes/RoutesFromArray";
+import RouteFromArray, { ModalRouteFromArray } from "../routes/RoutesFromArray";
 import { initUser } from "../store/init/actions";
 import { locale } from "../store/loading/actions";
 import Footer from "./Footer";
-import {preloadRouteComponent} from '../routes/helpers';
-import GuestPayment from "./GuestPayment";
+import { preloadRouteComponent } from "../routes/helpers";
+// import GuestPayment from "./GuestPayment";
 import routeID from "../routes/routeID";
+import { ReactLazyPreload } from "../routes/helpers";
+
+// import GuestPayment from "./GuestPayment";
+
+const GuestPayment = ReactLazyPreload(() =>
+    import("../components/GuestPayment")
+);
 
 const App = () => {
     const dispatch = useDispatch();
@@ -26,7 +34,7 @@ const App = () => {
 
     return (
         <div className="eventsapp">
-            <Header preloadRouteComponent={preloadRouteComponent}/>
+            <Header preloadRouteComponent={preloadRouteComponent} />
             <Switch location={background || location}>
                 {routes.map((route, index) => (
                     <RouteFromArray
@@ -36,7 +44,16 @@ const App = () => {
                     />
                 ))}
             </Switch>
-            {background && <Route path={routeID.buy} children={<GuestPayment/>} />}
+            {modalRoutes.map(
+                (modalRoute, index) =>
+                    background && (
+                        <ModalRouteFromArray
+                            key={`${index}-modal`}
+                            exact={modalRoute.exact}
+                            {...modalRoute}
+                        />
+                    )
+            )}
             <Footer />
         </div>
     );
