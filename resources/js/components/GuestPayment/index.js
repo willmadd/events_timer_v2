@@ -1,8 +1,12 @@
 import React from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import axios from "axios";
+import routeID from "../../routes/routeID";
+import { Link } from "react-router-dom";
+import { withStripe } from "../../helpers/withStripe";
 
-const GuestPayment = ({setDisplayPaymentModal, userCurrency, amount}) => {
+
+const GuestPayment = ({userCurrency, amount}) => {
     const stripe = useStripe();
     const elements = useElements();
 
@@ -74,10 +78,10 @@ const GuestPayment = ({setDisplayPaymentModal, userCurrency, amount}) => {
                         </button>
                     </form>
                 </div>
-                <button type="button" onClick={()=>setDisplayPaymentModal(false)}> Close</button>
+                <Link to={routeID.home}>Back</Link>
             </div>
         </div>
     );
 };
 
-export default GuestPayment;
+export default withStripe(GuestPayment);

@@ -4,7 +4,7 @@ import { randomString } from "../../helpers/randomstring";
 import { currencyConverter } from "../../helpers/currencyConversion";
 import Loading from "../Loader";
 import { toHHMMSS } from "../../helpers/time";
-
+import {preloadRouteComponent} from '../../routes/helpers';
 import BackgroundSelector from "./BackgroundSelector";
 import CreateCountdown from "./CreateCountdown";
 import ImageUpload from "./ImageUpload";
@@ -13,9 +13,17 @@ import GuestPayment from "../GuestPayment";
 // import CurrencyConverter from 'react-currency-conv';
 import { settings } from "../../settings";
 import AudioPlayer from "./AudioPlayer";
+import {
+    Link,
+    useLocation,
+  } from "react-router-dom";
+
+  import RouteID from '../../routes/routeID';
 
 const CreateVideoForm = ({ loggedin, userCurrency }) => {
     const [time, setTime] = useState(60000);
+
+    let location = useLocation();
 
     const [generatedDestination, setGeneratedDestination] = useState("");
 
@@ -343,7 +351,7 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
                         >
                             Download Video (SD)
                         </button>
-                        <button
+                        {/* <button
                             className="form__download"
                             type="button"
                             onClick={() => handlePremiumSubmit()}
@@ -351,7 +359,19 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
                         >
                             Download Video (HD)
                             {`${payment.amount.toFixed(2)} ${payment.currency}`}
-                        </button>
+                        </button> */}
+                        
+                                <Link
+                                onMouseEnter={()=>preloadRouteComponent(RouteID.buy)}
+          to={{
+            pathname: RouteID.buy,
+            // This is the trick! This link sets
+            // the `background` in location state.
+            state: { background: location }
+          }}
+        >Download Video (HD)
+        {`${payment.amount.toFixed(2)} ${payment.currency}`}</Link>
+    
                         <div className="button__explainer">
                             <h5>Free SD Countdown Timer</h5>
                             <div className="usp free">
