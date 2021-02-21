@@ -257,8 +257,6 @@ var BackgroundSelector = function BackgroundSelector(_ref) {
       setBackgroundImageLoading = _ref.setBackgroundImageLoading;
 
   var setBackgroundInPreview = function setBackgroundInPreview(value) {
-    console.log('set bg');
-
     _onChange(value);
 
     setBackgroundImageLoading(true);
@@ -873,7 +871,8 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
       hideMs: hideMs,
       audio: audio,
       featureImgPos: featureImgPos,
-      counterFont: counterFont
+      counterFont: counterFont,
+      q: 1
     };
     axios__WEBPACK_IMPORTED_MODULE_2___default().post("/api/create", data).then(function (res) {
       var startTime = Date.now();
@@ -922,7 +921,6 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
           if (percentage >= 100) {
             tidyUpAfterDownload(vId, destination, true);
           } else {
-            console.log("percetnage is nan", isNaN(percentage));
             setPercentageComplete(isNaN(percentage) ? 0 : Math.round(percentage));
             var now = Date.now();
             var totalTime = Math.round((now - startTime) / 10 / percentage - (now - startTime) / 1000);
@@ -942,7 +940,7 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
   };
 
   var checkProcessingError = function checkProcessingError(frameArr) {
-    if (frameArr.length > 2 && frameArr[0] === frameArr[1] && frameArr[0] === frameArr[2]) {
+    if (frameArr.length > 4 && frameArr[0] === frameArr[1] && frameArr[0] === frameArr[2] && frameArr[0] === frameArr[3] && frameArr[0] === frameArr[4]) {
       return true;
     } else {
       return false;
@@ -1023,7 +1021,7 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
           src: featureImage
         }), backgroundImage && backgroundImage !== "color" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", {
-            src: "/images/backgrounds/".concat(backgroundImage, ".jpg"),
+            src: "/images/backgrounds/".concat(backgroundImage, "_480.jpg"),
             alt: "background image for video",
             onLoad: function onLoad() {
               return setBackgroundImageLoading(false);
@@ -1088,7 +1086,13 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
           },
           disabled: !featureImage,
           children: "Download Video (SD)"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Link, {
+        }), !featureImage ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
+          className: "form__download pro",
+          type: "button",
+          disabled: true,
+          children: "Download Video (HD) ".concat(payment.amount.toFixed(2), " ").concat(payment.currency)
+        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Link, {
+          className: "form__download pro",
           onMouseEnter: function onMouseEnter() {
             return (0,_routes_helpers__WEBPACK_IMPORTED_MODULE_7__.preloadRouteComponent)(_routes_routeID__WEBPACK_IMPORTED_MODULE_15__.default.buy);
           },
@@ -1100,7 +1104,7 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
               amount: payment.amount.toFixed(2)
             }
           },
-          children: ["Download Video (HD)", "".concat(payment.amount.toFixed(2), " ").concat(payment.currency)]
+          children: "Download Video (HD) ".concat(payment.amount.toFixed(2), " ").concat(payment.currency)
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
           className: "button__explainer",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h5", {
@@ -1150,7 +1154,7 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
             children: "".concat(percentageComplete === 0 ? "Initializing Video..." : "".concat(percentageComplete, "% Complete"))
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
-            children: "".concat(secondsLeft, " remaining")
+            children: "".concat(secondsLeft)
           })]
         })]
       }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", {

@@ -108,6 +108,8 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
 
     public function create(Request $request)
     {
+        $res = $this->getQuality($request->q);
+
         $relPath = $this->getRelPath();
 
         $font = $this->getFont($request->counterFont);
@@ -134,15 +136,19 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
         
         $ms=$this->getMs($request->hideMs, $seconds, $mantissaDigits);
         
-        $bg = $this->getBackground($request->backgroundImage);
+        $bg = $this->getBackground($request->backgroundImage, $res);
 
         $hours = $this->getHours($seconds);
 
         $imgPath= $this->getImagePath($request->featureImage, $relPath, $id);
 
-        $complexFilters = $this->getComplexFilters($ft_img_pos, $font, $color, $upperFont, $hours, $seconds, $ms);
+        //input at 3/4 of the output taking into account 5% off set from top
+        $featureImgHeight = ($res*0.75) - ($res*0.05);
+
+        $complexFilters = $this->getComplexFilters($ft_img_pos, $font, $color, $upperFont, $hours, $seconds, $ms, $featureImgHeight);
 
         $publicPath = public_path();
+
 
         $command = "ffmpeg \
         $bg \
@@ -172,7 +178,7 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
             'id'=> $id,
             'file_alias' => "countdown_timer_$id.mp4",
             'destination' => $this->getDetination($id),
-            // 'type'=> $type,
+            'bgbgbg'=> $bg,
             // 'imgpath' => $imgPath,
             '$pathpath'=>public_path()."/outputs/".date('Y-m-d')."-generated",
             'font'=> $font,
@@ -188,9 +194,21 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
         return $seconds+0.15;
     }
 
+    private function getQuality($q)
+    {
+        if($q===3){
+            return 1080;
+        }else if($q===2){
+            return 720;
+        } else{
+            return 480;
+        }
+        return $seconds+0.15;
+    }
+
     private function getFont($font)
     {
-        return env("APP_FONT", "/").$font;
+        return public_path().'/fonts/'.$font;
     }
 
     private function getFileName($path, $id)
@@ -206,11 +224,11 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
     private function getFeatureImgPos($featureImgPos)
     {
         if($featureImgPos === "right"){
-            return 'x=W-w:y=(H-h)/2-40';
+            return 'x=W-w:y=40';
         }else if($featureImgPos === "left"){
-            return 'x=0:y=(H-h)/2-40';
+            return 'x=0:y=40';
         }else{
-            return 'x=(W-w)/2:y=(H-h)/2-40';
+            return 'x=(W-w)/2:y=40';
         }
     }
 
@@ -243,9 +261,9 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
         }
     }
 
-    private function getComplexFilters($ft_img_pos, $font, $color, $upperFont, $hours, $seconds, $ms)
+    private function getComplexFilters($ft_img_pos, $font, $color, $upperFont, $hours, $seconds, $ms, $featureImgHeight)
     {
-        return "\"[1]scale=iw*0.2:ih*0.2[wm];[0][wm]overlay=$ft_img_pos:[km];\
+        return "\"[1]scale=w=-1:h=320[wm];[0][wm]overlay=$ft_img_pos:[km];\
         [km]drawtext=fontfile='$font':fontcolor=$color:x=(w-text_w)/2:y=(h-text_h)-40:\
         fontsize=$upperFont:\
         text='$hours%{eif\:(mod(($seconds-t)/60, 60))\:d\:2}\:%{eif\:(mod($seconds-t, 60))\:d\:2}$ms',drawtext=fontcolor=#ffffff:x=10/2:y=(h-text_h)-10:\
@@ -261,7 +279,28 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
 
 
         $imgPath = $relPath.'/'.$id.'.'.$type;
+
         $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $featureImage));
+
+
+        // ../
+
+        $width = 1200;
+        $height = 1200;
+        
+        // $filename = 't-'.$trail_id.'-'.Str::random(12).'.'.$type;
+        // $imgf = Image::make($image);
+        // $imgf->height() > $imgf->width() ? $width=null : $height=null;
+        // $imgf->resize($width, $height, function ($constraint) {
+        //     $constraint->aspectRatio();
+        // });
+        // $imgf->save(public_path('trails/'.$trail_id.'/'.$filename),50,'jpg');
+        // $images = Images::create([
+        //     "url"=>'trails/'.$trail_id.'/'.$filename,
+        //     "trail_id"=>$trail_id
+        // ]);
+        // ..
+
         file_put_contents($imgPath, $data);
 
         return $imgPath;
@@ -269,13 +308,16 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
 
 
 
-    private function getBackground($background)
+    private function getBackground($background, $res)
     {
+        $width = ceil(($res*16/9));
+        if($width % 2 == 1) $width++;
+
         $pattern = "/#\w{4,8}/i";
-        $image=env("APP_BACKGROUND_URL", "/").'/public/images/backgrounds/'.$background.'.jpg';
+        $image=public_path().'/images/backgrounds/'.$background.'_'.$res.'.jpg';
         if (preg_match($pattern, $background)) {
             $col = $background;
-            return "-f lavfi -i color=c=$col:s=720x480:r=24 ";
+            return "-f lavfi -i color=c=$col:s=".$width."x".$res.":r=24 ";
         } else {
             return'-loop 1 -i '.$image ;
         }

@@ -15,7 +15,6 @@ const BackgroundSelector = ({
 }) => {
 
     const setBackgroundInPreview = (value) =>{
-        console.log('set bg');
         onChange(value);
         setBackgroundImageLoading(true);
     }

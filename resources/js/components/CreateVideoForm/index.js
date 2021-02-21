@@ -99,6 +99,7 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
             audio,
             featureImgPos,
             counterFont,
+            q:1
         };
 
         axios
@@ -161,7 +162,6 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
                     if (percentage >= 100) {
                         tidyUpAfterDownload(vId, destination, true);
                     } else {
-                        console.log("percetnage is nan", isNaN(percentage));
                         setPercentageComplete(
                             isNaN(percentage) ? 0 : Math.round(percentage)
                         );
@@ -191,9 +191,12 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
 
     const checkProcessingError = (frameArr) => {
         if (
-            frameArr.length > 2 &&
+            frameArr.length > 4 &&
             frameArr[0] === frameArr[1] &&
-            frameArr[0] === frameArr[2]
+            frameArr[0] === frameArr[2] &&
+            frameArr[0] === frameArr[3] 
+            &&
+            frameArr[0] === frameArr[4]
         ) {
             return true;
         } else {
@@ -268,7 +271,7 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
                     )}
                     {backgroundImage && backgroundImage !== "color" && (
                         <><img
-                            src={`/images/backgrounds/${backgroundImage}.jpg`}
+                            src={`/images/backgrounds/${backgroundImage}_480.jpg`}
                             alt="background image for video"
                             onLoad={() => setBackgroundImageLoading(false)}
                             style={backgroundImageLoading?{display:'none'}:{}}
@@ -345,8 +348,14 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
                         >
                             Download Video (SD)
                         </button>
-
-                        <Link
+                        {!featureImage?<button
+                            className="form__download pro"
+                            type="button"
+                            disabled={true}
+                        >
+                            {`Download Video (HD) ${payment.amount.toFixed(2)} ${payment.currency}`}
+                        </button>:<Link
+                        className="form__download pro"
                             onMouseEnter={() =>
                                 preloadRouteComponent(RouteID.buy)
                             }
@@ -359,9 +368,11 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
                                 },
                             }}
                         >
-                            Download Video (HD)
-                            {`${payment.amount.toFixed(2)} ${payment.currency}`}
-                        </Link>
+                            
+                            {`Download Video (HD) ${payment.amount.toFixed(2)} ${payment.currency}`}
+                        </Link>}
+
+                        
 
                         <div className="button__explainer">
                             <h5>Free SD Countdown Timer</h5>
@@ -397,7 +408,7 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
                                     ? "Initializing Video..."
                                     : `${percentageComplete}% Complete`
                             }`}</p>
-                            <p>{`${secondsLeft} remaining`}</p>
+                            <p>{`${secondsLeft}`}</p>
                         </div>
                     </>
                 ) : (
