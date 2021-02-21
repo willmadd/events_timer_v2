@@ -47,6 +47,7 @@ const AudioPlayer = ({
                 src={`/mp3/${currentAudio}.mp3`}
                 autoPlay={true}
                 type="audio/mp3"
+                controlsList="nopause"
                 controls
             ></audio>
         </div>

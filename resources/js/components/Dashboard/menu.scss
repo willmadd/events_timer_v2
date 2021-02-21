@@ -1,0 +1,21 @@
+nav.member{
+    padding:16px;
+    li{
+
+        margin: 0;
+        list-style: none;
+        padding: 8px;
+        background-color: #333333;
+        margin-bottom: 8px;
+        border-radius: 3px;
+        a{
+            color: #f5f5f5;
+            text-decoration: none;
+            &.active{
+                border-bottom: 3px solid yellow;
+                color:red;
+            }
+
+        }
+    }
+}

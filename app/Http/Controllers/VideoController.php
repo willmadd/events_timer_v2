@@ -16,6 +16,10 @@ use Carbon\Carbon;
 
 use Illuminate\Support\Facades\File;
 
+use Image;
+
+use Auth;
+
 // use Pbmedia\LaravelFFMpeg\FFMpeg;
 
 class VideoController extends Controller
@@ -140,10 +144,10 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
 
         $hours = $this->getHours($seconds);
 
-        $imgPath= $this->getImagePath($request->featureImage, $relPath, $id);
+        $imgPath= $this->getImagePath($request->featureImage, $relPath, $id, $res);
 
         //input at 3/4 of the output taking into account 5% off set from top
-        $featureImgHeight = ($res*0.75) - ($res*0.05);
+        $featureImgHeight = ($res*0.80);
 
         $complexFilters = $this->getComplexFilters($ft_img_pos, $font, $color, $upperFont, $hours, $seconds, $ms, $featureImgHeight);
 
@@ -163,6 +167,12 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
          -progress $publicPath/progress/progress-$id \
         $name
         ";
+        
+        
+        if(auth()->user()) {
+            // logged in working!
+            $this->saveVideoToUserProfile($res);
+        }
 
             $job = (new CreateCountdownVideo($command, $id))->delay(Carbon::now()->addSeconds(2));
 
@@ -178,7 +188,9 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
             'id'=> $id,
             'file_alias' => "countdown_timer_$id.mp4",
             'destination' => $this->getDetination($id),
-            'bgbgbg'=> $bg,
+            'qqqq res'=> $res,
+            'q' => $request->q,
+            'logged in'  => $logged,
             // 'imgpath' => $imgPath,
             '$pathpath'=>public_path()."/outputs/".date('Y-m-d')."-generated",
             'font'=> $font,
@@ -188,6 +200,10 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
         );
 }
     
+private function saveVideoToUserProfile($seconds)
+{
+    return "";
+}
 
     private function getTotalDuration($seconds)
     {
@@ -263,7 +279,9 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
 
     private function getComplexFilters($ft_img_pos, $font, $color, $upperFont, $hours, $seconds, $ms, $featureImgHeight)
     {
-        return "\"[1]scale=w=-1:h=320[wm];[0][wm]overlay=$ft_img_pos:[km];\
+        $yheight=strval($featureImgHeight);
+
+        return "\"[1]scale=w=-1:h=".$featureImgHeight."[wm];[0][wm]overlay=$ft_img_pos:[km];\
         [km]drawtext=fontfile='$font':fontcolor=$color:x=(w-text_w)/2:y=(h-text_h)-40:\
         fontsize=$upperFont:\
         text='$hours%{eif\:(mod(($seconds-t)/60, 60))\:d\:2}\:%{eif\:(mod($seconds-t, 60))\:d\:2}$ms',drawtext=fontcolor=#ffffff:x=10/2:y=(h-text_h)-10:\
@@ -271,7 +289,7 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
         text='Made for free with eventscountdown.com'\"";
     }
 
-    private function getImagePath($featureImage, $relPath, $id)
+    private function getImagePath($featureImage, $relPath, $id, $res)
     {
         $image_info = getimagesize($featureImage);
 
@@ -283,25 +301,23 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
         $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $featureImage));
 
 
-        // ../
+        $width = ceil(($res*16/9))*0.80;
+        if($width % 2 == 1) $width++;
 
-        $width = 1200;
-        $height = 1200;
-        
-        // $filename = 't-'.$trail_id.'-'.Str::random(12).'.'.$type;
-        // $imgf = Image::make($image);
-        // $imgf->height() > $imgf->width() ? $width=null : $height=null;
-        // $imgf->resize($width, $height, function ($constraint) {
-        //     $constraint->aspectRatio();
-        // });
-        // $imgf->save(public_path('trails/'.$trail_id.'/'.$filename),50,'jpg');
-        // $images = Images::create([
-        //     "url"=>'trails/'.$trail_id.'/'.$filename,
-        //     "trail_id"=>$trail_id
-        // ]);
+    
+ 
+        $height = $res * 0.80;
+
+        $imgf = Image::make($data);
+
+        $imgf->height() > $imgf->width() ? $width=null : $height=null;
+        $imgf->resize($width, $height, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+        $imgf->save($imgPath,50);
         // ..
 
-        file_put_contents($imgPath, $data);
+        // file_put_contents($imgPath, $imgf);
 
         return $imgPath;
     }

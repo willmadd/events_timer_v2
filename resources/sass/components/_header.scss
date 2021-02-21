@@ -29,8 +29,12 @@ header {
                 }
                 a{
                     color: $offwhite;
+                    text-decoration: none;
                     &:hover{
                         color: inherit;
+                    }
+                    &.active{
+                        border-bottom:2px solid yellow;
                     }
                 }
             }

@@ -839,8 +839,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 var GuestPayment = function GuestPayment(_ref) {
-  var userCurrency = _ref.userCurrency,
-      amount = _ref.amount;
+  var location = _ref.location;
+  var _location$state = location.state,
+      userCurrency = _location$state.userCurrency,
+      amount = _location$state.amount; // console.log(location.state);
+
   var stripe = (0,_stripe_react_stripe_js__WEBPACK_IMPORTED_MODULE_3__.useStripe)();
   var elements = (0,_stripe_react_stripe_js__WEBPACK_IMPORTED_MODULE_3__.useElements)();
 

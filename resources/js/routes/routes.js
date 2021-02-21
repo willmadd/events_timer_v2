@@ -1,7 +1,15 @@
 import React from 'react';
 import {ReactLazyPreload} from './helpers';
 import RouteID from '../routes/routeID';
-import GuestPayment from '../components/GuestPayment';
+// import GuestPayment from '../components/GuestPayment';
+
+const GuestPayment = ReactLazyPreload(() =>
+import("../components/GuestPayment")
+);
+
+const AboutPage = ReactLazyPreload(() =>
+import("../components/AboutPage")
+);
 
 const HomePage = ReactLazyPreload(() =>
 import("../components/HomePage")
@@ -50,6 +58,7 @@ export const routes = [
     {path: RouteID.signupActivate, exact:true, component: SignUpActivate},
     // {path: RouteID.logout, exact:true, component: LogOut},
     {path: RouteID.guides, exact:true, component: GuidesPage},
+    {path: RouteID.about, exact:true, component: AboutPage},
     {path: RouteID.dashboard, exact:true, component: Dashboard},
 ];
 

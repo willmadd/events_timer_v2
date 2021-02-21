@@ -1,11 +1,12 @@
 import React, { useEffect, useLayoutEffect } from "react";
 import { Route, useHistory } from "react-router-dom";
 import { ReactLazyPreload } from "../../routes/helpers";
-import routeID from "../../routes/routeID";
+import RouteID from "../../routes/routeID";
 import Loading from "../Loader";
 import LogOut from "../LogOut";
 import Menu from "./Menu";
 import img from './img/header.jpg'
+import MyVideos from "./MyVideos";
 
 const Dashboard = (props) => {
 
@@ -16,7 +17,7 @@ const Dashboard = (props) => {
 
     useLayoutEffect(() => {
         if (!props.user.loading && props.user.error) {
-            history.push(routeID.signup);
+            history.push(RouteID.signup);
         }
     }, [props.user]);
 
@@ -28,14 +29,17 @@ const Dashboard = (props) => {
                 <img src={img}/>
                 <div className="dashboard__wrapper">
 
-                <nav>
+       
                     <Menu />
-                </nav>
+      
                 <main>
-                    <Route exact path={"/dashboard"}>
+                    <Route exact path={RouteID.memberDashboard}>
                         <DashboardMain user={props.user} />
                     </Route>
-                    <Route exact path={routeID.logout} component={LogOut} />
+                    <Route exact path={RouteID.myVideos}>
+                        <MyVideos user={props.user}/>
+                    </Route>
+                    <Route exact path={RouteID.logout} component={LogOut} />
                 </main>
             </div>
                 </div>

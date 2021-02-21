@@ -14,7 +14,7 @@ import GuestPayment from "../GuestPayment";
 import { settings } from "../../settings";
 import AudioPlayer from "./AudioPlayer";
 import { Link, useLocation } from "react-router-dom";
-import SiteLoading from '../SiteLoading';
+import SiteLoading from "../SiteLoading";
 
 import RouteID from "../../routes/routeID";
 import SitePlaceholder from "../SitePlaceholder";
@@ -50,7 +50,7 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
 
     const [backgroundColor, setBackgroundColor] = useState(
         localStorage.getItem("eventsTimer:video:bgCol", backgroundColor) ||
-            "#ff4500"
+            "#E2F1ED"
     );
 
     const [payment, setPayment] = useState({
@@ -89,6 +89,7 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
         if (bg === "color") {
             bg = backgroundColor;
         }
+        const token = localStorage.getItem("eventcountdown:all:userToken");
         const data = {
             time: time / 1000,
             featureImage,
@@ -99,11 +100,17 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
             audio,
             featureImgPos,
             counterFont,
-            q:1
+            q: 3,
+        };
+
+        const headers = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
         };
 
         axios
-            .post("/api/create", data)
+            .post(loggedin ? "/api/auth/create" : "/api/create", data, headers)
             .then((res) => {
                 const startTime = Date.now();
 
@@ -194,8 +201,7 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
             frameArr.length > 4 &&
             frameArr[0] === frameArr[1] &&
             frameArr[0] === frameArr[2] &&
-            frameArr[0] === frameArr[3] 
-            &&
+            frameArr[0] === frameArr[3] &&
             frameArr[0] === frameArr[4]
         ) {
             return true;
@@ -270,13 +276,20 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
                         />
                     )}
                     {backgroundImage && backgroundImage !== "color" && (
-                        <><img
-                            src={`/images/backgrounds/${backgroundImage}_480.jpg`}
-                            alt="background image for video"
-                            onLoad={() => setBackgroundImageLoading(false)}
-                            style={backgroundImageLoading?{display:'none'}:{}}
-                        />
-                        {backgroundImageLoading ? <SitePlaceholder />:null}
+                        <>
+                            <img
+                                src={`/images/backgrounds/${backgroundImage}_480.jpg`}
+                                alt="background image for video"
+                                onLoad={() => setBackgroundImageLoading(false)}
+                                style={
+                                    backgroundImageLoading
+                                        ? { display: "none" }
+                                        : {}
+                                }
+                            />
+                            {backgroundImageLoading ? (
+                                <SitePlaceholder />
+                            ) : null}
                         </>
                     )}
 
@@ -348,31 +361,36 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
                         >
                             Download Video (SD)
                         </button>
-                        {!featureImage?<button
-                            className="form__download pro"
-                            type="button"
-                            disabled={true}
-                        >
-                            {`Download Video (HD) ${payment.amount.toFixed(2)} ${payment.currency}`}
-                        </button>:<Link
-                        className="form__download pro"
-                            onMouseEnter={() =>
-                                preloadRouteComponent(RouteID.buy)
-                            }
-                            to={{
-                                pathname: RouteID.buy,
-                                state: {
-                                    background: location,
-                                    userCurrency: payment.currency,
-                                    amount: payment.amount.toFixed(2),
-                                },
-                            }}
-                        >
-                            
-                            {`Download Video (HD) ${payment.amount.toFixed(2)} ${payment.currency}`}
-                        </Link>}
-
-                        
+                        {!featureImage ? (
+                            <button
+                                className="form__download pro"
+                                type="button"
+                                disabled={true}
+                            >
+                                {`Download Video (HD) ${payment.amount.toFixed(
+                                    2
+                                )} ${payment.currency}`}
+                            </button>
+                        ) : (
+                            <Link
+                                className="form__download pro"
+                                onMouseEnter={() =>
+                                    preloadRouteComponent(RouteID.buy)
+                                }
+                                to={{
+                                    pathname: RouteID.buy,
+                                    state: {
+                                        background: location,
+                                        userCurrency: payment.currency,
+                                        amount: payment.amount.toFixed(2),
+                                    },
+                                }}
+                            >
+                                {`Download Video (HD) ${payment.amount.toFixed(
+                                    2
+                                )} ${payment.currency}`}
+                            </Link>
+                        )}
 
                         <div className="button__explainer">
                             <h5>Free SD Countdown Timer</h5>

@@ -8,9 +8,7 @@ import { rootReducer } from "../store/reducers";
 import App from "./App";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
-import SiteLoading from './SiteLoading';
-
-
+import SiteLoading from "./SiteLoading";
 
 const store = createStore(
     rootReducer,
@@ -28,12 +26,11 @@ if (document.getElementById("events")) {
         <React.Suspense fallback={<SiteLoading />}>
             <Provider store={store}>
                 <Router>
-                        <App />
+                    <App />
                 </Router>
             </Provider>
         </React.Suspense>,
         // </React.StrictMode>,
         document.getElementById("events")
-        
     );
 }

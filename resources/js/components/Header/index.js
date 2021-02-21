@@ -23,10 +23,13 @@ const Header = ({preloadRouteComponent, loggedin}) => {
             <nav>
                 <ul>
                     <li>
-                    <NavLink exact to={RouteID.home} onMouseEnter={()=>preloadRouteComponent(RouteID.home)}>{'Events Countdown'}</NavLink>
+                    <Link exact to={RouteID.home} onMouseEnter={()=>preloadRouteComponent(RouteID.home)}>{'Events Countdown'}</Link>
                     </li>
                     <li>
                         Tour
+                    </li>
+                    <li>
+                    <NavLink exact to={RouteID.about} onMouseEnter={()=>preloadRouteComponent(RouteID.about)}>{'About Us'}</NavLink>
                     </li>
                     <li className="dd">
                         <PostsMenuEntry />
