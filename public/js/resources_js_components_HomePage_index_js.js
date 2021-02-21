@@ -308,7 +308,8 @@ var BackgroundSelector = function BackgroundSelector(_ref) {
               htmlFor: "radio__".concat(index),
               className: "color__label",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", {
-                src: "/images/backgrounds/".concat(background.thumb)
+                src: "/images/backgrounds/".concat(background.thumb),
+                alt: "background style ".concat(background.thumb)
               })
             })]
           }, background.thumb);
@@ -1185,6 +1186,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _HowToArea__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../HowToArea */ "./resources/js/components/HowToArea/index.js");
 /* harmony import */ var _VideoArea__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../VideoArea */ "./resources/js/components/VideoArea/index.js");
 /* harmony import */ var _Usp___WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Usp/ */ "./resources/js/components/Usp/index.js");
+/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/es/Helmet.js");
+
 
 
 

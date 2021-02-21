@@ -12,6 +12,7 @@ import { preloadRouteComponent } from "../routes/helpers";
 // import GuestPayment from "./GuestPayment";
 import routeID from "../routes/routeID";
 import { ReactLazyPreload } from "../routes/helpers";
+import Meta from "./Meta";
 
 // import GuestPayment from "./GuestPayment";
 
@@ -27,13 +28,17 @@ const App = () => {
     useEffect(() => {
         dispatch(locale());
         const userToken = localStorage.getItem("eventcountdown:all:userToken");
-        dispatch(initUser(userToken));
+        // if inplace so if there's no user token (i.e. user is logged out) it dosn't hit the user info api point
+        if(userToken){
+            dispatch(initUser(userToken));
+        }
     }, []);
 
     let background = location.state && location.state.background;
 
     return (
         <div className="eventsapp">
+            <Meta />
             <Header preloadRouteComponent={preloadRouteComponent} />
             <Switch location={background || location}>
                 {routes.map((route, index) => (

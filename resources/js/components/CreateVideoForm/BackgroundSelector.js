@@ -65,7 +65,7 @@ const BackgroundSelector = ({
                                 >
                                     <img
                                         src={`/images/backgrounds/${background.thumb}`}
-                                    ></img>
+                                    alt={`background style ${background.thumb}`}></img>
                                 </label>
                             </div>
                         );
