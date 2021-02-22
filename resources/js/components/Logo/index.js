@@ -7,7 +7,7 @@ const Logo = () => {
                 Countdown
             </h1>
             {/* <h3>{`${props.region}'s most popular webinar tool`}</h3> */}
-            <h2>Create an online countdown timer, perfect for enhancing your online or in-person event flow. Personalise it to match your event branding, overlay an audio track and download - it’s that simple!</h2>
+            <h2>Create and download an online countdown timer, perfect for enhancing your online or in-person event flow. Personalise it to match your event branding, overlay an audio track and download - it’s that simple!</h2>
             <img src="/images/countdownondevices.webp" height="593" width="1280" alt="example of countdown on macbook and iphone"/>
             <ul>
                 <li><h3>It’s easy</h3><p>Just follow each step until you have a timer that looks and sounds great.</p></li>
