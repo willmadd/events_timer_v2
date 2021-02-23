@@ -22,9 +22,13 @@ class CreateRecentVideosTable extends Migration
             $table->integer('duration');
             $table->text('definition')->nullable();
             $table->text('background');
-            $table->text('audio');
+            $table->text('audio')->nullable();
             $table->text('font');
             $table->text('hide_ms');
+            $table->text('font_size');
+            $table->text('font_color');
+            $table->text('res');
+            $table->text('vId');
         });
     }
 

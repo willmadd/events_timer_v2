@@ -20,6 +20,8 @@ use Image;
 
 use Auth;
 
+use App\Models\RecentVideos;
+
 // use Pbmedia\LaravelFFMpeg\FFMpeg;
 
 class VideoController extends Controller
@@ -170,8 +172,10 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
         
         
         if(auth()->user()) {
-            // logged in working!
-            $this->saveVideoToUserProfile($res);
+
+        $thumb = $this->makeThumb($request->featureImage,200);
+
+            $this->saveVideoToUserProfile(auth()->user()->id, $res, $thumb, $imgPath, $seconds, $id, $request->backgroundImage, $request->audio, $request->counterFont, $request->hideMs, $request->textColor);
         }
 
             $job = (new CreateCountdownVideo($command, $id))->delay(Carbon::now()->addSeconds(2));
@@ -200,9 +204,37 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
         );
 }
     
-private function saveVideoToUserProfile($seconds)
+private function saveVideoToUserProfile($userId, $res, $thumb, $imgPath, $seconds, $vId, $background, $audio, $font, $ms , $textColor)
 {
-    return "";
+    $vid = RecentVideos::create([
+        'user_id'=>$userId,
+        'thumbnail'=>$thumb,
+        'imgurl'=>$imgPath,
+        'duration'=>$seconds,
+        'background'=>$background,
+        'audio'=>$audio,
+        'font'=>$font,
+        'hide_ms'=>$ms,
+        'font_color'=>$textColor,
+        'font_size'=>100,
+        'res'=>$res,
+        'vId'=>$vId
+    ]);
+}
+
+private function makeThumb($img, $resolution)
+{
+    $width=$resolution;
+
+    $height=$resolution;
+
+    $thumb = Image::make($img);
+
+    $thumb->height() > $thumb->width() ? $width=null : $height=null;
+    $thumb->resize($width, $height, function ($constraint) {
+        $constraint->aspectRatio();
+    });
+    return (string) $thumb->encode('data-url');
 }
 
     private function getTotalDuration($seconds)

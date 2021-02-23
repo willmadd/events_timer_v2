@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class recentVideos extends Model
+class RecentVideos extends Model
 {
     use HasFactory;
 
@@ -22,6 +22,10 @@ class recentVideos extends Model
         'background', 
         'audio',
         'font',
-        'hide_ms'
+        'hide_ms',
+        'font_color',
+        'font_size',
+        'res',
+        'vId',
     ];
 }

@@ -19,8 +19,11 @@ const ImageUpload = ({setFeatureImage, setFeatureImgPos, featureImgPos}) => {
     }
 
 
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    const { getRootProps, getInputProps, isDragActive, isDragReject} = useDropzone({
         onDrop,
+        accept:"image/png, image/gif image/jpg image/jpeg",
+        minSize:0,
+        maxSize:4194304
     });
     return (
         <div className="featuredimage">
@@ -28,16 +31,14 @@ const ImageUpload = ({setFeatureImage, setFeatureImgPos, featureImgPos}) => {
             <div className="droparea">
                 <div {...getRootProps()} className={`root__drop ${isDragActive?'drag':''}`}>
                     <input {...getInputProps()} />
-                    {isDragActive ? (
-                        <p>Drop the files here ...</p>
-                    ) : (
-                        <p>
-                            Drag files here, or click to select
-                            files
-                        </p>
-                    )}
+           
+                      {!isDragActive && <p>{'Click here or drop a file to upload!'}</p>}
+                      {isDragActive && !isDragReject && <p>{"Drop it like it's hot!"}</p>}
+                      {isDragReject && <p>{"File type not accepted, sorry!"}</p>}    
+                
                 </div>
             </div>
+                <p className="featuredimage__caption">{'Accepts .png .jpg & .gif files under 4mb'}</p>
             <div className="featuredimage__position">
 
                 <h4>Position of featured image</h4>

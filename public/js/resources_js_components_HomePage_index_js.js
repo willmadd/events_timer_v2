@@ -1111,7 +1111,9 @@ var BackgroundSelector = function BackgroundSelector(_ref) {
               className: "color__label",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", {
                 src: "/images/backgrounds/".concat(background.thumb),
-                alt: "background style ".concat(background.thumb)
+                alt: "background style ".concat(background.thumb),
+                height: "75",
+                width: "75"
               })
             })]
           }, background.thumb);
@@ -1375,11 +1377,15 @@ var ImageUpload = function ImageUpload(_ref) {
   };
 
   var _useDropzone = (0,react_dropzone__WEBPACK_IMPORTED_MODULE_1__.useDropzone)({
-    onDrop: onDrop
+    onDrop: onDrop,
+    accept: "image/png, image/gif image/jpg image/jpeg",
+    minSize: 0,
+    maxSize: 4194304
   }),
       getRootProps = _useDropzone.getRootProps,
       getInputProps = _useDropzone.getInputProps,
-      isDragActive = _useDropzone.isDragActive;
+      isDragActive = _useDropzone.isDragActive,
+      isDragReject = _useDropzone.isDragReject;
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
     className: "featuredimage",
@@ -1389,12 +1395,17 @@ var ImageUpload = function ImageUpload(_ref) {
       className: "droparea",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", _objectSpread(_objectSpread({}, getRootProps()), {}, {
         className: "root__drop ".concat(isDragActive ? 'drag' : ''),
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", _objectSpread({}, getInputProps())), isDragActive ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
-          children: "Drop the files here ..."
-        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
-          children: "Drag files here, or click to select files"
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", _objectSpread({}, getInputProps())), !isDragActive && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
+          children: 'Click here or drop a file to upload!'
+        }), isDragActive && !isDragReject && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
+          children: "Drop it like it's hot!"
+        }), isDragReject && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
+          children: "File type not accepted, sorry!"
         })]
       }))
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
+      className: "featuredimage__caption",
+      children: 'Accepts .png .jpg & .gif files under 4mb'
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
       className: "featuredimage__position",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h4", {
