@@ -206,7 +206,7 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
     
 private function saveVideoToUserProfile($userId, $res, $thumb, $imgPath, $seconds, $vId, $background, $audio, $font, $ms , $textColor)
 {
-    $vid = RecentVideos::create([
+    RecentVideos::create([
         'user_id'=>$userId,
         'thumbnail'=>$thumb,
         'imgurl'=>$imgPath,
@@ -220,6 +220,15 @@ private function saveVideoToUserProfile($userId, $res, $thumb, $imgPath, $second
         'res'=>$res,
         'vId'=>$vId
     ]);
+
+    RecentVideos::select('id')->where('user_id', $userId)->orderBy('created_at')->skip(2)->delete();
+    // // $count = $vidRecords->count();
+    // // if ($count > 10){
+
+    // // }
+
+
+
 }
 
 private function makeThumb($img, $resolution)
