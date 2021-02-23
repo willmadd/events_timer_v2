@@ -29,7 +29,7 @@ const AudioPlayer = ({
                         }`}
                         onClick={(e) => setSelectedAudio(null)}
                     >
-                        None
+                        <p>None</p>
                     </div>
                 </div>
                 {audioFiles.map((file) => (

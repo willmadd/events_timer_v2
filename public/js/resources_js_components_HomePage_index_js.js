@@ -970,7 +970,9 @@ var AudioPlayer = function AudioPlayer(_ref) {
           onClick: function onClick(e) {
             return setSelectedAudio(null);
           },
-          children: "None"
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
+            children: "None"
+          })
         })
       }), audioFiles.map(function (file) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(AudioSelector, {

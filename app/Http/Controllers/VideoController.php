@@ -22,6 +22,8 @@ use Auth;
 
 use App\Models\RecentVideos;
 
+use Illuminate\Support\Facades\DB;
+
 // use Pbmedia\LaravelFFMpeg\FFMpeg;
 
 class VideoController extends Controller
@@ -170,12 +172,14 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
         $name
         ";
         
-        
+      
+        $databaseR="";
+
         if(auth()->user()) {
 
         $thumb = $this->makeThumb($request->featureImage,200);
 
-            $this->saveVideoToUserProfile(auth()->user()->id, $res, $thumb, $imgPath, $seconds, $id, $request->backgroundImage, $request->audio, $request->counterFont, $request->hideMs, $request->textColor);
+        $databaseR = $this->saveVideoToUserProfile(auth()->user()->id, $res, $thumb, $imgPath, $seconds, $id, $request->backgroundImage, $request->audio, $request->counterFont, $request->hideMs, $request->textColor);
         }
 
             $job = (new CreateCountdownVideo($command, $id))->delay(Carbon::now()->addSeconds(2));
@@ -192,13 +196,6 @@ $newimg = env("APP_BACKGROUND_URL", "/")."/public/images/backgrounds/1.jpg";
             'id'=> $id,
             'file_alias' => "countdown_timer_$id.mp4",
             'destination' => $this->getDetination($id),
-            'qqqq res'=> $res,
-            'q' => $request->q,
-            // 'logged in'  => $logged,
-            // 'imgpath' => $imgPath,
-            '$pathpath'=>public_path()."/outputs/".date('Y-m-d')."-generated",
-            'font'=> $font,
-            'kkk'=>env("APP_FONT", "/"),
         ],
             200
         );
@@ -221,14 +218,9 @@ private function saveVideoToUserProfile($userId, $res, $thumb, $imgPath, $second
         'vId'=>$vId
     ]);
 
-    RecentVideos::select('id')->where('user_id', $userId)->orderBy('created_at')->skip(2)->delete();
-    // // $count = $vidRecords->count();
-    // // if ($count > 10){
-
-    // // }
-
-
-
+    $ids = RecentVideos::select('id')->orderBy('created_at', 'DESC')->skip(2)->take(10)->get();
+    DB::table('recent_videos')->whereIn('id', $ids)->delete();
+    return $ids;
 }
 
 private function makeThumb($img, $resolution)

@@ -6,7 +6,8 @@ use Carbon\Carbon;
 use App\Models\User;
 use App\Notifications\SignupActivate;
 use Illuminate\Support\Str;
-
+use App\Models\RecentVideos;
+// use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -120,4 +121,17 @@ class AuthController extends Controller
         $user->save();
         return $user;
     }
+
+    public function recentVideos()
+    {
+        // $ids = RecentVideos::select(['thumb', 'background'])->where('user_id',auth()->user()->id())->get();
+
+        return response()->json(
+            [
+                // 'videos'=>$id,
+            ],
+                200
+            );
+    }
 }
+
