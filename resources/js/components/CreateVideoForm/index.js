@@ -149,6 +149,8 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
             );
         } else {
             axios.get(`/progress/progress-${vId}`).then((res) => {
+                smoothUpdatePercentage()
+
                 const frames = fps * (time / 1000);
                 const dataArr = res.data
                     .split("progress=continue")
@@ -242,6 +244,27 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
         }
         return obj;
     };
+
+const [simulatedPercentage, setSimulatedPercentage] = useState(0);
+const [lastSimulatedPercentage, setLastSimulatedPercentage] = useState(0);
+
+// const [percentageComplete, setPercentageComplete] = useState(0);
+
+    const smoothUpdatePercentage = () =>{
+
+        const differenceInPercentage = percentageComplete-lastSimulatedPercentage;
+        
+        setLastSimulatedPercentage(percentageComplete);
+        
+        let int = setInterval(()=>{
+            console.log('interval called');
+            differenceInPercentage/10;
+            setSimulatedPercentage(simulatedPercentage + (differenceInPercentage/10))
+        }, 200)
+
+        clearInterval(int);
+        
+    }
 
     const [fps, setFps] = React.useState(25);
 
@@ -427,6 +450,7 @@ const CreateVideoForm = ({ loggedin, userCurrency }) => {
                                     : `${percentageComplete}% Complete`
                             }`}</p>
                             <p>{`${secondsLeft}`}</p>
+                            <p>Simulated {simulatedPercentage}</p>
                         </div>
                     </>
                 ) : (

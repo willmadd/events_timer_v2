@@ -1778,6 +1778,7 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
       setErrorMsg("The server did not respond. Please wait a few minutes and try again");
     } else {
       axios__WEBPACK_IMPORTED_MODULE_2___default().get("/progress/progress-".concat(vId)).then(function (res) {
+        smoothUpdatePercentage();
         var frames = fps * (time / 1000);
         var dataArr = res.data.split("progress=continue").filter(function (data) {
           return data !== "\n";
@@ -1860,25 +1861,49 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
     return obj;
   };
 
+  var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+      _useState30 = _slicedToArray(_useState29, 2),
+      simulatedPercentage = _useState30[0],
+      setSimulatedPercentage = _useState30[1];
+
+  var _useState31 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+      _useState32 = _slicedToArray(_useState31, 2),
+      lastSimulatedPercentage = _useState32[0],
+      setLastSimulatedPercentage = _useState32[1]; // const [percentageComplete, setPercentageComplete] = useState(0);
+
+
+  var smoothUpdatePercentage = function smoothUpdatePercentage() {
+    var differenceInPercentage = percentageComplete - lastSimulatedPercentage;
+    setLastSimulatedPercentage(percentageComplete);
+
+    var _int = setInterval(function () {
+      console.log('interval called');
+      differenceInPercentage / 10;
+      setSimulatedPercentage(simulatedPercentage + differenceInPercentage / 10);
+    }, 200);
+
+    clearInterval(_int);
+  };
+
   var _React$useState = react__WEBPACK_IMPORTED_MODULE_1__.useState(25),
       _React$useState2 = _slicedToArray(_React$useState, 2),
       fps = _React$useState2[0],
       setFps = _React$useState2[1];
 
-  var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
-      _useState30 = _slicedToArray(_useState29, 2),
-      audio = _useState30[0],
-      setAudio = _useState30[1];
-
-  var _useState31 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
-      _useState32 = _slicedToArray(_useState31, 2),
-      backgroundImageLoading = _useState32[0],
-      setBackgroundImageLoading = _useState32[1];
-
   var _useState33 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
       _useState34 = _slicedToArray(_useState33, 2),
-      audioPlaying = _useState34[0],
-      setAudioPlaying = _useState34[1];
+      audio = _useState34[0],
+      setAudio = _useState34[1];
+
+  var _useState35 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState36 = _slicedToArray(_useState35, 2),
+      backgroundImageLoading = _useState36[0],
+      setBackgroundImageLoading = _useState36[1];
+
+  var _useState37 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
+      _useState38 = _slicedToArray(_useState37, 2),
+      audioPlaying = _useState38[0],
+      setAudioPlaying = _useState38[1];
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
     className: "form",
@@ -2028,6 +2053,8 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
             children: "".concat(percentageComplete === 0 ? "Initializing Video..." : "".concat(percentageComplete, "% Complete"))
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
             children: "".concat(secondsLeft)
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
+            children: ["Simulated ", simulatedPercentage]
           })]
         })]
       }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", {
