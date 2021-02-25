@@ -29,7 +29,8 @@ class User extends Authenticatable
         'password',
         'active', 
         'activation_token',
-        'membership_level'
+        'membership_level',
+        'admin'
     ];
 
     /**

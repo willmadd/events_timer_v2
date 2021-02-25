@@ -29,8 +29,6 @@ const App = () => {
         dispatch(locale());
         const userToken = localStorage.getItem("eventcountdown:all:userToken");
         // if inplace so if there's no user token (i.e. user is logged out) it dosn't hit the user info api point
-        console.log('logggeddd on');
-        console.log(userToken);
         if(userToken){
             dispatch(initUser(userToken));
         }

@@ -146,6 +146,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
 
 
 
@@ -164,15 +177,22 @@ var Dashboard = function Dashboard(props) {
   var MemberSubscribe = (0,_routes_helpers__WEBPACK_IMPORTED_MODULE_2__.ReactLazyPreload)(function () {
     return __webpack_require__.e(/*! import() */ "resources_js_components_MemberSubscribe_index_js").then(__webpack_require__.bind(__webpack_require__, /*! ../MemberSubscribe */ "./resources/js/components/MemberSubscribe/index.js"));
   });
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      plans = _useState2[0],
+      setPlans = _useState2[1];
+
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useLayoutEffect)(function () {
     if (!props.user.loading && props.user.error) {
       history.push(_routes_routeID__WEBPACK_IMPORTED_MODULE_3__.default.signup);
     }
   }, [props.user]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useLayoutEffect)(function () {
-    axios__WEBPACK_IMPORTED_MODULE_9___default().get('/api/plansbycurrency/gbp').then(function (res) {
-      console.log('plans');
-      console.log(res.data);
+    axios__WEBPACK_IMPORTED_MODULE_9___default().get("/api/plansbycurrency/gbp").then(function (res) {
+      setPlans(res.data);
+    })["catch"](function (e) {
+      console.log(e);
     });
   }, []);
 
@@ -201,7 +221,9 @@ var Dashboard = function Dashboard(props) {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
             exact: true,
             path: _routes_routeID__WEBPACK_IMPORTED_MODULE_3__.default.memberSubscribe,
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(MemberSubscribe, {})
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(MemberSubscribe, {
+              plans: plans
+            })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
             exact: true,
             path: _routes_routeID__WEBPACK_IMPORTED_MODULE_3__.default.logout,

@@ -2039,9 +2039,6 @@ var App = function App() {
     dispatch((0,_store_loading_actions__WEBPACK_IMPORTED_MODULE_7__.locale)());
     var userToken = localStorage.getItem("eventcountdown:all:userToken"); // if inplace so if there's no user token (i.e. user is logged out) it dosn't hit the user info api point
 
-    console.log('logggeddd on');
-    console.log(userToken);
-
     if (userToken) {
       dispatch((0,_store_init_actions__WEBPACK_IMPORTED_MODULE_6__.initUser)(userToken));
     }
