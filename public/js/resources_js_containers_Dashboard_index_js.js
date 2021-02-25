@@ -133,7 +133,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _routes_helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../routes/helpers */ "./resources/js/routes/helpers.js");
 /* harmony import */ var _routes_routeID__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../routes/routeID */ "./resources/js/routes/routeID.js");
 /* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Loader */ "./resources/js/components/Loader/index.js");
@@ -141,6 +141,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Menu__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Menu */ "./resources/js/components/Dashboard/Menu.js");
 /* harmony import */ var _img_header_jpg__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./img/header.jpg */ "./resources/js/components/Dashboard/img/header.jpg");
 /* harmony import */ var _MyVideos__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./MyVideos */ "./resources/js/components/Dashboard/MyVideos.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_9__);
+
 
 
 
@@ -154,15 +157,24 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Dashboard = function Dashboard(props) {
-  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_9__.useHistory)();
+  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_10__.useHistory)();
   var DashboardMain = (0,_routes_helpers__WEBPACK_IMPORTED_MODULE_2__.ReactLazyPreload)(function () {
     return __webpack_require__.e(/*! import() */ "resources_js_components_Dashboard_Dashboard_js").then(__webpack_require__.bind(__webpack_require__, /*! ./Dashboard */ "./resources/js/components/Dashboard/Dashboard.js"));
+  });
+  var MemberSubscribe = (0,_routes_helpers__WEBPACK_IMPORTED_MODULE_2__.ReactLazyPreload)(function () {
+    return __webpack_require__.e(/*! import() */ "resources_js_components_MemberSubscribe_index_js").then(__webpack_require__.bind(__webpack_require__, /*! ../MemberSubscribe */ "./resources/js/components/MemberSubscribe/index.js"));
   });
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useLayoutEffect)(function () {
     if (!props.user.loading && props.user.error) {
       history.push(_routes_routeID__WEBPACK_IMPORTED_MODULE_3__.default.signup);
     }
   }, [props.user]);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useLayoutEffect)(function () {
+    axios__WEBPACK_IMPORTED_MODULE_9___default().get('/api/plansbycurrency/gbp').then(function (res) {
+      console.log('plans');
+      console.log(res.data);
+    });
+  }, []);
 
   if (props.user.loading) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Loader__WEBPACK_IMPORTED_MODULE_4__.default, {});
@@ -174,19 +186,23 @@ var Dashboard = function Dashboard(props) {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: "dashboard__wrapper",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Menu__WEBPACK_IMPORTED_MODULE_6__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("main", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
             exact: true,
             path: _routes_routeID__WEBPACK_IMPORTED_MODULE_3__.default.memberDashboard,
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(DashboardMain, {
               user: props.user
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
             exact: true,
             path: _routes_routeID__WEBPACK_IMPORTED_MODULE_3__.default.myVideos,
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_MyVideos__WEBPACK_IMPORTED_MODULE_8__.default, {
               user: props.user
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+            exact: true,
+            path: _routes_routeID__WEBPACK_IMPORTED_MODULE_3__.default.memberSubscribe,
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(MemberSubscribe, {})
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
             exact: true,
             path: _routes_routeID__WEBPACK_IMPORTED_MODULE_3__.default.logout,
             component: _LogOut__WEBPACK_IMPORTED_MODULE_5__.default
@@ -212,12 +228,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _routes_routeID__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../routes/routeID */ "./resources/js/routes/routeID.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ([{
   name: "Profile",
   url: "/dashboard"
 }, {
   name: "Get EventsCountdown Pro",
-  url: "/getpro"
+  url: _routes_routeID__WEBPACK_IMPORTED_MODULE_0__.default.memberSubscribe
 }, {
   name: "My Videos",
   url: "/dashboard/myvideos"

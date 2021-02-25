@@ -1885,7 +1885,7 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
     clearInterval(_int);
   };
 
-  var _React$useState = react__WEBPACK_IMPORTED_MODULE_1__.useState(25),
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_1__.useState(18),
       _React$useState2 = _slicedToArray(_React$useState, 2),
       fps = _React$useState2[0],
       setFps = _React$useState2[1];

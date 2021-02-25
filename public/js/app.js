@@ -2268,7 +2268,14 @@ var Header = function Header(_ref) {
           })]
         }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
-            children: "My Account"
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.NavLink, {
+              exact: true,
+              to: _routes_routeID__WEBPACK_IMPORTED_MODULE_2__.default.memberDashboard,
+              onMouseEnter: function onMouseEnter() {
+                return preloadRouteComponent(_routes_routeID__WEBPACK_IMPORTED_MODULE_2__.default.memberDashboard);
+              },
+              children: 'My Account'
+            })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
             onClick: function onClick() {
               return logout();
@@ -2581,6 +2588,7 @@ __webpack_require__.r(__webpack_exports__);
   signupsuccess: '/signupsuccess',
   signupActivate: '/signup/activate/:token',
   memberDashboard: '/dashboard',
+  memberSubscribe: '/dashboard/getpro',
   signUpSuccess: '/signup/success',
   logout: '/logout',
   getPro: '/dashboard/getpro',
@@ -75839,7 +75847,7 @@ function valueEqual(a, b) {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_GuestPayment_index_js":1,"resources_js_components_AboutPage_index_js":1,"resources_js_components_HomePage_index_js":1,"resources_js_components_SignInPage_index_js":1,"resources_js_components_SignUpPage_index_js":1,"resources_js_components_SignUpSuccess_index_js":1,"resources_js_components_SignUpActivate_index_js":1,"resources_js_containers_Dashboard_index_js":1,"resources_js_components_GuidesPage_index_js":1,"resources_js_components_Test_index_js":1,"resources_js_components_Dashboard_Dashboard_js":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_GuestPayment_index_js":1,"resources_js_components_AboutPage_index_js":1,"resources_js_components_HomePage_index_js":1,"resources_js_components_SignInPage_index_js":1,"resources_js_components_SignUpPage_index_js":1,"resources_js_components_SignUpSuccess_index_js":1,"resources_js_components_SignUpActivate_index_js":1,"resources_js_containers_Dashboard_index_js":1,"resources_js_components_GuidesPage_index_js":1,"resources_js_components_Test_index_js":1,"resources_js_components_Dashboard_Dashboard_js":1,"resources_js_components_MemberSubscribe_index_js":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

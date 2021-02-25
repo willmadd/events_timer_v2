@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PaymentsController;
+use App\Http\Controllers\SubscriptionsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,8 @@ Route::get('/test', [VideoController::class, 'ffmpeg']);
 
 Route::post('/create', [VideoController::class, 'create']);
 Route::get('/c', [VideoController::class, 'testTwo']);
+
+Route::get('/plansbycurrency/{currency}', [SubscriptionsController::class, 'getplansbycurrency']);
 
 Route::post('/charge', [PaymentsController::class, 'singleCharge']);
 

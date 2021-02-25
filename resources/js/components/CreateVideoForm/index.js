@@ -266,7 +266,7 @@ const [lastSimulatedPercentage, setLastSimulatedPercentage] = useState(0);
         
     }
 
-    const [fps, setFps] = React.useState(25);
+    const [fps, setFps] = React.useState(18);
 
     const [audio, setAudio] = useState(null);
 

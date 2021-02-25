@@ -52,7 +52,7 @@ const Header = ({preloadRouteComponent, loggedin}) => {
                     </li>
                     </>:<>
                     <li>
-                        My Account
+                    <NavLink exact to={RouteID.memberDashboard} onMouseEnter={()=>preloadRouteComponent(RouteID.memberDashboard)}>{'My Account'}</NavLink>
                     </li>
                     <li onClick={()=>logout()}>
                         Log Out
