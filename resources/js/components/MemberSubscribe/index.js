@@ -5,16 +5,21 @@ import PlansSelector from "./PlansSelector";
 
 const MemberSubscribe = ({ plans }) => {
 
-const [selectedPlan, setSelectedPlan] = useState(null);
+const [selectedPlan, setSelectedPlan] = useState();
+
+console.log(plans.find(plan=>plan.slug===selectedPlan));
+
+// useEffect(()=>{
+//     plans.find(plan=>plan.slug===selectedPlan)
+// }, [selectedPlan])
 
     return (
         <div className="plans">
             <h2>Get Events Countdown Pro</h2>
-            <p>{`Sign up and get great value downloadabl evideos for your webinar or online event.`}</p>
-            <p>{`Get the first month free, and you can cancel any time, there's no risk at all!`}</p>
+           
             <div className="plans__wrapper">
                 <PlansSelector plans={plans} selectedPlan={selectedPlan} setSelectedPlan={setSelectedPlan}/>
-                <CheckoutArea />
+                {selectedPlan && <CheckoutArea selectedPlan={plans.find(plan=>plan.slug===selectedPlan)}/>}
             </div>
         </div>
     );
