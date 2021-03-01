@@ -819,6 +819,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helpers_withStripe__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../helpers/withStripe */ "./resources/js/helpers/withStripe.js");
 /* harmony import */ var _stripe_react_stripe_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @stripe/react-stripe-js */ "./node_modules/@stripe/react-stripe-js/dist/react-stripe.umd.js");
 /* harmony import */ var _stripe_react_stripe_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_stripe_react_stripe_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Loader */ "./resources/js/components/Loader/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _routes_routeID__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../routes/routeID */ "./resources/js/routes/routeID.js");
+
 
 
 
@@ -827,41 +831,65 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
 
 
 
 
 var CheckoutArea = function CheckoutArea(_ref) {
   var selectedPlan = _ref.selectedPlan;
+  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.useHistory)();
   var stripe = (0,_stripe_react_stripe_js__WEBPACK_IMPORTED_MODULE_4__.useStripe)();
   var elements = (0,_stripe_react_stripe_js__WEBPACK_IMPORTED_MODULE_4__.useElements)();
 
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      loading = _useState2[0],
+      setLoading = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(""),
+      _useState4 = _slicedToArray(_useState3, 2),
+      error = _useState4[0],
+      setError = _useState4[1];
+
   var handleSubmit = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee(event) {
-      var cardElement, _yield$stripe$createP, error, paymentMethod;
+      var cardElement, _yield$stripe$createP, error, paymentMethod, id, token, headers;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              console.log('checkout hit');
-
               if (!(!stripe || !elements)) {
-                _context.next = 3;
+                _context.next = 2;
                 break;
               }
 
               return _context.abrupt("return");
 
-            case 3:
+            case 2:
               cardElement = elements.getElement(_stripe_react_stripe_js__WEBPACK_IMPORTED_MODULE_4__.CardElement);
-              _context.next = 6;
+              _context.next = 5;
               return stripe.createPaymentMethod({
                 type: "card",
                 card: cardElement
               });
 
-            case 6:
+            case 5:
               _yield$stripe$createP = _context.sent;
               error = _yield$stripe$createP.error;
               paymentMethod = _yield$stripe$createP.paymentMethod;
@@ -869,18 +897,28 @@ var CheckoutArea = function CheckoutArea(_ref) {
               if (error) {
                 console.log("[error]", error);
               } else {
-                console.log("[PaymentMethod]", paymentMethod); // const {id} = paymentMethod;
-                // console.log(id);
-                // axios.post('/api/charge', {id, userCurrency, amount})
-                // .then(res=>{
-                //     console.log(res)
-                // })
-                // .catch(e=>{
-                //     console.log(e)
-                // })
+                setLoading(true);
+                id = paymentMethod.id;
+                token = localStorage.getItem("eventcountdown:all:userToken");
+                headers = {
+                  headers: {
+                    Authorization: "Bearer ".concat(token)
+                  }
+                };
+                axios.post("/api/auth/subscribe", {
+                  id: id,
+                  plan: selectedPlan.stripe_plan
+                }, headers).then(function (res) {
+                  setLoading(false);
+                  history.push(_routes_routeID__WEBPACK_IMPORTED_MODULE_6__.default.memberDashboard);
+                })["catch"](function (e) {
+                  setLoading(false);
+                  setError("A server error occured, Please try again");
+                  console.log(e);
+                });
               }
 
-            case 10:
+            case 9:
             case "end":
               return _context.stop();
           }
@@ -901,7 +939,6 @@ var CheckoutArea = function CheckoutArea(_ref) {
     return newDate;
   };
 
-  console.log(selectedPlan);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
     className: "plans__checkout",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", {
@@ -916,37 +953,42 @@ var CheckoutArea = function CheckoutArea(_ref) {
         children: "Charge today: 0"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
         children: ["Your first payment of ".concat(selectedPlan.cost, " ").concat(selectedPlan.currency, " will happen on "), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("b", {
-          children: getOneMonthForward().toLocaleDateString('en-GB', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric'
+          children: getOneMonthForward().toLocaleDateString("en-GB", {
+            year: "numeric",
+            month: "short",
+            day: "numeric"
           })
-        }), " unless you cancel beforehand"]
+        }), " ", "unless you cancel beforehand"]
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_stripe_react_stripe_js__WEBPACK_IMPORTED_MODULE_4__.CardElement, {
-      options: {
-        style: {
-          base: {
-            fontSize: "16px",
-            border: "1px solid #333333",
-            marginBottom: "24px",
-            color: "#424770",
-            "::placeholder": {
-              color: "#aab7c4"
+    }), error && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
+      className: "error",
+      children: error
+    }), loading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Loader__WEBPACK_IMPORTED_MODULE_5__.default, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_stripe_react_stripe_js__WEBPACK_IMPORTED_MODULE_4__.CardElement, {
+        options: {
+          style: {
+            base: {
+              fontSize: "16px",
+              border: "1px solid #333333",
+              marginBottom: "24px",
+              color: "#424770",
+              "::placeholder": {
+                color: "#aab7c4"
+              }
+            },
+            invalid: {
+              color: "#9e2146"
             }
-          },
-          invalid: {
-            color: "#9e2146"
           }
         }
-      }
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
-      type: "button",
-      onClick: function onClick() {
-        return handleSubmit();
-      },
-      disabled: !stripe,
-      children: "Sign Up"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
+        type: "button",
+        onClick: function onClick() {
+          return handleSubmit();
+        },
+        disabled: !stripe,
+        children: "Sign Up"
+      })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
       className: "checkout__info",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
@@ -957,68 +999,6 @@ var CheckoutArea = function CheckoutArea(_ref) {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_helpers_withStripe__WEBPACK_IMPORTED_MODULE_3__.withStripe)(CheckoutArea));
-
-/***/ }),
-
-/***/ "./resources/js/components/MemberSubscribe/PlansSelector.js":
-/*!******************************************************************!*\
-  !*** ./resources/js/components/MemberSubscribe/PlansSelector.js ***!
-  \******************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-
-
-
-var PlansSelector = function PlansSelector(_ref) {
-  var plans = _ref.plans,
-      setSelectedPlan = _ref.setSelectedPlan,
-      selectedPlan = _ref.selectedPlan;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-    className: "plans__area",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
-      children: "If you're running online or in person events regularly then it works out much more cost effective to purchase an Events Countdown subscription. The first month is on us, so if you don't like our service, you can cancel within the first month and yu won't be charged at all."
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
-      children: "With no minimum contact, you can cancel any time and to make matters better, the first month is completly free"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", {
-      children: "Choose a subscription:"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-      className: "plans__selector",
-      children: plans.map(function (plan) {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-          onClick: function onClick() {
-            return setSelectedPlan(plan.slug);
-          },
-          className: "plans__individual ".concat(selectedPlan === plan.slug ? "active" : selectedPlan ? "inactive" : undefined),
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", {
-            children: plan.name
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
-            children: plan.description
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h4", {
-            children: "Pay nothing for the first month, then ".concat(plan.cost, " ").concat(plan.currency, " per month, charged monthly")
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
-            children: "No minium contract, cancel anytime"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
-            type: "button",
-            onClick: function onClick() {
-              return setSelectedPlan(plan.slug);
-            },
-            children: "Sign Up to ".concat(plan.name)
-          })]
-        }, plan.slug);
-      })
-    })]
-  });
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PlansSelector);
 
 /***/ }),
 
@@ -1190,7 +1170,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".plans__checkout {\n  border: 1px solid #333333;\n  border-radius: 4px;\n  padding: 24px;\n  margin-bottom: 24px;\n}\n.plans__checkout button {\n  width: 100%;\n  margin-top: 16px;\n  margin-bottom: 16px;\n}\n.plans__checkout .StripeElement {\n  border-bottom: 1px solid #333333;\n  padding: 8px 4px;\n}\n.plans__individual {\n  border: 1px solid #333333;\n  padding: 24px;\n  border-radius: 4px;\n  cursor: pointer;\n}\n.plans__individual:hover {\n  background-color: #f5f5f5;\n}\n.plans__individual.active {\n  border-width: 2px;\n}\n.plans__individual.active button {\n  background-color: #bebebe;\n}\n.plans__individual.inactive {\n  border-color: #bebebe;\n}\n.plans__individual.inactive p, .plans__individual.inactive h3, .plans__individual.inactive h4 {\n  color: #bebebe;\n}\n.plans__individual.inactive button {\n  background-color: #bebebe;\n}\n.plans__individual button {\n  width: 100%;\n}\n.plans__wrapper {\n  display: grid;\n  grid-template-columns: 3fr 2fr;\n  grid-gap: 24px;\n}\n.plans__selector {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  grid-gap: 12px;\n  margin-bottom: 24px;\n}\n.plans p {\n  margin-bottom: 12px;\n  margin-bottom: 12px;\n  line-height: 24px;\n}\n.plans h2, .plans h3 {\n  margin-bottom: 24px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".plans {\n  margin-right: 16px;\n}\n.plans__checkout {\n  border: 1px solid #333333;\n  border-radius: 4px;\n  padding: 24px;\n  margin-bottom: 24px;\n}\n.plans__checkout button {\n  width: 100%;\n  margin-top: 16px;\n  margin-bottom: 16px;\n}\n.plans__checkout .StripeElement {\n  border-bottom: 1px solid #333333;\n  padding: 8px 4px;\n}\n.plans__individual {\n  border: 1px solid #333333;\n  padding: 24px;\n  border-radius: 4px;\n  cursor: pointer;\n}\n.plans__individual:hover {\n  background-color: #f5f5f5;\n}\n.plans__individual.active {\n  border-width: 2px;\n}\n.plans__individual.active button {\n  background-color: #bebebe;\n}\n.plans__individual.inactive {\n  border-color: #bebebe;\n}\n.plans__individual.inactive p, .plans__individual.inactive h3, .plans__individual.inactive h4 {\n  color: #bebebe;\n}\n.plans__individual.inactive button {\n  background-color: #bebebe;\n}\n.plans__individual button {\n  width: 100%;\n}\n.plans__wrapper {\n  display: grid;\n  grid-template-columns: 3fr 2fr;\n  grid-gap: 24px;\n}\n.plans__selector {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  grid-gap: 12px;\n  margin-bottom: 24px;\n}\n.plans p {\n  margin-bottom: 12px;\n  margin-bottom: 12px;\n  line-height: 24px;\n}\n.plans h2, .plans h3 {\n  margin-bottom: 24px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

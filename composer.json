@@ -21,6 +21,7 @@
         "laravel/ui": "^3.2",
         "pbmedia/laravel-ffmpeg": "^7.5",
         "php-ffmpeg/php-ffmpeg": "^0.17.0",
+        "spatie/laravel-stripe-webhooks": "^2.5",
         "stripe/stripe-php": "^7.72"
     },
     "require-dev": {

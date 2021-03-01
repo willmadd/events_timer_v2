@@ -35,6 +35,9 @@ Route::post('/charge', [PaymentsController::class, 'singleCharge']);
 
 Route::post('/cleanup', [VideoController::class, 'cleanup']);
 
+
+// Route::post('/stripe/success', [WebhookController::class, 'handleInvoicePaymentSucceeded']);
+Route::stripeWebhooks('/stripe/success');
 // Route::post('/video', [VideoController::class, 'ffmpeg']);
 
 Route::group([
@@ -50,6 +53,8 @@ Route::group([
         Route::get('logout', [AuthController::class, 'logout']);
         Route::get('user', [AuthController::class, 'user']);
         Route::post('create', [VideoController::class, 'create']);
+        Route::post('/subscribe', [SubscriptionsController::class, 'createSubscription']);
         Route::get('/recentvideos', [AuthController::class, 'recentVideos']);
+        Route::get('/cancelsubscription', [SubscriptionsController::class, 'cancelSubscription']);
     });
 });

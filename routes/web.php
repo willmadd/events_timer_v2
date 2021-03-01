@@ -24,3 +24,9 @@ Route::get('/{path?}', [
     'as' => 'react',
     'where' => ['path' => '.*'],
 ]);
+
+
+Route::post(
+    '/stripe/webhook',
+    [WebhookController::class, 'handleWebhook']
+);

@@ -18,23 +18,25 @@ class PlanSeeder extends Seeder
             [
                 'name' => "GBP basic",
                 'slug' => 'gbp-basic',
-                'stripe_plan' => 'gbp-basic',
+                'stripe_plan' => 'price_1IP2r1LrsmQqsvaa0XuOJHBZ',
                 'cost'=>9,
                 'currency'=>'GBP',
                 'description'=>'GBP basic test description',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'level'=>'basic'
             
             ],
             [
                 'name' => "GBP Premium",
                 'slug' => 'gbp-premium',
-                'stripe_plan' => 'gbp-premium',
+                'stripe_plan' => 'price_1IP2r1LrsmQqsvaavhJrwC1r',
                 'cost'=>25,
                 'currency'=>'GBP',
                 'description'=>'GBP premium test description',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'level'=>'premium'
             
             ],
             [
@@ -45,7 +47,8 @@ class PlanSeeder extends Seeder
                 'currency'=>'JPY',
                 'description'=>'JPY basic test description',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'level'=>'basic'
             
             ],
             [
@@ -56,7 +59,8 @@ class PlanSeeder extends Seeder
                 'currency'=>'JPY',
                 'description'=>'JPY premium test description',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'level'=>'premium'
             
             ],
 

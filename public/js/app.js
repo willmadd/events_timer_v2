@@ -2592,7 +2592,8 @@ __webpack_require__.r(__webpack_exports__);
   myVideos: '/dashboard/myvideos',
   guides: '/guide/:guide',
   buy: '/buy',
-  about: '/about'
+  about: '/about',
+  manageSubscription: '/dashboard/mysubscription'
 });
 
 /***/ }),
@@ -2717,6 +2718,7 @@ var FAILURE = "FAILURE";
 var UPDATE = "UPDATE";
 var SUCCESSFUL_UPDATE = "SUCCESSFUL_UPDATE";
 var initUser = function initUser(token) {
+  console.log('init user');
   return function (dispatch) {
     dispatch({
       type: LOADING

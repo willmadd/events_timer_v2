@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Notifications\SignupActivate;
 use Illuminate\Support\Str;
 use App\Models\RecentVideos;
+use Illuminate\Support\Facades\DB;
 // use App\Models\User;
 
 class AuthController extends Controller
@@ -32,6 +33,7 @@ class AuthController extends Controller
             'name' => $request->name,
             'company' => $request->company,
             'email' => $request->email,
+            'membership_level' => 'free',
             'password' => bcrypt($request->password),
             'activation_token' => Str::random(60)
 
@@ -105,7 +107,22 @@ class AuthController extends Controller
      */
     public function user(Request $request)
     {
-        return response()->json($request->user());
+
+        $subscription=DB::table('subscriptions')->where('user_id', $request->user()->id)->pluck('stripe_plan');
+
+        
+        $userObj = $request->user();
+        
+        if($subscription){
+            $plan_name = DB::table('plans')->where('stripe_plan', $subscription)->value('name');
+            $userObj->subscription = $plan_name;
+            $userObj->membership_level = $plan_name;
+        } else{
+            $userObj->subscription = "Free";
+            $userObj->membership_level = "Free";
+        }
+
+        return response()->json($userObj);
     }
 
     public function signupActivate($token)

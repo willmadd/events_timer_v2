@@ -9,6 +9,7 @@ import img from "./img/header.jpg";
 import MyVideos from "./MyVideos";
 
 import axios from "axios";
+import ManageSubscriptions from "./ManageSubscriptions";
 
 const Dashboard = (props) => {
     const history = useHistory();
@@ -37,6 +38,8 @@ const Dashboard = (props) => {
             });
     }, []);
 
+    console.log('index', plans);
+
     if (props.user.loading) {
         return <Loading />;
     } else {
@@ -55,6 +58,10 @@ const Dashboard = (props) => {
                         </Route>
                         <Route exact path={RouteID.memberSubscribe}>
                             <MemberSubscribe plans={plans} />
+                        </Route>
+                        <Route exact path={RouteID.manageSubscription}>
+                            <ManageSubscriptions plans={plans} user={props.user}/>
+                            {/* <MemberSubscribe /> */}
                         </Route>
                         <Route exact path={RouteID.logout} component={LogOut} />
                     </main>

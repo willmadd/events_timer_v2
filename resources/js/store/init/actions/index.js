@@ -7,6 +7,7 @@ export const UPDATE = "UPDATE";
 export const SUCCESSFUL_UPDATE = "SUCCESSFUL_UPDATE";
 
 export const initUser = (token) => {
+    console.log('init user');
     return (dispatch) => {
         dispatch({ type: LOADING });
         return axios

@@ -30,7 +30,8 @@ class User extends Authenticatable
         'active', 
         'activation_token',
         'membership_level',
-        'admin'
+        'is_admin',
+        'downloads_remaining'
     ];
 
     /**

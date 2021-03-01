@@ -13,4 +13,5 @@ export default {
     guides:'/guide/:guide',
     buy:'/buy',
     about:'/about',
+    manageSubscription:'/dashboard/mysubscription',
 }

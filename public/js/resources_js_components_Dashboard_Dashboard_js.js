@@ -13,48 +13,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _helpers_getMemberShopLevel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../helpers/getMemberShopLevel */ "./resources/js/helpers/getMemberShopLevel.js");
-/* harmony import */ var _routes_routeID__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../routes/routeID */ "./resources/js/routes/routeID.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _routes_routeID__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../routes/routeID */ "./resources/js/routes/routeID.js");
 
 
 
 
 
 
-
-var Dashboard = function Dashboard(_ref) {
-  var user = _ref.user;
+var Dashboard = function Dashboard(props) {
+  var user = props.user;
+  console.log(props);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h1", {
       children: "Welcome ".concat(user.name)
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", {
-      children: "Membership Level ".concat((0,_helpers_getMemberShopLevel__WEBPACK_IMPORTED_MODULE_2__.default)(user.membership_level))
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
-      to: _routes_routeID__WEBPACK_IMPORTED_MODULE_3__.default.getPro,
+      children: "Membership Level ".concat(user.membership_level)
+    }), user.membership_level === "free" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+      to: _routes_routeID__WEBPACK_IMPORTED_MODULE_2__.default.getPro,
       children: "Upgrade Now"
+    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+      to: _routes_routeID__WEBPACK_IMPORTED_MODULE_2__.default.manageSubscription,
+      children: "Manage my subscription"
     })]
   });
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Dashboard);
-
-/***/ }),
-
-/***/ "./resources/js/helpers/getMemberShopLevel.js":
-/*!****************************************************!*\
-  !*** ./resources/js/helpers/getMemberShopLevel.js ***!
-  \****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (num) {
-  return num === 0 ? "basic" : "pro";
-});
 
 /***/ })
 

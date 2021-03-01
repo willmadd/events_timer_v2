@@ -1,3 +1,5 @@
+@import './colours';
+
 @font-face {
     font-family: "ds-digital";
     src: url("/fonts/ds-digib-webfont.woff2") format("woff2"),
@@ -60,4 +62,8 @@ h3{
 a{
     color: slateblue;
     text-decoration: underline;
+}
+
+.error{
+    color: $errorRed;
 }

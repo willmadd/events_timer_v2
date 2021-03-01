@@ -91,6 +91,10 @@ a {
   text-decoration: underline;
 }
 
+.error {
+  color: #F32013;
+}
+
 input {
   padding: 4px 8px;
 }

@@ -2419,13 +2419,14 @@ __webpack_require__.r(__webpack_exports__);
 
 var PopupModal = function PopupModal(_ref) {
   var message = _ref.message,
-      close = _ref.close;
+      close = _ref.close,
+      proceed = _ref.proceed;
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     document.addEventListener("keydown", function () {
       return close(null);
     }, false);
     return function () {
-      window.removeEventListener('keydown', function () {
+      window.removeEventListener("keydown", function () {
         return close(null);
       });
     };
@@ -2444,7 +2445,13 @@ var PopupModal = function PopupModal(_ref) {
         onClick: function onClick() {
           return close(null);
         },
-        children: "Ok"
+        children: "Close"
+      }), proceed && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
+        type: "button",
+        onClick: function onClick() {
+          return proceed();
+        },
+        children: "Proceed"
       })]
     })
   });
