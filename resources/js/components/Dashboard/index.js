@@ -47,7 +47,7 @@ const Dashboard = (props) => {
             <div className="dashboard">
                 <img src={img} />
                 <div className="dashboard__wrapper">
-                    <Menu />
+                    <Menu membership={props.user.membership_level}/>
 
                     <main>
                         <Route exact path={RouteID.memberDashboard}>

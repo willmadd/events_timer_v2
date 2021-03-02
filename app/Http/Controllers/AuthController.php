@@ -108,13 +108,13 @@ class AuthController extends Controller
     public function user(Request $request)
     {
 
-        $subscription=DB::table('subscriptions')->where('user_id', $request->user()->id)->pluck('stripe_plan');
-
-        
+        $subscription=DB::table('subscriptions')->select('stripe_plan', 'ends_at')->where('user_id', $request->user()->id)->first();
+//  return $subscription->stripe_plan;
+//  return response()->json($subscription->stripe_plan);
         $userObj = $request->user();
         
-        if($subscription){
-            $plan_name = DB::table('plans')->where('stripe_plan', $subscription)->value('name');
+        if($subscription->stripe_plan && !$subscription->ends_at){
+            $plan_name = DB::table('plans')->where('stripe_plan', $subscription->stripe_plan)->value('name');
             $userObj->subscription = $plan_name;
             $userObj->membership_level = $plan_name;
         } else{

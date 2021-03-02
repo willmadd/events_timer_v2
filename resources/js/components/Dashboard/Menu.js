@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import menuItems from "./menuitems";
 import { preloadRouteComponent } from "../../routes/helpers";
 import "./menu.scss";
-const Menu = () => {
+const Menu = ({membership}) => {
     return (
         <nav className="member">
             <ul>

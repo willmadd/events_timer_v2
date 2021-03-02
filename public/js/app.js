@@ -2425,9 +2425,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var store = (0,redux__WEBPACK_IMPORTED_MODULE_10__.createStore)(_store_reducers__WEBPACK_IMPORTED_MODULE_5__.rootReducer, // initialState,
-(0,redux__WEBPACK_IMPORTED_MODULE_10__.compose)((0,redux__WEBPACK_IMPORTED_MODULE_10__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_8__.default) // window.__REDUX_DEVTOOLS_EXTENSION__ &&
-//     window.__REDUX_DEVTOOLS_EXTENSION__()
-));
+(0,redux__WEBPACK_IMPORTED_MODULE_10__.compose)((0,redux__WEBPACK_IMPORTED_MODULE_10__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_8__.default), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
 
 if (document.getElementById("events")) {
   react_dom__WEBPACK_IMPORTED_MODULE_2__.render(
