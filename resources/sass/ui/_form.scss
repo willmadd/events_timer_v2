@@ -1,12 +1,13 @@
-input{
-    padding:4px 8px;
-    &:focus{
-        outline:none;
+@import "./colours";
+input {
+    padding: 4px 8px;
+    &:focus {
+        outline: none;
     }
 }
-audio{
-    &:focus{
-        outline:none;
+audio {
+    &:focus {
+        outline: none;
     }
 }
 
@@ -14,29 +15,126 @@ audio:focus {
     outline: none;
 }
 
-ul{
-    margin:0;
-    padding:0;
-
+ul {
+    margin: 0;
+    padding: 0;
 }
 
-li{
-    padding:0;
-    margin:0;
+li {
+    padding: 0;
+    margin: 0;
     list-style: none;
 }
 
-button{
+button {
     background: $black;
-    outline:0;
+    outline: 0;
     color: $offwhite;
     border: 0;
-    padding:12px;
+    padding: 12px;
     border-radius: 3px;
 }
 
-button:disabled,
-button[disabled]{
-    background: $grey-dark;
-    cursor:not-allowed;
+button.primary:disabled,
+button.primary[disabled] {
+    background: $primaryDisabled;
+    cursor: not-allowed;
+}
+
+.tab{
+    border-radius: 7px 7px 0 0;
+    border: 2px solid $gText;
+    background-color:$white;
+    border-bottom:0;
+    color: $gText;
+    cursor: pointer;
+}
+
+.primary {
+    padding: 8px 24px;
+    background-color: $primary;
+    border-radius: 7px;
+    box-shadow: $boxShadow;
+    // color: $offwhite;
+    font-family: $headFont;
+    text-decoration: none;
+    text-align: center;
+    text-transform: capitalize;
+    color: $primaryText;
+    cursor: pointer;
+    @include breakpoint($tablet) {
+    }
+}
+.secondary {
+    padding: 8px 24px;
+    background-color: $white;
+    border-radius: 7px;
+    box-shadow: $boxShadow;
+    // color: $offwhite;
+    font-family: $headFont;
+    text-decoration: none;
+    text-align: center;
+    text-transform: capitalize;
+    color: $gText;
+    border: 2px solid $gText;
+    cursor: pointer;
+    @include breakpoint($tablet) {
+    }
+}
+
+
+.icon:after{
+
+    // background-color: violet;
+    height: 18px;
+    width: 18px;
+    display: block;
+    content: "";
+    margin-left:8px;
+}
+.icon {
+    display: flex;
+    align-items: center;
+    &__proceed {
+        &:after {
+            background-image: url('/images/icons/proceed.svg');
+        }
+    }
+    &__close {
+        &:after {
+            height: 14px;
+            width: 14px;
+            background-image: url('/images/icons/close-st.svg');
+        }
+    }
+    &__lock {
+        &:after {
+            background-image: url('/images/icons/padlock-g.svg');
+        }
+    }
+    &__bell {
+        &:after {
+            background-image: url('/images/icons/bell-g.svg');
+        }
+    }
+    &__lock.active{
+        &:after {
+            background-image: url('/images/icons/padlock.svg');
+        }
+    }
+    &__credit-card {
+        &:after {
+            background-image: url('/images/icons/credit-card-g.svg');
+        }
+    }
+    &__credit-card.active{
+        &:after{
+            background-image: url('/images/icons/credit-card.svg');
+        }
+    }
+    &__bell.active{
+        &:after{
+            background-image: url('/images/icons/bell.svg');
+        }
+    }
 }

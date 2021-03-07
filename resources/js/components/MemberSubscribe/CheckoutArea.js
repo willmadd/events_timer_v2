@@ -5,7 +5,7 @@ import Loading from "../Loader";
 import { Link, useHistory } from "react-router-dom";
 import RouteID from "../../routes/routeID";
 
-const CheckoutArea = ({ selectedPlan }) => {
+const CheckoutArea = ({ selectedPlan, setSelectedPlan }) => {
 
     const history = useHistory();
     const stripe = useStripe();
@@ -68,8 +68,10 @@ const CheckoutArea = ({ selectedPlan }) => {
 
     return (
         <div className="plans__checkout">
+            <div className="plans__checkout__modal">
+                <div type="button" onClick={()=>setSelectedPlan(null)} className="plans__checkout__close"></div>
             <h3>Checkout</h3>
-            <div className="plans__checkout__summary">
+            <div className="plans__checkout__summary" >
                 <p>
                     You are purchasing 1 x {selectedPlan.name} subscription to
                     EventsCountdown.com
@@ -112,6 +114,7 @@ const CheckoutArea = ({ selectedPlan }) => {
                         }}
                     />
                     <button
+                    className="primary"
                         type="button"
                         onClick={() => handleSubmit()}
                         disabled={!stripe}
@@ -126,6 +129,7 @@ const CheckoutArea = ({ selectedPlan }) => {
                     stored on Events Countdown's servers
                 </p>
             </div>
+        </div>
         </div>
     );
 };

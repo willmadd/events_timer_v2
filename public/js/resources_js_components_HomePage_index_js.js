@@ -2440,18 +2440,23 @@ var PopupModal = function PopupModal(_ref) {
       className: "overlay__modal",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
         children: message
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
-        type: "button",
-        onClick: function onClick() {
-          return close(null);
-        },
-        children: "Close"
-      }), proceed && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
-        type: "button",
-        onClick: function onClick() {
-          return proceed();
-        },
-        children: "Proceed"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+        className: "overlay__buttons",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
+          className: 'secondary icon__close icon',
+          type: "button",
+          onClick: function onClick() {
+            return close(null);
+          },
+          children: "Close"
+        }), proceed && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
+          className: 'primary icon__proceed icon',
+          type: "button",
+          onClick: function onClick() {
+            return proceed();
+          },
+          children: "Proceed"
+        })]
       })]
     })
   });
@@ -2921,7 +2926,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".overlay__wrapper {\n  position: fixed;\n  z-index: 8;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n  background-color: black;\n  background-color: rgba(0, 0, 0, 0.4);\n}\n\n.overlay__modal {\n  background-color: #fefefe;\n  margin: 15% auto;\n  padding: 20px;\n  border: 1px solid #333333;\n  width: 80%;\n  max-width: 480px;\n  box-shadow: 0px 0px 15px #333333;\n  border-radius: 7px;\n}\n.overlay__modal button {\n  margin-top: 24px;\n  padding: 8px 24px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".overlay__wrapper {\n  position: fixed;\n  z-index: 8;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n  background-color: black;\n  background-color: rgba(0, 0, 0, 0.4);\n}\n.overlay__modal {\n  background-color: #fefefe;\n  margin: 15% auto;\n  padding: 20px;\n  border: 1px solid #333333;\n  width: 80%;\n  max-width: 480px;\n  box-shadow: 0px 0px 15px #333333;\n  border-radius: 7px;\n}\n.overlay__buttons {\n  display: flex;\n}\n.overlay__buttons button {\n  margin-top: 24px;\n  padding: 8px 24px;\n  margin-right: 12px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

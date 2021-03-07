@@ -4,14 +4,14 @@ export const LOADING = "LOADING";
 export const SUCCESS = "SUCCESS";
 export const FAILURE = "FAILURE";
 export const UPDATE = "UPDATE";
+export const LOGOUT = "LOGOUT";
 export const SUCCESSFUL_UPDATE = "SUCCESSFUL_UPDATE";
 
 export const initUser = (token) => {
-    console.log('init user');
     return (dispatch) => {
         dispatch({ type: LOADING });
         return axios
-            .get(`api/auth/user`, {
+            .get(`/api/auth/user`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

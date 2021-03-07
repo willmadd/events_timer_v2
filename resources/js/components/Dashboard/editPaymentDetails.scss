@@ -1,0 +1,22 @@
+@import "../../../sass/ui/colours";
+@import "../../../sass/ui/screens";
+.update-payment{
+    max-width: 724px;
+    @include breakpoint($desktop){
+        margin-right:36px;
+    }
+    p{
+    }
+}
+.card__element{
+    margin: 18px 0;
+    background-color: white;
+    padding: 12px;
+
+    border-radius: 3px;
+}
+.sub{
+    margin-top:8px;
+    font-size:12px;
+    margin-bottom:12px;
+}

@@ -8,6 +8,7 @@ use App\Notifications\SignupActivate;
 use Illuminate\Support\Str;
 use App\Models\RecentVideos;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 // use App\Models\User;
 
 class AuthController extends Controller
@@ -34,7 +35,7 @@ class AuthController extends Controller
             'company' => $request->company,
             'email' => $request->email,
             'membership_level' => 'free',
-            'password' => bcrypt($request->password),
+            'password' => Hash::make($request->password),
             'activation_token' => Str::random(60)
 
         ]);
@@ -113,7 +114,7 @@ class AuthController extends Controller
 //  return response()->json($subscription->stripe_plan);
         $userObj = $request->user();
         
-        if($subscription->stripe_plan && !$subscription->ends_at){
+        if($subscription && $subscription->stripe_plan && !$subscription->ends_at){
             $plan_name = DB::table('plans')->where('stripe_plan', $subscription->stripe_plan)->value('name');
             $userObj->subscription = $plan_name;
             $userObj->membership_level = $plan_name;
@@ -139,16 +140,45 @@ class AuthController extends Controller
         return $user;
     }
 
-    public function recentVideos()
+    public function recentVideos(Request $request)
     {
-        // $ids = RecentVideos::select(['thumb', 'background'])->where('user_id',auth()->user()->id())->get();
+        $ids = RecentVideos::select(['thumbnail', 'background', 'created_at', 'duration', 'font', 'font_color'])->where('user_id',auth()->user()->id)->get();
 
         return response()->json(
             [
-                // 'videos'=>$id,
+                'videos'=>$ids,
             ],
                 200
             );
+    }
+
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'password' => 'string|required',
+            'newPassword'=>'string|required'
+        ]);
+
+    if(!Hash::check($request->password, Auth::guard('api')->user()->password)){
+        return response()->json(
+            [
+                'message'=>'Your password is incorrect',
+            ],
+                401
+            );
+    }else{
+        $user = Auth::user();
+        $user->password = Hash::make($request->newPassword);
+        $user->save();
+        return response()->json(
+            [
+                'message'=>'success',
+                'user'=>$user
+            ],
+                200
+            );
+        }
+
     }
 }
 

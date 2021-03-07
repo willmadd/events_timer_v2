@@ -4,8 +4,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MarketingController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\SubscriptionsController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +57,9 @@ Route::group([
         Route::post('create', [VideoController::class, 'create']);
         Route::post('/subscribe', [SubscriptionsController::class, 'createSubscription']);
         Route::get('/recentvideos', [AuthController::class, 'recentVideos']);
+        Route::post('/tbsndkf', [AuthController::class, 'changePassword']);
         Route::get('/cancelsubscription', [SubscriptionsController::class, 'cancelSubscription']);
+        Route::post('/newsletter', [MarketingController::class, 'newsletter']);
+        Route::post('/updatepaymentmethod', [SubscriptionsController::class, 'updatePaymentMethod']);
     });
 });

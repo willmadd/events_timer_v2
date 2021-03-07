@@ -1,0 +1,35 @@
+@import "../../../sass/ui/colours";
+@import "../../../sass/ui/screens";
+
+.edit-details{
+    &__tab-wrapper{
+        border-bottom:2px solid $gText;
+        padding-left:0px;
+        display: flex;
+        margin-bottom:36px;
+        @include breakpoint($desktop){
+            margin-right:36px;
+    
+        }
+        .active{
+            background-color: $primary;
+            box-shadow: $boxShadow;
+            color: $primaryText;
+            z-index:99;
+            border:0;
+        }
+        .inactive{
+            z-index:5;
+        }
+        .payment{
+            margin-left:-10px;
+        }
+    }
+    .button__container{
+        display: flex;
+        margin-top:18px;
+        button{
+            margin-right: 12px;
+        }
+    }
+}

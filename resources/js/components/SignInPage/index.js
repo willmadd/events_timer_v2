@@ -25,6 +25,11 @@ const SignInPage = () => {
             password:sha256(password),
             remember_me
         };
+        console.log({
+            original:password,
+            sha:sha256(password)
+
+        });
         axios.post('/api/auth/login', data)
         .then(res=>{
             localStorage.setItem("eventcountdown:all:userToken", res.data.access_token);

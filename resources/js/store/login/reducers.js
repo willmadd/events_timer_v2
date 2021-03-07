@@ -2,7 +2,6 @@
 
 // const initialStateU = {};
 
-
 // export const userData = (state = initialStateU, {type, payload}) => {
 //     console.log('userdata');
 //     console.log(type);
@@ -15,14 +14,13 @@
 //     }
 // }
 
-
-
 import {
     LOADING,
     SUCCESS,
     FAILURE,
     UPDATE,
-    SUCCESSFUL_UPDATE
+    SUCCESSFUL_UPDATE,
+    LOGOUT
 } from "../init/actions";
 
 const initialState = {
@@ -35,7 +33,7 @@ export const user = (state = initialState, action) => {
         case LOADING:
             return {
                 ...state,
-                loading: true
+                loading: true,
             };
 
         case SUCCESS:
@@ -49,7 +47,14 @@ export const user = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                error: true
+                error: true,
+            };
+        case LOGOUT:
+            console.log('logout');
+            return {
+                user:{},
+                loading: false,
+                error: true,
             };
         default:
             return state;

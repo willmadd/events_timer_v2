@@ -2193,6 +2193,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
 
 
 
@@ -2200,6 +2213,11 @@ __webpack_require__.r(__webpack_exports__);
 var Header = function Header(_ref) {
   var preloadRouteComponent = _ref.preloadRouteComponent,
       loggedin = _ref.loggedin;
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      open = _useState2[0],
+      setOpen = _useState2[1];
 
   var logout = function logout() {
     var token = localStorage.getItem("eventcountdown:all:userToken");
@@ -2213,71 +2231,85 @@ var Header = function Header(_ref) {
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("header", {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("nav", {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("ul", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
-            exact: true,
-            to: _routes_routeID__WEBPACK_IMPORTED_MODULE_2__.default.home,
-            onMouseEnter: function onMouseEnter() {
-              return preloadRouteComponent(_routes_routeID__WEBPACK_IMPORTED_MODULE_2__.default.home);
-            },
-            children: 'Events Countdown'
-          })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
-          children: "Tour"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.NavLink, {
-            exact: true,
-            to: _routes_routeID__WEBPACK_IMPORTED_MODULE_2__.default.about,
-            onMouseEnter: function onMouseEnter() {
-              return preloadRouteComponent(_routes_routeID__WEBPACK_IMPORTED_MODULE_2__.default.about);
-            },
-            children: 'About Us'
-          })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
-          className: "dd",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_PostsMenuEntry__WEBPACK_IMPORTED_MODULE_3__.default, {})
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
-          children: "Gallery"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
-          children: "Get Pro"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
-          children: "Support"
-        }), !loggedin ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+      role: "navigation",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+        id: "menuToggle",
+        onClick: function onClick() {
+          return setOpen(!open);
+        },
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", {
+          type: "checkbox",
+          checked: open
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("ul", {
+          id: "menu",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.NavLink, {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
               exact: true,
-              to: _routes_routeID__WEBPACK_IMPORTED_MODULE_2__.default.signin,
+              to: _routes_routeID__WEBPACK_IMPORTED_MODULE_2__.default.home,
               onMouseEnter: function onMouseEnter() {
-                return preloadRouteComponent(_routes_routeID__WEBPACK_IMPORTED_MODULE_2__.default.signin);
+                return preloadRouteComponent(_routes_routeID__WEBPACK_IMPORTED_MODULE_2__.default.home);
               },
-              children: 'Sign In'
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", {
+                src: "/images/logo-white.svg",
+                alt: "events countdown"
+              })
             })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
+            children: "Tour"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.NavLink, {
               exact: true,
-              to: _routes_routeID__WEBPACK_IMPORTED_MODULE_2__.default.signup,
+              to: _routes_routeID__WEBPACK_IMPORTED_MODULE_2__.default.about,
               onMouseEnter: function onMouseEnter() {
-                return preloadRouteComponent(_routes_routeID__WEBPACK_IMPORTED_MODULE_2__.default.signup);
+                return preloadRouteComponent(_routes_routeID__WEBPACK_IMPORTED_MODULE_2__.default.about);
               },
-              children: 'Sign Up'
-            })
-          })]
-        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.NavLink, {
-              exact: true,
-              to: _routes_routeID__WEBPACK_IMPORTED_MODULE_2__.default.memberDashboard,
-              onMouseEnter: function onMouseEnter() {
-                return preloadRouteComponent(_routes_routeID__WEBPACK_IMPORTED_MODULE_2__.default.memberDashboard);
-              },
-              children: 'My Account'
+              children: "About Us"
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
-            onClick: function onClick() {
-              return logout();
-            },
-            children: "Log Out"
+            className: "dd",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_PostsMenuEntry__WEBPACK_IMPORTED_MODULE_3__.default, {})
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
+            children: "Gallery"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
+            children: "Get Pro"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
+            children: "Support"
+          }), !loggedin ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.NavLink, {
+                exact: true,
+                to: _routes_routeID__WEBPACK_IMPORTED_MODULE_2__.default.signin,
+                onMouseEnter: function onMouseEnter() {
+                  return preloadRouteComponent(_routes_routeID__WEBPACK_IMPORTED_MODULE_2__.default.signin);
+                },
+                children: "Sign In"
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.NavLink, {
+                exact: true,
+                to: _routes_routeID__WEBPACK_IMPORTED_MODULE_2__.default.signup,
+                onMouseEnter: function onMouseEnter() {
+                  return preloadRouteComponent(_routes_routeID__WEBPACK_IMPORTED_MODULE_2__.default.signup);
+                },
+                children: "Sign Up"
+              })
+            })]
+          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.NavLink, {
+                exact: true,
+                to: _routes_routeID__WEBPACK_IMPORTED_MODULE_2__.default.memberDashboard,
+                onMouseEnter: function onMouseEnter() {
+                  return preloadRouteComponent(_routes_routeID__WEBPACK_IMPORTED_MODULE_2__.default.memberDashboard);
+                },
+                children: "My Account"
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
+              onClick: function onClick() {
+                return logout();
+              },
+              children: "Log Out"
+            })]
           })]
         })]
       })
@@ -2583,15 +2615,16 @@ __webpack_require__.r(__webpack_exports__);
   signupsuccess: '/signupsuccess',
   signupActivate: '/signup/activate/:token',
   memberDashboard: '/dashboard',
-  memberSubscribe: '/dashboard/getpro',
+  memberSubscribe: '/dashboard/get-pro',
   signUpSuccess: '/signup/success',
   logout: '/logout',
-  getPro: '/dashboard/getpro',
+  getPro: '/dashboard/get-pro',
   myVideos: '/dashboard/myvideos',
   guides: '/guide/:guide',
   buy: '/buy',
   about: '/about',
-  manageSubscription: '/dashboard/mysubscription'
+  editDetails: '/dashboard/edit',
+  manageSubscription: '/dashboard/my-subscription'
 });
 
 /***/ }),
@@ -2704,6 +2737,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "SUCCESS": () => (/* binding */ SUCCESS),
 /* harmony export */   "FAILURE": () => (/* binding */ FAILURE),
 /* harmony export */   "UPDATE": () => (/* binding */ UPDATE),
+/* harmony export */   "LOGOUT": () => (/* binding */ LOGOUT),
 /* harmony export */   "SUCCESSFUL_UPDATE": () => (/* binding */ SUCCESSFUL_UPDATE),
 /* harmony export */   "initUser": () => (/* binding */ initUser)
 /* harmony export */ });
@@ -2714,14 +2748,14 @@ var LOADING = "LOADING";
 var SUCCESS = "SUCCESS";
 var FAILURE = "FAILURE";
 var UPDATE = "UPDATE";
+var LOGOUT = "LOGOUT";
 var SUCCESSFUL_UPDATE = "SUCCESSFUL_UPDATE";
 var initUser = function initUser(token) {
-  console.log('init user');
   return function (dispatch) {
     dispatch({
       type: LOADING
     });
-    return axios__WEBPACK_IMPORTED_MODULE_0___default().get("api/auth/user", {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/auth/user", {
       headers: {
         Authorization: "Bearer ".concat(token)
       }
@@ -2919,6 +2953,14 @@ var user = function user() {
         loading: false,
         error: true
       });
+
+    case _init_actions__WEBPACK_IMPORTED_MODULE_0__.LOGOUT:
+      console.log('logout');
+      return {
+        user: {},
+        loading: false,
+        error: true
+      };
 
     default:
       return state;

@@ -65,6 +65,10 @@ var SignInPage = function SignInPage() {
       password: js_sha256__WEBPACK_IMPORTED_MODULE_3___default()(password),
       remember_me: remember_me
     };
+    console.log({
+      original: password,
+      sha: js_sha256__WEBPACK_IMPORTED_MODULE_3___default()(password)
+    });
     axios__WEBPACK_IMPORTED_MODULE_2___default().post('/api/auth/login', data).then(function (res) {
       localStorage.setItem("eventcountdown:all:userToken", res.data.access_token);
       dispatch((0,_store_init_actions__WEBPACK_IMPORTED_MODULE_5__.initUser)(res.data.access_token));

@@ -52,6 +52,19 @@ class SubscriptionsController extends Controller
             , 200);
 
     }
+    public function updatePaymentMethod(Request $request){
+        $id = $request->id;
+        $user = User::find(auth()->user()->id);
+        $user->updateDefaultPaymentMethod($id);
+        $user->save();
+        
+        return response()->json([
+            'result'=>'success',
+            'payload'=>$id,
+        ]
+            , 200);
+    }
+
     public function cancelSubscription(Request $request)
     {   
 

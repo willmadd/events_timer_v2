@@ -22,6 +22,8 @@ class UserSeeder extends Seeder
             'created_at'=>'2021-02-10 18:03:04',
             'updated_at'=>'2021-02-10 18:03:04',
             'membership_level' => 'free',
+            'agreetandc'=>1,
+            'newsletter'=>1
         ]);
     }
 }

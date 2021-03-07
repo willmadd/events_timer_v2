@@ -39,12 +39,12 @@ $headFont : 'Overpass', sans-serif;
 
 $bodyFont : 'Quicksand', sans-serif;
 
-p, label{
+p{
     font-family: 'Quicksand', sans-serif;
     font-weight: 500;
     margin:0;
 }
-h1,h2,h3,h4,h5,h6{
+h1,h2,h3,h4,h5,h6, label{
     margin:0;
     font-family: $headFont;
     font-weight: 700;

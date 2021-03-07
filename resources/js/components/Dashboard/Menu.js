@@ -3,25 +3,46 @@ import { Link, NavLink } from "react-router-dom";
 import menuItems from "./menuitems";
 import { preloadRouteComponent } from "../../routes/helpers";
 import "./menu.scss";
-const Menu = ({membership}) => {
+import { slugify } from "../../helpers/slugify";
+const Menu = ({ membership }) => {
+    console.log('MEMBERSHIP',membership)
     return (
-        <nav className="member">
+        <nav className="member mob-hide">
             <ul>
-                {menuItems.map((menuItem) => {
+                {/* {menuItems.map((menuItem) => {
                     return (
                         <li key={menuItem.name}>
                             <NavLink
+                                className={slugify(menuItem.name)}
                                 exact
                                 to={menuItem.url}
                                 onMouseOver={() =>
                                     preloadRouteComponent(menuItem.url)
                                 }
                             >
-                                <h5>{menuItem.name}</h5>
+                                {menuItem.name}
                             </NavLink>
                         </li>
                     );
-                })}
+                })} */}
+                {menuItems.reduce((acc,menuItem, i)=>{
+                        if (membership && membership.toLowerCase() !== menuItem.hide) {
+                            acc.push(<li key={menuItem.name}>
+                                <NavLink
+                                    className={slugify(menuItem.name)}
+                                    exact
+                                    to={menuItem.url}
+                                    onMouseOver={() =>
+                                        preloadRouteComponent(menuItem.url)
+                                    }
+                                >
+                                    {menuItem.name}
+                                </NavLink>
+                            </li>);
+                        }
+                        return acc;
+                    // return <p>Hello!</p>
+                },[])}
             </ul>
         </nav>
     );

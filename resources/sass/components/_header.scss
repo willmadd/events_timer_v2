@@ -1,49 +1,155 @@
 header {
     width: 100%;
-    background-color: $black;
+    background: $gText;
 
     height: 60px;
     position: sticky;
     top: 0;
     z-index: 3;
-    nav {
-        height: 100%;
-        max-width: 1440px;
-        margin-left: auto;
-        margin-right: auto;
-        ul {
+
+    #menuToggle {
+        display: block;
+        position: relative;
+        top: 18px;
+        left: 18px;
+        height: 60px;
+        z-index: 1;
+        width: calc(100% - 18px);
+        -webkit-user-select: none;
+        user-select: none;
+        @include breakpoint($tablet) {
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+    }
+
+    #menuToggle a,
+    #menuToggle li {
+        text-decoration: none;
+        color: $selectedBG;
+
+        transition: color 0.3s ease;
+        font-family: $headFont;
+        display: flex;
+    }
+
+    #menuToggle a:hover {
+        color: $primary;
+    }
+
+    #menuToggle input {
+        display: block;
+        width: 40px;
+        height: 32px;
+        position: absolute;
+        top: -7px;
+        left: -5px;
+
+        cursor: pointer;
+
+        opacity: 0;
+        z-index: 2;
+
+        -webkit-touch-callout: none;
+        @include breakpoint($tablet) {
+            display: none;
+        }
+    }
+
+    #menuToggle span {
+        display: block;
+        width: 33px;
+        height: 4px;
+        margin-bottom: 5px;
+        position: relative;
+
+        background: $selectedBG;
+        border-radius: 3px;
+
+        z-index: 1;
+
+        transform-origin: 4px 0px;
+
+        transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
+            background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease;
+        @include breakpoint($tablet) {
+            display: none;
+        }
+    }
+
+    #menuToggle span:first-child {
+        transform-origin: 0% 0%;
+    }
+
+    #menuToggle span:nth-last-child(2) {
+        transform-origin: 0% 100%;
+    }
+
+    #menuToggle input:checked ~ span {
+        opacity: 1;
+        transform: rotate(45deg) translate(-2px, -1px);
+        background: $selectedBG;
+    }
+
+    #menuToggle input:checked ~ span:nth-last-child(3) {
+        opacity: 0;
+        transform: rotate(0deg) scale(0.2, 0.2);
+    }
+
+    #menuToggle input:checked ~ span:nth-last-child(2) {
+        transform: rotate(-45deg) translate(0, -1px);
+    }
+
+    #menu {
+        position: absolute;
+        width: 100%;
+        margin: -100px 0 0 -50px;
+        padding: 50px;
+        padding-top: 104px;
+
+        background: $gText;
+        list-style-type: none;
+        -webkit-font-smoothing: antialiased;
+        transform-origin: 0% 0%;
+        transform: translate(-100%, 0);
+
+        transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+
+        @include breakpoint($tablet) {
+            // display: none;
+            width: 100%;
             display: flex;
-            justify-content: space-around;
-            align-items: center;
             margin: 0;
             padding: 0;
-            height: 100%;
-            li {
-                list-style: none;
-                padding:12px;
-                color:$offwhite;
-                font-family: $headFont;
-                font-size: 18px;
-                &.dd{
-                    padding:none;
-                }
-                a{
-                    color: $offwhite;
-                    text-decoration: none;
-                    &:hover{
-                        color: inherit;
-                    }
-                    &.active{
-                        border-bottom:2px solid yellow;
-                    }
-                }
-            }
+            transform: none;
+            position: relative;
+            height:60px;
         }
+    }
+
+    #menu li {
+        padding: 10px 0;
+        font-size: 22px;
+        @include breakpoint($tablet){
+            display: flex;
+    align-items: center;
+        }
+        img{
+            height:45px;
+        }
+    }
+
+    #menuToggle input:checked ~ ul {
+        transform: none;
     }
     .dropdown {
         position: relative;
-        padding:16px;
-        &:hover .dropdown__content{
+        padding: 16px;
+        @include breakpoint($tablet) {
+            padding: 0;
+        }
+        &:hover .dropdown__content {
             display: flex;
         }
         &__content {
@@ -53,7 +159,7 @@ header {
             flex-direction: column;
             bottom: -100px;
             min-width: 250px;
-            height:100px;
+            height: 100px;
             color: $white;
             li {
                 background-color: $black;

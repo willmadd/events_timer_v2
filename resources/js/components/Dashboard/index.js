@@ -5,16 +5,20 @@ import RouteID from "../../routes/routeID";
 import Loading from "../Loader";
 import LogOut from "../LogOut";
 import Menu from "./Menu";
-import img from "./img/header.jpg";
+import img from "./img/memberbg.svg";
 import MyVideos from "./MyVideos";
 
 import axios from "axios";
 import ManageSubscriptions from "./ManageSubscriptions";
+import MobileMenu from "./MobileMenu";
+import EditDetails from "./EditDetails";
 
 const Dashboard = (props) => {
     const history = useHistory();
 
     const DashboardMain = ReactLazyPreload(() => import("./Dashboard"));
+
+    const EditDetails = ReactLazyPreload(() => import("./EditDetails"));
 
     const MemberSubscribe = ReactLazyPreload(() =>
         import("../MemberSubscribe")
@@ -38,16 +42,16 @@ const Dashboard = (props) => {
             });
     }, []);
 
-    console.log('index', plans);
-
     if (props.user.loading) {
         return <Loading />;
     } else {
+
         return (
             <div className="dashboard">
                 <img src={img} />
                 <div className="dashboard__wrapper">
                     <Menu membership={props.user.membership_level}/>
+                    <MobileMenu />
 
                     <main>
                         <Route exact path={RouteID.memberDashboard}>
@@ -61,7 +65,9 @@ const Dashboard = (props) => {
                         </Route>
                         <Route exact path={RouteID.manageSubscription}>
                             <ManageSubscriptions plans={plans} user={props.user}/>
-                            {/* <MemberSubscribe /> */}
+                        </Route>
+                        <Route exact path={RouteID.editDetails}>
+                            <EditDetails user={props.user}/>
                         </Route>
                         <Route exact path={RouteID.logout} component={LogOut} />
                     </main>
@@ -72,3 +78,4 @@ const Dashboard = (props) => {
 };
 
 export default Dashboard;
+

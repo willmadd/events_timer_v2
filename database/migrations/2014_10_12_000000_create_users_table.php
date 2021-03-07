@@ -25,6 +25,8 @@ class CreateUsersTable extends Migration
             $table->string('membership_level')->nullable();
             $table->integer('downloads_remaining')->default(0);
             $table->boolean('is_admin')->default(false);
+            $table->boolean('agreetandc')->default(false);
+            $table->boolean('newsletter')->default(false);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

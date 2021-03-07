@@ -1,13 +1,68 @@
-.dashboard{
-    max-width:1440px;
-    margin-left: auto;
-    margin-right:auto;
-    img{
-        width:100%;
+@import "../../node_modules/breakpoint-sass/stylesheets/breakpoint";
+
+.dashboard {
+    max-width: 1440px;
+    // margin-left: auto;
+    // margin-right:auto;
+    flex: 1;
+    background: $staticBG;
+    color: $gText;
+    &__statistics {
+        display: grid;
+        grid-template-columns: 1fr;
+        max-width: 860px;
+        grid-gap: 12px;
+        margin-bottom: 36px;
+        @include breakpoint($tablet) {
+            margin-right: 36px;
+            box-sizing: border-box;
+        }
+        p {
+            line-height: 24px;
+            margin-bottom: 8px;
+            padding: 4px;
+        }
     }
-    &__wrapper{
-        display:grid;
-        grid-template-columns: 320px auto;
-        grid-gap:36px;
+    &__action {
+        border-radius: 3px;
+        background-color: $selectedBG;
+    }
+    main {
+        padding: 0 24px 48px 24px;
+        display: flex;
+        flex-direction: column;
+        @include breakpoint($desktop) {
+            margin-top: 24px;
+            padding: 0;
+            padding-bottom: 48px;
+            display: block;
+        }
+        h1 {
+            text-transform: capitalize;
+            margin-bottom: 24px;
+            text-align: center;
+            @include breakpoint($tablet) {
+                text-align: left;
+            }
+        }
+    }
+    h3,
+    h2 {
+        text-transform: uppercase;
+        margin-top: 16px;
+        margin-bottom: 24px;
+    }
+    img {
+        width: 100%;
+    }
+    &__wrapper {
+        display: grid;
+        grid-gap: 8px;
+        margin-top: -4px;
+        grid-template-columns: 1fr;
+        @include breakpoint($tablet) {
+            grid-template-columns: 340px auto;
+            grid-gap: 36px;
+        }
     }
 }

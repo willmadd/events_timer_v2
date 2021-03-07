@@ -1,0 +1,115 @@
+@import "../../../sass/ui/colours";
+@import "../../../../node_modules/breakpoint-sass/stylesheets/breakpoint";
+@import "../../../sass/ui/screens";
+.plans {
+    &__individual {
+        border: 1px solid $offwhite;
+        padding: 24px;
+        border-radius: 10px;
+        box-shadow: 0px 2px 6px rgb(0, 0, 0, 0.36);
+        background-color: $white;
+        width: auto;
+        box-sizing: border-box;
+        min-height: 0;
+        @include breakpoint($desktopLarge) {
+            width: 280px;
+        }
+        cursor: pointer;
+        &:hover {
+            background-color: $selectedBG;
+        }
+        h3 {
+            text-transform: uppercase;
+            margin: 0;
+            line-height: 24px;
+        }
+        &.cancel {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 100%;
+            @include breakpoint($desktopLarge) {
+                width: auto;
+            }
+            h3 {
+                line-height: 24px;
+            }
+        }
+        p.usp {
+            text-align: center;
+            color: $gText;
+            background-color: $selected;
+            border-radius: 5px;
+            font-size: 12px;
+            margin-top: 12px;
+        }
+        &.active {
+            border-width: 2px;
+            border: 4px solid $primary;
+            background-color: $selectedBG;
+            animation: pop 0.3s linear 1;
+            button {
+                background-color: $grey-dark;
+            }
+            h3 {
+                display: flex;
+                justify-content: space-between;
+                &:after {
+                    height: 24px;
+                    width: 24px;
+                    min-width:24px;
+                    content: "";
+                    display: inline-block;
+                    background-image: url("/images/icons/greencheck.svg");
+                    background-size: 24px;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    animation: appear 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 1;
+                }
+            }
+        }
+        &.inactive {
+            border-color: $grey-dark;
+            p,
+            h3,
+            h4 {
+                color: $gText;
+            }
+            button {
+                background-color: $grey-dark;
+            }
+        }
+        button {
+            width: 100%;
+        }
+    }
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(1);
+    }
+
+    25% {
+        transform: scale(0.99);
+    }
+
+    50% {
+        transform: scale(1.01);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes appear {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
