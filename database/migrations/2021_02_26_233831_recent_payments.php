@@ -34,6 +34,6 @@ class RecentPayments extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('recent_payments');
+        Schema::dropIfExists('payments');
     }
 }
