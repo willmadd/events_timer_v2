@@ -19,8 +19,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _stripe_react_stripe_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @stripe/react-stripe-js */ "./node_modules/@stripe/react-stripe-js/dist/react-stripe.umd.js");
 /* harmony import */ var _stripe_react_stripe_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_stripe_react_stripe_js__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Loader */ "./resources/js/components/Loader/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _routes_routeID__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../routes/routeID */ "./resources/js/routes/routeID.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store_init_actions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../store/init/actions */ "./resources/js/store/init/actions/index.js");
 
 
 
@@ -49,10 +51,13 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
 var CheckoutArea = function CheckoutArea(_ref) {
   var selectedPlan = _ref.selectedPlan,
       setSelectedPlan = _ref.setSelectedPlan;
-  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.useHistory)();
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_7__.useDispatch)();
+  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_9__.useHistory)();
   var stripe = (0,_stripe_react_stripe_js__WEBPACK_IMPORTED_MODULE_4__.useStripe)();
   var elements = (0,_stripe_react_stripe_js__WEBPACK_IMPORTED_MODULE_4__.useElements)();
 
@@ -110,6 +115,7 @@ var CheckoutArea = function CheckoutArea(_ref) {
                   plan: selectedPlan.stripe_plan
                 }, headers).then(function (res) {
                   setLoading(false);
+                  dispatch((0,_store_init_actions__WEBPACK_IMPORTED_MODULE_8__.initUser)(token));
                   history.push(_routes_routeID__WEBPACK_IMPORTED_MODULE_6__.default.memberDashboard);
                 })["catch"](function (e) {
                   setLoading(false);

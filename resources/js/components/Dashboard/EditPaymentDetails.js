@@ -6,6 +6,7 @@ import "./editPaymentDetails.scss";
 import Loading from "../Loader";
 
 const EditPaymentDetails = ({ user, setPath }) => {
+    console.log('USER', user)
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
@@ -51,6 +52,10 @@ const EditPaymentDetails = ({ user, setPath }) => {
     return (
         <div className="update-payment">
             <h3>Update subscription payment card</h3>
+            <div className="update-payment__current">
+                <p>Current payment card:
+                <span>XXXX XXXX XXXX {user.card_last_four}</span></p>
+            </div>
             <p>
                 If you've signed up to out payment subscriptions service, then
                 you can update the card payment details here. If you update your

@@ -7,6 +7,7 @@ const PlansSelector = ({
     selectedPlan,
     buttonLabel,
 }) => {
+    // console.log('SELECTED', selectedPlan);
     return (
         <>
             {plans.map((plan) => (

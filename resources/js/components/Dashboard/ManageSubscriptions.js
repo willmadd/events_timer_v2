@@ -6,34 +6,40 @@ import RouteID from "../../routes/routeID";
 import { useDispatch } from "react-redux";
 import { initUser } from "../../store/init/actions";
 import "../MemberSubscribe/index.scss";
+import { slugify } from "../../helpers/slugify";
+import Loading from "../Loader";
 
 const ManageSubscriptions = ({ plans, user }) => {
-    
     const history = useHistory();
-    
-    const dispatch = useDispatch();
-    
-    const [selectedPlan, setSelectedPlan] = useState();
-    
-    const [showModal, setShowModal] = useState();
-    
-    useEffect(()=>{
-        const currentPlan = plans.find(plan=>plan.name===user.membership_level);
-        currentPlan && setSelectedPlan(currentPlan.slug);
-    },[])
 
-const handleSubmit = ()=>{
-    if(!selectedPlan){
-        console.log('this is the plan you already have)')
-    }else if(selectedPlan === "cancel"){
-        // cancelSubscription();
-        setShowModal(true);
-    }else{
-        changeSubscription();
-    }
-}
+    const dispatch = useDispatch();
+
+    const [selectedPlan, setSelectedPlan] = useState();
+
+    const [showModal, setShowModal] = useState(null);
+
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        const currentPlan = plans.find(
+            (plan) => plan.name === user.membership_level
+        );
+        currentPlan && setSelectedPlan(currentPlan.slug);
+    }, [plans]);
+
+    const handleSubmit = () => {
+        if (!selectedPlan) {
+            console.log("this is the plan you already have)");
+        } else if (selectedPlan === "cancel") {
+            // cancelSubscription();
+            setShowModal(true);
+        } else {
+            changeSubscription();
+        }
+    };
 
     const cancelSubscription = () => {
+        setLoading(true);
         const token = localStorage.getItem("eventcountdown:all:userToken");
         const headers = {
             headers: {
@@ -43,6 +49,7 @@ const handleSubmit = ()=>{
         axios
             .get("/api/auth/cancelsubscription", headers)
             .then((res) => {
+                setLoading(false);
                 const userToken = localStorage.getItem(
                     "eventcountdown:all:userToken"
                 );
@@ -50,15 +57,17 @@ const handleSubmit = ()=>{
                 dispatch(initUser(userToken));
 
                 history.push(RouteID.memberDashboard, {
-                    message: "You're subscription has now been cancelled.",
+                    message: "Your subscription has now been cancelled.",
                 });
             })
             .catch((e) => {
+                setLoading(false);
                 console.log(e);
             });
     };
 
     const changeSubscription = () => {
+        setLoading(true);
         const token = localStorage.getItem("eventcountdown:all:userToken");
         const headers = {
             headers: {
@@ -66,15 +75,25 @@ const handleSubmit = ()=>{
             },
         };
 
+        const planId = plans.find(plan=>plan.slug===selectedPlan)
+
+
+
         const data = {
-            selectedPlan,
+            stripe_plan:planId.stripe_plan,
         };
         axios
             .post("/api/auth/changesubscription", data, headers)
             .then((res) => {
-                console.log(res);
+                setLoading(false);
+                dispatch(initUser(token));
+
+                history.push(RouteID.memberDashboard, {
+                    message: `Your subscription has now been changed to ${res.data.plan.name}`,
+                });
             })
             .catch((e) => {
+                setLoading(false);
                 console.log(e);
             });
     };
@@ -101,19 +120,25 @@ const handleSubmit = ()=>{
                         buttonLabel={"Change"}
                     />
                     <div
-                        // onClick={() => setSelectedPlan(plan.slug)}
-                        className={`plans__individual cancel ${selectedPlan==='cancel'?'active':'incactive'}`}
-                        onClick={() => setSelectedPlan('cancel')} >
+                        className={`plans__individual cancel ${
+                            selectedPlan === "cancel" ? "active" : "inactive"
+                        }`}
+                        onClick={() => setSelectedPlan("cancel")}
+                    >
                         <h3>Cancel my Subscription</h3>
-                        {/* <button
-                            type="button"
-                            // onClick={() => setShowModal(true)}
-                        >
-                            {"Cancel my subscription"}
-                        </button> */}
                     </div>
                 </div>
-                <button type="button" className="primary icon icon__proceed" disabled={!selectedPlan} onClick={()=>handleSubmit()}>continue</button>
+                {loading?<Loading />:
+                
+                <button
+                type="button"
+                className="primary icon icon__proceed"
+                disabled={slugify(user.membership_level) === selectedPlan}
+                onClick={() => handleSubmit()}
+                >
+                    continue
+                </button>
+                }
             </div>
         </div>
         // </div>

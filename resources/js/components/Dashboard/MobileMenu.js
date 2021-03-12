@@ -15,7 +15,7 @@ const MobileMenu = (props) => {
 
     const path = location.pathname.split('/');
 
-    const title =path[path.length-1]
+    const title = path[path.length-1]
 
     return (
         <nav className="menu__mobile member desktop-hide">

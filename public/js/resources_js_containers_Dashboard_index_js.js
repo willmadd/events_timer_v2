@@ -1247,6 +1247,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var EditPaymentDetails = function EditPaymentDetails(_ref) {
   var user = _ref.user,
       setPath = _ref.setPath;
+  console.log('USER', user);
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -1328,6 +1329,13 @@ var EditPaymentDetails = function EditPaymentDetails(_ref) {
     className: "update-payment",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", {
       children: "Update subscription payment card"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+      className: "update-payment__current",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
+        children: ["Current payment card:", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", {
+          children: ["XXXX XXXX XXXX ", user.card_last_four]
+        })]
+      })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
       children: "If you've signed up to out payment subscriptions service, then you can update the card payment details here. If you update your payment method, there will be no change to your billing date"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
@@ -1412,11 +1420,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _MemberSubscribe_PlansSelector__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../MemberSubscribe/PlansSelector */ "./resources/js/components/MemberSubscribe/PlansSelector.js");
 /* harmony import */ var _PopupModal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../PopupModal */ "./resources/js/components/PopupModal/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _routes_routeID__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../routes/routeID */ "./resources/js/routes/routeID.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store_init_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../store/init/actions */ "./resources/js/store/init/actions/index.js");
 /* harmony import */ var _MemberSubscribe_index_scss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../MemberSubscribe/index.scss */ "./resources/js/components/MemberSubscribe/index.scss");
+/* harmony import */ var _helpers_slugify__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../helpers/slugify */ "./resources/js/helpers/slugify.js");
+/* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../Loader */ "./resources/js/components/Loader/index.js");
 
 
 
@@ -1441,10 +1451,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
 var ManageSubscriptions = function ManageSubscriptions(_ref) {
   var plans = _ref.plans,
       user = _ref.user;
-  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_8__.useHistory)();
+  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_10__.useHistory)();
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_5__.useDispatch)();
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(),
@@ -1452,21 +1464,26 @@ var ManageSubscriptions = function ManageSubscriptions(_ref) {
       selectedPlan = _useState2[0],
       setSelectedPlan = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
       _useState4 = _slicedToArray(_useState3, 2),
       showModal = _useState4[0],
       setShowModal = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      loading = _useState6[0],
+      setLoading = _useState6[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     var currentPlan = plans.find(function (plan) {
       return plan.name === user.membership_level;
     });
     currentPlan && setSelectedPlan(currentPlan.slug);
-  }, []);
+  }, [plans]);
 
   var handleSubmit = function handleSubmit() {
     if (!selectedPlan) {
-      console.log('this is the plan you already have)');
+      console.log("this is the plan you already have)");
     } else if (selectedPlan === "cancel") {
       // cancelSubscription();
       setShowModal(true);
@@ -1476,6 +1493,7 @@ var ManageSubscriptions = function ManageSubscriptions(_ref) {
   };
 
   var cancelSubscription = function cancelSubscription() {
+    setLoading(true);
     var token = localStorage.getItem("eventcountdown:all:userToken");
     var headers = {
       headers: {
@@ -1483,30 +1501,41 @@ var ManageSubscriptions = function ManageSubscriptions(_ref) {
       }
     };
     axios.get("/api/auth/cancelsubscription", headers).then(function (res) {
+      setLoading(false);
       var userToken = localStorage.getItem("eventcountdown:all:userToken"); // if inplace so if there's no user token (i.e. user is logged out) it dosn't hit the user info api point
 
       dispatch((0,_store_init_actions__WEBPACK_IMPORTED_MODULE_6__.initUser)(userToken));
       history.push(_routes_routeID__WEBPACK_IMPORTED_MODULE_4__.default.memberDashboard, {
-        message: "You're subscription has now been cancelled."
+        message: "Your subscription has now been cancelled."
       });
     })["catch"](function (e) {
+      setLoading(false);
       console.log(e);
     });
   };
 
   var changeSubscription = function changeSubscription() {
+    setLoading(true);
     var token = localStorage.getItem("eventcountdown:all:userToken");
     var headers = {
       headers: {
         Authorization: "Bearer ".concat(token)
       }
     };
+    var planId = plans.find(function (plan) {
+      return plan.slug === selectedPlan;
+    });
     var data = {
-      selectedPlan: selectedPlan
+      stripe_plan: planId.stripe_plan
     };
     axios.post("/api/auth/changesubscription", data, headers).then(function (res) {
-      console.log(res);
+      setLoading(false);
+      dispatch((0,_store_init_actions__WEBPACK_IMPORTED_MODULE_6__.initUser)(token));
+      history.push(_routes_routeID__WEBPACK_IMPORTED_MODULE_4__.default.memberDashboard, {
+        message: "Your subscription has now been changed to ".concat(res.data.plan.name)
+      });
     })["catch"](function (e) {
+      setLoading(false);
       console.log(e);
     });
   };
@@ -1533,19 +1562,18 @@ var ManageSubscriptions = function ManageSubscriptions(_ref) {
           setSelectedPlan: setSelectedPlan,
           buttonLabel: "Change"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-          // onClick={() => setSelectedPlan(plan.slug)}
-          className: "plans__individual cancel ".concat(selectedPlan === 'cancel' ? 'active' : 'incactive'),
+          className: "plans__individual cancel ".concat(selectedPlan === "cancel" ? "active" : "inactive"),
           onClick: function onClick() {
-            return setSelectedPlan('cancel');
+            return setSelectedPlan("cancel");
           },
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", {
             children: "Cancel my Subscription"
           })
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
+      }), loading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Loader__WEBPACK_IMPORTED_MODULE_9__.default, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
         type: "button",
         className: "primary icon icon__proceed",
-        disabled: !selectedPlan,
+        disabled: (0,_helpers_slugify__WEBPACK_IMPORTED_MODULE_8__.slugify)(user.membership_level) === selectedPlan,
         onClick: function onClick() {
           return handleSubmit();
         },
@@ -1593,7 +1621,8 @@ var Menu = function Menu(_ref) {
     className: "member mob-hide",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", {
       children: _menuitems__WEBPACK_IMPORTED_MODULE_2__.default.reduce(function (acc, menuItem, i) {
-        if (membership && membership.toLowerCase() !== menuItem.hide) {
+        // if (membership && membership.toLowerCase() !== menuItem.hide || !menuItem.show) {
+        if (!menuItem.show || menuItem.show === 'free' && membership && membership.toLowerCase() === "free" || menuItem.show !== "free" && membership && membership.toLowerCase() !== "free") {
           acc.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.NavLink, {
               className: (0,_helpers_slugify__WEBPACK_IMPORTED_MODULE_5__.slugify)(menuItem.name),
@@ -1962,11 +1991,11 @@ __webpack_require__.r(__webpack_exports__);
 }, {
   name: "Get EventsCountdown Pro",
   url: _routes_routeID__WEBPACK_IMPORTED_MODULE_0__.default.memberSubscribe,
-  hide: "paid"
+  show: "free"
 }, {
   name: "Manage Subscriptions",
   url: _routes_routeID__WEBPACK_IMPORTED_MODULE_0__.default.manageSubscription,
-  hide: "free"
+  show: "paid"
 }, {
   name: "My Videos",
   url: _routes_routeID__WEBPACK_IMPORTED_MODULE_0__.default.myVideos
@@ -2090,6 +2119,7 @@ var PlansSelector = function PlansSelector(_ref) {
       setSelectedPlan = _ref.setSelectedPlan,
       selectedPlan = _ref.selectedPlan,
       buttonLabel = _ref.buttonLabel;
+  // console.log('SELECTED', selectedPlan);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     children: plans.map(function (plan) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
@@ -2454,7 +2484,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".update-payment {\n  max-width: 724px;\n}\n@media (min-width: 1024px) {\n  .update-payment {\n    margin-right: 36px;\n  }\n}\n.card__element {\n  margin: 18px 0;\n  background-color: white;\n  padding: 12px;\n  border-radius: 3px;\n}\n\n.sub {\n  margin-top: 8px;\n  font-size: 12px;\n  margin-bottom: 12px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".update-payment {\n  max-width: 724px;\n}\n@media (min-width: 1024px) {\n  .update-payment {\n    margin-right: 36px;\n  }\n}\n.update-payment__current {\n  margin-bottom: 24px;\n}\n.update-payment__current span {\n  background-color: #fafefd;\n  padding: 8px;\n  margin-left: 12px;\n  border-radius: 3px;\n}\n\n.card__element {\n  margin: 18px 0;\n  background-color: white;\n  padding: 12px;\n  border-radius: 3px;\n}\n\n.sub {\n  margin-top: 8px;\n  font-size: 12px;\n  margin-bottom: 12px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

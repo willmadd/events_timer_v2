@@ -26,7 +26,8 @@ const Menu = ({ membership }) => {
                     );
                 })} */}
                 {menuItems.reduce((acc,menuItem, i)=>{
-                        if (membership && membership.toLowerCase() !== menuItem.hide) {
+                        // if (membership && membership.toLowerCase() !== menuItem.hide || !menuItem.show) {
+                            if (!menuItem.show || (menuItem.show === 'free' && membership && membership.toLowerCase()==="free")||(menuItem.show!=="free" && membership && membership.toLowerCase()!=="free" ) ) {
                             acc.push(<li key={menuItem.name}>
                                 <NavLink
                                     className={slugify(menuItem.name)}

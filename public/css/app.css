@@ -526,8 +526,7 @@ footer {
 }
 
 .video {
-  background: #14a3d4;
-  background: radial-gradient(circle, #14a3d4 27%, #0055d6 100%);
+  background-image: url("/images/homebg.svg");
 }
 .video .wrapper {
   display: grid;

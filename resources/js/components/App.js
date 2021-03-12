@@ -35,7 +35,7 @@ const App = () => {
     }, []);
 
     let background = location.state && location.state.background;
-
+// console.log('modalRoutes', modalRoutes[0]);
     return (
         <div className="eventsapp">
             <Meta />

@@ -61,5 +61,6 @@ Route::group([
         Route::get('/cancelsubscription', [SubscriptionsController::class, 'cancelSubscription']);
         Route::post('/newsletter', [MarketingController::class, 'newsletter']);
         Route::post('/updatepaymentmethod', [SubscriptionsController::class, 'updatePaymentMethod']);
+        Route::post('/changesubscription', [SubscriptionsController::class, 'changeSubscription']);
     });
 });

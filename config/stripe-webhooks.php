@@ -16,8 +16,8 @@ return [
      */
     'jobs' => [
         // 'invoice_payment_succeeded' => \App\Jobs\StripeWebhooks\HandleChargeableSource::class,
-        'invoice_payment_succeeded' => \App\Jobs\StripeWebhooks\ChargeSucceededJob::class
-        // 'invoice_payment_succeeded' => \App\Jobs\CreateCountdownVideo\CreateCountdownVideo::class,
+        'invoice_payment_succeeded' => \App\Jobs\StripeWebhooks\ChargeSucceededJob::class,
+        'customer_subscription_deleted' => \App\Jobs\StripeWebhooks\CancelSubscription::class,
         // 'source_chargeable' => \App\Jobs\StripeWebhooks\HandleChargeableSource::class,
         // 'charge_failed' => \App\Jobs\StripeWebhooks\HandleFailedCharge::class,
     ],

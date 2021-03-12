@@ -12,6 +12,11 @@ use Spatie\WebhookClient\Models\WebhookCall;
 use App\Models\Payment;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendPaymentNotification;
+use App\Models\User;
+use App\Models\Plan;
+use App\Models\DownloadAmountLookup;
+use Illuminate\Support\Facades\DB;
+
 
 class ChargeSucceededJob implements ShouldQueue
 {
@@ -56,9 +61,28 @@ class ChargeSucceededJob implements ShouldQueue
             'currency' => $charge['currency'],
         ];
 
+
+
         Mail::send('email-template', $data, function($message){
             $message->to('payments@eventscountdown.net', 'eventscountdown.net')->subject('new payment recieved');
             $message->from('noreply@eventscountdown.net', 'eventscountdoen.net');
         });
+
+        if($charge['billing_reason']==="subscription_cycle"||$charge['billing_reason']==="subscription_create")
+        {
+            $user = User::where('stripe_id', $charge['customer'])->first();
+
+            $stripe_plan = DB::table('subscriptions')->where('user_id',$user->id)->value('stripe_plan');
+
+            $level = Plan::where('stripe_plan', $stripe_plan)->value('level');
+
+            $downloads_allowed = DownloadAmountLookup::where('key', $level)->value('downloads_allowed');
+
+            $user->downloads_remaining = $downloads_allowed;
+
+            // dd($user);
+
+            $user->save();
+        }
     }
 }

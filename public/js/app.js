@@ -2043,7 +2043,8 @@ var App = function App() {
       dispatch((0,_store_init_actions__WEBPACK_IMPORTED_MODULE_6__.initUser)(userToken));
     }
   }, []);
-  var background = location.state && location.state.background;
+  var background = location.state && location.state.background; // console.log('modalRoutes', modalRoutes[0]);
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
     className: "eventsapp",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Meta__WEBPACK_IMPORTED_MODULE_11__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_containers_Header__WEBPACK_IMPORTED_MODULE_4__.default, {

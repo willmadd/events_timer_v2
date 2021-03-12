@@ -4,9 +4,12 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import Loading from "../Loader";
 import { Link, useHistory } from "react-router-dom";
 import RouteID from "../../routes/routeID";
+import { useDispatch } from "react-redux";
+import { initUser } from "../../store/init/actions";
 
 const CheckoutArea = ({ selectedPlan, setSelectedPlan }) => {
 
+    const dispatch = useDispatch();
     const history = useHistory();
     const stripe = useStripe();
     const elements = useElements();
@@ -48,6 +51,7 @@ const CheckoutArea = ({ selectedPlan, setSelectedPlan }) => {
                 )
                 .then((res) => {
                     setLoading(false);
+                    dispatch(initUser(token));
                     history.push(RouteID.memberDashboard)
                 })
                 .catch((e) => {
