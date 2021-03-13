@@ -31,8 +31,9 @@ const Header = ({ preloadRouteComponent, loggedin }) => {
                     <span></span>
                     <span></span>
                     <span></span>
+<div id="menu">
 
-                    <ul id="menu">
+                    <ul>
                         <li>
                             <Link
                                 exact
@@ -40,7 +41,7 @@ const Header = ({ preloadRouteComponent, loggedin }) => {
                                 onMouseEnter={() =>
                                     preloadRouteComponent(RouteID.home)
                                 }
-                            >
+                                >
                                 <img src="/images/logo-white.svg" alt="events countdown"/>
                             </Link>
                         </li>
@@ -52,7 +53,7 @@ const Header = ({ preloadRouteComponent, loggedin }) => {
                                 onMouseEnter={() =>
                                     preloadRouteComponent(RouteID.about)
                                 }
-                            >
+                                >
                                 {"About Us"}
                             </NavLink>
                         </li>
@@ -63,54 +64,57 @@ const Header = ({ preloadRouteComponent, loggedin }) => {
                         <li>Gallery</li>
                         <li>Get Pro</li>
                         <li>Support</li>
+                        </ul>
+                        <ul>
                         {!loggedin ? (
                             <>
-                                <li>
+                                <li className="primary second__link">
                                     <NavLink
                                         exact
                                         to={RouteID.signin}
                                         onMouseEnter={() =>
                                             preloadRouteComponent(
                                                 RouteID.signin
-                                            )
-                                        }
-                                    >
+                                                )
+                                            }
+                                            >
                                         {"Sign In"}
                                     </NavLink>
                                 </li>
-                                <li>
+                                <li className="secondary second__link">
                                     <NavLink
                                         exact
                                         to={RouteID.signup}
                                         onMouseEnter={() =>
                                             preloadRouteComponent(
                                                 RouteID.signup
-                                            )
-                                        }
-                                    >
+                                                )
+                                            }
+                                            >
                                         {"Sign Up"}
                                     </NavLink>
                                 </li>
                             </>
                         ) : (
                             <>
-                                <li>
+                                <li className="primary second__link">
                                     <NavLink
                                         exact
                                         to={RouteID.memberDashboard}
                                         onMouseEnter={() =>
                                             preloadRouteComponent(
                                                 RouteID.memberDashboard
-                                            )
-                                        }
-                                    >
+                                                )
+                                            }
+                                            >
                                         {"My Account"}
                                     </NavLink>
                                 </li>
-                                <li onClick={() => logout()}>Log Out</li>
+                                <li className="secondary second__link" onClick={() => logout()}>Log Out</li>
                             </>
                         )}
                     </ul>
+                        </div>
                 </div>
             </nav>
     

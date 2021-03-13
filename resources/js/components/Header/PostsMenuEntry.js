@@ -14,6 +14,7 @@ const query = `query GetPosts {
 
 const PostsMenuEntry = () => {
     const [entries, setEntries] = useState([]);
+    const [open, setOpen] = useState(false)
 
     useEffect(() => {
         axios({
@@ -30,19 +31,17 @@ const PostsMenuEntry = () => {
 
     }, []);
 
-    // console.log(sampleResponse.data.posts.nodes);
-
     return (
-        <div className="dropdown">
-            <div className="menu__title">
+        <div className="dropdown" onMouseOver={()=>setOpen(true)} onMouseLeave={()=>setOpen(false)}>
+            <div className="menu__title" >
                 Guides
             </div>
-            <ul className="dropdown__content">
 
+            {open && <ul className="dropdown__content">
             {entries.map((entry) => (
                 <li key={entry.slug}><Link to={`/guide/${entry.slug}`}>{decodeURI(entry.title)}</Link></li>
                 ))}
-                </ul>
+                </ul>}
         </div>
     );
 };

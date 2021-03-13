@@ -107,7 +107,7 @@ header {
         margin: -100px 0 0 -50px;
         padding: 50px;
         padding-top: 104px;
-
+        justify-content: space-between;
         background: $gText;
         list-style-type: none;
         -webkit-font-smoothing: antialiased;
@@ -126,14 +126,30 @@ header {
             position: relative;
             height:60px;
         }
+        ul{
+            display: flex;
+    align-items: center;
+        }
     }
 
     #menu li {
-        padding: 10px 0;
+        padding: 8px;;
         font-size: 22px;
         @include breakpoint($tablet){
             display: flex;
     align-items: center;
+    &.second__link{
+        font-size: 16px;
+        margin-right:12px;
+        padding:4px 8px;
+        &.primary{
+            border:3px solid $primary;
+        }
+        &.secondary{
+            background-color: inherit;
+            border: 3px solid $white;
+        }
+    }
         }
         img{
             height:45px;
