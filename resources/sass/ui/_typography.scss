@@ -38,17 +38,19 @@ $counterFont: "ds-digital";
 // $headFont : 'Overpass', sans-serif;
 $headFont : 'Source Sans Pro', sans-serif;
 
-$bodyFont : 'Quicksand', sans-serif;
+// $bodyFont : 'Quicksand', sans-serif;
+
+$bodyFont : 'Source Sans Pro', sans-serif;
 
 p{
-    font-family: 'Quicksand', sans-serif;
+    font-family: $bodyFont;
     font-weight: 500;
     margin:0;
 }
 h1,h2,h3,h4,h5,h6, label{
     margin:0;
     font-family: $headFont;
-    font-weight: 700;
+    font-weight: 400;
 }
 
 button{

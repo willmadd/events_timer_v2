@@ -1939,10 +1939,13 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
       className: "form__wrapper",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-        className: "form__preview ".concat(backgroundImage === "color" ? "colour" : "image"),
-        style: {
-          backgroundColor: backgroundImage === "color" ? backgroundColor : "inherit"
-        },
+        className: "form__preview ".concat(backgroundImage === "color" ? "colour" : "image") // style={{
+        //     backgroundColor:
+        //         backgroundImage === "color"
+        //             ? backgroundColor
+        //             : "inherit",
+        // }}
+        ,
         children: [featureImage && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", {
           className: "feature__image ".concat(featureImgPos === "left" ? "left" : featureImgPos === "right" ? "right" : undefined),
           src: featureImage
@@ -1957,6 +1960,11 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
               display: "none"
             } : {}
           }), backgroundImageLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_SitePlaceholder__WEBPACK_IMPORTED_MODULE_16__.default, {}) : null]
+        }), backgroundImage === "color" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+          className: "colour__bg",
+          style: {
+            backgroundColor: backgroundImage === "color" ? backgroundColor : "inherit"
+          }
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
           style: {
             color: textColor,
