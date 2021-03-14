@@ -42,7 +42,7 @@ const Header = ({ preloadRouteComponent, loggedin }) => {
                                     preloadRouteComponent(RouteID.home)
                                 }
                                 >
-                                <img src="/images/logo-white.svg" alt="events countdown"/>
+                                <img src="/images/logo-o-blue.svg" alt="events countdown"/>
                             </Link>
                         </li>
                         <li>Tour</li>

@@ -278,7 +278,7 @@ const [lastSimulatedPercentage, setLastSimulatedPercentage] = useState(0);
         <div className="form">
             <div className="form__wrapper">
                 <div
-                    className="form__preview"
+                    className={`form__preview ${backgroundImage === "color"?"colour":"image"}`}
                     style={{
                         backgroundColor:
                             backgroundImage === "color"

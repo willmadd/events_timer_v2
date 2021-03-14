@@ -35,7 +35,8 @@ $counterFont: "ds-digital";
     font-family: "librebaskerville-regular";
 }
 
-$headFont : 'Overpass', sans-serif;
+// $headFont : 'Overpass', sans-serif;
+$headFont : 'Source Sans Pro', sans-serif;
 
 $bodyFont : 'Quicksand', sans-serif;
 
@@ -66,4 +67,8 @@ a{
 
 .error{
     color: $errorRed;
+}
+
+header{
+    font-family: 'Source Sans Pro', sans-serif;
 }

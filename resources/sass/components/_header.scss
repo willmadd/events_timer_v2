@@ -1,8 +1,8 @@
 header {
     width: 100%;
-    background: $gText;
+    // background: #333333;
 
-    height: 60px;
+    height: 45px;
     position: sticky;
     top: 0;
     z-index: 3;
@@ -108,7 +108,7 @@ header {
         padding: 50px;
         padding-top: 104px;
         justify-content: space-between;
-        background: $gText;
+        background: #333333;
         list-style-type: none;
         -webkit-font-smoothing: antialiased;
         transform-origin: 0% 0%;
@@ -124,7 +124,7 @@ header {
             padding: 0;
             transform: none;
             position: relative;
-            height:60px;
+            height:45px;
         }
         ul{
             display: flex;
@@ -134,12 +134,14 @@ header {
 
     #menu li {
         padding: 8px;;
-        font-size: 22px;
+        font-size: 14px;
+        font-weight: 600;
+        color: $menuText;
         @include breakpoint($tablet){
             display: flex;
     align-items: center;
     &.second__link{
-        font-size: 16px;
+        font-size: 14px;
         margin-right:12px;
         padding:4px 8px;
         &.primary{
@@ -152,7 +154,7 @@ header {
     }
         }
         img{
-            height:45px;
+            height:28px;
         }
     }
 

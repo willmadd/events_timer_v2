@@ -1939,7 +1939,7 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
       className: "form__wrapper",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-        className: "form__preview",
+        className: "form__preview ".concat(backgroundImage === "color" ? "colour" : "image"),
         style: {
           backgroundColor: backgroundImage === "color" ? backgroundColor : "inherit"
         },
@@ -2384,10 +2384,13 @@ __webpack_require__.r(__webpack_exports__);
 var Logo = function Logo() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
     className: "logo",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("h1", {
-      children: ["Events:", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("br", {}), "Countdown"]
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", {
+      src: "/images/logo-white.svg",
+      alt: "events countdown"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h2", {
-      children: "Create and download an online countdown timer, perfect for enhancing your online or in-person event flow. Personalise it to match your event branding, overlay an audio track and download - it\u2019s that simple!"
+      children: "Create and download a free online countdown timer, perfect for enhancing your online or in-person event flow."
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h2", {
+      children: "Personalise it to match your event branding, overlay an audio track and download - it\u2019s that simple!"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", {
       src: "/images/countdownondevices.webp",
       height: "593",
