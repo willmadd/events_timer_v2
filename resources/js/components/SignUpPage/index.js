@@ -45,7 +45,9 @@ const SignUpPage = () => {
                 <div className="signin__image">
                     <img src={"/images/signin.jpg"} />
                 </div>
-                <div className="signin__modal">
+                <div className="signin__content__wrapper signup">
+
+                <div className="signin__modal signup">
             <div className="signin__reasons"><h2>Great reasons to sign up</h2>
             <ul>
                 <li><h3>Get access to more features</h3><p>Get access to more features such as different backgrounds and audio tracks</p></li>
@@ -55,7 +57,7 @@ const SignUpPage = () => {
             </div>
             <div className="signin__form">
 
-                    <h2>Create an Events Countdown Account</h2>
+                    <h1>Create an Account</h1>
 
                     <label>
                         <input
@@ -107,13 +109,14 @@ const SignUpPage = () => {
                         <span>Confirm Password</span>
                     </label>
 
-                    <button type="button" onClick={() => handleSubmit()}>
+                    <button className="primary" type="button" onClick={() => handleSubmit()}>
                         Sign Up
                     </button>
-                    <p>Already have an account? <Link to={RouteID.signin}>Sign in Here</Link></p>
+                    <p className="signin__signup signup">Already have an account? <Link to={RouteID.signin}>Sign in Here</Link></p>
                             </div>
                 </div>
             </div>
+                            </div>
         </main>
     );
 };

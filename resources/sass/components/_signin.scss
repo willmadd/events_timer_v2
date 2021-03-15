@@ -1,107 +1,158 @@
-.signin{
-    &__wrapper{
+.signin {
+    &__wrapper {
         position: relative;
         display: flex;
         justify-content: center;
         max-height: 100vh;
-        h3{
-            margin-top:24px;
-            margin-bottom:8px;
+        h3 {
+            margin-top: 24px;
+            margin-bottom: 8px;
         }
     }
-    &__image{
+    &__image {
         // position: absolute;
     }
-    &__reasons{
+    &__reasons {
         display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border-right: 1px solid $grey-dark;
-    padding-right:24px;
-    max-width: 360px;
-    }
-    &__form{
-        max-width:360px;
-        display:flex;
         flex-direction: column;
-        padding-left:24px;
-        p{
-            margin-top:8px;
+        justify-content: center;
+        border-right: 1px solid $grey-dark;
+        padding-right: 24px;
+        max-width: 360px;
+    }
+    &__form {
+        max-width: 360px;
+        display: flex;
+        flex-direction: column;
+        padding-left: 24px;
+        p {
+            margin-top: 8px;
             text-align: center;
-            margin-bottom:0;
+            margin-bottom: 0;
         }
         & > * {
-            margin-bottom:8px;
-            :last-child{
-                margin-bottom:0;
+            // margin-bottom: 8px;
+            :last-child {
+                margin-bottom: 0;
             }
         }
-        h2{
+        h2 {
             text-align: center;
-            margin-bottom:16px;
+            margin-bottom: 16px;
         }
-        button{
-            margin-top:16px;
-            margin-bottom:0;
+        button {
+            margin-top: 16px;
+            margin-bottom: 0;
         }
-        
     }
-    &__modal{
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        background:rgba(255,255,255, 0.85);
-        padding:36px;
+    &__signup{
+        background-color: $grey-med;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius:0 0 4px 4px;
+        &.signup{
+            margin-top:24px;
+        }
+        p{
+            padding:24px 0;
+            margin:0;
+        }
+        a{
+            font-family: $fontMed;
+            color: $black;
+        }
+    }
+    &__content__wrapper{
         position: absolute;
-        // top:0;
-        top: 50%;
+        top: calc(50% - 45px);
         transform: translateY(-50%);
         border-radius: 5px;
-        box-shadow: 0px 0px 15px #333333;
-        
-        
+        box-shadow: $boxShadow;
+        max-width: 420px;
+        width: 100%;
+        &.signup{
+            width:80%;
+            max-width:860px;
+        }
     }
-    img{
-        width:100%;
+    &__modal {
+        border-radius:4px 4px 0 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        background: rgba(255, 255, 255, 0.85);
+        padding: 36px;
+        padding-bottom:18px;
+        display: flex;
+        flex-direction: column;
+        border-top: 5px solid $primary;
+        &.signup{
+display: grid;
+        }
+        h1 {
+            font-family: $fontHeavy;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+    }
+    img {
+        width: 100%;
     }
 
     label {
         // margin:20px 0;
-        position:relative;
-        display:inline-block;
-      }
-        
-      span {
-        padding:10px;
+        position: relative;
+        display: inline-block;
+    }
+
+    span {
+        padding: 10px;
         pointer-events: none;
-        position:absolute;
-        left:0;
-        top:3px;
+        position: absolute;
+        left: 0;
+        top: 3px;
         transition: 0.2s;
         transition-timing-function: ease;
         transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
-        opacity:0.5;
-      }
-      
-      input {
-        padding:10px;
-        width:100%;
-      }
-      
-      input:focus + span, input:not(:placeholder-shown) + span {
-        opacity:1;
+        opacity: 0.5;
+    }
+
+    input {
+        padding: 10px;
+        width: 100%;
+        box-sizing: border-box;
+        // margin-top:12px;
+        margin-bottom: 18px;
+        height:44px;
+        border-radius: 5px;
+        border: 1px solid $grey-dark;
+    }
+
+    input:focus + span,
+    input:not(:placeholder-shown) + span {
+        opacity: 1;
         transform: scale(0.75) translateY(-70%) translateX(1px);
-        background:$white;
-        padding:0 4px;
+        background: $white;
+        padding: 0 4px;
         // margin-left:6px;
         // border: 1px solid $black;
         border-radius: 5px;
-      }
-      
-      /* For IE Browsers*/
-      input:focus + span, input:not(:-ms-input-placeholder) + span {
-        opacity:1;
+    }
+
+    /* For IE Browsers*/
+    input:focus + span,
+    input:not(:-ms-input-placeholder) + span {
+        opacity: 1;
         transform: scale(0.75) translateY(-70%) translateX(-5px);
-        background:red;
-        padding:2px;
-      }
+        // background: red;
+        padding: 2px;
+    }
+}
+
+.forgot-password{
+    font-family: $fontHeavy;
+    margin-top:18px;
+    text-align: right;
+    color: $black;
+    font-size: 14px;
 }

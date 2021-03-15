@@ -24,6 +24,30 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: "visbycf-light";
+    src: url("/fonts/visbycf-light-webfont.woff2") format("woff2"),
+        url("/fonts/visbycf-light-webfont.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "visbycf-regular";
+    src: url("/fonts/visbycf-regular-webfont.woff2") format("woff2"),
+        url("/fonts/visbycf-regular-webfont.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "visbycf-medium";
+    src: url("/fonts/visbycf-medium-webfont.woff2") format("woff2"),
+        url("/fonts/visbycf-medium-webfont.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
 $counterFont: "ds-digital";
 .ds-digital {
     font-family: "ds-digital";
@@ -36,11 +60,15 @@ $counterFont: "ds-digital";
 }
 
 // $headFont : 'Overpass', sans-serif;
-$headFont : 'Source Sans Pro', sans-serif;
+$headFont : 'visbycf-regular', sans-serif;
 
 // $bodyFont : 'Quicksand', sans-serif;
 
-$bodyFont : 'Source Sans Pro', sans-serif;
+$bodyFont : 'visbycf-light', sans-serif;
+
+$fontMed: 'visbycf-medium';
+
+$fontHeavy: 'visbycf-heavy';
 
 p{
     font-family: $bodyFont;

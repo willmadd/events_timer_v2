@@ -29,6 +29,8 @@
         h3 {
             padding-top: 16px;
             padding-bottom: 16px;
+            font-family: $fontMed;
+            font-size:14px;
         }
     }
     &__buttons {
@@ -167,7 +169,6 @@
         .color__label {
             cursor: pointer;
             display: flex;
-            // margin-left:12px;
             img,
             div {
                 width: 100%;
@@ -177,7 +178,13 @@
                 &:hover{
                     animation: pop 0.3s linear 1;
                 }
-                // object-fit: none;
+            }
+        }
+        .color__label.blank{
+            div{
+                &:hover{
+                    animation: none;
+                }
             }
         }
         .colour {
@@ -220,7 +227,7 @@
             // left:50%; 
             right: 10px;
             transform:translate(0, -50%); 
-            width:40%; /* You can specify ANY width values here */ 
+            width:45%; /* You can specify ANY width values here */ 
             p{
                 font-weight: 300;
                 margin-bottom:0;

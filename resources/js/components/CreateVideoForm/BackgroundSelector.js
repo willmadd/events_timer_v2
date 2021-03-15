@@ -78,19 +78,19 @@ const BackgroundSelector = ({
                 })}
                 {!loggedin && (
                     <>
-                        <div className="color__label">
+                        <div className="color__label blank">
                             <div></div>
                         </div>
-                        <div className="color__label">
+                        <div className="color__label blank">
                             <div></div>
                         </div>
-                        <div className="color__label">
+                        <div className="color__label blank">
                             <div></div>
                         </div>
-                        <div className="color__label">
+                        <div className="color__label blank">
                             <div></div>
                         </div>
-                        <div className="color__label">
+                        <div className="color__label blank">
                             <div></div>
                         </div>
                         <div className="signup__cta">
