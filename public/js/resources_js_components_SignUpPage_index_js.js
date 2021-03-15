@@ -198,7 +198,7 @@ var SignUpPage = function SignUpPage() {
               children: "Sign Up"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
               className: "signin__signup signup",
-              children: ["Already have an account? ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
+              children: ["Already have an account?", " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
                 to: _routes_routeID__WEBPACK_IMPORTED_MODULE_4__.default.signin,
                 children: "Sign in Here"
               })]

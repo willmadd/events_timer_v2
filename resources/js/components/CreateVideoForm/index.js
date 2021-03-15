@@ -277,6 +277,7 @@ const [lastSimulatedPercentage, setLastSimulatedPercentage] = useState(0);
     return (
         <div className="form">
             <div className="form__wrapper">
+                <h2>Configure Your Downloadable Countdown Video</h2>
                 <div
                     className={`form__preview ${backgroundImage === "color"?"colour":"image"}`}
                     // style={{

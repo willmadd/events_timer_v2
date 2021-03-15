@@ -1938,7 +1938,9 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
     className: "form",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
       className: "form__wrapper",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h2", {
+        children: "Configure Your Downloadable Countdown Video"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: "form__preview ".concat(backgroundImage === "color" ? "colour" : "image") // style={{
         //     backgroundColor:
         //         backgroundImage === "color"

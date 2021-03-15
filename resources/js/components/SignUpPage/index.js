@@ -46,77 +46,97 @@ const SignUpPage = () => {
                     <img src={"/images/signin.jpg"} />
                 </div>
                 <div className="signin__content__wrapper signup">
+                    <div className="signin__modal signup">
+                        <div className="signin__reasons">
+                            <h2>Great reasons to sign up</h2>
+                            <ul>
+                                <li>
+                                    <h3>Get access to more features</h3>
+                                    <p>
+                                        Get access to more features such as
+                                        different backgrounds and audio tracks
+                                    </p>
+                                </li>
+                                <li>
+                                    <h3>Keep track of your videos</h3>
+                                </li>
+                                <li>
+                                    <h3>SIgn up to get HD pro videos</h3>
+                                </li>
+                            </ul>
+                        </div>
+                        <div className="signin__form">
+                            <h1>Create an Account</h1>
 
-                <div className="signin__modal signup">
-            <div className="signin__reasons"><h2>Great reasons to sign up</h2>
-            <ul>
-                <li><h3>Get access to more features</h3><p>Get access to more features such as different backgrounds and audio tracks</p></li>
-                <li><h3>Keep track of your videos</h3></li>
-                <li><h3>SIgn up to get HD pro videos</h3></li>
-            </ul>
-            </div>
-            <div className="signin__form">
+                            <label>
+                                <input
+                                    type="text"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                    placeholder=" "
+                                />
+                                <span>Name</span>
+                            </label>
 
-                    <h1>Create an Account</h1>
+                            <label>
+                                <input
+                                    type="text"
+                                    value={company}
+                                    onChange={(e) => setCompany(e.target.value)}
+                                    placeholder=" "
+                                />
+                                <span>Company</span>
+                            </label>
 
-                    <label>
-                        <input
-                            type="text"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            placeholder=" "
-                            />
-                        <span>Name</span>
-                    </label>
+                            <label>
+                                <input
+                                    type="text"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    placeholder=" "
+                                />
+                                <span>Email</span>
+                            </label>
 
-                    <label>
-                        <input
-                            type="text"
-                            value={company}
-                            onChange={(e) => setCompany(e.target.value)}
-                            placeholder=" "
-                            />
-                        <span>Company</span>
-                    </label>
+                            <label>
+                                <input
+                                    type="password"
+                                    value={password}
+                                    onChange={(e) =>
+                                        setPassword(e.target.value)
+                                    }
+                                    placeholder=" "
+                                />
+                                <span>Password</span>
+                            </label>
 
-                    <label>
-                        <input
-                            type="text"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            placeholder=" "
-                            />
-                        <span>Email</span>
-                    </label>
+                            <label>
+                                <input
+                                    type="password"
+                                    value={confirmPassword}
+                                    onChange={(e) =>
+                                        setConfirmPassword(e.target.value)
+                                    }
+                                    placeholder=" "
+                                />
+                                <span>Confirm Password</span>
+                            </label>
 
-                    <label>
-                        <input
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            placeholder=" "
-                            />
-                        <span>Password</span>
-                    </label>
-
-                    <label>
-                        <input
-                            type="password"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                            placeholder=" "
-                            />
-                        <span>Confirm Password</span>
-                    </label>
-
-                    <button className="primary" type="button" onClick={() => handleSubmit()}>
-                        Sign Up
-                    </button>
-                    <p className="signin__signup signup">Already have an account? <Link to={RouteID.signin}>Sign in Here</Link></p>
-                            </div>
+                            <button
+                                className="primary"
+                                type="button"
+                                onClick={() => handleSubmit()}
+                            >
+                                Sign Up
+                            </button>
+                            <p className="signin__signup signup">
+                                Already have an account?{" "}
+                                <Link to={RouteID.signin}>Sign in Here</Link>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
-                            </div>
         </main>
     );
 };
