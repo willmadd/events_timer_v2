@@ -22,7 +22,8 @@
 .form {
     &__wrapper {
         padding: 24px;
-        background-color: $selectedBG;
+        background-color: rgba(255, 255, 255, 0.85);
+        border-top: 5px solid $primary;
         // border: 1px solid $black;
         box-shadow: $boxShadow;
         border-radius: 7px;
