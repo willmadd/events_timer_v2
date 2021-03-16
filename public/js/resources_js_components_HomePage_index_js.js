@@ -1656,12 +1656,14 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CreateVideoForm = function CreateVideoForm(_ref) {
   var loggedin = _ref.loggedin,
-      userCurrency = _ref.userCurrency;
+      userCurrency = _ref.userCurrency,
+      downloadsRemaining = _ref.downloadsRemaining;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(60000),
       _useState2 = _slicedToArray(_useState, 2),
       time = _useState2[0],
-      setTime = _useState2[1];
+      setTime = _useState2[1]; // console.log('downloadsRemaining', downloadsRemaining);
+
 
   var location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_17__.useLocation)();
 
@@ -2016,7 +2018,7 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
       }), loadingState === "ready" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: "button__wrapper",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
-          className: "form__download",
+          className: "form__download secondary",
           type: "button",
           onClick: function onClick() {
             return handleSubmit("sd");
@@ -2024,12 +2026,12 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
           disabled: !featureImage,
           children: "Download Video (SD)"
         }), !featureImage ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
-          className: "form__download pro",
+          className: "form__download pro primary",
           type: "button",
           disabled: true,
-          children: "Download Video (HD) ".concat(payment.amount.toFixed(2), " ").concat(payment.currency)
-        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Link, {
-          className: "form__download pro",
+          children: "Download Video (HD) ".concat(!loggedin ? "".concat(payment.amount.toFixed(2), " ").concat(payment.currency) : "")
+        }) : !loggedin || loggedin && downloadsRemaining < 1 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Link, {
+          className: "form__download pro primary",
           onMouseEnter: function onMouseEnter() {
             return (0,_routes_helpers__WEBPACK_IMPORTED_MODULE_7__.preloadRouteComponent)(_routes_routeID__WEBPACK_IMPORTED_MODULE_15__.default.buy);
           },
@@ -2042,6 +2044,9 @@ var CreateVideoForm = function CreateVideoForm(_ref) {
             }
           },
           children: "Download Video (HD) ".concat(payment.amount.toFixed(2), " ").concat(payment.currency)
+        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
+          className: "primary",
+          children: "Download Video (HD)"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
           className: "button__explainer",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h5", {
@@ -2395,6 +2400,7 @@ var Logo = function Logo() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
     className: "logo",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", {
+      className: "head",
       src: "/images/logo-white.svg",
       alt: "events countdown"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h2", {
@@ -2730,7 +2736,8 @@ __webpack_require__.r(__webpack_exports__);
 var mapStateToProps = function mapStateToProps(state) {
   return {
     loggedin: state.user.active,
-    userCurrency: state.locale.currency
+    userCurrency: state.locale.currency,
+    downloadsRemaining: state.user.downloads_remaining
   };
 };
 

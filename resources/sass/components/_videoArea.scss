@@ -1,11 +1,6 @@
 .video {
-    // background: rgb(20, 163, 212);
-    // background: radial-gradient(
-    //     circle,
-    //     rgba(20, 163, 212, 1) 27%,
-    //     rgba(0, 85, 214, 1) 100%
-    // );
     background-image: url('/images/homebg.svg');
+    background-repeat: no-repeat;
     .wrapper {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -129,14 +124,14 @@
     }
     &__download {
         width: 100%;
-        margin-top: 24px;
-        background: $black;
+        // margin-top: 24px;
+        // background: $black;
         outline: 0;
-        color: #f5f5f5;
-        border: 0;
-        padding: 12px;
-        border-radius: 3px;
-        font-family: "Overpass", sans-serif;
+        // color: #f5f5f5;
+        // border: 0;
+        // padding: 12px;
+        // border-radius: 3px;
+        // font-family: "Overpass", sans-serif;
         text-align: center;
         text-decoration: none;
         line-height:18px;
@@ -449,6 +444,7 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-gap: 24px;
+        margin-top:24px;
     }
     &__explainer {
         background-color: palegoldenrod;

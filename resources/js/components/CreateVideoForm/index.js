@@ -19,8 +19,10 @@ import SiteLoading from "../SiteLoading";
 import RouteID from "../../routes/routeID";
 import SitePlaceholder from "../SitePlaceholder";
 
-const CreateVideoForm = ({ loggedin, userCurrency }) => {
+const CreateVideoForm = ({ loggedin, userCurrency, downloadsRemaining }) => {
     const [time, setTime] = useState(60000);
+
+// console.log('downloadsRemaining', downloadsRemaining);
 
     let location = useLocation();
 
@@ -389,7 +391,7 @@ const [lastSimulatedPercentage, setLastSimulatedPercentage] = useState(0);
                 {loadingState === "ready" ? (
                     <div className="button__wrapper">
                         <button
-                            className="form__download"
+                            className="form__download secondary"
                             type="button"
                             onClick={() => handleSubmit("sd")}
                             disabled={!featureImage}
@@ -398,17 +400,17 @@ const [lastSimulatedPercentage, setLastSimulatedPercentage] = useState(0);
                         </button>
                         {!featureImage ? (
                             <button
-                                className="form__download pro"
+                                className="form__download pro primary"
                                 type="button"
                                 disabled={true}
                             >
-                                {`Download Video (HD) ${payment.amount.toFixed(
+                                {`Download Video (HD) ${!loggedin? `${payment.amount.toFixed(
                                     2
-                                )} ${payment.currency}`}
+                                )} ${payment.currency}`:""}`}
                             </button>
-                        ) : (
+                        ) : !loggedin || (loggedin && downloadsRemaining < 1)?(
                             <Link
-                                className="form__download pro"
+                                className="form__download pro primary"
                                 onMouseEnter={() =>
                                     preloadRouteComponent(RouteID.buy)
                                 }
@@ -424,8 +426,8 @@ const [lastSimulatedPercentage, setLastSimulatedPercentage] = useState(0);
                                 {`Download Video (HD) ${payment.amount.toFixed(
                                     2
                                 )} ${payment.currency}`}
-                            </Link>
-                        )}
+                            </Link>):<button className="primary">Download Video (HD)</button>
+                        }
 
                         <div className="button__explainer">
                             <h5>Free SD Countdown Timer</h5>

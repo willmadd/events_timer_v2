@@ -25,8 +25,9 @@
         display: flex;
         flex-direction: column;
         padding-left: 24px;
+        
         p {
-            margin-top: 8px;
+            margin-top: 0px;
             text-align: center;
             margin-bottom: 0;
         }
@@ -45,25 +46,25 @@
             margin-bottom: 0;
         }
     }
-    &__signup{
+    &__signup {
         background-color: $grey-med;
         display: flex;
         justify-content: center;
         align-items: center;
-        border-radius:0 0 4px 4px;
-        &.signup{
-            margin-top:24px;
+        border-radius: 0 0 4px 4px;
+        &.signup {
+            margin-top: 24px;
         }
-        p{
-            padding:24px 0;
-            margin:0;
+        p {
+            padding: 24px 0;
+            margin: 0;
         }
-        a{
+        a {
             font-family: $fontMed;
             color: $black;
         }
     }
-    &__content__wrapper{
+    &__content__wrapper {
         position: absolute;
         top: calc(50% - 45px);
         transform: translateY(-50%);
@@ -71,23 +72,23 @@
         box-shadow: $boxShadow;
         max-width: 420px;
         width: 100%;
-        &.signup{
-            width:80%;
-            max-width:860px;
+        &.signup {
+            width: 80%;
+            max-width: 860px;
         }
     }
     &__modal {
-        border-radius:4px 4px 0 0;
+        border-radius: 4px 4px 0 0;
         display: grid;
         grid-template-columns: 1fr 1fr;
         background: rgba(255, 255, 255, 0.85);
         padding: 36px;
-        padding-bottom:18px;
+        padding-bottom: 18px;
         display: flex;
         flex-direction: column;
         border-top: 5px solid $primary;
-        &.signup{
-display: grid;
+        &.signup {
+            display: grid;
         }
         h1 {
             font-family: $fontHeavy;
@@ -123,7 +124,7 @@ display: grid;
         box-sizing: border-box;
         // margin-top:12px;
         margin-bottom: 18px;
-        height:44px;
+        height: 44px;
         border-radius: 5px;
         border: 1px solid $grey-dark;
     }
@@ -149,9 +150,9 @@ display: grid;
     }
 }
 
-.forgot-password{
+.forgot-password {
     font-family: $fontHeavy;
-    margin-top:18px;
+    margin-top: 18px;
     text-align: right;
     color: $black;
     font-size: 14px;

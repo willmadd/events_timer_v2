@@ -3,7 +3,7 @@ import React from 'react';
 const Logo = () => {
     return (
         <div className="logo">
-<img src="/images/logo-white.svg" alt="events countdown"/>
+<img className="head" src="/images/logo-white.svg" alt="events countdown"/>
             {/* <h3>{`${props.region}'s most popular webinar tool`}</h3> */}
             <h2>Create and download a free online countdown timer, perfect for enhancing your online or in-person event flow.</h2><h2>Personalise it to match your event branding, overlay an audio track and download - it’s that simple!</h2>
             <img src="/images/countdownondevices.webp" height="593" width="1280" alt="example of countdown on macbook and iphone"/>
