@@ -6,6 +6,7 @@ import Logo from '../../containers/Logo';
 const VideoArea = () => {
     return (
         <section className="video">
+            <img className="video__background" src="/images/homebg.svg"/>
             <div className="wrapper">
             <Logo />
             <CreateVideoForm />

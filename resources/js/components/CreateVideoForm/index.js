@@ -391,7 +391,7 @@ const [lastSimulatedPercentage, setLastSimulatedPercentage] = useState(0);
                 {loadingState === "ready" ? (
                     <div className="button__wrapper">
                         <button
-                            className="form__download secondary"
+                            className="form__download free secondary"
                             type="button"
                             onClick={() => handleSubmit("sd")}
                             disabled={!featureImage}
@@ -429,7 +429,7 @@ const [lastSimulatedPercentage, setLastSimulatedPercentage] = useState(0);
                             </Link>):<button className="primary">Download Video (HD)</button>
                         }
 
-                        <div className="button__explainer">
+                        <div className="button__explainer free">
                             <h5>Free SD Countdown Timer</h5>
                             <div className="usp free">
                                 <p>Free</p>
@@ -441,7 +441,7 @@ const [lastSimulatedPercentage, setLastSimulatedPercentage] = useState(0);
                                 <p>Watermarked Video</p>
                             </div>
                         </div>
-                        <div className="button__explainer">
+                        <div className="button__explainer pro">
                             <h5>HD Pro Countdown Timer</h5>
                             <div className="usp professional">
                                 <p>Professional</p>

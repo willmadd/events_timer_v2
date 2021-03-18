@@ -1,10 +1,22 @@
 .video {
-    background-image: url('/images/homebg.svg');
-    background-repeat: no-repeat;
+    // background-image: url('/images/homebg.svg');
+    // background-repeat: no-repeat;
+    &__background{
+        position: absolute;
+        z-index: -1;
+        height: 35em;
+        width: 100%;
+        object-fit: cover;
+    }
     .wrapper {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-gap: 48px;
+        grid-template-columns: 1fr ;
+        grid-template-areas: "title " "blurb" "configurator" "image" "usp";
+        @include breakpoint($tablet) {
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 48px;
+            grid-template-areas: "title configurator" "blurb configurator" "image configurator" "usp configurator";
+        }
     }
 }
 
@@ -56,18 +68,25 @@
         }
         img{
             width:100%;
+            object-fit: contain;
         }
         span {
             font-family: $counterFont;
             position: absolute;
             bottom: 12px;
-            font-size: 48px;
+            // font-size: 48px;
+
+    font-size: 7vw;
         }
     }
     &__countdown {
         display: flex;
         flex-direction: column;
-        margin-left: 24px;
+        border-top: 1px solid black;
+        @include breakpoint($tablet){
+            margin-left: 24px;
+border-top:0;
+        }
 
         &__wrapper {
             // display: flex;
@@ -95,6 +114,9 @@
                 width: 100%;
                 color: #333333;
                 font-weight: 700;
+
+    box-sizing: border-box;
+
             }
             input[type="checkbox"] {
                 position: absolute;
@@ -135,10 +157,18 @@
         text-align: center;
         text-decoration: none;
         line-height:18px;
+        &.free{
+            order:3;
+            @include breakpoint($tablet){
+            }
+        }
         &.pro{
             display: flex;
             align-items: center;
             justify-content: center;
+            order:1;
+            @include breakpoint($tablet){
+            }
         }
         &.pro::before{
             background-image: url('/images/icons/gold-medal.svg');
@@ -157,9 +187,12 @@
 .background {
     &__wrapper {
         display: grid;
-        grid-template-columns: repeat(9, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         grid-gap: 8px;
         position: relative;
+        @include breakpoint($tablet){
+            grid-template-columns: repeat(9, 1fr);
+        }
         input[type="radio"] {
             position: absolute;
             left: -99999px;
@@ -252,15 +285,19 @@
     border-radius: 3px;
     display: flex;
     justify-content: center;
+    box-sizing: border-box;
     p {
         margin: 0;
     }
 }
 
 .featuredimage {
-    padding-left: 24px;
-    padding-right: 24px;
-    border-right: 1px solid $black;
+    @include breakpoint($tablet){
+        padding-left: 24px;
+        padding-right: 24px;
+        border-right: 1px solid $black;
+
+    }
     &__position {
         display: flex;
         justify-content: space-between;
@@ -432,19 +469,29 @@
 
 .step__wrapper {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     margin-top: 24px;
     // margin-bottom:24px;
     border-top: 1px solid $black;
     border-bottom: 1px solid $black;
+    @include breakpoint($tablet)
+    {
+        grid-template-columns: 1fr 1fr;
+
+    }
 }
 
 .button {
     &__wrapper {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
         grid-gap: 24px;
         margin-top:24px;
+        @include breakpoint($tablet)
+        {
+            grid-template-columns: 1fr 1fr;
+    
+        }
     }
     &__explainer {
         background-color: palegoldenrod;
@@ -468,6 +515,16 @@
             border-width: 15px;
             margin-left: -15px;
             top: -30px;
+        }
+        &.pro{
+            order:2;
+            @include breakpoint($tablet){
+            }
+        }
+        &.free{
+            order:4;
+            @include breakpoint($tablet){
+            }
         }
         h5 {
             margin-bottom: 8px;

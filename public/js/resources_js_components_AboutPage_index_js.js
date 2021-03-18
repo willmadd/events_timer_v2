@@ -131,7 +131,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".static__page {\n  background: #14a3d4;\n  background: radial-gradient(circle, #14a3d4 27%, #0055d6 100%);\n  display: flex;\n  height: 100%;\n}\n\n.static__page__wrapper {\n  max-width: 680px;\n  margin-left: auto;\n  margin-right: auto;\n  background-color: #f5f5f5;\n  padding: 48px;\n}\n\nh2 {\n  margin-bottom: 24px;\n}\n\np {\n  margin-bottom: 24px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".static__page {\n  background: #14a3d4;\n  background: radial-gradient(circle, #14a3d4 27%, #0055d6 100%);\n  display: flex;\n  height: 100%;\n}\n\n.static__page__wrapper {\n  max-width: 680px;\n  margin-left: auto;\n  margin-right: auto;\n  background-color: #f5f5f5;\n  padding: 48px;\n}\n.static__page__wrapper h2 {\n  margin-bottom: 24px;\n}\n.static__page__wrapper p {\n  margin-bottom: 24px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
