@@ -65,18 +65,22 @@ const CreateCountdown = ({
                     </div>
                 </div>
                 <div className="form__countdown__option">
+                    <p>{`Show ms`}</p>
                     <input
                         id="ms__timer"
                         onChange={() => toggleHideMs()}
                         checked={hideMs}
                         type="checkbox"
                         />
+                        {/* <span /> */}
                     <label htmlFor="ms__timer" className="form__countdown__ms">
-                        <p>{`Show ms`}</p>
                         </label>
                 </div>
                 <div className="form__countdown__option font">
-                    <h6>{`Font`}</h6>
+                    <div>
+
+                    
+                    <p>{`Font`}</p>
                     <div className="font__selector">
                         <div
                             className="font__card font__card__title"
@@ -110,6 +114,7 @@ const CreateCountdown = ({
                                 </div>
                             )}
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>

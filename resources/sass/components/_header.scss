@@ -2,11 +2,14 @@ header {
     width: 100%;
     // background: #333333;
 
-    height: 45px;
+    height: 60px;
     position: sticky;
     top: 0;
-    z-index: 3;
+    z-index: 99999999;
     background-color: $gText;
+    @include breakpoint($tablet){
+        height:45px;
+    }
 
     #menuToggle {
         display: block;
@@ -125,7 +128,7 @@ header {
             padding: 0;
             transform: none;
             position: relative;
-            height:45px;
+            // height:60px;
         }
         ul{
             display: flex;

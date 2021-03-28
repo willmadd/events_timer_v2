@@ -949,7 +949,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var audioFiles = ["Happy", "Hermit", "Alone", "Seasons", "Meeting", "Stairway", "Wander"];
+var audioFiles = ["Happy", "Hermit", "Alone", "Seasons", "Meeting", "Stairway", "Wander", "Ambient", "Cinematic", "Softhop", "Haze", "Enjoy", "Positive", "Clock", "Forever", "Upbeat", "Energy", "Magical", "Inspiring"];
 
 var AudioPlayer = function AudioPlayer(_ref) {
   var currentAudio = _ref.currentAudio,
@@ -964,12 +964,12 @@ var AudioPlayer = function AudioPlayer(_ref) {
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
       className: "audio__wrapper",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-        className: "audio__button none",
+        className: "audio__button none ".concat(!selectedAudio ? "active" : "inactive"),
+        onClick: function onClick(e) {
+          return setSelectedAudio(null);
+        },
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-          className: "audio__label ".concat(!selectedAudio ? "active" : "inactive"),
-          onClick: function onClick(e) {
-            return setSelectedAudio(null);
-          },
+          className: "audio__label ",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
             children: "None"
           })
@@ -1002,7 +1002,10 @@ var AudioSelector = function AudioSelector(_ref2) {
       selectedAudio = _ref2.selectedAudio,
       setSelectedAudio = _ref2.setSelectedAudio;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-    className: "audio__button",
+    className: "audio__button ".concat(file === selectedAudio ? "active" : "inactive"),
+    onClick: function onClick(e) {
+      return setSelectedAudio(file);
+    },
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
       className: "blobs-container",
       onClick: function onClick() {
@@ -1012,10 +1015,7 @@ var AudioSelector = function AudioSelector(_ref2) {
         className: "blob ".concat(currentAudio === file ? "playing" : undefined)
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-      className: "audio__label ".concat(file === selectedAudio ? "active" : "inactive"),
-      onClick: function onClick(e) {
-        return setSelectedAudio(file);
-      },
+      className: "audio__label ",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
         children: file
       })
@@ -1266,7 +1266,9 @@ var CreateCountdown = function CreateCountdown(_ref) {
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: "form__countdown__option",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
+          children: "Show ms"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", {
           id: "ms__timer",
           onChange: function onChange() {
             return toggleHideMs();
@@ -1275,53 +1277,52 @@ var CreateCountdown = function CreateCountdown(_ref) {
           type: "checkbox"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", {
           htmlFor: "ms__timer",
-          className: "form__countdown__ms",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
-            children: "Show ms"
-          })
+          className: "form__countdown__ms"
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
         className: "form__countdown__option font",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h6", {
-          children: "Font"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-          className: "font__selector",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-            className: "font__card font__card__title",
-            onClick: function onClick(e) {
-              return setFontOpen(!fontOpen);
-            },
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("h6", {
-              children: [counterFont.replace("-", " ").split('.')[0], /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
-                className: "".concat(counterFont.split('.')[0]),
-                children: "12:43:56"
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
+            children: "Font"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+            className: "font__selector",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+              className: "font__card font__card__title",
+              onClick: function onClick(e) {
+                return setFontOpen(!fontOpen);
+              },
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("h6", {
+                children: [counterFont.replace("-", " ").split('.')[0], /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+                  className: "".concat(counterFont.split('.')[0]),
+                  children: "12:43:56"
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+                className: " font__chevron ".concat(fontOpen ? "active" : null)
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-              className: " font__chevron ".concat(fontOpen ? "active" : null)
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-            className: "font__card__children",
-            children: fontOpen && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-              style: {
-                position: "relative"
-              },
-              children: fontList.map(function (font) {
-                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-                  className: "font__card font__card__child",
-                  onClick: function onClick() {
-                    return selectFont(font);
-                  },
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("h6", {
-                    children: [font.replace("-", " ").split('.')[0], /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
-                      className: "".concat(font.split('.')[0]),
-                      children: "12:43:56"
-                    })]
-                  })
-                });
+              className: "font__card__children",
+              children: fontOpen && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+                style: {
+                  position: "relative"
+                },
+                children: fontList.map(function (font) {
+                  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+                    className: "font__card font__card__child",
+                    onClick: function onClick() {
+                      return selectFont(font);
+                    },
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("h6", {
+                      children: [font.replace("-", " ").split('.')[0], /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+                        className: "".concat(font.split('.')[0]),
+                        children: "12:43:56"
+                      })]
+                    })
+                  });
+                })
               })
-            })
+            })]
           })]
-        })]
+        })
       })]
     })]
   });
@@ -1382,6 +1383,8 @@ var ImageUpload = function ImageUpload(_ref) {
       setMessage = _useState2[1];
 
   var onDrop = (0,react__WEBPACK_IMPORTED_MODULE_2__.useCallback)(function (acceptedFiles) {
+    console.log('ON DROP');
+    console.log(acceptedFiles);
     getBase64(acceptedFiles);
   }, []);
 
@@ -1425,7 +1428,7 @@ var ImageUpload = function ImageUpload(_ref) {
 
   var _useDropzone = (0,react_dropzone__WEBPACK_IMPORTED_MODULE_1__.useDropzone)({
     onDrop: onDrop,
-    accept: "image/png, image/gif image/jpg image/jpeg",
+    // accept: "image/png image/gif image/jpg image/jpeg",
     minSize: 0,
     maxSize: 4194304,
     validator: validator
@@ -1531,22 +1534,12 @@ var files = [{
 }, {
   id: "17",
   paid: false
-}, {
-  id: "4",
-  paid: true
-}, {
-  id: "5",
-  paid: true
-}, {
-  id: "6",
-  paid: true
-}, {
-  id: "7",
-  paid: true
-}, {
-  id: "8",
-  paid: true
-}, {
+}, // { id: "4", paid: true },
+// { id: "5", paid: true },
+// { id: "6", paid: true },
+// { id: "7", paid: true },
+// { id: "8", paid: true },
+{
   id: "9",
   paid: true
 }, {
@@ -1574,6 +1567,39 @@ var files = [{
   paid: true
 }, {
   id: "20",
+  paid: true
+}, {
+  id: "21",
+  paid: true
+}, {
+  id: "22",
+  paid: true
+}, {
+  id: "23",
+  paid: true
+}, {
+  id: "24",
+  paid: true
+}, {
+  id: "25",
+  paid: true
+}, {
+  id: "26",
+  paid: true
+}, {
+  id: "27",
+  paid: true
+}, {
+  id: "28",
+  paid: true
+}, {
+  id: "29",
+  paid: true
+}, {
+  id: "30",
+  paid: true
+}, {
+  id: "31",
   paid: true
 }];
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (files.map(function (file) {
@@ -2396,18 +2422,22 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var Logo = function Logo() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-    className: "logo",
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", {
-      className: "head",
+      className: "head sevenfive",
       src: "/images/logo-white.svg",
       alt: "events countdown"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h2", {
-      children: "Create and download a free online countdown timer, perfect for enhancing your online or in-person event flow."
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h2", {
-      children: "Personalise it to match your event branding, overlay an audio track and download - it\u2019s that simple!"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+      className: "blurb",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h2", {
+        children: "Create and download a free online countdown timer, perfect for enhancing your online or in-person event flow."
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h2", {
+        children: "Personalise it to match your event branding, overlay an audio track and download - it\u2019s that simple!"
+      })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", {
+      className: "sevenfive",
       src: "/images/countdownondevices.webp",
       height: "593",
       width: "1280",

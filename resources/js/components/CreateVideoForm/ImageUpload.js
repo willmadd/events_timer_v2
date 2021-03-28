@@ -6,6 +6,8 @@ const ImageUpload = ({ setFeatureImage, setFeatureImgPos, featureImgPos }) => {
     const [message, setMessage] = useState(null);
 
     const onDrop = useCallback((acceptedFiles) => {
+        console.log('ON DROP');
+        console.log(acceptedFiles);
         getBase64(acceptedFiles);
     }, []);
 
@@ -56,7 +58,7 @@ const ImageUpload = ({ setFeatureImage, setFeatureImgPos, featureImgPos }) => {
         isDragReject,
     } = useDropzone({
         onDrop,
-        accept: "image/png, image/gif image/jpg image/jpeg",
+        // accept: "image/png image/gif image/jpg image/jpeg",
         minSize: 0,
         maxSize: 4194304,
         validator,

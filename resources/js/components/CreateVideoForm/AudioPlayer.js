@@ -8,6 +8,18 @@ const audioFiles = [
     "Meeting",
     "Stairway",
     "Wander",
+    "Ambient",
+    "Cinematic",
+    "Softhop",
+    "Haze",
+    "Enjoy",
+    "Positive",
+    "Clock",
+    "Forever",
+    "Upbeat",
+    "Energy",
+    "Magical",
+    "Inspiring"
 ];
 
 const AudioPlayer = ({
@@ -21,13 +33,14 @@ const AudioPlayer = ({
     return (
         <div className="audio">
             <h3>Step 4. Pick an Audio Track</h3>
-            <div className="audio__wrapper">
-                <div className={"audio__button none"}>
-                    <div
-                        className={`audio__label ${
+            <div className={`audio__wrapper`}>
+                <div className={`audio__button none ${
                             !selectedAudio ? "active" : "inactive"
                         }`}
-                        onClick={(e) => setSelectedAudio(null)}
+                        onClick={(e) => setSelectedAudio(null)}>
+                    <div
+                        className={`audio__label `}
+                        
                     >
                         <p>None</p>
                     </div>
@@ -64,7 +77,12 @@ const AudioSelector = ({
     setSelectedAudio,
 }) => {
     return (
-        <div className="audio__button">
+        <div
+            className={`audio__button ${
+                file === selectedAudio ? "active" : "inactive"
+            }`}
+            onClick={(e) => setSelectedAudio(file)}
+        >
             <div
                 className="blobs-container"
                 onClick={() => setCurrentAudio(currentAudio ? null : `${file}`)}
@@ -76,10 +94,8 @@ const AudioSelector = ({
                 ></div>
             </div>
             <div
-                className={`audio__label ${
-                    file === selectedAudio ? "active" : "inactive"
-                }`}
-                onClick={(e) => setSelectedAudio(file)}
+                className={`audio__label `}
+                
             >
                 <p>{file}</p>
             </div>
